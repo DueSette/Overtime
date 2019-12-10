@@ -73,13 +73,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsWalking: 1
   m_IsCrouching: 0
-  m_WalkSpeed: 3.2
-  m_RunSpeed: 5
+  m_WalkSpeed: 2
+  m_RunSpeed: 3.2
   m_CrouchSpeedModifier: 0.625
   m_RunstepLenghten: 0.7
   m_JumpSpeed: 10
   m_StickToGroundForce: 10
   m_GravityMultiplier: 2
+  mainCamera: {fileID: 2000000}
   m_CameraZoomFOV: 30
   m_MouseLook:
     XSensitivity: 2
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_JumpBob:
     BobDuration: 0.2
     BobAmount: 0.1
-  m_StepInterval: 5
+  m_StepInterval: 3
   m_WoodFootstepSounds:
   - {fileID: 8300000, guid: 28891e516a6e37d4499aedc45774e371, type: 3}
   - {fileID: 8300000, guid: 5dc9dbd6e80fb2e458202e364cf4121b, type: 3}
@@ -197,7 +198,6 @@ MonoBehaviour:
   m_PromptIcon: {fileID: 0}
   _PromptSprite: {fileID: 21300000, guid: d7c9b890a6cd21347ba204c6197b0bb7, type: 3}
   m_PromptBox: {fileID: 0}
-  mainCamera: {fileID: 2000000}
   m_CrouchCharacterController: {fileID: 1660028867}
 --- !u!114 &5394079296489620361
 MonoBehaviour:
@@ -211,6 +211,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8a3a9818cf73142a0446337e272c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  postProcBlock: {fileID: 824490797}
+  profiles:
+  - {fileID: 11400000, guid: ac67506068da3c64ba9b6d585f5f4f00, type: 2}
+  - {fileID: 11400000, guid: ac67506068da3c64ba9b6d585f5f4f00, type: 2}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -526,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &148767701
 Transform:
   m_ObjectHideFlags: 0
@@ -535,7 +539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148767700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.03, y: 0, z: 0.09}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 824490799}
@@ -582,6 +586,7 @@ GameObject:
   - component: {fileID: 824490799}
   - component: {fileID: 824490798}
   - component: {fileID: 824490800}
+  - component: {fileID: 1880283324}
   m_Layer: 10
   m_Name: pProcess
   m_TagString: Untagged
@@ -597,7 +602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824490797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.835, y: -5.019, z: 0.11}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 874083898}
@@ -637,6 +642,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1880283324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824490797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 3.5
+  weight: 1
+  sharedProfile: {fileID: 0}
 --- !u!1 &874083897
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &874083898
 Transform:
   m_ObjectHideFlags: 0
@@ -663,7 +685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874083897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.03, y: 0, z: 0.09}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 824490799}

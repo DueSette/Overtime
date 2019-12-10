@@ -10,7 +10,6 @@ public class UIPromptIconScript : MonoBehaviour
     [SerializeField, Range(0.1f, 3)] float fadeSpeed = 1;
     float alpha = 0;
 
-
     private void Start()
     {
         image = GetComponent<Image>();

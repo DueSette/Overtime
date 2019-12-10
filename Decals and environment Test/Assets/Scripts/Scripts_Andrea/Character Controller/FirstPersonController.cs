@@ -53,6 +53,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_MoveDir = Vector3.zero;
         private CharacterController m_StandingCharacterController; //character controller used for standing
         [SerializeField] private CharacterController m_CrouchCharacterController; //character controller used for crouching
+        private PostProcessVolumeSummoner postProcessSummoner;
         CharacterController currentCharController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
@@ -62,7 +63,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private float m_cameraOriginalFOV;
         private AudioSource m_AudioSource;
-
+        
         Coroutine crouchCoroutine = null;
         GameStateManager gsManager;
 
@@ -77,6 +78,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             currentCharController = m_StandingCharacterController;
 
             gsManager = GetComponent<GameStateManager>();
+            postProcessSummoner = GetComponent<PostProcessVolumeSummoner>();
+
             m_OriginalCameraPosition = mainCamera.transform.localPosition;
             m_cameraOriginalFOV = mainCamera.fieldOfView;
             m_FovKick.Setup(mainCamera);
