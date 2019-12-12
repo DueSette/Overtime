@@ -23,6 +23,7 @@ public class OfficeLayoutGenerator : MonoBehaviour
     public int numberOfGenerations = 10;
     private int currentGeneration = 0;
 
+    public List<LayoutData> spawnedLayouts;
 
     /*
     ====================================================================================================
@@ -40,6 +41,9 @@ public class OfficeLayoutGenerator : MonoBehaviour
 
         currentAttempt = 0;
         currentGeneration = 0;
+
+        
+        spawnedLayouts = new List<LayoutData>();
 
         StartCoroutine(Generate(eventCode));
     }
@@ -116,6 +120,11 @@ public class OfficeLayoutGenerator : MonoBehaviour
                 ofc.transform.parent = newParent.transform;
             }
 
+            LayoutData ld = newParent.AddComponent<LayoutData>();
+            ld.layoutRooms = spawnedRooms;
+
+            spawnedLayouts.Add(ld);
+
             if (currentGeneration < numberOfGenerations)
             {
                 this.transform.position = new Vector3
@@ -133,6 +142,10 @@ public class OfficeLayoutGenerator : MonoBehaviour
                 currentAttempt = 0;
 
                 StartCoroutine(Generate(eventCode));
+            }
+            else
+            {
+                UnityEditor.EditorUtility.SetDirty(this);
             }
         }
     }
