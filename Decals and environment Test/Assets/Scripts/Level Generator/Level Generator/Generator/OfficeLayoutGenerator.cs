@@ -15,7 +15,9 @@ public class OfficeLayoutGenerator : MonoBehaviour
 
     private List<OfficeRoomController> spawnedRooms = new List<OfficeRoomController>();
     private Dictionary<LayoutGraphElement, OfficeRoomController> spawnedRoomDict = new Dictionary<LayoutGraphElement, OfficeRoomController>();
-    
+    private List<Transform> connectionPoints;
+    public GameObject doorPrefab;
+
     private bool generationFailed = false;
 
     public int numberOfAttempts = 100;
@@ -42,7 +44,6 @@ public class OfficeLayoutGenerator : MonoBehaviour
         currentAttempt = 0;
         currentGeneration = 0;
 
-        
         spawnedLayouts = new List<LayoutData>();
 
         StartCoroutine(Generate(eventCode));
@@ -68,6 +69,7 @@ public class OfficeLayoutGenerator : MonoBehaviour
         // Setup spawned room tracking
         spawnedRooms = new List<OfficeRoomController>();
         spawnedRoomDict = new Dictionary<LayoutGraphElement, OfficeRoomController>();
+        connectionPoints = new List<Transform>();
 
         generationFailed = false;
 
@@ -280,6 +282,8 @@ public class OfficeLayoutGenerator : MonoBehaviour
                     connectionNext.connected = true;
                     connectionPrevious.connected = true;
                     nextRoom.placed = true;
+
+                    connectionPoints.Add(connectionNext.transform);
                 }
             }
 
@@ -299,6 +303,17 @@ public class OfficeLayoutGenerator : MonoBehaviour
     */
     private void DecorateRooms()
     {
+        // Adding Doors To Rooms
+        for (int i = 0; i < connectionPoints.Count; i++)
+        {
+            GameObject newDoor = Instantiate(doorPrefab, connectionPoints[i]);
+            Debug.Log(newDoor.transform.lossyScale);
+
+            newDoor.transform.position = connectionPoints[i].position;
+            newDoor.transform.rotation = connectionPoints[i].rotation;
+        }
+
+        // Individual Room Decoration
         for (int i = 0; i < spawnedRooms.Count; i++)
         {
             OfficeRoomController ofc = spawnedRooms[i];
