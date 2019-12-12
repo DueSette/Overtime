@@ -9,6 +9,12 @@ public class GameStateManager : MonoBehaviour
 { 
     public static GameState gameState { get; private set; } = GameState.IN_GAME;
     private static GameState previousState;
+    private static GameObject player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<FirstPersonController>().gameObject;
+    }
 
     public static void UpdateGameState(GameState gs)
     {
@@ -43,4 +49,6 @@ public class GameStateManager : MonoBehaviour
 
         print("Cursor state: " + Cursor.lockState);
     }
+
+    public static GameObject GetPlayer() { return player; }
 }
