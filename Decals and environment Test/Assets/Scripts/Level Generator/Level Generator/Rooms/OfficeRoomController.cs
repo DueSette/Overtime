@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OfficeRoomController : MonoBehaviour
 {
@@ -19,6 +18,8 @@ public class OfficeRoomController : MonoBehaviour
     [Header("Generator Details")]
     public OfficeRoomController previousRoom;
     public bool placed = false;
+
+    public ReflectionProbe reflectionProbe;
 
     /*
     ====================================================================================================
@@ -221,6 +222,8 @@ public class OfficeRoomController : MonoBehaviour
                 newPrefab.transform.rotation = c.transform.rotation;
             }
         }
+
+        reflectionProbe.gameObject.SetActive(true);
     }
 
 
@@ -230,6 +233,10 @@ public class OfficeRoomController : MonoBehaviour
     Debugging
     ====================================================================================================
     */
+    private void OnValidate()
+    {
+        reflectionProbe.size = new Vector3(width, 3, height);
+    }
     private void OnDrawGizmos()
     {
         // Drawing room bounds
