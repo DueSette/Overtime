@@ -13,45 +13,23 @@ public class LevelManager : MonoBehaviour
 
     public string nextLevel;
 
-    // Level Events
-    public delegate void LevelChange(Vector3 playerPos, Vector3 playerEulerRot);
-    public static LevelChange onLevelChange;
-
-    private void OnEnable()
-    {
-        onLevelChange += PositionPlayer;
-    }
-
     private void Start()
     {
-        // This level wasn't loaded by a previous level (For Debugging Purposes)
-        if (pickedLayout == null)
-        {
-            PickLayout();
+        PickLayout();
 
-            // Places the player in the start elevator of the selected level
-            player.transform.position = pickedLayout.layoutRooms[0].transform.position + (Vector3.up);
-            player.GetComponent<CharacterController>().enabled = true;
-        }
+        // Places the player in the start elevator of the selected level
+        player.transform.position = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position + PlayerPositioning.Instance.playerPreviousPos;
+        player.transform.eulerAngles = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.eulerAngles + PlayerPositioning.Instance.playerPreviousRot;
+
+        player.GetComponent<CharacterController>().enabled = true;
+        player.SetActive(true);
     }
-
-
-    /*
-    ====================================================================================================
-    Player Start
-    ====================================================================================================
-    */
-    /// <summary></summary>
-    /// <param name="playerPos">Player's position relative to the previous level's end elevator</param>
-    /// <param name="playerEulerRot">Player's rotation in the previous level</param>
-    private void PositionPlayer(Vector3 playerPos, Vector3 playerEulerRot)
+    private void Update()
     {
-        GameObject startElevator = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].gameObject;
-
-        player.transform.position = startElevator.transform.position + playerPos;
-        player.transform.eulerAngles = playerEulerRot;
-
-        onLevelChange -= PositionPlayer;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NextLevel();
+        }
     }
 
 
@@ -76,22 +54,19 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
     /*
     ====================================================================================================
     Level Loading
     ====================================================================================================
     */
-    IEnumerator LoadNextLevel()
+    private void NextLevel()
     {
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(nextLevel);
-        asyncOperation.allowSceneActivation = false;
+        // Getting Players Transform Relative To The End Elevator
+        PlayerPositioning pp = PlayerPositioning.Instance;
+        pp.playerPreviousPos = player.transform.position - pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform.position;
+        pp.playerPreviousRot = player.transform.eulerAngles - pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform.eulerAngles;
 
-        while (!asyncOperation.isDone)
-        {
-            yield return null;
-        }
-
-        asyncOperation.allowSceneActivation = true;
+        // Loading Next Level
+        SceneManager.LoadScene("LevelGeneration");
     }
 }
