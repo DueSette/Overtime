@@ -377,6 +377,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
             if (Physics.Raycast(ray, out RaycastHit hit, 4))
             {
+                Debug.Log(hit.collider.GetComponent<IInteractable>());
+
                 if (hit.collider.GetComponent<IInteractable>() != null)
                     hit.collider.GetComponent<IInteractable>().InteractWith();
             }

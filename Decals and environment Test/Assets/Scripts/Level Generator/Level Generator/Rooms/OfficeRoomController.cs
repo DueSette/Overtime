@@ -19,6 +19,7 @@ public class OfficeRoomController : MonoBehaviour
     public OfficeRoomController previousRoom;
     public bool placed = false;
 
+    public RoomTypes roomType;
     public ReflectionProbe reflectionProbe;
 
     /*

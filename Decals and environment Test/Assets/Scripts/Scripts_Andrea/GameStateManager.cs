@@ -40,7 +40,7 @@ public class GameStateManager : MonoBehaviour
                 Cursor.visible = false;
                 break;
             case GameState.MENU:
-                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;
             default:
