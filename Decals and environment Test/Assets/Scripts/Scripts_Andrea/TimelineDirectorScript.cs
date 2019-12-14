@@ -5,18 +5,23 @@ using UnityEngine.Playables;
 
 public class TimelineDirectorScript : MonoBehaviour
 {
-    PlayableDirector director;
+    [HideInInspector] public PlayableDirector director;
+    public static TimelineDirectorScript instance;
+    public PlayableAsset[] sequences;
 
-    void Awake()
+    private void Awake()
     {
-        director = GetComponent<PlayableDirector>();
+        if (instance == null)
+            instance = this;
     }
 
     void OnEnable()
     {
+        director = GetComponent<PlayableDirector>();
         director.played += OnPlayableDirectorPlayed;
         director.stopped += OnPlayableDirectorStopped;
 
+        director.playableAsset = sequences[0];
         director.Play();
     }
 
@@ -29,11 +34,18 @@ public class TimelineDirectorScript : MonoBehaviour
     void OnPlayableDirectorPlayed(PlayableDirector aDirector)
     {
         if (director == aDirector)
-             GameStateManager.UpdateGameState(GameState.CUTSCENE);
+             GameStateManager.SetGameState(GameState.CUTSCENE);
     }
 
     void OnDisable()
     {
         director.played -= OnPlayableDirectorPlayed;
+        director.stopped -= OnPlayableDirectorStopped;
+    }
+
+    public void PlaySequence(int whichSequence)
+    {
+        director.playableAsset = sequences[whichSequence];
+        director.Play();
     }
 }
