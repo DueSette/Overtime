@@ -132,15 +132,8 @@ public class OfficeLayoutGenerator : MonoBehaviour
             if (currentGeneration < numberOfGenerations)
             {
                 Vector3 newPosition = this.transform.position;
-                if (currentGeneration % 5 == 0)
-                {
-                    newPosition.x = 0;
-                    newPosition.z += 50;
-                }
-                else
-                {
-                    newPosition.x += 50;
-                }
+                newPosition.x += 50;
+
                 this.transform.position = newPosition;
 
                 spawnedRooms = new List<OfficeRoomController>();
