@@ -17,7 +17,6 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     GameObject postProcBlock;
     [SerializeField, Tooltip("These need to be put in order: Transition to Dark, from Dark, etc")]
     VolumeProfile[] profiles;
-    Volume equippedVolume;
 
     Vector3 startingRelativePos; //the initial point of the block
     AudioSource postProcAudio;
@@ -25,25 +24,20 @@ public class PostProcessVolumeSummoner : MonoBehaviour
 
     private void Start()
     {
-        equippedVolume = postProcBlock.GetComponent<Volume>();
         postProcAudio = postProcBlock.GetComponent<AudioSource>();
         startingRelativePos = postProcBlock.transform.localPosition;
     }
 
     public IEnumerator SummonVolume(PostProcVolumeType type, float timeToApproach, float peakTime, float timeToFade)
     {
-        equippedVolume.profile = profiles[(int)type];
+        postProcBlock.GetComponent<Volume>().profile = profiles[(int)type];
         postProcAudio.Play();
-
-        GameStateManager.SetGameState(GameState.CUTSCENE);
 
         yield return StartCoroutine(MoveToCharacter(timeToApproach));
         yield return new WaitForSeconds(peakTime);
         yield return MoveAwayFromCharacter(timeToFade);
 
-        GameStateManager.SetGameState(GameState.IN_GAME);
-
-        equippedVolume.profile = null;
+        postProcBlock.GetComponent<Volume>().profile = null;
         postProcAudio.Stop();
         yield return null;
     }
@@ -86,9 +80,6 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.P))
-        {
             StartCoroutine(SummonVolume(PostProcVolumeType.TO_DARK, 2.5f, 1.75f, 2.6f));
-            TimelineDirectorScript.instance.PlaySequence(1);
-        }
     }
 }

@@ -22,8 +22,7 @@ public class InventoriesManager : MonoBehaviour
 
     void Update()
     {
-        if (GameStateManager.gameState == GameState.IN_GAME || GameStateManager.gameState == GameState.MENU)
-            CheckInput();
+        CheckInput();
     }
 
     void CheckInput()
@@ -73,10 +72,10 @@ public class InventoriesManager : MonoBehaviour
         {
             noteManager.CleanPreviousNoteUI();
             noteManager.ScrollEntriesToLast();
-            GameStateManager.SetGameState(GameState.IN_GAME);
+            GameStateManager.UpdateGameState(GameState.IN_GAME);
         }
         else //if we opened the menu
-            GameStateManager.SetGameState(GameState.MENU);
+            GameStateManager.UpdateGameState(GameState.MENU);
 
         noteInventoryOpen = !noteInventoryOpen;
         noteManager.transform.parent.gameObject.SetActive(noteInventoryOpen);
@@ -100,7 +99,7 @@ public class InventoriesManager : MonoBehaviour
     {
         noteManager.CleanPreviousNoteUI();
         noteManager.ScrollEntries(unlockedNoteID);
-        GameStateManager.SetGameState(GameState.MENU);
+        GameStateManager.UpdateGameState(GameState.MENU);
         noteInventoryOpen = true;
         noteManager.transform.parent.gameObject.SetActive(true);
     }
@@ -121,14 +120,14 @@ public class InventoriesManager : MonoBehaviour
             itemManager.CleanPreviousUI();
             itemManager.gameObject.SetActive(itemInventoryOpen);
             itemManager.UpdateUI();
-            GameStateManager.SetGameState(GameState.MENU);
+            GameStateManager.UpdateGameState(GameState.MENU);
         }
 
         else //if not, clean the UI
         {
             itemManager.CleanPreviousUI();
             itemManager.gameObject.SetActive(itemInventoryOpen);
-            GameStateManager.SetGameState(GameState.IN_GAME);
+            GameStateManager.UpdateGameState(GameState.IN_GAME);
         }
     }
 
@@ -148,7 +147,7 @@ public class InventoriesManager : MonoBehaviour
             itemManager.gameObject.SetActive(itemInventoryOpen);
         }
 
-        GameStateManager.SetGameState(openOverride ? GameState.MENU : GameState.IN_GAME);
+        GameStateManager.UpdateGameState(openOverride ? GameState.MENU : GameState.IN_GAME);
     }
     #endregion
 }
