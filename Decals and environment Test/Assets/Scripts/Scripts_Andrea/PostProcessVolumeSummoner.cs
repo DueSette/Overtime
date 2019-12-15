@@ -5,13 +5,7 @@ using UnityEngine.Rendering;
 
 public class PostProcessVolumeSummoner : MonoBehaviour
 {
-    /*
-     * 
-     * REQUIREMENTS
-     * Choose a Volume profile from list
-     * Equip it to deisgnated GameObject
-     * Choose speed, proximity, lingering (how long to stay at a certain proximity)
-     */
+    //This class manages everything related to post process effects, including ppVolumes, timeline, and specific game objects
 
     [SerializeField, Tooltip("This is the FPS controller's child, its transform is used to move the Volumes around")]
     GameObject postProcBlock;
@@ -22,6 +16,7 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     Coroutine volumeSummoning;
     Vector3 startingRelativePos; //the initial point of the block
     AudioSource postProcAudio;
+
     public enum PostProcVolumeType { TO_DARK = 0, FROM_DARK = 1 };
 
     private void Start()
