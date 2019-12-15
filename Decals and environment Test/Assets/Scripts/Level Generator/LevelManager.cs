@@ -13,9 +13,28 @@ public class LevelManager : MonoBehaviour
 
     public string nextLevel;
 
+    // Level Events
+    public delegate void LevelEvent();
+    public static LevelEvent onEventLevelStart;
+    /// <summary>
+    /// Called When The Start Elevator Finishes it's Start Animation
+    /// </summary>
+    public static LevelEvent onEventPuzzleStart;
+    public static LevelEvent onEventLevelSolved;
+    /// <summary>
+    /// Called When The End Elevator's Button Is Pressed
+    /// </summary>
+    public static LevelEvent onEventLevelEnd;
+
     private void Start()
     {
+        // Chooses which variation of the level to use
         PickLayout();
+
+        // Setting up start elevator
+        Vector3 elevatorStartPos = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position;
+        elevatorStartPos.y += 3;
+        pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position = elevatorStartPos;
 
         // Places the player in the start elevator of the selected level
         player.transform.parent = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform;
@@ -25,6 +44,9 @@ public class LevelManager : MonoBehaviour
 
         player.GetComponent<CharacterController>().enabled = true;
         player.SetActive(true);
+
+        // Starts the level
+        onEventLevelStart();
     }
 
 
