@@ -18,13 +18,18 @@ public class LevelManager : MonoBehaviour
         PickLayout();
 
         // Places the player in the start elevator of the selected level
-        player.transform.parent = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform;
-        player.transform.localPosition = PlayerPositioning.Instance.playerPreviousPos;
-        player.transform.localEulerAngles = PlayerPositioning.Instance.playerPreviousRot;
-        player.transform.parent = null;
+        player.transform.position = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position + PlayerPositioning.Instance.playerPreviousPos;
+        player.transform.eulerAngles = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.eulerAngles + PlayerPositioning.Instance.playerPreviousRot;
 
         player.GetComponent<CharacterController>().enabled = true;
         player.SetActive(true);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            NextLevel();
+        }
     }
 
 
@@ -54,15 +59,12 @@ public class LevelManager : MonoBehaviour
     Level Loading
     ====================================================================================================
     */
-    public void NextLevel()
+    private void NextLevel()
     {
         // Getting Players Transform Relative To The End Elevator
         PlayerPositioning pp = PlayerPositioning.Instance;
-
-        player.transform.parent = pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform;
-
-        pp.playerPreviousPos = player.transform.localPosition;
-        pp.playerPreviousRot = player.transform.localEulerAngles;
+        pp.playerPreviousPos = player.transform.position - pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform.position;
+        pp.playerPreviousRot = player.transform.eulerAngles - pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform.eulerAngles;
 
         // Loading Next Level
         SceneManager.LoadScene("LevelGeneration");
