@@ -106,7 +106,9 @@ public class OfficeLayoutGenerator : MonoBehaviour
                     }
                 }
 
+#if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(this);
+#endif
             }
         }
         else
@@ -147,7 +149,9 @@ public class OfficeLayoutGenerator : MonoBehaviour
             }
             else
             {
+#if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(this);
+#endif
             }
         }
     }
