@@ -25,6 +25,7 @@ public class ElevatorBehaviour : MonoBehaviour
             theRB = this.GetComponent<Rigidbody>();
         }
 
+        theRB.isKinematic = true;
         theRB.velocity = Vector3.zero;
     }
     protected void MoveElevator()
@@ -34,6 +35,7 @@ public class ElevatorBehaviour : MonoBehaviour
             theRB = this.GetComponent<Rigidbody>();
         }
 
+        theRB.isKinematic = false;
         theRB.velocity = Vector3.up * moveSpeed;
     }
 
