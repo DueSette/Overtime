@@ -13,6 +13,8 @@ public class InventoriesManager : MonoBehaviour
     public bool itemInventoryOpen = false;
     public NoteInventory noteManager;
     public ItemInventory itemManager;
+    [SerializeField] AudioClip openInventory;
+    [SerializeField] AudioClip navigateInventory;
 
     void Awake()
     {
@@ -47,22 +49,37 @@ public class InventoriesManager : MonoBehaviour
         if (noteInventoryOpen)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
                 noteManager.ScrollEntries(false);
+                SoundManager.instance.PlaySound(openInventory);
+            }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
                 noteManager.ScrollEntries(true);
+                SoundManager.instance.PlaySound(openInventory);
+            }
 
             if (Input.GetKeyDown(KeyCode.M))
+            {
+                SoundManager.instance.PlaySound(openInventory);
                 ToggleNotesDescriptionBox();
+            }
 
         }
         else if (itemInventoryOpen)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
+            {
                 itemManager.ScrollItems(false);
+                SoundManager.instance.PlaySound(openInventory);
+            }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            {
                 itemManager.ScrollItems(true);
+                SoundManager.instance.PlaySound(openInventory);
+            }
         }
     }
 
@@ -78,6 +95,7 @@ public class InventoriesManager : MonoBehaviour
         else //if we opened the menu
             GameStateManager.SetGameState(GameState.MENU);
 
+        SoundManager.instance.PlaySound(openInventory);
         noteInventoryOpen = !noteInventoryOpen;
         noteManager.transform.parent.gameObject.SetActive(noteInventoryOpen);
     }
@@ -91,7 +109,7 @@ public class InventoriesManager : MonoBehaviour
         }
 
         //GameStateManager.UpdateGameState(openOverride ? GameState.MENU : GameState.IN_GAME);
-
+        SoundManager.instance.PlaySound(openInventory);
         noteInventoryOpen = openOverride;
         noteManager.transform.parent.gameObject.SetActive(openOverride);
     }
@@ -122,6 +140,7 @@ public class InventoriesManager : MonoBehaviour
             itemManager.gameObject.SetActive(itemInventoryOpen);
             itemManager.UpdateUI();
             GameStateManager.SetGameState(GameState.MENU);
+            SoundManager.instance.PlaySound(openInventory);
         }
 
         else //if not, clean the UI
@@ -129,6 +148,7 @@ public class InventoriesManager : MonoBehaviour
             itemManager.CleanPreviousUI();
             itemManager.gameObject.SetActive(itemInventoryOpen);
             GameStateManager.SetGameState(GameState.IN_GAME);
+            SoundManager.instance.PlaySound(openInventory);
         }
     }
 
@@ -140,12 +160,14 @@ public class InventoriesManager : MonoBehaviour
         {
             itemManager.gameObject.SetActive(itemInventoryOpen);
             itemManager.UpdateUI();
+            SoundManager.instance.PlaySound(openInventory);
         }
 
         else //if not, clean the UI
         {
             itemManager.CleanPreviousUI();
             itemManager.gameObject.SetActive(itemInventoryOpen);
+            SoundManager.instance.PlaySound(openInventory);
         }
 
         GameStateManager.SetGameState(openOverride ? GameState.MENU : GameState.IN_GAME);

@@ -17,8 +17,9 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     GameObject postProcBlock;
     [SerializeField, Tooltip("These need to be put in order: Transition to Dark, from Dark, etc")]
     VolumeProfile[] profiles;
-    Volume equippedVolume;
 
+    Volume equippedVolume;
+    Coroutine volumeSummoning;
     Vector3 startingRelativePos; //the initial point of the block
     AudioSource postProcAudio;
     public enum PostProcVolumeType { TO_DARK = 0, FROM_DARK = 1 };
@@ -36,7 +37,8 @@ public class PostProcessVolumeSummoner : MonoBehaviour
         postProcAudio.Play();
 
         GameStateManager.SetGameState(GameState.CUTSCENE);
-
+        
+        //these three lines, along with the two coroutines called, should be deleted and the behaviour should be let to the timeline
         yield return StartCoroutine(MoveToCharacter(timeToApproach));
         yield return new WaitForSeconds(peakTime);
         yield return MoveAwayFromCharacter(timeToFade);
@@ -45,6 +47,7 @@ public class PostProcessVolumeSummoner : MonoBehaviour
 
         equippedVolume.profile = null;
         postProcAudio.Stop();
+        volumeSummoning = null;
         yield return null;
     }
 
@@ -85,9 +88,9 @@ public class PostProcessVolumeSummoner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyUp(KeyCode.P) && volumeSummoning == null)
         {
-            StartCoroutine(SummonVolume(PostProcVolumeType.TO_DARK, 2.5f, 1.75f, 2.6f));
+            volumeSummoning = StartCoroutine(SummonVolume(PostProcVolumeType.TO_DARK, 2.5f, 1.75f, 2.6f));
             TimelineDirectorScript.instance.PlaySequence(1);
         }
     }
