@@ -582,6 +582,11 @@ PrefabInstance:
       propertyPath: m_PromptBox
       value: 
       objectReference: {fileID: 138818497}
+    - target: {fileID: 2366892619958319701, guid: 5e9e851c0e142814dac026a256ba2ac0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
 --- !u!1 &474145935
@@ -774,10 +779,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5492d595b27f144857fd0170f0f38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBeOpened: 1
   flipRotationDirection: 0
   hingePivot: {fileID: 1258351607}
   openingSound: {fileID: 8300000, guid: c3dbe7a6b5b70204699ec37bc1851883, type: 3}
   closedSound: {fileID: 8300000, guid: 8784710463dec6543987e3b163939f83, type: 3}
+  lockedSound: {fileID: 8300000, guid: 7c6ee71d047caa5469d94d3db467c55c, type: 3}
 --- !u!82 &801735044
 AudioSource:
   m_ObjectHideFlags: 0
@@ -908,16 +915,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: -7013179093912321235, guid: c43c6a5eb5897234cb1c53d824f760b2,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: -6227116337509879338, guid: c43c6a5eb5897234cb1c53d824f760b2,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c43c6a5eb5897234cb1c53d824f760b2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -987,6 +984,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7013179093912321235, guid: c43c6a5eb5897234cb1c53d824f760b2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: -6227116337509879338, guid: c43c6a5eb5897234cb1c53d824f760b2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: -3635334165664871612, guid: c43c6a5eb5897234cb1c53d824f760b2,
         type: 3}

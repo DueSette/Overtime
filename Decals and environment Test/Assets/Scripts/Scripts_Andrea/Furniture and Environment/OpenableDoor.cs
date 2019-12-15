@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenableDoor : MonoBehaviour, IInteractable, ITextPrompt
+public class OpenableDoor : MonoBehaviour, IInteractable
 {
     bool open = false;
+    [SerializeField] bool canBeOpened = true;
     [SerializeField] private bool flipRotationDirection;
     [SerializeField] GameObject hingePivot;
 
     [SerializeField] private AudioClip openingSound;
     [SerializeField] private AudioClip closedSound;
+    [SerializeField] private AudioClip lockedSound;
     
     AudioSource aud;
     float lapsed = 0;
@@ -22,6 +24,12 @@ public class OpenableDoor : MonoBehaviour, IInteractable, ITextPrompt
 
     void IInteractable.InteractWith() //called when the player clicks the door
     {
+        if (!canBeOpened)
+        {
+            aud.PlayOneShot(lockedSound);
+            return;
+        }
+
         if (rotRoutine != null)
         {
             StopCoroutine(rotRoutine); //interrupt door movement if the player clicks the door while it is still moving
@@ -62,10 +70,5 @@ public class OpenableDoor : MonoBehaviour, IInteractable, ITextPrompt
         lapsed = 0;
 
         yield return null;
-    }
-
-    string ITextPrompt.PromptText()
-    {
-        return "This door can be opened... duh";
     }
 }
