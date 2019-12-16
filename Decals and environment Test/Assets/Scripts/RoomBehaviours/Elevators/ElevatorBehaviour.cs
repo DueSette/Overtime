@@ -25,7 +25,7 @@ public class ElevatorBehaviour : MonoBehaviour
             theRB = this.GetComponent<Rigidbody>();
         }
 
-        //theRB.isKinematic = true;
+        theRB.isKinematic = true;
         theRB.velocity = Vector3.zero;
 
         if (theAnimController == null)

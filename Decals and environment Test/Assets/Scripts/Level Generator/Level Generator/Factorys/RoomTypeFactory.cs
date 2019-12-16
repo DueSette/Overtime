@@ -16,7 +16,11 @@ public class RoomTypeFactory : MonoBehaviour
     */
     public void SetupFactory()
     {
-        currentRooms = prefabRooms;
+        currentRooms = new List<GameObject>();
+        for (int i = 0; i < prefabRooms.Count; i++)
+        {
+            currentRooms.Add(prefabRooms[i]);
+        }
     }
 
 
