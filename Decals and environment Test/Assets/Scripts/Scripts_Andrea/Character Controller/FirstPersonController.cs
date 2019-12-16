@@ -391,15 +391,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 4f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.65f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
-                    m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());              
+                    m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                else
+                    m_PromptBox.SetText("");
             }
             else
                 m_PromptBox.SetText("");
 
-            if (Physics.Raycast(ray, out hit, 4f))
+            if (Physics.Raycast(ray, out hit, 1.65f))
             {
                 if (hit.collider.GetComponent<IInteractable>() != null)               
                     m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(true);               
