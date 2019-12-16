@@ -15,6 +15,8 @@ public class CandleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GetComponent<BoxCollider>().size /= 2.5f;
+        rb.AddForce(Vector3.forward * 10, ForceMode.Impulse);
         aud.Play();
         transform.parent = null;
         rb.isKinematic = false;
