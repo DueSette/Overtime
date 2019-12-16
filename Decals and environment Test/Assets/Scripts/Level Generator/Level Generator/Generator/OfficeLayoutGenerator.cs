@@ -34,7 +34,7 @@ public class OfficeLayoutGenerator : MonoBehaviour
     */
     public void StartNewGeneration(string eventCode)
     {
-        this.transform.position = new Vector3(25, 0, 0);
+        this.transform.position = new Vector3(50, 0, 0);
 
         spawnedRooms = new List<OfficeRoomController>();
         spawnedRoomDict = new Dictionary<LayoutGraphElement, OfficeRoomController>();
@@ -134,7 +134,7 @@ public class OfficeLayoutGenerator : MonoBehaviour
             if (currentGeneration < numberOfGenerations)
             {
                 Vector3 newPosition = this.transform.position;
-                newPosition.x += 50;
+                newPosition.x += 100;
 
                 this.transform.position = newPosition;
 
@@ -223,6 +223,11 @@ public class OfficeLayoutGenerator : MonoBehaviour
             {
                 // Rooms To Connect to
                 OfficeRoomController previousRoom = spawnedRoomDict[currentElement];
+
+                if (previousRoom == null)
+                {
+                    Debug.Break();
+                }
 
                 // All the possible connection points on the rooms
                 List<Connector> previousRoomConnectionPoints = previousRoom.GetAvailableConnectors();

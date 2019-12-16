@@ -32,6 +32,8 @@ public class StartElevatorBehaviour : ElevatorBehaviour
 
         // Setting position To Align With The Rest Of The Level
         StopElevator();
+        yield return new WaitForSeconds(0.25f);
+
 
         Vector3 newPos = this.transform.position;
         newPos.y = 0;
