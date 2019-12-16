@@ -15,10 +15,12 @@ public class CandleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        aud.Play();
-        transform.parent = null;
+        GetComponent<BoxCollider>().size /= 2.5f;
         rb.isKinematic = false;
         GetComponent<Collider>().isTrigger = false;
+
+        aud.Play();
+        transform.parent = null;
     }
 
     private void OnCollisionEnter(Collision collision)

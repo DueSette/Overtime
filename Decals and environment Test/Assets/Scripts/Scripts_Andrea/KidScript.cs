@@ -32,16 +32,15 @@ public class KidScript : MonoBehaviour
         {
             once = false;
             anim.SetTrigger("approached");
-        }
-
-        StartCoroutine(EnableSpeed());
+            StartCoroutine(EnableSpeed());
+        }      
     }
 
     IEnumerator EnableSpeed()
     {
         yield return new WaitForSeconds(0.85f);
-        speed = 2;
-        yield return new WaitForSeconds(1.25f);
+        speed = 4.2f;
+        yield return new WaitForSeconds(5f);
         gameObject.SetActive(false);
     }
 }
