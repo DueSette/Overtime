@@ -73,9 +73,10 @@ public class NoteInventory : MonoBehaviour
 
     void InitialiaseOwnedNotes() //checks what notes we have collected from savefile and gives them their ID
     {
-       notesOwned.Add(0);
-       // notesOwned.Add(3);
-       // notesOwned.Add(4);
+        //This is an example of how we add notes when we first load the level (it unlocks all the notes on game startup)
+        //notesOwned.Add(0);
+        //notesOwned.Add(3);
+        //notesOwned.Add(4);
         //temporary code
 
         //load from json
