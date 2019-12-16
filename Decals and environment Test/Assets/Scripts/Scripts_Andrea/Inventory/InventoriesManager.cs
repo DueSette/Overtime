@@ -16,8 +16,13 @@ public class InventoriesManager : MonoBehaviour
     [SerializeField] AudioClip openInventory;
     [SerializeField] AudioClip navigateInventory;
 
+    public static InventoriesManager instance;
+
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+
         itemManager.gameObject.SetActive(true);
         noteManager.transform.parent.gameObject.SetActive(true); //activates the inventory, which will deactivate itself in the same frame. This loads the note inventory.
     }
@@ -81,6 +86,15 @@ public class InventoriesManager : MonoBehaviour
                 SoundManager.instance.PlaySound(openInventory);
             }
         }
+    }
+
+    public bool HasItem(string itemName)
+    {
+        foreach (ItemInventory.Item i in itemManager.itemList)
+            if (i.name == itemName)
+                return true;
+
+        return false;
     }
 
     #region NoteInventory Methods
