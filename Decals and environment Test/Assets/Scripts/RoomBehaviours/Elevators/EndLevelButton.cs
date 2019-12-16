@@ -6,10 +6,7 @@ public class EndLevelButton : MonoBehaviour, IInteractable, ITextPrompt
 {
     void IInteractable.InteractWith()
     {
-        GameObject g = GameObject.FindGameObjectWithTag("GameController");
-
-        LevelManager lm = g.GetComponent<LevelManager>();
-        lm.NextLevel();
+        LevelManager.onEventLevelEnd();
     }
 
     string ITextPrompt.PromptText()

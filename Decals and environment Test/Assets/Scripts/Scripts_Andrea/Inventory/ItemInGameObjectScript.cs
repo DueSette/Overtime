@@ -15,10 +15,11 @@ public class ItemInGameObjectScript : MonoBehaviour, IInteractable
 
         inventory.itemManager.UnlockNewItem(item);
         inventory.ToggleItemInventoryWindow(true);
-        if (destroyOnPickup)
-            Destroy(gameObject);
 
         InteractionEvent();
+
+        if (destroyOnPickup)
+            Destroy(gameObject);
     }
 
     protected virtual void InteractionEvent()
