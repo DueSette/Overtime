@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhotoGraphPickUp : MonoBehaviour
+public class PhotoGraphPickUp : ItemInGameObjectScript
 {
-    public float theDistance;
     public GameObject thePhotograph; // The photograph in the world.
     public GameObject sequenceBeginner; // TheGameobject which begins the photograph animation
 
@@ -14,23 +13,10 @@ public class PhotoGraphPickUp : MonoBehaviour
         sequenceBeginner = GameObject.FindGameObjectWithTag("PSequence");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void InteractionEvent()
     {
-        theDistance = PlayerCasting.distanceFromTarget; // TheDistance is as far as the player is from the target.
-    }
-
-    void OnMouseOver() // When mouse is over the object this script is attatched to.
-    {
-        if (Input.GetKeyDown(KeyCode.E)) // If player presses E -
-        {
-
-            Debug.Log("ActionPressed");
-            if (theDistance <= 3) //  - Whilst less than a distance of 3 from door.
-            {
-                sequenceBeginner.GetComponent<BoxCollider>().enabled = true;
-                thePhotograph.SetActive(false);
-            }
-        }
+        Debug.Log("ActionPressed");
+        sequenceBeginner.GetComponent<BoxCollider>().enabled = true;
+        thePhotograph.SetActive(false);
     }
 }

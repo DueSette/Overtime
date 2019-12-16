@@ -14,11 +14,18 @@ public class ItemInGameObjectScript : MonoBehaviour, IInteractable
         inventory.ToggleItemInventoryWindow(true);
         if (destroyOnPickup)
             Destroy(gameObject);
+
+        InteractionEvent();
     }
 
     void Start()
     {
         if (inventory == null)
             inventory = FindObjectOfType<InventoriesManager>();
+    }
+
+    protected virtual void InteractionEvent()
+    {
+
     }
 }
