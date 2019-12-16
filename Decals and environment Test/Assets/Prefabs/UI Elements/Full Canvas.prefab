@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: -40}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -20, y: -25}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &822630329
 CanvasRenderer:
@@ -166,8 +166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19.999893, y: -39.999935}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -19.999756, y: -25}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1675424829
 CanvasRenderer:
@@ -621,11 +621,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NOTE INVENTORY
       objectReference: {fileID: 0}
-    - target: {fileID: 3343000753648510968, guid: 6536183deb9f74b4d8e2fcc20860afa0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3343000753648510969, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -861,11 +856,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3612193331389577003, guid: 6536183deb9f74b4d8e2fcc20860afa0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000061035156
-      objectReference: {fileID: 0}
     - target: {fileID: 6949501784880697573, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
       propertyPath: m_Sprite
@@ -877,20 +867,22 @@ PrefabInstance:
       propertyPath: m_Type
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3343000754456325764, guid: 6536183deb9f74b4d8e2fcc20860afa0,
+    - target: {fileID: 3343000754515031548, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343000754456325764, guid: 6536183deb9f74b4d8e2fcc20860afa0,
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a63ea179b0c23a46812f8ae836a8701,
+        type: 2}
+    - target: {fileID: 3343000754515031548, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5782079524694794933, guid: 5a63ea179b0c23a46812f8ae836a8701,
+        type: 2}
     - target: {fileID: 3343000754515031548, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
       propertyPath: m_fontSize
-      value: 38.75
+      value: 44.45
       objectReference: {fileID: 0}
     - target: {fileID: 724601984378949053, guid: 6536183deb9f74b4d8e2fcc20860afa0,
         type: 3}
@@ -968,8 +960,7 @@ PrefabInstance:
       propertyPath: noteList.Array.data[4].entryName
       value: ERR
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 724601983369163916, guid: 6536183deb9f74b4d8e2fcc20860afa0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6536183deb9f74b4d8e2fcc20860afa0, type: 3}
 --- !u!224 &5301491957720628691 stripped
 RectTransform:
@@ -1181,6 +1172,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 75264913, guid: e00de69e57de1684ab29f8002bab5b21, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75264913, guid: e00de69e57de1684ab29f8002bab5b21, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75264913, guid: e00de69e57de1684ab29f8002bab5b21, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 75264913, guid: e00de69e57de1684ab29f8002bab5b21, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 75264913, guid: e00de69e57de1684ab29f8002bab5b21, type: 3}
       propertyPath: m_Sprite
