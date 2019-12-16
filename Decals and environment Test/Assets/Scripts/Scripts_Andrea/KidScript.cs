@@ -41,5 +41,7 @@ public class KidScript : MonoBehaviour
     {
         yield return new WaitForSeconds(0.85f);
         speed = 2;
+        yield return new WaitForSeconds(1.25f);
+        gameObject.SetActive(false);
     }
 }

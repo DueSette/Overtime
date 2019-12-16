@@ -14,6 +14,12 @@ public class SimplePromptObject : MonoBehaviour, IInteractable, ITextPrompt
 
     void IInteractable.InteractWith()
     {
+        if (InventoriesManager.instance.HasItem("Item 1"))
+            print("xDDDD");
+
+        if (clip == null)
+            return;
+
         SoundManager.instance.PlaySound(clip);
     }
 
