@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class EndElevatorBehaviour : ElevatorBehaviour
 {
-<<<<<<< HEAD
     [SerializeField] string nextLevel;
-=======
-    public string nextLevel;
->>>>>>> e1d26866880cd9dc114245c9bd85f3b820f2fc55
 
     private void OnEnable()
     {
@@ -50,10 +46,10 @@ public class EndElevatorBehaviour : ElevatorBehaviour
         pp.playerPreviousRot = player.transform.localEulerAngles;
 
         // Loading Next Level
-        LevelManager lm = GameObject.FindGameObjectWithTag("GameController").GetComponent<LevelManager>();
+        GameObject lm = GameObject.FindGameObjectWithTag("GameController");
         if (lm != null)
         {
-            nextLevel = lm.nextLevel;
+            nextLevel = lm.GetComponent<LevelManager>().nextLevel;
         }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);
