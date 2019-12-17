@@ -295,9 +295,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private AudioClip[] DetermineFloor() //checks what kind of floor we stepped on and returns an array of appropriate sounds to pick from
         {
-            if (Physics.SphereCast(m_FloorDetector.position, .3f, Vector3.down, out RaycastHit hit, 1.5f))
+            if (Physics.SphereCast(m_FloorDetector.position, .3f, Vector3.down, out RaycastHit hit, 0.5f))
             {
-                if (hit.collider.CompareTag("Floor")) //can be expanded to also work with say furniture
+                if (hit.collider.GetComponent<FloorType>() != null) //can be expanded to also work with say furniture
                 {
                     switch (hit.collider.GetComponent<FloorType>().type)
                     {
@@ -375,7 +375,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void CheckForInteractible() //called when player clicks
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
-            if (Physics.Raycast(ray, out RaycastHit hit, 1.5f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 Debug.Log(hit.collider.GetComponent<IInteractable>());
 
@@ -391,7 +391,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 1.5f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
                     m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());
@@ -401,7 +401,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
                 m_PromptBox.SetText("");
 
-            if (Physics.Raycast(ray, out hit, 1.5f))
+            if (Physics.Raycast(ray, out hit, 1.9f))
             {
                 if (hit.collider.GetComponent<IInteractable>() != null)
                     m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(true);

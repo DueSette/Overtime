@@ -6,7 +6,9 @@ public class MemoryRoomZeroScript : MonoBehaviour
 {
     public List<GameObject> fluffFurniture = new List<GameObject>();
     public List<GameObject> importantFurniture = new List<GameObject>();
-    [SerializeField] GameObject[] parents;
+    [SerializeField] GameObject parent;
+    [SerializeField] Material dissolver;
+    [SerializeField] Transform hallwaySpot;
 
     void OnEnable()
     {
@@ -20,22 +22,51 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
     void VanishItem()
     {
-        if(fluffFurniture.Count > 0)
+        try
         {
-            int rand = Random.Range(0, fluffFurniture.Count);
-            //use dissolve shader on object
-            fluffFurniture.RemoveAt(rand);
-        }
-        else if (importantFurniture.Count > 0)
-        {
-            int rand = Random.Range(0, importantFurniture.Count);
-            //use dissolve shader on object
-            importantFurniture.RemoveAt(rand);
-        }
+            if (fluffFurniture.Count > 0)
+            {
+                int rand = Random.Range(0, fluffFurniture.Count);
+                fluffFurniture[rand].GetComponent<Renderer>().material = dissolver;
+                StartCoroutine(LerpDissolve(fluffFurniture[rand].GetComponent<Renderer>().material));
+                fluffFurniture.RemoveAt(rand);
+            }
+            else if (importantFurniture.Count > 0)
+            {
+                int rand = Random.Range(0, importantFurniture.Count);
+                importantFurniture[rand].GetComponent<Renderer>().material = dissolver;
+                importantFurniture.RemoveAt(rand);
+            }
 
-        else
+            else
+            {
+                parent.GetComponent<Renderer>().material = dissolver;
+                parent.SetActive(false);
+
+                GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+                GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
+                GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+                LevelManager.onEventLevelSolved();
+            }
+        }
+        catch
         {
-            //same on parents
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+            GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+            LevelManager.onEventLevelSolved();
+        }
+    }
+
+    IEnumerator LerpDissolve(Material mat)
+    {
+        float lapsed = 0f;
+
+        while(lapsed < 1)
+        {
+            lapsed += Time.deltaTime / 2;
+            mat.SetFloat("_DissolveAmount", Mathf.Lerp(0, 1, lapsed));
+            yield return null;
         }
     }
 }

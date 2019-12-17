@@ -6,6 +6,7 @@ public class CandleScript : MonoBehaviour
 {
     Rigidbody rb;
     AudioSource aud;
+    [SerializeField] GameObject cake;
 
     private void Awake()
     {
@@ -15,7 +16,6 @@ public class CandleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        GetComponent<BoxCollider>().size /= 2.5f;
         rb.isKinematic = false;
         GetComponent<Collider>().isTrigger = false;
 
@@ -26,5 +26,10 @@ public class CandleScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         aud.Play();
+    }
+
+    private void OnDestroy()
+    {
+        cake.SetActive(true);
     }
 }
