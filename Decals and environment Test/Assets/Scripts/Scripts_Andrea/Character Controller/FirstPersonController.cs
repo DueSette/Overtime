@@ -375,7 +375,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void CheckForInteractible() //called when player clicks
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
-            if (Physics.Raycast(ray, out RaycastHit hit, 4))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.5f))
             {
                 Debug.Log(hit.collider.GetComponent<IInteractable>());
 
@@ -391,7 +391,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 1.65f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.5f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
                     m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());
@@ -401,10 +401,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
                 m_PromptBox.SetText("");
 
-            if (Physics.Raycast(ray, out hit, 1.65f))
+            if (Physics.Raycast(ray, out hit, 1.5f))
             {
-                if (hit.collider.GetComponent<IInteractable>() != null)               
-                    m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(true);               
+                if (hit.collider.GetComponent<IInteractable>() != null)
+                    m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(true);
+                else
+                    m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(false);
             }
             else
                 m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(false);
