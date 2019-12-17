@@ -69,24 +69,4 @@ public class LevelManager : MonoBehaviour
             }
         }
     }
-
-
-    /*
-    ====================================================================================================
-    Level Loading
-    ====================================================================================================
-    */
-    public void NextLevel()
-    {
-        // Getting Players Transform Relative To The End Elevator
-        PlayerPositioning pp = PlayerPositioning.Instance;
-
-        player.transform.parent = pickedLayout.GetRooms(RoomTypes.ELEVATOR_END)[0].transform;
-
-        pp.playerPreviousPos = player.transform.localPosition;
-        pp.playerPreviousRot = player.transform.localEulerAngles;
-
-        // Loading Next Level
-        SceneManager.LoadScene("LevelGeneration");
-    }
 }

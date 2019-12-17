@@ -652,10 +652,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5492d595b27f144857fd0170f0f38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canBeOpened: 1
   flipRotationDirection: 0
   hingePivot: {fileID: 8713437589054874065}
   openingSound: {fileID: 8300000, guid: c3dbe7a6b5b70204699ec37bc1851883, type: 3}
   closedSound: {fileID: 8300000, guid: 8784710463dec6543987e3b163939f83, type: 3}
+  lockedSound: {fileID: 0}
 --- !u!1 &2927062561337725712
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1074,7 @@ Transform:
   - {fileID: 8255619065801315288}
   - {fileID: 8276073404605225810}
   - {fileID: 6257704439212138096}
+  - {fileID: 6811092916657698606}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1338,6 +1341,55 @@ Transform:
   m_Father: {fileID: 6039756300840800935}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7443730666742376178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6811092916657698606}
+  - component: {fileID: 5315038817702960024}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6811092916657698606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443730666742376178}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalScale: {x: 50, y: 100, z: 10}
+  m_Children: []
+  m_Father: {fileID: 6039756300840800935}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &5315038817702960024
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443730666742376178}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 1, y: 1, z: 1}
+  - {x: 1, y: 1, z: -1}
+  - {x: 1, y: -1, z: 1}
+  - {x: 1, y: -1, z: -1}
+  - {x: -1, y: 1, z: 1}
+  - {x: -1, y: 1, z: -1}
+  - {x: -1, y: -1, z: 1}
+  - {x: -1, y: -1, z: -1}
+  m_Dering: 1
 --- !u!1 &7465511735218554622
 GameObject:
   m_ObjectHideFlags: 0
