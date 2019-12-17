@@ -54,17 +54,20 @@ public class Sequence : MonoBehaviour
     IEnumerator ScenePlayer()
     {
         //fadeScreen.GetComponent<Animation>().Play("FadeInAndOut");
+        player.GetComponent<FirstPersonController>().enabled = false;
         player.transform.position = this.gameObject.transform.position;
         playerCamera.transform.rotation = this.gameObject.transform.rotation;
 
-        player.GetComponent<FirstPersonController>().enabled = false;
         yield return new WaitForSeconds(2f);
+        localPhotograph.SetActive(true);
         localPhotograph.GetComponent<Animation>().Play("PhotographSwitch");
         yield return new WaitForSeconds(4.5f);
         wall.SetActive(false);
         noiseAmount = 0.01f;
         //dissolveSound.Play();
         yield return new WaitForSeconds(2.3f);
+
+        localPhotograph.SetActive(false);
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 }
