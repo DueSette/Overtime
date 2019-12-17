@@ -56,6 +56,7 @@ public class Sequence : MonoBehaviour
         //fadeScreen.GetComponent<Animation>().Play("FadeInAndOut");
         player.transform.position = this.gameObject.transform.position;
         playerCamera.transform.rotation = this.gameObject.transform.rotation;
+
         player.GetComponent<FirstPersonController>().enabled = false;
         yield return new WaitForSeconds(2f);
         localPhotograph.GetComponent<Animation>().Play("PhotographSwitch");
@@ -63,7 +64,7 @@ public class Sequence : MonoBehaviour
         wall.SetActive(false);
         noiseAmount = 0.01f;
         //dissolveSound.Play();
-        yield return new WaitForSeconds(1.9f);
+        yield return new WaitForSeconds(2.3f);
         player.GetComponent<FirstPersonController>().enabled = true;
     }
 }
