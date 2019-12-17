@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndElevatorBehaviour : ElevatorBehaviour
 {
-    string nextLevel;
+    public string nextLevel;
 
     private void OnEnable()
     {
