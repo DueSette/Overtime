@@ -6,9 +6,9 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class HexPositionSnapping : MonoBehaviour
 {
-    public static float xLock = (0.5f);
-    public static float yLock = (0.5f);
-    public static float zLock = (0.5f);
+    public float xLock = (0.5f);
+    public float yLock = (0.5f);
+    public float zLock = (0.5f);
 
     // Update is called once per frame
     void Update()
