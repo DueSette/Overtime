@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EndElevatorBehaviour : ElevatorBehaviour
 {
+<<<<<<< HEAD
+    [SerializeField] string nextLevel;
+=======
     public string nextLevel;
+>>>>>>> e1d26866880cd9dc114245c9bd85f3b820f2fc55
 
     private void OnEnable()
     {

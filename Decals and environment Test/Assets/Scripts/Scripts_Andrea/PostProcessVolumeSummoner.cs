@@ -15,11 +15,16 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     Coroutine volumeSummoning;
     AudioSource postProcAudio;
 
+    public static PostProcessVolumeSummoner instance;
+
     public enum PostProcVolumeType { TO_DARK = 0, FROM_DARK = 1 };
 
     private void Start()
     {
         postProcAudio = postProcBlock.GetComponent<AudioSource>();
+
+        if (instance == null)
+            instance = this;
     }
 
     public IEnumerator SummonVolume(PostProcVolumeType type, float timeToApproach, float peakTime, float timeToFade)
@@ -34,12 +39,22 @@ public class PostProcessVolumeSummoner : MonoBehaviour
         yield return null;
     }
 
+    bool goUp = true;
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.P) && volumeSummoning == null)
         {
-            volumeSummoning = StartCoroutine(SummonVolume(PostProcVolumeType.TO_DARK, 2.5f, 1.75f, 2.6f));
-            TimelineDirectorScript.instance.PlaySequence(1);
+            DarkTransition();
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+            GameStateManager.GetPlayer().transform.position = GameStateManager.GetPlayer().transform.position + new Vector3(0, goUp ? 10 : -10, 0);
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+            goUp = !goUp;
         }
+    }
+
+    public void DarkTransition()
+    {
+        volumeSummoning = StartCoroutine(SummonVolume(PostProcVolumeType.TO_DARK, 2.5f, 1.75f, 2.6f));
+        TimelineDirectorScript.instance.PlaySequence(1);
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4976187001800465437
 Transform:
   m_ObjectHideFlags: 0
@@ -170,6 +170,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1120981632252035209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4976187002619578467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650dd2d9961e7dd4394ca9df0d4ef03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    model: {fileID: 4976187002619578467}
+    name: Birthday candle
+    description: From a long time ago
+  destroyOnPickup: 1
 --- !u!1001 &4976187001566757223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,16 +198,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BoyCharacter_LP@T-Pose
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: c846342afa7af9b45874a2e7f3fdac8e,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 919a02eefe7a32e408a789e83be23899, type: 2}
-    - target: {fileID: -6057140222963153312, guid: c846342afa7af9b45874a2e7f3fdac8e,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c846342afa7af9b45874a2e7f3fdac8e,
         type: 3}
@@ -245,6 +252,16 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: c846342afa7af9b45874a2e7f3fdac8e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: c846342afa7af9b45874a2e7f3fdac8e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 919a02eefe7a32e408a789e83be23899, type: 2}
+    - target: {fileID: -6057140222963153312, guid: c846342afa7af9b45874a2e7f3fdac8e,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
