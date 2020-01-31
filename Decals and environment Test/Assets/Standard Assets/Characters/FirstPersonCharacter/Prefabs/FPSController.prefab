@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4715577729947480351}
   m_Layer: 0
   m_Name: FPSController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,11 +50,11 @@ CharacterController:
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.7
-  m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_Radius: 0.35
+  m_SlopeLimit: 15
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
@@ -243,7 +243,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a887b38c3127d9244ae1fb73f712fbf8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1043,7 +1043,7 @@ CharacterController:
   m_Enabled: 0
   serializedVersion: 2
   m_Height: 0.85
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -1276,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.052
       objectReference: {fileID: 0}
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
@@ -1286,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.577
+      value: 0.527
       objectReference: {fileID: 0}
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
@@ -1330,13 +1330,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.140675
+      objectReference: {fileID: 0}
+    - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
+        type: 3}
       propertyPath: m_LocalScale.y
       value: 0.16243006
       objectReference: {fileID: 0}
     - target: {fileID: 2366892619558114502, guid: 2cac593ad603b9547844b1cf37073186,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.16243006
+      value: 0.09930649
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cac593ad603b9547844b1cf37073186, type: 3}
