@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 /*
@@ -47,7 +48,6 @@ public class NoteInventory : MonoBehaviour
         ScrollEntries(0);
 
         parent.SetActive(false); //initialise everything and then disappear from view
-        print("done");
     }
 
     #region StartUp Functions
@@ -140,7 +140,7 @@ public class NoteInventory : MonoBehaviour
 
     public void CleanPreviousNoteUI() //clear previously in-focus entry (set color and style back to normal, clear related 3D Object from view
     {
-        GameObject currentNoteObject = noteNameGameObjects[currentFocus];
+        GameObject currentNoteObject = noteNameGameObjects[currentFocus]; //this needs to always be the first line of the method
 
         currentNoteObject.GetComponent<TextMeshProUGUI>().color = Color.white;
         currentNoteObject.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
@@ -152,6 +152,7 @@ public class NoteInventory : MonoBehaviour
     void UpdateNoteDescriptionUI() //updates description, background model, color of the currently selected entry
     {
         NoteEntryItem currentNote = noteList[currentFocus];
+
         GameObject current3DObj = currentNote.noteModel;
         descriptionUIText.text = currentNote.collected ? currentNote.entryDescription : "???"; //update text section
 
@@ -163,6 +164,7 @@ public class NoteInventory : MonoBehaviour
 
         noteNameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
         noteNameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+        noteNameGameObjects[currentFocus].GetComponent<Button>().Select();
     }
 
     public void UnlockNote(int noteID) //call when a player finds a new note
