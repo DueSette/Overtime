@@ -14,7 +14,7 @@ public class ItemInGameObjectScript : MonoBehaviour, IInteractable
             inventory = FindObjectOfType<InventoriesManager>();
 
         inventory.itemManager.UnlockNewItem(item);
-        inventory.ToggleItemInventoryWindow(true);
+        inventory.ForceToggleItemInventoryWindow(true);
 
         InteractionEvent();
 

@@ -39,7 +39,7 @@ public class InventoriesManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.N))
         {
             if (itemInventoryOpen) //if the other inventory is open, close it
-                ToggleItemInventoryWindow(false);
+                ForceToggleItemInventoryWindow(false);
 
             ToggleNoteInventoryWindow();
         }
@@ -88,7 +88,7 @@ public class InventoriesManager : MonoBehaviour
         }
     }
 
-    public bool HasItem(string itemName)
+    public bool HasItem(string itemName) //checks if we have an item by searching its name 
     {
         foreach (ItemInventory.Item i in itemManager.itemList)
             if (i.name == itemName)
@@ -122,12 +122,13 @@ public class InventoriesManager : MonoBehaviour
             noteManager.ScrollEntriesToLast();
         }
 
-        //GameStateManager.UpdateGameState(openOverride ? GameState.MENU : GameState.IN_GAME);
+        GameStateManager.SetGameState(openOverride ? GameState.MENU : GameState.IN_GAME);
         SoundManager.instance.PlaySound(openInventory);
         noteInventoryOpen = openOverride;
         noteManager.transform.parent.gameObject.SetActive(openOverride);
     }
 
+    //call when we want the menu to open automatically once player collects a note
     public void OpenNoteInventoryWindowOnUnlock(int unlockedNoteID)
     {
         noteManager.CleanPreviousNoteUI();
@@ -166,7 +167,7 @@ public class InventoriesManager : MonoBehaviour
         }
     }
 
-    public void ToggleItemInventoryWindow(bool openOverride)
+    public void ForceToggleItemInventoryWindow(bool openOverride)
     {
         itemInventoryOpen = openOverride;
 
