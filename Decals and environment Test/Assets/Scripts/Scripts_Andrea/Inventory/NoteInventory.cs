@@ -47,7 +47,6 @@ public class NoteInventory : MonoBehaviour
         ScrollEntries(0);
 
         parent.SetActive(false); //initialise everything and then disappear from view
-        print("done");
     }
 
     #region StartUp Functions
