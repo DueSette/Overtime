@@ -22,8 +22,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
     void VanishItem()
     {
-        try
-        {
+        //try
             if (fluffFurniture.Count > 0)
             {
                 int rand = Random.Range(0, fluffFurniture.Count);
@@ -48,7 +47,8 @@ public class MemoryRoomZeroScript : MonoBehaviour
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
                 LevelManager.onEventLevelSolved();
             }
-        }
+        
+    /*
         catch
         {
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
@@ -56,8 +56,10 @@ public class MemoryRoomZeroScript : MonoBehaviour
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
             LevelManager.onEventLevelSolved();
         }
+        */
     }
 
+    //updates dissolve value of dissolve shader
     IEnumerator LerpDissolve(Material mat)
     {
         float lapsed = 0f;
