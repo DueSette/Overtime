@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    AudioSource aud;
-    AudioClip currentlyPlayingClip;
-
     public static SoundManager instance;
-
+    private List<AudioSource> sources = new List<AudioSource>();
     private void Awake()
     {
         if (instance == null)
             instance = this;
 
-        aud = GetComponent<AudioSource>();
+        sources.Add(GetComponent<AudioSource>());
     }
 
     public void PlaySound(AudioClip clip)
     {
-        if (currentlyPlayingClip == clip)
-            return;
+        //if (currentlyPlayingClip == clip) can cause strange bugs related to audio sound muffled
+           // return;
 
-        aud.PlayOneShot(clip);
-        StartCoroutine(ManageLastClip(clip));
+        FindAvailableSource().PlayOneShot(clip);
     }
-
-    private IEnumerator ManageLastClip(AudioClip clip)
+    private AudioSource FindAvailableSource()
     {
-        currentlyPlayingClip = clip;
-        yield return new WaitForSeconds(currentlyPlayingClip.length);
-        currentlyPlayingClip = null;
+        for (int i = 0; i < sources.Count; i++)
+        {
+            if (!sources[i].isPlaying)
+                return sources[i];
+        }
+
+        sources.Add(gameObject.AddComponent<AudioSource>());
+        sources[sources.Count - 1].playOnAwake = false;
+        return sources[sources.Count - 1];
     }
 }
