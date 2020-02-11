@@ -56,18 +56,18 @@ public class InventoriesManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
             {
                 noteManager.ScrollEntries(false);
-                SoundManager.instance.PlaySound(openInventory);
+                SoundManager.instance.PlaySound(navigateInventory);
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 noteManager.ScrollEntries(true);
-                SoundManager.instance.PlaySound(openInventory);
+                SoundManager.instance.PlaySound(navigateInventory);
             }
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                SoundManager.instance.PlaySound(openInventory);
+                SoundManager.instance.PlaySound(navigateInventory);
                 ToggleNotesDescriptionBox();
             }
 
@@ -77,13 +77,13 @@ public class InventoriesManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
             {
                 itemManager.ScrollItems(false);
-                SoundManager.instance.PlaySound(openInventory);
+                SoundManager.instance.PlaySound(navigateInventory);
             }
 
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 itemManager.ScrollItems(true);
-                SoundManager.instance.PlaySound(openInventory);
+                SoundManager.instance.PlaySound(navigateInventory);
             }
         }
     }
@@ -98,7 +98,7 @@ public class InventoriesManager : MonoBehaviour
     }
 
     #region NoteInventory Methods
-    void ToggleNoteInventoryWindow()
+    void ToggleNoteInventoryWindow() //opens or closes the note inventory, based on its current status
     {
         if (noteInventoryOpen) //if note inventory was open, reset UI-related stuff and close
         {
@@ -114,7 +114,7 @@ public class InventoriesManager : MonoBehaviour
         noteManager.transform.parent.gameObject.SetActive(noteInventoryOpen);
     }
 
-    public void ForceToggleNoteInventoryWindow(bool openOverride)
+    public void ForceToggleNoteInventoryWindow(bool openOverride) //instead of toggling from on to off and viceversa, it sets the state
     {
         if (openOverride) //if it was open, reset UI-related stuff and close
         {
