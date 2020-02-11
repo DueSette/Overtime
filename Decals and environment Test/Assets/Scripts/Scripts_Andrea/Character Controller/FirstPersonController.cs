@@ -396,20 +396,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
                     m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());
                 else
-                    m_PromptBox.SetText("");
+                    m_PromptBox?.SetText("");
             }
             else
-                m_PromptBox.SetText("");
+            {
+                m_PromptBox?.SetText("");
+            }
 
             if (Physics.Raycast(ray, out hit, 1.9f))
             {
                 if (hit.collider.GetComponent<IInteractable>() != null)
-                    m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(true);
+                    m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(true);
                 else
-                    m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(false);
+                    m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(false);
             }
             else
-                m_PromptIcon.GetComponent<UIPromptIconScript>().ManageFade(false);
+                m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(false);
         }
 
         /// <summary>
