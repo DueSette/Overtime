@@ -34,6 +34,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
         [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
+
         [Header("Sounds")]
         [SerializeField] private AudioClip[] m_WoodFootstepSounds;    // an array of footstep sounds that will be randomly selected from, one for each kind
         [SerializeField] private AudioClip[] m_CarpetFootstepSounds;
@@ -96,7 +97,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
-            if (GameStateManager.gameState == GameState.IN_GAME)
+            if (GameStateManager.gameState == (GameState.IN_GAME & GameState.IN_GAME_LOOK_ONLY))
             {
                 RotateView();
                 CheckActionInput();
@@ -352,6 +353,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
+            //if(tutorialMode)
             m_MouseLook.LookRotation(transform, mainCamera.transform);
         }
 
@@ -384,6 +386,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
+        //checks if we are facing an object that emits a prompt and updates HUD accordingly
         private void CheckForPrompt() //called every time (so long as we are in IN_GAME state)
         {
             if (Camera.main == null)

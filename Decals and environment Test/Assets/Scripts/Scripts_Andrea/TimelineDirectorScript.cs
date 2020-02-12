@@ -15,28 +15,35 @@ public class TimelineDirectorScript : MonoBehaviour
             instance = this;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+            GameStateManager.SetGameState(GameState.IN_GAME_LOOK_ONLY);
+    }
+
     void OnEnable()
     {
         director = GetComponent<PlayableDirector>();
-        director.played += OnPlayableDirectorPlayed;
+        director.played += OnPlayableDirectorPlayed; //these events exist by default, we are just subscribing new methods to them
         director.stopped += OnPlayableDirectorStopped;
 
         director.playableAsset = sequences[0];
         director.Play();
     }
 
-    private void OnPlayableDirectorStopped(PlayableDirector aDirector)
-    {
-        if (director == aDirector)
-            GameStateManager.RestorePreviousState();
-    }
-
+    //if the director that fired the event is this director, act upon it
     void OnPlayableDirectorPlayed(PlayableDirector aDirector)
     {
         if (director == aDirector)
             GameStateManager.SetGameState(GameState.CUTSCENE);
     }
 
+    //if the director that fired the event is this director, act upon it
+    private void OnPlayableDirectorStopped(PlayableDirector aDirector)
+    {
+        if (director == aDirector)
+            GameStateManager.RestorePreviousState();
+    }
     void OnDisable()
     {
         director.played -= OnPlayableDirectorPlayed;
