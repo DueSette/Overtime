@@ -3,7 +3,14 @@ using System.Collections.Generic;
 using UnityStandardAssets.Utility;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine;
-public enum GameState { IN_GAME, MENU, CUTSCENE, PAUSE }
+
+public enum GameState
+{   IN_GAME = 0,
+    MENU = 2,
+    CUTSCENE = 4,
+    PAUSE = 8,
+    IN_GAME_LOOK_ONLY = 16
+} //the last one is for specific cases where you can move cam but can't walk
 
 public class GameStateManager : MonoBehaviour
 {
