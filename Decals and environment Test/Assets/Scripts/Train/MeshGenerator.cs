@@ -40,7 +40,7 @@ public class MeshGenerator : MonoBehaviour
 
         if (timer >= 1)
         {
-            xSize = xSize + 10;
+            xSize = xSize + 20;
             //zSize = zSize + 10;
             timer = 0;
 
