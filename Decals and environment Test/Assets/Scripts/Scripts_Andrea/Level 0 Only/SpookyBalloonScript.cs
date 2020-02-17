@@ -5,14 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SpookyBalloonScript : MonoBehaviour
 {
-    [SerializeField] float freeWanderRadius, playerDetectionRadius, speed, idleTime;
+    [SerializeField] float freeWanderRadius, playerDetectionRadius, maxSpeed, idleTime;
     [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
 
     #region Internal stuff
     private static UnityStandardAssets.Characters.FirstPerson.FirstPersonController player; //static ref to player - all hail nested namespaces
     AudioSource aud;
-
-    private float downTimer;
+    private float idleTimer, chaseTimer;
     private Vector3 wanderSpot;
     private Vector3 startPos;
 
@@ -26,7 +25,7 @@ public class SpookyBalloonScript : MonoBehaviour
             player = FindObjectOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
 
         aud = GetComponent<AudioSource>();
-        downTimer = idleTime;
+        idleTimer = idleTime;
         startPos = transform.position;
     }
 
@@ -41,8 +40,8 @@ public class SpookyBalloonScript : MonoBehaviour
         {
             case BalloonState.IDLE:
                 {
-                    downTimer -= Time.deltaTime;
-                    if (downTimer <= 0.0f)
+                    idleTimer -= Time.deltaTime;
+                    if (idleTimer <= 0.0f)
                         ChangeState(BalloonState.WANDERING);
 
                     if (IsPlayerNear())
@@ -52,7 +51,7 @@ public class SpookyBalloonScript : MonoBehaviour
             case BalloonState.WANDERING:
                 {
                     Vector3 dir = (wanderSpot - transform.position).normalized;
-                    transform.position += dir * (speed / 3.0f) * Time.deltaTime;
+                    transform.position += dir * (maxSpeed / 3.0f) * Time.deltaTime;
 
                     if (ReachedWanderSpot())
                         ChangeState(BalloonState.IDLE);
@@ -64,7 +63,10 @@ public class SpookyBalloonScript : MonoBehaviour
             case BalloonState.CHASING:
                 {
                     Vector3 dir = (player.transform.position - transform.position).normalized;
-                    transform.position += dir * speed * Time.deltaTime;
+                    float chaseSpeed = Mathf.Lerp(0.1f, maxSpeed, Mathf.Clamp(chaseTimer / maxSpeed, 0, 1)); //the balloon accelerates base on how much time passed since the chase began
+
+                    transform.position += dir * chaseSpeed * Time.deltaTime;
+                    chaseTimer += Time.deltaTime;
 
                     if (!IsPlayerNear())
                         ChangeState(BalloonState.IDLE);
@@ -81,20 +83,18 @@ public class SpookyBalloonScript : MonoBehaviour
         {
             case BalloonState.IDLE:
                 {
-                    downTimer = idleTime;
+                    idleTimer = idleTime;
                     break;
                 }
             case BalloonState.WANDERING:
                 {
-                    Vector2 w = PickWanderSpot();
-                    wanderSpot.x = w.x;
-                    wanderSpot.y = transform.position.y;
-                    wanderSpot.z = w.y;                   
+                    PickWanderSpot();                                    
                     break;
                 }
             case BalloonState.CHASING:
                 {
                     //TODO: play "chasing" clip
+                    chaseTimer = 0.0f;
                     break;
                 }
         }
@@ -106,12 +106,14 @@ public class SpookyBalloonScript : MonoBehaviour
         return (dist < playerDetectionRadius * playerDetectionRadius);
     }
 
-    private Vector2 PickWanderSpot()
+    private void PickWanderSpot()
     {
-        Vector3 result;
-        result = startPos + Random.insideUnitSphere * freeWanderRadius;
+        Vector3 spot;
+        spot = startPos + (Random.insideUnitSphere * freeWanderRadius);
 
-        return new Vector2(result.x, result.z);
+        wanderSpot.x = spot.x;
+        wanderSpot.y = transform.position.y;
+        wanderSpot.z = spot.y;
     }
 
     private bool ReachedWanderSpot()
