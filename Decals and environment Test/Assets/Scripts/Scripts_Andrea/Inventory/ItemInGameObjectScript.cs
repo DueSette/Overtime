@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemInGameObjectScript : MonoBehaviour, IInteractable
+public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
     static InventoriesManager inventory;
     [SerializeField] ItemInventory.Item item;
