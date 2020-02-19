@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteInGameObjectScript : MonoBehaviour, IInteractable
+public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
     static InventoriesManager inventoriesManager;
     [SerializeField, Tooltip("Which note does this unlock?")] int noteID = -1;
@@ -11,6 +11,7 @@ public class NoteInGameObjectScript : MonoBehaviour, IInteractable
     {
         inventoriesManager.noteManager.UnlockNote(noteID);
         inventoriesManager.OpenNoteInventoryWindowOnUnlock(noteID);
+        
     }
 
     // Start is called before the first frame update
