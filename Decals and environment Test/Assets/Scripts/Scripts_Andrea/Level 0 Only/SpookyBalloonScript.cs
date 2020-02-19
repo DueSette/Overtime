@@ -5,7 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SpookyBalloonScript : MonoBehaviour
 {
+    [Header("Designer Friendly Options")]
+    [SerializeField] bool fixedWanderer;
+    [SerializeField] Transform[] fixedWanderSpots;
     [SerializeField] float freeWanderRadius, playerDetectionRadius, maxSpeed, idleTime;
+
     [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
 
     #region Internal stuff
@@ -13,7 +17,10 @@ public class SpookyBalloonScript : MonoBehaviour
     AudioSource aud;
     private float idleTimer, chaseTimer;
     private Vector3 wanderSpot;
+
     private Vector3 startPos;
+    public int fixedWandererIterator = 1; //determines the current node the fixed patroller is supposed to visit
+    bool forwardWanderOrder = true; //for fixed patrolling logic
 
     private enum BalloonState { IDLE, WANDERING, CHASING };
     private BalloonState state = BalloonState.IDLE;
@@ -31,7 +38,7 @@ public class SpookyBalloonScript : MonoBehaviour
 
     private void Update()
     {
-        HandleState();     
+        HandleState();
     }
 
     void HandleState()
@@ -53,6 +60,8 @@ public class SpookyBalloonScript : MonoBehaviour
                     Vector3 dir = (wanderSpot - transform.position).normalized;
                     transform.position += dir * (maxSpeed / 3.0f) * Time.deltaTime;
 
+                    BalloonLookAt(wanderSpot);
+
                     if (ReachedWanderSpot())
                         ChangeState(BalloonState.IDLE);
 
@@ -68,8 +77,10 @@ public class SpookyBalloonScript : MonoBehaviour
                     transform.position += dir * chaseSpeed * Time.deltaTime;
                     chaseTimer += Time.deltaTime;
 
-                    if (!IsPlayerNear())
-                        ChangeState(BalloonState.IDLE);
+                    BalloonLookAt(player.transform);
+
+                    if (!IsPlayerNear()) //sends badoom to its first spawnpoint
+                        ResetActivity();
                     break;
                 }
         }
@@ -88,7 +99,7 @@ public class SpookyBalloonScript : MonoBehaviour
                 }
             case BalloonState.WANDERING:
                 {
-                    PickWanderSpot();                                    
+                    PickWanderSpot();
                     break;
                 }
             case BalloonState.CHASING:
@@ -100,7 +111,7 @@ public class SpookyBalloonScript : MonoBehaviour
         }
     }
 
-    private bool IsPlayerNear()
+    private bool IsPlayerNear() 
     {
         float dist = (player.transform.position - transform.position).sqrMagnitude;
         return (dist < playerDetectionRadius * playerDetectionRadius);
@@ -109,25 +120,91 @@ public class SpookyBalloonScript : MonoBehaviour
     private void PickWanderSpot()
     {
         Vector3 spot;
-        spot = startPos + (Random.insideUnitSphere * freeWanderRadius);
+        if (fixedWanderer)
+        {
+            spot = (fixedWandererIterator == 0) ? startPos : fixedWanderSpots[fixedWandererIterator].position;
+            fixedWandererIterator += forwardWanderOrder ? 1 : -1;
 
-        wanderSpot.x = spot.x;
-        wanderSpot.y = transform.position.y;
-        wanderSpot.z = spot.y;
+            if(fixedWandererIterator > fixedWanderSpots.Length - 1)
+            {
+                fixedWandererIterator = fixedWanderSpots.Length - 1;
+                forwardWanderOrder = !forwardWanderOrder;
+            }
+            else if (fixedWandererIterator < 0)
+            {
+                fixedWandererIterator = 1;
+                forwardWanderOrder = !forwardWanderOrder;
+            }
+
+            wanderSpot = spot;   
+        }
+        else
+        {
+            spot = startPos + (Random.insideUnitSphere * freeWanderRadius);
+
+            wanderSpot.x = spot.x;
+            wanderSpot.y = transform.position.y;
+            wanderSpot.z = spot.y;
+        }
     }
 
     private bool ReachedWanderSpot()
     {
         float f = Mathf.Floor(transform.position.x);
-        float g = Mathf.Floor(transform.position.z);
-        float a = Mathf.Floor(wanderSpot.x);
-        float b = Mathf.Floor(wanderSpot.z);
+        float g = Mathf.Floor(transform.position.y);
+        float h = Mathf.Floor(transform.position.z);
 
-        return (f == a) && (g == b);
+        float a = Mathf.Floor(wanderSpot.x);
+        float b = Mathf.Floor(wanderSpot.y);
+        float c = Mathf.Floor(wanderSpot.z);
+
+        return (f == a) && (g == b) && (h == c);
+    }
+
+    private void BalloonLookAt(Transform target)
+    {
+        
+        Quaternion prev = transform.rotation;
+        transform.LookAt(target);
+        Quaternion fut = transform.localRotation;
+
+        transform.rotation = Quaternion.Lerp(prev, fut, 0.15f);
+    }
+
+    private void BalloonLookAt(Vector3 target)
+    {
+
+        Quaternion prev = transform.rotation;
+        transform.LookAt(target);
+        Quaternion fut = transform.localRotation;
+
+        transform.rotation = Quaternion.Lerp(prev, fut, 0.15f);
+    }
+
+    private void ResetActivity() //back to square one and in wandering state
+    {
+        ChangeState(BalloonState.WANDERING);
+        wanderSpot = startPos;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        //explode on player contact
+        switch (collision.collider.tag)
+        {
+            case "BalloonStopper":
+                {
+                    ResetActivity();
+                    print("stopped");
+                }
+                break;
+
+            case "Player":
+                {
+                    //explode on player contact
+                    //this means screen fx, sound, maybe camera shake, maybe slowed speed
+                    print("player got badoomed");
+                }
+                break;
+        }
     }
 }
