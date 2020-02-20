@@ -73,6 +73,9 @@ public class ItemInventory : MonoBehaviour
 
     public void UpdateUI() //updates render texture, description, entry names to the currently selected item
     {
+        if (itemNamesList.Count < 1)
+            return;
+
         currentFocus = Mathf.Clamp(currentFocus, 0, itemList.Count - 1);
 
         PutItemInView(itemList[currentFocus].model);
@@ -84,6 +87,9 @@ public class ItemInventory : MonoBehaviour
 
     public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list
     {
+        if (itemNamesList.Count < 1)
+            return;
+
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
 

@@ -163,22 +163,22 @@ public class SpookyBalloonScript : MonoBehaviour
 
     private void BalloonLookAt(Transform target)
     {
-        
-        Quaternion prev = transform.rotation;
+        Vector3 prev = transform.rotation.eulerAngles;
         transform.LookAt(target);
-        Quaternion fut = transform.localRotation;
+        Vector3 fut = transform.localRotation.eulerAngles;
 
-        transform.rotation = Quaternion.Lerp(prev, fut, 0.15f);
+        Vector3 v = Vector3.Lerp(prev, fut, 0.15f);
+        transform.rotation = Quaternion.Euler(prev.x, v.y, prev.z);
     }
 
     private void BalloonLookAt(Vector3 target)
     {
-
-        Quaternion prev = transform.rotation;
+        Vector3 prev = transform.rotation.eulerAngles;
         transform.LookAt(target);
-        Quaternion fut = transform.localRotation;
+        Vector3 fut = transform.localRotation.eulerAngles;
 
-        transform.rotation = Quaternion.Lerp(prev, fut, 0.15f);
+        Vector3 v = Vector3.Lerp(prev, fut, 0.15f);
+        transform.rotation = Quaternion.Euler(prev.x, v.y, prev.z);
     }
 
     private void ResetActivity() //back to square one and in wandering state
