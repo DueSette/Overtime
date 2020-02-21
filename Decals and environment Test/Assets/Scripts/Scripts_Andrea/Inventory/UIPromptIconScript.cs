@@ -17,6 +17,9 @@ public class UIPromptIconScript : MonoBehaviour
 
     public void ManageFade(bool up)
     {
+        if (image == null)
+            return;
+
         alpha = Mathf.Clamp(alpha + (up ? 0.025f : -0.025f) * fadeSpeed, 0, 1);
         Color c = new Color(255, 255, 255, alpha);
         image.color = c;
