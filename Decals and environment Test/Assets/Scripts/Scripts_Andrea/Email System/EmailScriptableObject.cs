@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Email", menuName = "ScriptableObjects/EmailScriptableObject", order = 1)]
 public class EmailScriptableObject : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string title, sender, receivers, text;
+    public bool read;
 }

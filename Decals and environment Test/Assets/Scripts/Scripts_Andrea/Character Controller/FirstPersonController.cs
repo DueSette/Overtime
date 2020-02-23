@@ -68,6 +68,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         Coroutine crouchCoroutine = null;
         GameStateManager gsManager;
 
+        public delegate void InputEventDelegate();
+        public static event InputEventDelegate ExitInteraction;
+
         // Use this for initialization
         private void Start()
         {
@@ -101,6 +104,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 RotateView();
                 CheckActionInput();
+            }
+
+            if(GameStateManager.gameState == GameState.INTERACTING_W_ITEM)
+            {
+                if (Input.GetButton("Cancel"))
+                    ExitInteraction();
+
             }
 
             if (m_IsCrouching) //makes sure that when moving the child controller the parent follows
