@@ -141,6 +141,7 @@ public class InventoriesManager : MonoBehaviour
     void ToggleNotesDescriptionBox()
     {
         noteManager.descriptionUIText.enabled = !noteManager.descriptionUIText.enabled;
+        noteManager.descriptionVeil.SetActive(noteManager.descriptionUIText.enabled);
     }
     #endregion
 
