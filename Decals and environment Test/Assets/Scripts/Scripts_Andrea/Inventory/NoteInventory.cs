@@ -25,6 +25,7 @@ public class NoteInventory : MonoBehaviour
     }
 
     public TextMeshProUGUI descriptionUIText;
+    public GameObject descriptionVeil; //an almost opaque black panel that only serves the purpose of masking the currently rendered object to make text more readable
     [SerializeField] List<NoteEntryItem> noteList = new List<NoteEntryItem>(); //all the actual info about the notes, set via editor
 
     [SerializeField] GameObject noteNamePrefab;
