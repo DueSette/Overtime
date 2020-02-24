@@ -5,8 +5,7 @@ using UnityEngine;
 public class OpenableDoor : MonoBehaviour, IInteractable
 {
     bool open = false;
-    [SerializeField] bool canBeOpened = true;
-    [SerializeField] private bool flipRotationDirection;
+    public bool canBeOpened = true;
 
     [Header("Door Animations")]
     [SerializeField] private Animator doorAnimController;
@@ -17,8 +16,6 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip lockedSound;
     
     AudioSource aud;
-    float lapsed = 0;
-    Coroutine rotRoutine;
 
     void Start()
     {
