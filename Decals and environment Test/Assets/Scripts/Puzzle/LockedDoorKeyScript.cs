@@ -5,10 +5,10 @@ using UnityEngine;
 public class LockedDoorKeyScript : ItemInGameObjectScript
 {
     [SerializeField]
-    private OpenableDoor unlockingDoor;
+    private string keyUnlockEventCode;
 
     protected override void InteractionEvent()
     {
-        unlockingDoor.canBeOpened = true;
+        OpenableDoor.OnDoorUnlockEvent(keyUnlockEventCode);
     }
 }
