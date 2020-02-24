@@ -9,8 +9,9 @@ public enum GameState
     MENU = 2,
     CUTSCENE = 4,
     PAUSE = 8,
-    IN_GAME_LOOK_ONLY = 16
-} //the last one is for specific cases where you can move cam but can't walk
+    IN_GAME_LOOK_ONLY = 16, //this one is for specific cases where you can move the camera but can't walk
+    INTERACTING_W_ITEM = 32
+} 
 
 public class GameStateManager : MonoBehaviour
 {

@@ -19,7 +19,8 @@ public class ItemInventory : MonoBehaviour
     int currentFocus = 0;
     GameObject itemInView = null;
 
-    [System.Serializable] public class Item
+    [System.Serializable]
+    public class Item
     {
         public GameObject model;
         public string name;
@@ -30,7 +31,7 @@ public class ItemInventory : MonoBehaviour
     {
         //populate itemList - possibly load from save
         int x = 0;
-        foreach(Item i in itemList)
+        foreach (Item i in itemList)
         {
             i.model = Instantiate(i.model, Vector3.zero, Quaternion.identity, modelContainer); //instantiate all owned items and set container as parent
             i.model.transform.localPosition = Vector3.zero;
@@ -54,9 +55,9 @@ public class ItemInventory : MonoBehaviour
     {
         currentFocus = itemList.Count;
 
-        for (int i = 0; i < itemList.Count; i++) 
+        for (int i = 0; i < itemList.Count; i++)
             if (itemList[i] == newItem) //if the new item is actually an Item that is still on the map but is clicked again
-                currentFocus = i;       
+                currentFocus = i;
 
         foreach (Item i in itemList)  //if we already are in possess of this item don't add it, but still open the inventory       
             if (i == newItem)
@@ -73,6 +74,9 @@ public class ItemInventory : MonoBehaviour
 
     public void UpdateUI() //updates render texture, description, entry names to the currently selected item
     {
+        if (itemNamesList.Count < 1)
+            return;
+
         currentFocus = Mathf.Clamp(currentFocus, 0, itemList.Count - 1);
 
         PutItemInView(itemList[currentFocus].model);
@@ -80,15 +84,18 @@ public class ItemInventory : MonoBehaviour
 
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
-    } 
+    }
 
     public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list
     {
+        if (itemNamesList.Count < 1)
+            return;
+
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
 
         //maybe make it lerp away
-        if(itemInView != null)
+        if (itemInView != null)
             itemInView.SetActive(false);
     }
 
