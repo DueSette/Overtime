@@ -31,6 +31,7 @@ public class ItemInventory : MonoBehaviour
     {
         //populate itemList - possibly load from save
         int x = 0;
+
         foreach (Item i in itemList)
         {
             i.model = Instantiate(i.model, Vector3.zero, Quaternion.identity, modelContainer); //instantiate all owned items and set container as parent

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MarbleBehaviour : MonoBehaviour
 {
-    public float Speed;
+    public float speed;
+    public float speedModifier = 10;
     AudioSource aud;
     Rigidbody rb;
 
@@ -20,18 +21,18 @@ public class MarbleBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Speed = rb.velocity.magnitude * 10;
+        speed = rb.velocity.magnitude * speedModifier;
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (aud.isPlaying == false && Speed >= 0.1f && collision.gameObject.tag == "Board")
+        if (aud.isPlaying == false && speed >= 0.1f && collision.gameObject.tag == "Board")
         {
             Debug.Log("HittingBoard");
             aud.Play();
         }
         else
-        if (aud.isPlaying == true && Speed < 0.1f && collision.gameObject.tag == "Board")
+        if (aud.isPlaying == true && speed < 0.1f && collision.gameObject.tag == "Board")
         {
             aud.Pause();
         }
@@ -43,5 +44,10 @@ public class MarbleBehaviour : MonoBehaviour
         {
             aud.Pause();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        speedModifier = 0;
     }
 }
