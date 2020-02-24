@@ -26,6 +26,7 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     {
         if (!canBeOpened)
         {
+            doorAnimController.SetTrigger("DoorLocked");
             aud.PlayOneShot(lockedSound);
             return;
         }
