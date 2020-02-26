@@ -352,7 +352,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             else
             {
-
                 newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
             }
             mainCamera.transform.localPosition = newCameraPosition;
@@ -404,23 +403,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
-                    FacingPromptTextEvent(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                    FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
                 else
-                    FacingPromptTextEvent("");
+                    FacingPromptTextEvent?.Invoke("");
             }
             else
-                FacingPromptTextEvent("");
+                FacingPromptTextEvent?.Invoke("");
 
             //FOR PROMPT ICON
             if (Physics.Raycast(ray, out hit, 1.9f))
             {
                 if (hit.collider.GetComponent<IInteractable>() != null)
-                    FacingPromptIconEvent(true);
+                    FacingPromptIconEvent?.Invoke(true);
                 else
-                    FacingPromptIconEvent(false);
+                    FacingPromptIconEvent?.Invoke(false);
             }
             else
-                FacingPromptIconEvent(false);
+                FacingPromptIconEvent?.Invoke(false);
         }
 
         /// <summary>
