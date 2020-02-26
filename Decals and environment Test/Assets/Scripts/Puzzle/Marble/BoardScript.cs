@@ -8,7 +8,9 @@ public class BoardScript : MonoBehaviour, IInteractable
     public float rotspeed = 200;
     public float minSpeed = 1f;
 
+
     public bool marbleActve = false;
+    public bool puzzleComplete = false;
 
     public static int camNum;
 
@@ -39,12 +41,13 @@ public class BoardScript : MonoBehaviour, IInteractable
 
     void Update()
     {
-          marbleActve = MarbleBehaviour.marbleInInventory;
+        marbleActve = MarbleBehaviour.marbleInInventory;
+        puzzleComplete = MarbleFinish.puzzleComplete;
 
 
 
 
-        if(camNum == 2 && marbleActve == true)
+        if(camNum == 2 && marbleActve == true && puzzleComplete == false)
         {
             localMarble.gameObject.SetActive(true);
         }
