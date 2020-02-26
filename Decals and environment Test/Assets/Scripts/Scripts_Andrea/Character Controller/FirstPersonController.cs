@@ -24,6 +24,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
         [SerializeField] private float m_GravityMultiplier;
+
         [Space, Header("Camera settings")]
         [SerializeField] private Camera mainCamera;
         [SerializeField] private float m_CameraZoomFOV = 30f;
@@ -359,7 +360,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            //if(tutorialMode)
             m_MouseLook.LookRotation(transform, mainCamera.transform);
         }
 
