@@ -1293,6 +1293,16 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: promptTextBox
+      value: 
+      objectReference: {fileID: 138818497}
+    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: fadeSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 309ce587f4114124aba1dba454a2f9e6, type: 3}
 --- !u!1001 &453650510
@@ -3250,6 +3260,7 @@ GameObject:
   - component: {fileID: 1596002475}
   - component: {fileID: 1596002474}
   - component: {fileID: 1596002473}
+  - component: {fileID: 1596002477}
   m_Layer: 0
   m_Name: 'item '
   m_TagString: Untagged
@@ -3352,6 +3363,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596002471}
   m_Mesh: {fileID: 4300002, guid: 622a87b3379022740be7e2efea3ebd33, type: 3}
+--- !u!114 &1596002477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596002471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f122c8f0248704449c9b0cbd8a76e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
+  promptText: asd
 --- !u!1001 &1672155120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3648,6 +3673,7 @@ GameObject:
   - component: {fileID: 1716243443}
   - component: {fileID: 1716243445}
   - component: {fileID: 1716243444}
+  - component: {fileID: 1716243446}
   m_Layer: 0
   m_Name: Mail Title (1)
   m_TagString: Untagged
@@ -3794,6 +3820,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716243442}
   m_CullTransparentMesh: 0
+--- !u!114 &1716243446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716243442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f122c8f0248704449c9b0cbd8a76e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 5082d5f2f4d43714aa1f0668edfca3a5, type: 3}
+  promptText: ASD
 --- !u!1 &1757256213
 GameObject:
   m_ObjectHideFlags: 0

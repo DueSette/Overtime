@@ -66,12 +66,12 @@ public class NoteInventory : MonoBehaviour
     {
         for (int i = 0; i < noteList.Count; i++)
         {
-            noteList[i].noteModel = Instantiate(noteList[i].noteModel, Vector3.zero, Quaternion.identity, modelContainer);
+            noteList[i].noteModel = Instantiate(noteList[i].noteModel, Vector3.zero, Quaternion.Euler(0, -90, 0), modelContainer);
             noteList[i].noteModel.transform.localPosition = Vector3.zero;
             noteList[i].noteModel.layer = LayerMask.NameToLayer("ViewableObjects"); //makes sure we are on the layer the inventory cam can see
         }
     }
-
+    
     void InitialiaseOwnedNotes() //checks what notes we have collected from savefile and gives them their ID
     {
         //This is an example of how we add notes when we first load the level (it unlocks all the notes on game startup)
