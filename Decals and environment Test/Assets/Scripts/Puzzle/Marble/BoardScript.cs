@@ -8,6 +8,8 @@ public class BoardScript : MonoBehaviour, IInteractable
     public float rotspeed = 200;
     public float minSpeed = 1f;
 
+    public bool marbleActve = false;
+
     public static int camNum;
 
 
@@ -21,6 +23,7 @@ public class BoardScript : MonoBehaviour, IInteractable
     float eulerAngXAlt;
     [SerializeField]
     float eulerAngZAlt;
+    public GameObject localMarble;
 
 
 
@@ -36,6 +39,19 @@ public class BoardScript : MonoBehaviour, IInteractable
 
     void Update()
     {
+          marbleActve = MarbleBehaviour.marbleInInventory;
+
+
+
+
+        if(camNum == 2 && marbleActve == true)
+        {
+            localMarble.gameObject.SetActive(true);
+        }
+        
+
+
+
         currentRot = transform.rotation;
 
         eulerAngX = transform.localEulerAngles.x;
