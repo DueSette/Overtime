@@ -19,7 +19,7 @@ public class DynamicCamera : MonoBehaviour
         currentView = views[4];
         marbleCamera = this.gameObject.GetComponent<Camera>();
         viewNum = 5;
-        transitionSpeed = .5F;
+        transitionSpeed = 3F;
         maxviews = views.Length;
     }
 

@@ -11,6 +11,8 @@ public class BoardScript : MonoBehaviour, IInteractable
 
     public bool marbleActve = false;
     public bool puzzleComplete = false;
+    public GameObject cameraHolder;
+
 
     public static int camNum;
 
@@ -50,6 +52,16 @@ public class BoardScript : MonoBehaviour, IInteractable
         if(camNum == 2 && marbleActve == true && puzzleComplete == false)
         {
             localMarble.gameObject.SetActive(true);
+        }
+
+
+        if(camNum == 2)
+        {
+            cameraHolder.transform.parent = null;
+        }
+        else
+        {
+            cameraHolder.transform.parent = this.transform;
         }
         
 
