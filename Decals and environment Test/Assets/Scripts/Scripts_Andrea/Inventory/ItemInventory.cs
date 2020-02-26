@@ -27,7 +27,7 @@ public class ItemInventory : MonoBehaviour
         public string description;
     }
 
-    private void Awake()
+    private void Start()
     {
         //populate itemList - possibly load from save
         int x = 0;
@@ -35,7 +35,10 @@ public class ItemInventory : MonoBehaviour
         {
             i.model = Instantiate(i.model, Vector3.zero, Quaternion.identity, modelContainer); //instantiate all owned items and set container as parent
             i.model.transform.localPosition = Vector3.zero;
-            i.model.layer = LayerMask.NameToLayer("ViewableObjects"); //need this layer so that the dedicated camera will only render on that layer            
+
+            //i.model.layer = LayerMask.NameToLayer("ViewableObjects"); //need this layer so that the dedicated camera will only render on that layer    
+            SetObjectWithChildrenOnLayer(i.model);
+
             itemNamesList.Add(Instantiate(entryNamePrefab, leftPanel));
             itemNamesList[x].GetComponent<TextMeshProUGUI>().text = i.name;
             itemNamesList[x].GetComponent<ItemUIObjectScript>().containedItem = i;
@@ -67,7 +70,10 @@ public class ItemInventory : MonoBehaviour
 
         newItem.model = Instantiate(newItem.model, Vector3.zero, Quaternion.identity, modelContainer);
         newItem.model.transform.localPosition = Vector3.zero;
-        newItem.model.layer = LayerMask.NameToLayer("ViewableObjects");
+
+        //newItem.model.layer = LayerMask.NameToLayer("ViewableObjects");
+        SetObjectWithChildrenOnLayer(newItem.model);
+
         itemNamesList.Add(Instantiate(entryNamePrefab, leftPanel));
         itemNamesList[itemNamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
     }
@@ -85,19 +91,19 @@ public class ItemInventory : MonoBehaviour
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
         itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
     }
-
-    public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list
+    
+    void SetObjectWithChildrenOnLayer(GameObject model)
     {
-        if (itemNamesList.Count < 1)
-            return;
+        model.layer = LayerMask.NameToLayer("ViewableObjects");
 
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+        int x = model.transform.childCount;
 
-        //maybe make it lerp away
-        if (itemInView != null)
-            itemInView.SetActive(false);
-    }
+        for (int i = 0; i < x; i++)
+        {
+            GameObject child = model.transform.GetChild(i).gameObject;
+            SetObjectWithChildrenOnLayer(child);
+        }
+    } //Recursively assigns correct layer to object and all it's children
 
     public void ScrollItems(bool up) //navigates through the list
     {
@@ -123,6 +129,19 @@ public class ItemInventory : MonoBehaviour
         }
 
 
+    }
+
+    public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list
+    {
+        if (itemNamesList.Count < 1)
+            return;
+
+        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
+        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+
+        //maybe make it lerp away
+        if (itemInView != null)
+            itemInView.SetActive(false);
     }
     #endregion
 

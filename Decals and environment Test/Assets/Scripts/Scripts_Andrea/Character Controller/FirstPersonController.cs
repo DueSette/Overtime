@@ -44,9 +44,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
         [SerializeField] Transform m_FloorDetector;
         [SerializeField] Transform m_CeilingDetector;
-        [SerializeField] Image m_PromptIcon;
-        [SerializeField] Sprite _PromptSprite;
-        [SerializeField] private TextMeshProUGUI m_PromptBox;
 
         private bool m_Jump;
         private float m_YRotation;
@@ -54,10 +51,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Vector3 m_MoveDir = Vector3.zero;
         private CharacterController m_StandingCharacterController; //character controller used for standing
         [SerializeField] private CharacterController m_CrouchCharacterController; //character controller used for crouching
-        private PostProcessVolumeSummoner postProcessSummoner;
         CharacterController currentCharController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
+
         private Vector3 m_OriginalCameraPosition;
         private float m_StepCycle;
         private float m_NextStep;
@@ -66,12 +63,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
         
         Coroutine crouchCoroutine = null;
-        GameStateManager gsManager;
 
+        //for management related to objects that "get the player busy" - like computers and the diorama
         public delegate void InputEventDelegate();
         public static event InputEventDelegate ExitInteraction;
 
-        // Use this for initialization
+        //used for canvas elements management
+        public delegate void FacingIconPromptDelegate(bool b);
+        public static event FacingIconPromptDelegate FacingPromptIconEvent;
+        public delegate void FacingTextPromptDelegate(string s);
+        public static event FacingTextPromptDelegate FacingPromptTextEvent;
+        
         private void Start()
         {
             QualitySettings.vSyncCount = 1;
@@ -80,9 +82,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_StandingCharacterController = GetComponent<CharacterController>();
             currentCharController = m_StandingCharacterController;
-
-            gsManager = GetComponent<GameStateManager>();
-            postProcessSummoner = GetComponent<PostProcessVolumeSummoner>();
 
             m_OriginalCameraPosition = mainCamera.transform.localPosition;
             m_cameraOriginalFOV = mainCamera.fieldOfView;
@@ -97,7 +96,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.Init(transform, mainCamera.transform);
         }
 
-        // Update is called once per frame
         private void Update()
         {
             if (GameStateManager.gameState == (GameState.IN_GAME & GameState.IN_GAME_LOOK_ONLY))
@@ -110,7 +108,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 if (Input.GetButton("Cancel"))
                     ExitInteraction();
-
             }
 
             if (m_IsCrouching) //makes sure that when moving the child controller the parent follows
@@ -367,7 +364,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.LookRotation(transform, mainCamera.transform);
         }
 
-
         private void CheckActionInput()
         {
             if (Input.GetMouseButtonDown(0)) //interacting with objects
@@ -399,32 +395,32 @@ namespace UnityStandardAssets.Characters.FirstPerson
         //checks if we are facing an object that emits a prompt and updates HUD accordingly
         private void CheckForPrompt() //called every time (so long as we are in IN_GAME state)
         {
-            if (Camera.main == null)
-                return;
+            if (Camera.main == null) { return; }
 
+            //cast ray from center of screen
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
 
+            //FOR PROMPT TEXT
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
-                    m_PromptBox.SetText(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                    FacingPromptTextEvent(hit.collider.GetComponent<ITextPrompt>().PromptText());
                 else
-                    m_PromptBox?.SetText("");
+                    FacingPromptTextEvent("");
             }
             else
-            {
-                m_PromptBox?.SetText("");
-            }
+                FacingPromptTextEvent("");
 
+            //FOR PROMPT ICON
             if (Physics.Raycast(ray, out hit, 1.9f))
             {
                 if (hit.collider.GetComponent<IInteractable>() != null)
-                    m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(true);
+                    FacingPromptIconEvent(true);
                 else
-                    m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(false);
+                    FacingPromptIconEvent(false);
             }
             else
-                m_PromptIcon?.GetComponent<UIPromptIconScript>().ManageFade(false);
+                FacingPromptIconEvent(false);
         }
 
         /// <summary>
