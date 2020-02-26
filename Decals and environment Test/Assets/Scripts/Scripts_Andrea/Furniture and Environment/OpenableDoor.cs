@@ -4,32 +4,51 @@ using UnityEngine;
 
 public class OpenableDoor : MonoBehaviour, IInteractable
 {
+    // Unlock Event Information
+    public delegate void DoorUnlockEvent(string doorEventCode);
+    public static DoorUnlockEvent OnDoorUnlockEvent;
+    public bool canBeOpened = true;
+    [SerializeField]
+    private string doorUnlockEventCode;
+
+    // Default Door Information
     bool open = false;
-    [SerializeField] bool canBeOpened = true;
-    [SerializeField] private bool flipRotationDirection;
 
     [Header("Door Animations")]
     [SerializeField] private Animator doorAnimController;
 
     [Header("Door Audio")]
+    AudioSource audioSource;
     [SerializeField] private AudioClip openingSound;
     [SerializeField] private AudioClip closedSound;
     [SerializeField] private AudioClip lockedSound;
-    
-    AudioSource aud;
-    float lapsed = 0;
-    Coroutine rotRoutine;
 
+
+    private void OnEnable()
+    {
+        OpenableDoor.OnDoorUnlockEvent += UnlockDoor;
+    }
+    private void OnDisable()
+    {
+        OpenableDoor.OnDoorUnlockEvent -= UnlockDoor;
+    }
     void Start()
     {
-        aud = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
+
+    /*
+    ====================================================================================================
+    Player Interaction
+    ====================================================================================================
+    */
     void IInteractable.InteractWith() //called when the player clicks the door
     {
         if (!canBeOpened)
         {
-            aud.PlayOneShot(lockedSound);
+            doorAnimController.SetTrigger("DoorLocked");
+            audioSource.PlayOneShot(lockedSound);
             return;
         }
 
@@ -38,16 +57,30 @@ public class OpenableDoor : MonoBehaviour, IInteractable
             doorAnimController.SetTrigger("DoorOpen");
             open = true;
             
-            aud.Stop();
-            aud.PlayOneShot(openingSound);
+            audioSource.Stop();
+            audioSource.PlayOneShot(openingSound);
         }
         else
         {
             doorAnimController.SetTrigger("DoorClose");
             open = false;
             
-            aud.Stop();
-            aud.PlayOneShot(closedSound);
+            audioSource.Stop();
+            audioSource.PlayOneShot(closedSound);
+        }
+    }
+
+
+    /*
+    ====================================================================================================
+    Door Unlocking
+    ====================================================================================================
+    */
+    private void UnlockDoor(string unlockEventCode)
+    {
+        if (unlockEventCode == doorUnlockEventCode)
+        {
+            canBeOpened = true;
         }
     }
 }
