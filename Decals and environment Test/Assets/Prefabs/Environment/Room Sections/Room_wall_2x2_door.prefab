@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLock: 0.5
+  yLock: 0.5
+  zLock: 0.5
 --- !u!1 &1631963742332598396
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,6 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLock: 0.5
+  yLock: 0.5
+  zLock: 0.5
 --- !u!65 &6952543021854072311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -178,6 +184,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLock: 0.5
+  yLock: 0.5
+  zLock: 0.5
 --- !u!65 &5399947297989720851
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -269,6 +278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLock: 0.5
+  yLock: 0.5
+  zLock: 0.5
 --- !u!65 &1950344112343290447
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -326,6 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xLock: 0.5
+  yLock: 0.5
+  zLock: 0.5
 --- !u!65 &1590239999297681939
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -346,11 +361,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6387654635043123508}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: a8c601c6ee171e14681706e3693be687,
-        type: 3}
-      propertyPath: m_Name
-      value: Room_ceiling_side
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: a8c601c6ee171e14681706e3693be687,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -406,6 +416,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: a8c601c6ee171e14681706e3693be687,
+        type: 3}
+      propertyPath: m_Name
+      value: Room_ceiling_side
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: a8c601c6ee171e14681706e3693be687,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d64492328616a854f895c6c7bf9091f9, type: 2}
+    - target: {fileID: -1504981713932161579, guid: a8c601c6ee171e14681706e3693be687,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d4962bd4c0180b49afec7d8477532f1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8c601c6ee171e14681706e3693be687, type: 3}
 --- !u!4 &5804621086225016833 stripped
@@ -421,11 +446,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6387654635043123508}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 13f93a9d5a1db7f458009cd86ec8ceac,
-        type: 3}
-      propertyPath: m_Name
-      value: Room_wall_2x2_door
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 13f93a9d5a1db7f458009cd86ec8ceac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -480,6 +500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 13f93a9d5a1db7f458009cd86ec8ceac,
+        type: 3}
+      propertyPath: m_Name
+      value: Room_wall_2x2_door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13f93a9d5a1db7f458009cd86ec8ceac, type: 3}
