@@ -20,7 +20,6 @@ public class OfficeRoomController : MonoBehaviour
     public bool placed = false;
 
     public RoomTypes roomType;
-    public ReflectionProbe reflectionProbe;
 
     /*
     ====================================================================================================
@@ -223,8 +222,6 @@ public class OfficeRoomController : MonoBehaviour
                 newPrefab.transform.rotation = c.transform.rotation;
             }
         }
-
-        reflectionProbe.gameObject.SetActive(true);
     }
 
 
@@ -234,10 +231,6 @@ public class OfficeRoomController : MonoBehaviour
     Debugging
     ====================================================================================================
     */
-    private void OnValidate()
-    {
-        reflectionProbe.size = new Vector3(width, 3, height);
-    }
     private void OnDrawGizmos()
     {
         // Drawing room bounds
