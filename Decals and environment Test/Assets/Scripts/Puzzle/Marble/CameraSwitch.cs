@@ -11,7 +11,6 @@ public class CameraSwitch : MonoBehaviour
     public Camera marbleCamera;
     public CharacterController controller;
 
-
     AudioListener playerCamAud;
     AudioListener marbleCamAud;
 
@@ -24,14 +23,12 @@ public class CameraSwitch : MonoBehaviour
         playerCamera = theCharacter.GetComponent<Camera>();
         marbleCamera = theBoard.GetComponent<Camera>();
         controller = thefpsController.GetComponent<CharacterController>();
-
-        
-
         playerCamAud = thefpsController.GetComponent<AudioListener>();
 
         marbleCamAud = theBoard.GetComponent<AudioListener>();
 
         cameraNum = 1;
+
     }
 
     // Update is called once per frame
@@ -76,6 +73,7 @@ public class CameraSwitch : MonoBehaviour
 
         if (cameraNum == 2)
         {
+            
             marbleCamera.enabled = true;
             marbleCamAud.enabled = true;
             playerCamera.enabled = false;

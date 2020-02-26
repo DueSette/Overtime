@@ -74,14 +74,14 @@ public class BoardScript : MonoBehaviour, IInteractable
 
         if (camNum == 2)
         {
-            if (!Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            if (!Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
             {
                 if (eulerAngXAlt > -10)
                 {
                     transform.Rotate(Vector3.left * rotspeed * Time.deltaTime * 20);
                 }
             }
-            if (!Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            if (!Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.D))
             {
                 if (eulerAngX < 10 || eulerAngX > 340)
                 {
