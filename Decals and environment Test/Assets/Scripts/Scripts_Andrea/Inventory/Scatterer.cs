@@ -12,10 +12,17 @@ public class Scatterer : MonoBehaviour
     //cycles through the list of scatterables and receivers, if item and slot have the same importance slot the item is assigned to the slot
     public void ScatterObjects()
     {
-        foreach(GameObject obj in objectsToScatter)
+        foreach (GameObject obj in objectsToScatter)
         {
-            InGameObjectBaseClass g = obj.GetComponent<InGameObjectBaseClass>();
-            Scatter(g);
+            try
+            {
+                InGameObjectBaseClass g = obj.GetComponent<InGameObjectBaseClass>();
+                Scatter(g);
+            }
+            catch
+            {
+                throw new System.Exception("HELLO PAY ATTENTION: The object in the list is probably missing a component. Try adding NoteInGameObject or ItemInGameObject");
+            }
         }
     }
 
