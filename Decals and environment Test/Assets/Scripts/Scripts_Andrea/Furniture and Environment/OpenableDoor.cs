@@ -7,15 +7,15 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     // Unlock Event Information
     public delegate void DoorUnlockEvent(string doorEventCode);
     public static DoorUnlockEvent OnDoorUnlockEvent;
+    [SerializeField] private string doorUnlockEventCode;
     public bool canBeOpened = true;
-    [SerializeField]
-    private string doorUnlockEventCode;
 
     // Default Door Information
     bool open = false;
 
     [Header("Door Animations")]
     [SerializeField] private Animator doorAnimController;
+    private bool canBeInteractedWith = true;
 
     [Header("Door Audio")]
     AudioSource audioSource;
@@ -45,31 +45,38 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     */
     void IInteractable.InteractWith() //called when the player clicks the door
     {
-        if (!canBeOpened)
+        if (canBeInteractedWith)
         {
-            doorAnimController.SetTrigger("DoorLocked");
-            audioSource.PlayOneShot(lockedSound);
-            return;
-        }
+            if (!canBeOpened)
+            {
+                doorAnimController.SetTrigger("DoorLocked");
+                audioSource.PlayOneShot(lockedSound);
+                return;
+            }
 
-        if (!open)
-        {
-            doorAnimController.SetTrigger("DoorOpen");
-            open = true;
-            
-            audioSource.Stop();
-            audioSource.PlayOneShot(openingSound);
-        }
-        else
-        {
-            doorAnimController.SetTrigger("DoorClose");
-            open = false;
-            
-            audioSource.Stop();
-            audioSource.PlayOneShot(closedSound);
+            if (!open)
+            {
+                doorAnimController.SetTrigger("DoorOpen");
+                open = true;
+
+                audioSource.Stop();
+                audioSource.PlayOneShot(openingSound);
+            }
+            else
+            {
+                doorAnimController.SetTrigger("DoorClose");
+                open = false;
+
+                audioSource.Stop();
+                audioSource.PlayOneShot(closedSound);
+            }
         }
     }
 
+    public void SetCanInteract(bool isInteractable)
+    {
+        canBeInteractedWith = isInteractable;
+    }
 
     /*
     ====================================================================================================
