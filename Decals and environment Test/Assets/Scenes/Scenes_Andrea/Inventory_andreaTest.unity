@@ -1223,30 +1223,25 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8088680869816498400, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6185413797471104257, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
+    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
+      propertyPath: promptTextBox
+      value: 
+      objectReference: {fileID: 138818497}
+    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8088680869816498400, guid: 309ce587f4114124aba1dba454a2f9e6,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: fadeSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5301491956422619094, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
@@ -1273,6 +1268,21 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5301491956380693678, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 798389927723566211, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1292,16 +1302,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
-        type: 3}
-      propertyPath: promptTextBox
-      value: 
-      objectReference: {fileID: 138818497}
-    - target: {fileID: 8088680870441394576, guid: 309ce587f4114124aba1dba454a2f9e6,
-        type: 3}
-      propertyPath: fadeSpeed
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 309ce587f4114124aba1dba454a2f9e6, type: 3}
@@ -1840,7 +1840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBeOpened: 1
-  flipRotationDirection: 0
+  doorUnlockEventCode: 
   doorAnimController: {fileID: 0}
   openingSound: {fileID: 8300000, guid: c3dbe7a6b5b70204699ec37bc1851883, type: 3}
   closedSound: {fileID: 8300000, guid: 8784710463dec6543987e3b163939f83, type: 3}
@@ -2271,6 +2271,7 @@ GameObject:
   - component: {fileID: 1005460530}
   - component: {fileID: 1005460532}
   - component: {fileID: 1005460531}
+  - component: {fileID: 1005460533}
   m_Layer: 0
   m_Name: '"Computer"'
   m_TagString: Untagged
@@ -2322,6 +2323,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1005460533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005460529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7399c40bc15361478d1c2b53ca7b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  noteID: -1
 --- !u!1 &1078311521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3049,9 +3064,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToScatter:
-  - {fileID: 9164320515218553333, guid: a099c1b8bb2db624a82142f8c10b9645, type: 3}
-  - {fileID: 4584509876021769103, guid: b1f96b6acb10ed94f83090fe6e835093, type: 3}
-  - {fileID: 8729486428710120692, guid: 279e4555b2a793a4b9d120d7487dcadf, type: 3}
+  - {fileID: 1005460529}
+  - {fileID: 1005460529}
+  - {fileID: 1005460529}
 --- !u!1 &1412153820
 GameObject:
   m_ObjectHideFlags: 0
@@ -4588,7 +4603,7 @@ GameObject:
   - component: {fileID: 2137992292}
   - component: {fileID: 2137992294}
   m_Layer: 0
-  m_Name: Sphere - BADOOM
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4675,7 +4690,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137992287}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7368f16405f666449a5795143be8e96, type: 3}
   m_Name: 
