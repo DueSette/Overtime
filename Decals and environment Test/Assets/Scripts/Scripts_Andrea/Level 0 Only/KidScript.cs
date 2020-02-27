@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class KidScript : MonoBehaviour
 {
-    //VERY QUICK AND DIRTY THING DONT JUDGE ME
+    // VERY QUICK AND DIRTY THING DONT JUDGE ME
+    // TODO: ALL THE JUDGEMENT WILL BE GIVEN
 
     [SerializeField] GameObject candle;
     float speed = 0;
@@ -24,6 +25,12 @@ public class KidScript : MonoBehaviour
             transform.Translate(-Vector3.forward * Time.deltaTime * speed);
     }
 
+
+    /*
+    ====================================================================================================
+    Handling/ Triggering Hallway Sequence Events
+    ====================================================================================================
+    */
     void IsPlayerNear()
     {
         Vector3 pPos = GameStateManager.GetPlayer().transform.position;
@@ -36,6 +43,13 @@ public class KidScript : MonoBehaviour
         }      
     }
 
+
+    /*
+    ====================================================================================================
+    Event Logic
+    ====================================================================================================
+    */
+    // Event 1 - Running down the corridor, away from the player
     IEnumerator EnableSpeed()
     {
         yield return new WaitForSeconds(0.85f);
@@ -43,4 +57,6 @@ public class KidScript : MonoBehaviour
         yield return new WaitForSeconds(5f);
         gameObject.SetActive(false);
     }
+
+    // Event 2 - Turning and running through the door
 }
