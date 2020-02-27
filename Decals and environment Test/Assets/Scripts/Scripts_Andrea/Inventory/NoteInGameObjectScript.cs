@@ -11,7 +11,6 @@ public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
     {
         inventoriesManager.noteManager.UnlockNote(noteID);
         inventoriesManager.OpenNoteInventoryWindowOnUnlock(noteID);
-        
     }
 
     // Start is called before the first frame update
