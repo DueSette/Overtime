@@ -22,6 +22,5 @@ public class CakeScript : MonoBehaviour, ITextPrompt, IInteractable
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
         GameStateManager.GetPlayer().transform.position = memoryRoomSpawnPoint.position;
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-
     }
 }
