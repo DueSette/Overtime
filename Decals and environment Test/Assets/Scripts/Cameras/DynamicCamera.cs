@@ -8,25 +8,31 @@ public class DynamicCamera : MonoBehaviour
     public Transform[] views;
     public float transitionSpeed;
     Transform currentView;
+    Transform startView;
     public int viewNum;
     public int maxviews;
-    public Camera marbleCamera;
+    public Camera dynamicCamera;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        currentView = views[4];
-        marbleCamera = this.gameObject.GetComponent<Camera>();
-        viewNum = 5;
+       // currentView = views[4];
+        dynamicCamera = this.gameObject.GetComponent<Camera>();
+        viewNum = 0;
         transitionSpeed = 3F;
+        
+
         maxviews = views.Length;
     }
 
 
     void Update()
     {
-        if (marbleCamera.enabled == true)
+
+        currentView = views[viewNum];
+
+        if (dynamicCamera.enabled == true)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -53,9 +59,12 @@ public class DynamicCamera : MonoBehaviour
                     viewNum = 0;
                 }
 
+
                 Debug.Log(viewNum);
                 currentView = views[viewNum];
             }
+
+
         }
     }
 

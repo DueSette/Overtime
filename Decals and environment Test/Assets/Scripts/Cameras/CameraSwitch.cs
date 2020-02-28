@@ -1,18 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraSwitch : MonoBehaviour
 {
     public GameObject thefpsController;
     public GameObject theCharacter;
-    public GameObject theBoard;
+    public GameObject dynamicCameraGameObj;
+    public GameObject dynamicCameraHolder;
     public Camera playerCamera;
-    public Camera marbleCamera;
+    public Camera dynamicCamera;
     public CharacterController controller;
 
     AudioListener playerCamAud;
-    AudioListener marbleCamAud;
+    AudioListener dynamicCamAud;
 
 
     public int cameraNum;
@@ -21,13 +20,14 @@ public class CameraSwitch : MonoBehaviour
     void Start()
     {
         playerCamera = theCharacter.GetComponent<Camera>();
-        marbleCamera = theBoard.GetComponent<Camera>();
+        dynamicCamera = dynamicCameraGameObj.GetComponent<Camera>();
         controller = thefpsController.GetComponent<CharacterController>();
         playerCamAud = thefpsController.GetComponent<AudioListener>();
-
-        marbleCamAud = theBoard.GetComponent<AudioListener>();
+        dynamicCamAud = dynamicCameraGameObj.GetComponent<AudioListener>();
 
         cameraNum = 1;
+
+        dynamicCamAud.enabled = false;
 
     }
 
@@ -38,21 +38,33 @@ public class CameraSwitch : MonoBehaviour
         cameraNum = BoardScript.camNum;
 
 
+        if(Input.GetKey(KeyCode.Mouse1))
+        {
+            cameraNum = 1;
+        }
+
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            cameraNum = 2;
+        }
+
         if (cameraNum == 1)
         {
             playerCamera.enabled = true;
             playerCamAud.enabled = true;
             controller.enabled = true;
-            marbleCamera.enabled = false;
-            marbleCamAud.enabled = false;
+            dynamicCamera.enabled = false;
+            dynamicCamAud.enabled = false;
+            dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
         }
 
         
 
         if (cameraNum == 2)
         {
-            marbleCamera.enabled = true;
-            marbleCamAud.enabled = true;
+            dynamicCamera.enabled = true;
+            dynamicCamAud.enabled = true;
+            dynamicCameraGameObj.transform.parent = null;
             controller.enabled = false;
             playerCamera.enabled = false;
             playerCamAud.enabled = false;
@@ -67,15 +79,15 @@ public class CameraSwitch : MonoBehaviour
         {
             playerCamera.enabled = true;
             playerCamAud.enabled = true;
-            marbleCamera.enabled = false;
-            marbleCamAud.enabled = false;
+            dynamicCamera.enabled = false;
+            dynamicCamAud.enabled = false;
         }
 
         if (cameraNum == 2)
         {
             
-            marbleCamera.enabled = true;
-            marbleCamAud.enabled = true;
+            dynamicCamera.enabled = true;
+            dynamicCamAud.enabled = true;
             playerCamera.enabled = false;
             playerCamAud.enabled = false;
         }
