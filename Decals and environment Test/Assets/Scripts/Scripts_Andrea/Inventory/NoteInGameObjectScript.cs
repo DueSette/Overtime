@@ -5,18 +5,25 @@ using UnityEngine;
 public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
     static InventoriesManager inventoriesManager;
+    [SerializeField] NoteInventory.NoteEntryItem note;
+
     [SerializeField, Tooltip("Which note does this unlock?")] int noteID = -1;
+    [SerializeField] bool destroyOnPickup = false;
 
     public void InteractWith()
     {
-        inventoriesManager.noteManager.UnlockNote(noteID);
+        if (inventoriesManager == null)
+            inventoriesManager = FindObjectOfType<InventoriesManager>();
+
+        inventoriesManager.noteManager.UnlockNewNote(note);
         inventoriesManager.OpenNoteInventoryWindowOnUnlock(noteID);
+
+        OnInteraction();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void OnInteraction()
     {
-        if(inventoriesManager == null)
-            inventoriesManager = FindObjectOfType<InventoriesManager>();
+        if (destroyOnPickup)
+            Destroy(gameObject);
     }
 }
