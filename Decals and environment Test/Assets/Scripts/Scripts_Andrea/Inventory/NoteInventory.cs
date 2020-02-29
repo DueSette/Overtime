@@ -8,62 +8,55 @@ using TMPro;
  *  ======= CLASS SUMMARY =======
  *  This class takes care of storing, displaying and updating the notes inventory, managing both the canvas and the internal data
  */
+
 public class NoteInventory : MonoBehaviour
 {
-    [System.Serializable] class NoteEntryItem
+    [System.Serializable]
+    public class NoteEntryItem
     {
         public int noteID; //let's say there are 20 notes in the game: this is their actual order in the collection
-        public bool collected;
         public string entryName;
         public string entryDescription;
         public GameObject noteModel;
-
-        public void Check() //why does this need to be a method? Nobody knows but here we are 
-        {
-            collected = true;
-        }
     }
 
     public TextMeshProUGUI descriptionUIText;
     public GameObject descriptionVeil; //an almost opaque black panel that only serves the purpose of masking the currently rendered object to make text more readable
-    [SerializeField] List<NoteEntryItem> noteList = new List<NoteEntryItem>(); //all the actual info about the notes, set via editor
+    public List<NoteEntryItem> noteList = new List<NoteEntryItem>(); //all the actual info about the notes, set via editor or through pickup items
 
     [SerializeField] GameObject noteNamePrefab;
     [SerializeField] GameObject noteNameContainer; //we need this to make stuff scrollable
-    private GameObject[] noteNameGameObjects; //this is the UI objects with the names of the notes
+    private List<GameObject> noteUINameGameObjects = new List<GameObject>(); //this is the UI objects with the names of the notes
 
     [SerializeField] Transform inventoryCameraSpot;
     [SerializeField] Transform modelContainer;
     [SerializeField] GameObject parent;
 
-    int currentFocus;
-    List<int> notesOwned = new List<int>();
+    int currentFocus = 0;
 
     void Start()
     {
-        SpawnNoteUIObject(); //fills a necessary array of references to gameobjects
-        InitialiaseOwnedNotes(); //check what entries the player has found
-        Spawn3DModels();
-
-        LoadAllEntries();
-        ScrollEntries(0);
+        InitialiseNoteUIObjects(); //fills a necessary array of references to gameobjects
+        InitialiseOwnedNotes3D(); //loads stuff that was set via editor or from save file
 
         parent.SetActive(false); //initialise everything and then disappear from view
     }
 
     #region StartUp Functions
-    void SpawnNoteUIObject() //spawns UI game objects containing the title of each note
+    void InitialiseNoteUIObjects() //spawns UI game objects containing the title of each note
     {
-        noteNameGameObjects = new GameObject[noteList.Count];
         for (int i = 0; i < noteList.Count; i++)
         {
-            noteNameGameObjects[i] = Instantiate(noteNamePrefab, noteNameContainer.transform); //what is spawned is the TextMeshPro note's name            
-            noteNameGameObjects[i].GetComponent<NoteUIObjectScript>().noteID = noteList[i].noteID;
+            noteUINameGameObjects.Add(Instantiate(noteNamePrefab, noteNameContainer.transform)); //what is spawned is the TextMeshPro note's name            
+            noteUINameGameObjects[i].GetComponent<NoteUIObjectScript>().noteID = noteList[i].noteID;
+            noteUINameGameObjects[i].GetComponent<TextMeshProUGUI>().SetText(noteList[i].entryName);
         }
+        ScrollEntries(0);
     }
 
-    void Spawn3DModels()
+    void InitialiseOwnedNotes3D() //spawns the models for the inventory camera
     {
+        //technically, here we would put the function that retrieves the currently collected notes from saved file
         for (int i = 0; i < noteList.Count; i++)
         {
             noteList[i].noteModel = Instantiate(noteList[i].noteModel, Vector3.zero, Quaternion.Euler(0, -90, 0), modelContainer);
@@ -72,48 +65,6 @@ public class NoteInventory : MonoBehaviour
         }
     }
     
-    void InitialiaseOwnedNotes() //checks what notes we have collected from savefile and gives them their ID
-    {
-        //This is an example of how we add notes when we first load the level (it unlocks all the notes on game startup)
-        //notesOwned.Add(0);
-        //notesOwned.Add(3);
-        //notesOwned.Add(4);
-        //temporary code
-
-        //load from json
-    }
-
-    public void LoadAllEntries() //load all gathered notes and sort them by noteID. Possibly read from json save data and retrieve the ID of owned notes
-    {
-        MarkOwnedNotes();
-        ActivateOwnedNotes();
-
-        //SET ALL COLLECTED NOTES (READ FROM MEMBER ID INT ARRAY) TO "COLLECTED"
-        void MarkOwnedNotes()
-        {
-            for (int i = 0; i < notesOwned.Count; i++)
-            {
-                if (notesOwned[i] > -1)
-                {
-                    int actID = notesOwned[i];
-                    noteList[actID].Check();
-                }
-            }
-        }
-
-        void ActivateOwnedNotes()
-        {
-            for (int i = 0; i < noteList.Count; i++)
-            {
-                //among the collected notes, make the appropriate entry on the screen display its name, for un-owned entries, put question marks
-                NoteEntryItem note = noteList[i];
-                if (noteList[i].collected)
-                    noteNameGameObjects[note.noteID].GetComponent<TextMeshProUGUI>().text = noteList[i].entryName;
-                else
-                    noteNameGameObjects[note.noteID].GetComponent<TextMeshProUGUI>().text = "???";
-            }
-        }
-    }
     #endregion
 
     #region Reoccurring Functions
@@ -141,7 +92,7 @@ public class NoteInventory : MonoBehaviour
 
     public void CleanPreviousNoteUI() //clear previously in-focus entry (set color and style back to normal, clear related 3D Object from view
     {
-        GameObject currentNoteObject = noteNameGameObjects[currentFocus]; //this needs to always be the first line of the method
+        GameObject currentNoteObject = noteUINameGameObjects[currentFocus]; //this needs to always be the first line of the method
 
         currentNoteObject.GetComponent<TextMeshProUGUI>().color = Color.white;
         currentNoteObject.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
@@ -155,30 +106,43 @@ public class NoteInventory : MonoBehaviour
         NoteEntryItem currentNote = noteList[currentFocus];
 
         GameObject current3DObj = currentNote.noteModel;
-        descriptionUIText.text = currentNote.collected ? currentNote.entryDescription : "???"; //update text section
+        descriptionUIText.text = currentNote.entryDescription; //update text section
 
-        if (current3DObj != null && currentNote.collected)
+        if (current3DObj != null)
         {
             current3DObj.SetActive(true);
             current3DObj.transform.position = inventoryCameraSpot.position;
         }
 
-        noteNameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
-        noteNameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
-        noteNameGameObjects[currentFocus].GetComponent<Button>().Select();
+        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
+        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+        noteUINameGameObjects[currentFocus].GetComponent<Button>().Select();
     }
 
-    public void UnlockNote(int noteID) //call when a player finds a new note
+    public void UnlockNewNote(NoteEntryItem newNote) //call when a player finds a new note
     {
-        if (noteID < 0)
-            return;
+        //MAKING SURE THE ITEM IS NOT ALREADY IN OUR POSSESSION
+        
+        for (int i = 0; i < noteList.Count; i++)
+            if (noteList[i] == newNote) //if the new item is actually an Item that is still on the map but is clicked again
+                currentFocus = i;
 
-        CleanPreviousNoteUI();
-        currentFocus = (noteID);
+        foreach (NoteEntryItem i in noteList)  //if we already are in possess of this item don't add it, but still open the inventory       
+            if (i == newNote)
+                return;
 
-        notesOwned.Add(noteID);
-        LoadAllEntries();
-        ScrollEntries(noteID);
+        noteList.Add(newNote);
+
+        //SPAWNS 3 MODEL OF NEW NOTE
+        newNote.noteModel = Instantiate(newNote.noteModel, Vector3.zero, Quaternion.Euler(0, -90, 0), modelContainer);
+        newNote.noteModel.transform.localPosition = Vector3.zero;
+        newNote.noteModel.layer = LayerMask.NameToLayer("ViewableObjects"); //makes sure we are on the layer the inventory cam can see
+
+        //SPAWNS UI OBJECT OF NEW NOTE AND UPDATES IT WITH NOTE'S DATA
+        noteUINameGameObjects.Add(Instantiate(noteNamePrefab, noteNameContainer.transform));
+        noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<TextMeshProUGUI>().text = newNote.entryName;
+
+        ScrollEntries(noteList.Count);
     }
     #endregion
 }

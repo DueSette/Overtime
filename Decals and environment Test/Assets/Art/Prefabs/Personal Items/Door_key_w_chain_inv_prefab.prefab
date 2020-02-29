@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6084308309476548496}
   - component: {fileID: 6119230588226949547}
   - component: {fileID: 6139684935242689092}
+  - component: {fileID: 1714145537}
   m_Layer: 0
   m_Name: Key_inv_geo_Door_key_geo1
   m_TagString: Untagged
@@ -29,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: -0.000000038146972, z: 0.2249713}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4789422362534102678}
   m_Father: {fileID: 8534802625623712808}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,40 +92,23 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &4093826101068874239
-GameObject:
+--- !u!65 &1714145537
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6843111439766597162}
-  m_Layer: 0
-  m_Name: Actual Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &6843111439766597162
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4093826101068874239}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.1602}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4789422362534102678}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 278532267740602876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.00800003, y: 0.21356414, z: 0.49083903}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4623767573119997499
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,12 +133,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4623767573119997499}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4249362315848631301}
-  - {fileID: 4789422362534102678}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -165,7 +149,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4623767573119997499}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5676359, z: 1}
@@ -193,14 +177,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5002395813837054581}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.00023589797, z: 0.018548682}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.00023585983, z: -0.20642261}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6843111439766597162}
   - {fileID: 7759859950159702560}
-  m_Father: {fileID: 8534802625623712808}
-  m_RootOrder: 1
+  m_Father: {fileID: 4249362315848631301}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5080211589656599365
 GameObject:
@@ -213,8 +196,9 @@ GameObject:
   - component: {fileID: 5341818083500877612}
   - component: {fileID: 8785084461438323956}
   - component: {fileID: 2641728565046356141}
-  - component: {fileID: 5464810873084905666}
-  - component: {fileID: 1850909720369671903}
+  - component: {fileID: 1325145491}
+  - component: {fileID: 1325145490}
+  - component: {fileID: 1325145494}
   m_Layer: 0
   m_Name: Nine_keyring_geo
   m_TagString: Untagged
@@ -281,7 +265,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &5464810873084905666
+--- !u!54 &1325145491
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -289,30 +273,30 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5080211589656599365}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!59 &1850909720369671903
+--- !u!59 &1325145490
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5080211589656599365}
-  m_ConnectedBody: {fileID: 5780857125260134238}
-  m_Anchor: {x: 0, y: 0.09321789, z: 0}
+  m_ConnectedBody: {fileID: 651731296}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.09321789, z: -0.1620699}
-  m_UseSpring: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: -0.16206989}
+  m_UseSpring: 1
   m_Spring:
     spring: 0
-    damper: 0
+    damper: 20.7
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -321,17 +305,30 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 0
   m_Limits:
-    min: 0
-    max: 0
+    min: -90
+    max: 90
     bounciness: 0
-    bounceMinVelocity: 0.2
+    bounceMinVelocity: 0
     contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!65 &1325145494
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5080211589656599365}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.034137584, y: 0.18643579, z: 0.3088872}
+  m_Center: {x: 0.0000000037252903, y: -0.000000007450581, z: -0.1715468}
 --- !u!1 &5732087726926152348
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,8 +340,8 @@ GameObject:
   - component: {fileID: 7759859950159702560}
   - component: {fileID: 5619667168213652262}
   - component: {fileID: 5488650350909610516}
-  - component: {fileID: 5780857125260134238}
-  - component: {fileID: 8229616298934069319}
+  - component: {fileID: 651731296}
+  - component: {fileID: 651731295}
   m_Layer: 0
   m_Name: Keychain_geo
   m_TagString: Untagged
@@ -365,7 +362,7 @@ Transform:
   m_Children:
   - {fileID: 9118914828696100272}
   m_Father: {fileID: 4789422362534102678}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5619667168213652262
 MeshFilter:
@@ -412,7 +409,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &5780857125260134238
+--- !u!54 &651731296
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -420,15 +417,15 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5732087726926152348}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!59 &8229616298934069319
+--- !u!59 &651731295
 HingeJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -436,14 +433,14 @@ HingeJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5732087726926152348}
   m_ConnectedBody: {fileID: 6139684935242689092}
-  m_Anchor: {x: 0, y: 0.008147462, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000029137595, y: 0.007911602, z: -0.20730188}
-  m_UseSpring: 0
+  m_ConnectedAnchor: {x: 0.000000029137595, y: -0.00023585983, z: -0.20730188}
+  m_UseSpring: 1
   m_Spring:
     spring: 0
-    damper: 0
+    damper: 20.7
     targetPosition: 0
   m_UseMotor: 0
   m_Motor:
@@ -452,14 +449,14 @@ HingeJoint:
     freeSpin: 0
   m_UseLimits: 0
   m_Limits:
-    min: 0
-    max: 0
+    min: -90
+    max: 90
     bounciness: 0
-    bounceMinVelocity: 0.2
+    bounceMinVelocity: 0
     contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1

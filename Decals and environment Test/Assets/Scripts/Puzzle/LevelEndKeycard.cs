@@ -6,6 +6,6 @@ public class LevelEndKeycard : ItemInGameObjectScript
 {
     protected override void InteractionEvent()
     {
-        LevelManager.onEventLevelSolved();
+        LevelManager.onLevelEvent("LevelSolved");
     }
 }

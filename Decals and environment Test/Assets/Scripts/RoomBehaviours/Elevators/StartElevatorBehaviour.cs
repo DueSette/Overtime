@@ -6,20 +6,28 @@ public class StartElevatorBehaviour : ElevatorBehaviour
 {
     private void OnEnable()
     {
-        LevelManager.onEventLevelStart += LevelStart;
-
-        LevelManager.onEventPuzzleStart += OpenDoors;
+        LevelManager.onLevelEvent += LevelStart;
+        LevelManager.onLevelEvent += OpenDoorsEvent;
     }
     private void OnDisable()
     {
-        LevelManager.onEventLevelStart -= LevelStart;
-
-        LevelManager.onEventPuzzleStart -= OpenDoors;
+        LevelManager.onLevelEvent -= LevelStart;
+        LevelManager.onLevelEvent -= OpenDoorsEvent;
     }
 
-    private void LevelStart()
+    private void OpenDoorsEvent(string eventCode)
     {
-        StartCoroutine(LevelStartAnim());
+        if (eventCode == "PuzzleStart")
+        {
+            OpenDoors();
+        }
+    }
+    private void LevelStart(string eventCode)
+    {
+        if (eventCode == "LevelStart")
+        {
+            StartCoroutine(LevelStartAnim());
+        }
     }
     private IEnumerator LevelStartAnim()
     {
@@ -40,6 +48,6 @@ public class StartElevatorBehaviour : ElevatorBehaviour
         this.transform.position = newPos;
 
         // Starting Level
-        LevelManager.onEventPuzzleStart();
+        LevelManager.onLevelEvent("PuzzleStart");
     }
 }
