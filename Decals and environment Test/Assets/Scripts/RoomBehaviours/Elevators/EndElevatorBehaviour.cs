@@ -8,20 +8,28 @@ public class EndElevatorBehaviour : ElevatorBehaviour
 
     private void OnEnable()
     {
-        LevelManager.onEventLevelSolved += OpenDoors;
-
-        LevelManager.onEventLevelEnd += EndLevel;
+        LevelManager.onLevelEvent += OpenDoorsEvent;
+        LevelManager.onLevelEvent += EndLevel;
     }
     private void OnDisable()
     {
-        LevelManager.onEventLevelSolved -= OpenDoors;
-
-        LevelManager.onEventLevelEnd -= EndLevel;
+        LevelManager.onLevelEvent -= OpenDoorsEvent;
+        LevelManager.onLevelEvent -= EndLevel;
     }
 
-    void EndLevel()
+    void OpenDoorsEvent(string eventCode)
     {
-        StartCoroutine(EndLevelAnim());
+        if (eventCode == "LevelSolved")
+        {
+            OpenDoors();
+        }
+    }
+    void EndLevel(string eventCode)
+    {
+        if (eventCode == "EndLevel")
+        {
+            StartCoroutine(EndLevelAnim());
+        }
     }
     IEnumerator EndLevelAnim()
     {
