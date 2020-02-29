@@ -12,12 +12,13 @@ public class ItemInventory : MonoBehaviour
     [SerializeField] TextMeshProUGUI descriptionBox;
     [SerializeField] GameObject entryNamePrefab;
 
-    List<GameObject> itemNamesList = new List<GameObject>(); //list of all the UI items (their name, basically), we need this to have access to the UI entries in the inventory
+    private List<GameObject> itemUINamesList = new List<GameObject>(); //list of all the UI items (their name, basically), we need this to have access to the UI entries in the inventory
     public List<Item> itemList = new List<Item>(); //a list of Type <Item> (a struct that contains info like model, name, description)
 
     [SerializeField] float rotationSpeed; //to rotate the items in view
-    int currentFocus = 0;
     GameObject itemInView = null;
+
+    int currentFocus = 0;
 
     [System.Serializable]
     public class Item
@@ -28,6 +29,12 @@ public class ItemInventory : MonoBehaviour
     }
 
     private void Start()
+    {
+        InitialiseOwnedItems();
+        gameObject.SetActive(false);
+    }
+
+    private void InitialiseOwnedItems()
     {
         //populate itemList - possibly load from save
         int x = 0;
@@ -40,12 +47,11 @@ public class ItemInventory : MonoBehaviour
             //i.model.layer = LayerMask.NameToLayer("ViewableObjects"); //need this layer so that the dedicated camera will only render on that layer    
             SetObjectWithChildrenOnLayer(i.model);
 
-            itemNamesList.Add(Instantiate(entryNamePrefab, leftPanel));
-            itemNamesList[x].GetComponent<TextMeshProUGUI>().text = i.name;
-            itemNamesList[x].GetComponent<ItemUIObjectScript>().containedItem = i;
+            itemUINamesList.Add(Instantiate(entryNamePrefab, leftPanel));
+            itemUINamesList[x].GetComponent<TextMeshProUGUI>().text = i.name;
+            itemUINamesList[x].GetComponent<ItemUIObjectScript>().containedItem = i;
             x++;
         }
-        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -72,16 +78,15 @@ public class ItemInventory : MonoBehaviour
         newItem.model = Instantiate(newItem.model, Vector3.zero, Quaternion.identity, modelContainer);
         newItem.model.transform.localPosition = Vector3.zero;
 
-        //newItem.model.layer = LayerMask.NameToLayer("ViewableObjects");
         SetObjectWithChildrenOnLayer(newItem.model);
 
-        itemNamesList.Add(Instantiate(entryNamePrefab, leftPanel));
-        itemNamesList[itemNamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
+        itemUINamesList.Add(Instantiate(entryNamePrefab, leftPanel));
+        itemUINamesList[itemUINamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
     }
 
     public void UpdateUI() //updates render texture, description, entry names to the currently selected item
     {
-        if (itemNamesList.Count < 1)
+        if (itemUINamesList.Count < 1)
             return;
 
         currentFocus = Mathf.Clamp(currentFocus, 0, itemList.Count - 1);
@@ -89,8 +94,8 @@ public class ItemInventory : MonoBehaviour
         PutItemInView(itemList[currentFocus].model);
         descriptionBox.text = itemList[currentFocus].description;
 
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
+        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
     }
     
     void SetObjectWithChildrenOnLayer(GameObject model)
@@ -134,11 +139,11 @@ public class ItemInventory : MonoBehaviour
 
     public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list
     {
-        if (itemNamesList.Count < 1)
+        if (itemUINamesList.Count < 1)
             return;
 
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
-        itemNamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.white;
+        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
 
         //maybe make it lerp away
         if (itemInView != null)
