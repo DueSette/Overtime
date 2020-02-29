@@ -15,7 +15,6 @@ public class OpenableDoor : MonoBehaviour, IInteractable
 
     [Header("Door Animations")]
     [SerializeField] private Animator doorAnimController;
-    private bool canBeInteractedWith = true;
 
     [Header("Door Audio")]
     AudioSource audioSource;
@@ -45,37 +44,29 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     */
     void IInteractable.InteractWith() //called when the player clicks the door
     {
-        if (canBeInteractedWith)
+        if (!canBeOpened)
         {
-            if (!canBeOpened)
-            {
-                doorAnimController.SetTrigger("DoorLocked");
-                audioSource.PlayOneShot(lockedSound);
-                return;
-            }
-
-            if (!open)
-            {
-                doorAnimController.SetTrigger("DoorOpen");
-                open = true;
-
-                audioSource.Stop();
-                audioSource.PlayOneShot(openingSound);
-            }
-            else
-            {
-                doorAnimController.SetTrigger("DoorClose");
-                open = false;
-
-                audioSource.Stop();
-                audioSource.PlayOneShot(closedSound);
-            }
+            doorAnimController.SetTrigger("DoorLocked");
+            audioSource.PlayOneShot(lockedSound);
+            return;
         }
-    }
 
-    public void SetCanInteract(bool isInteractable)
-    {
-        canBeInteractedWith = isInteractable;
+        if (!open)
+        {
+            doorAnimController.SetTrigger("DoorOpen");
+            open = true;
+
+            audioSource.Stop();
+            audioSource.PlayOneShot(openingSound);
+        }
+        else
+        {
+            doorAnimController.SetTrigger("DoorClose");
+            open = false;
+
+            audioSource.Stop();
+            audioSource.PlayOneShot(closedSound);
+        }
     }
 
     /*
@@ -87,6 +78,7 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     {
         if (unlockEventCode == doorUnlockEventCode)
         {
+            Debug.Log("Unlocking Door: " + doorUnlockEventCode);
             canBeOpened = true;
         }
     }
