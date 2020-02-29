@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4022077813093576393}
   - component: {fileID: 4022077813093576396}
-  - component: {fileID: 4022077813093576395}
   - component: {fileID: 4022077813093576394}
+  - component: {fileID: 522565905}
   m_Layer: 0
   m_Name: Badoom_Full
   m_TagString: Untagged
@@ -130,32 +130,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4022077813093576395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4022077813093576392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd94e31b4fcb7046a87aa671f2539d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixedWanderer: 1
-  fixedWanderSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  freeWanderRadius: 1
-  playerDetectionRadius: 2.3
-  maxSpeed: 2
-  idleTime: 2
-  turningSpeed: 0.1
-  hoveringSound: {fileID: 0}
-  chasingSound: {fileID: 0}
-  explosionSound: {fileID: 0}
-  fixedWandererIterator: 1
 --- !u!136 &4022077813093576394
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -170,6 +144,32 @@ CapsuleCollider:
   m_Height: 0.66
   m_Direction: 1
   m_Center: {x: 0, y: 0.23298693, z: 0}
+--- !u!114 &522565905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022077813093576392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd94e31b4fcb7046a87aa671f2539d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedWanderer: 1
+  fixedWanderSpots:
+  - {x: 2, y: 55, z: 1}
+  - {x: 3, y: 3, z: 2}
+  - {x: 3, y: 3, z: 4}
+  freeWanderRadius: 1
+  playerDetectionRadius: 2.3
+  maxSpeed: 2
+  idleTime: 2
+  turningSpeed: 0.1
+  hoveringSound: {fileID: 0}
+  chasingSound: {fileID: 0}
+  explosionSound: {fileID: 0}
+  fixedWandererIterator: 1
 --- !u!1001 &4022077814719927369
 PrefabInstance:
   m_ObjectHideFlags: 0
