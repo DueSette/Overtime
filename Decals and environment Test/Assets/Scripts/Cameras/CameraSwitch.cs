@@ -38,18 +38,20 @@ public class CameraSwitch : MonoBehaviour
         cameraNum = BoardScript.camNum;
 
 
-        if(Input.GetKey(KeyCode.Mouse1))
+        if(Input.GetKey(KeyCode.J))
         {
             cameraNum = 1;
         }
 
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.K))
         {
             cameraNum = 2;
         }
 
         if (cameraNum == 1)
         {
+            thefpsController.SetActive(true);
+            dynamicCameraHolder.SetActive(false);
             playerCamera.enabled = true;
             playerCamAud.enabled = true;
             controller.enabled = true;
@@ -62,6 +64,8 @@ public class CameraSwitch : MonoBehaviour
 
         if (cameraNum == 2)
         {
+            dynamicCameraHolder.SetActive(true);
+            thefpsController.SetActive(false);
             dynamicCamera.enabled = true;
             dynamicCamAud.enabled = true;
             dynamicCameraGameObj.transform.parent = null;
@@ -73,7 +77,7 @@ public class CameraSwitch : MonoBehaviour
     }
 
 
-    void CameraChange()
+   /* void CameraChange()
     {
         if (cameraNum == 1)
         {
@@ -91,5 +95,5 @@ public class CameraSwitch : MonoBehaviour
             playerCamera.enabled = false;
             playerCamAud.enabled = false;
         }
-    }
+    }*/
 }

@@ -6,9 +6,11 @@ public class DynamicCamera : MonoBehaviour
 {
 
     public Transform[] views;
+    public List<Transform> viewList; // Make stuff assigned to list tomorrow
     public float transitionSpeed;
     Transform currentView;
-    Transform startView;
+    public Transform startView;
+    public GameObject cameraHolder;
     public int viewNum;
     public int maxviews;
     public Camera dynamicCamera;
@@ -17,7 +19,7 @@ public class DynamicCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // currentView = views[4];
+        currentView = views[0];
         dynamicCamera = this.gameObject.GetComponent<Camera>();
         viewNum = 0;
         transitionSpeed = 3F;
@@ -31,6 +33,13 @@ public class DynamicCamera : MonoBehaviour
     {
 
         currentView = views[viewNum];
+
+
+
+        //---------------------------------------
+        // Functions for cycling between cameras,
+        //---------------------------------------
+
 
         if (dynamicCamera.enabled == true)
         {
@@ -63,19 +72,18 @@ public class DynamicCamera : MonoBehaviour
                 Debug.Log(viewNum);
                 currentView = views[viewNum];
             }
-
-
         }
+        
     }
-
+    
     private void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, currentView.position, Time.deltaTime * transitionSpeed);
 
         Vector3 currentAngle = new Vector3(
-            Mathf.LerpAngle(transform.rotation.eulerAngles.x, currentView.transform.rotation.eulerAngles.x, Time.deltaTime * transitionSpeed),
-            Mathf.LerpAngle(transform.rotation.eulerAngles.y, currentView.transform.rotation.eulerAngles.y, Time.deltaTime * transitionSpeed),
-            Mathf.LerpAngle(transform.rotation.eulerAngles.z, currentView.transform.rotation.eulerAngles.z, Time.deltaTime * transitionSpeed));
+            Mathf.LerpAngle(transform.rotation.eulerAngles.x, currentView.rotation.eulerAngles.x, Time.deltaTime * transitionSpeed),
+            Mathf.LerpAngle(transform.rotation.eulerAngles.y, currentView.rotation.eulerAngles.y, Time.deltaTime * transitionSpeed),
+            Mathf.LerpAngle(transform.rotation.eulerAngles.z, currentView.rotation.eulerAngles.z, Time.deltaTime * transitionSpeed));
 
         transform.eulerAngles = currentAngle;
     }
