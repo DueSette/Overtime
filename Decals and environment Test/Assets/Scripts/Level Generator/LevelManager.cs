@@ -14,17 +14,8 @@ public class LevelManager : MonoBehaviour
     public string nextLevel;
 
     // Level Events
-    public delegate void LevelEvent();
-    public static LevelEvent onEventLevelStart;
-    /// <summary>
-    /// Called When The Start Elevator Finishes it's Start Animation
-    /// </summary>
-    public static LevelEvent onEventPuzzleStart;
-    public static LevelEvent onEventLevelSolved;
-    /// <summary>
-    /// Called When The End Elevator's Button Is Pressed
-    /// </summary>
-    public static LevelEvent onEventLevelEnd;
+    public delegate void LevelEvent(string eventCode);
+    public static LevelEvent onLevelEvent;
 
     private void Start()
     {
@@ -46,7 +37,7 @@ public class LevelManager : MonoBehaviour
         player.SetActive(true);
 
         // Starts the level
-        onEventLevelStart();
+        onLevelEvent("LevelStart");
     }
 
 

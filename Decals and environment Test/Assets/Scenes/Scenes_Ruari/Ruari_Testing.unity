@@ -121,18 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &67624206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5092039934124830657, guid: fd36b0db1189c0a49b8fec0f9187acf7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1276654168}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c5492d595b27f144857fd0170f0f38b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &624905809
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,15 +437,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8088680869816498414, guid: 309ce587f4114124aba1dba454a2f9e6,
-        type: 3}
-      propertyPath: itemList.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8318875547658312690, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
       propertyPath: noteList.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8088680869816498414, guid: 309ce587f4114124aba1dba454a2f9e6,
+        type: 3}
+      propertyPath: itemList.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7491201012604005910, guid: 309ce587f4114124aba1dba454a2f9e6,
         type: 3}
@@ -899,11 +887,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LockedDoor
       objectReference: {fileID: 0}
-    - target: {fileID: 5092039934124830657, guid: fd36b0db1189c0a49b8fec0f9187acf7,
-        type: 3}
-      propertyPath: doorUnlockEventCode
-      value: WhoompThereItIs
-      objectReference: {fileID: 0}
     - target: {fileID: 1525980666409194811, guid: fd36b0db1189c0a49b8fec0f9187acf7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -958,6 +941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092039934124830657, guid: fd36b0db1189c0a49b8fec0f9187acf7,
+        type: 3}
+      propertyPath: doorUnlockEventCode
+      value: WhoompThereItIs
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd36b0db1189c0a49b8fec0f9187acf7, type: 3}
@@ -1180,7 +1168,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unlockingDoor
       value: 
-      objectReference: {fileID: 67624206}
+      objectReference: {fileID: 0}
     - target: {fileID: 7048134005273994796, guid: 94d029d2c8c25f642865a2cbd4ced6ff,
         type: 3}
       propertyPath: keyUnlockEventCode
