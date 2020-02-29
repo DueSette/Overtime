@@ -45,18 +45,8 @@ public class MemoryRoomZeroScript : MonoBehaviour
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
                 GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-                LevelManager.onEventLevelSolved();
+                LevelManager.onLevelEvent("LevelSolved");
             }
-        
-    /*
-        catch
-        {
-            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
-            GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
-            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-            LevelManager.onEventLevelSolved();
-        }
-        */
     }
 
     //updates dissolve value of dissolve shader
