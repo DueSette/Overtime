@@ -106,7 +106,10 @@ public class KidScript : MonoBehaviour
         anim.SetTrigger("approached2");
         yield return new WaitForSeconds(1f);
 
-        //gameObject.SetActive(false);
+        candle.transform.SetParent(null);
+        candle.transform.position = new Vector3(2.25f, 1.5f, -4.0f);
+        candle.GetComponent<Rigidbody>().useGravity = true;
+        gameObject.SetActive(false);
 
 
         // End Event
