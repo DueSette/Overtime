@@ -30,6 +30,6 @@ public class CandleScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        cake.SetActive(true);
+        //cake.SetActive(true);
     }
 }

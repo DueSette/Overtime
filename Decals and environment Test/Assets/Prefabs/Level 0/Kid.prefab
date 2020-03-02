@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4976187001800465437
 Transform:
   m_ObjectHideFlags: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   candle: {fileID: 4976187002619578467}
+  anim: {fileID: 7997901154451228423}
 --- !u!54 &1844569534
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650dd2d9961e7dd4394ca9df0d4ef03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  importance: 0
   item:
     model: {fileID: 4976187002619578467}
     name: Birthday candle
@@ -272,6 +274,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4976187001566757223}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &7997901154451228423 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: c846342afa7af9b45874a2e7f3fdac8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4976187001566757223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1603800227482627358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3220319501169496967, guid: c846342afa7af9b45874a2e7f3fdac8e,
@@ -289,6 +297,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Candle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180556997502535159, guid: 0f070c81acb849d4da9ab6c1386e2816,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1180556997502535158, guid: 0f070c81acb849d4da9ab6c1386e2816,
         type: 3}
