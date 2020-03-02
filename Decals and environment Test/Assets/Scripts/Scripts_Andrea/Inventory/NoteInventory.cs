@@ -36,8 +36,8 @@ public class NoteInventory : MonoBehaviour
 
     void Start()
     {
-        InitialiseNoteUIObjects(); //fills a necessary array of references to gameobjects
-        InitialiseOwnedNotes3D(); //loads stuff that was set via editor or from save file
+        InitialiseNoteUIObjects(); //fills and spawns the contents of a list, one UI entry for each owned item
+        InitialiseOwnedNotes3D(); //spawns the 3D models. Loads stuff that was set via editor or from save file
 
         parent.SetActive(false); //initialise everything and then disappear from view
     }
@@ -114,6 +114,7 @@ public class NoteInventory : MonoBehaviour
             current3DObj.transform.position = inventoryCameraSpot.position;
         }
 
+        //Set entry name the correct color and font style, also set its button component as selected
         noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
         noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
         noteUINameGameObjects[currentFocus].GetComponent<Button>().Select();
@@ -122,15 +123,10 @@ public class NoteInventory : MonoBehaviour
     public void UnlockNewNote(NoteEntryItem newNote) //call when a player finds a new note
     {
         //MAKING SURE THE ITEM IS NOT ALREADY IN OUR POSSESSION
-        
         for (int i = 0; i < noteList.Count; i++)
-            if (noteList[i] == newNote) //if the new item is actually an Item that is still on the map but is clicked again
-                currentFocus = i;
-
-        foreach (NoteEntryItem i in noteList)  //if we already are in possess of this item don't add it, but still open the inventory       
-            if (i == newNote)
+            if (noteList[i].noteID == newNote.noteID) //if the new item is actually an Item that is still on the map but is clicked again
                 return;
-
+            
         noteList.Add(newNote);
 
         //SPAWNS 3 MODEL OF NEW NOTE
