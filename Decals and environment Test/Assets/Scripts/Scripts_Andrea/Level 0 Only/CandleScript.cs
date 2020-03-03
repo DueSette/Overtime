@@ -27,9 +27,4 @@ public class CandleScript : MonoBehaviour
     {
         aud.Play();
     }
-
-    private void OnDestroy()
-    {
-        cake.SetActive(true);
-    }
 }
