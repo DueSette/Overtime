@@ -7,7 +7,8 @@ public class SpookyBalloonScript : MonoBehaviour
 {
     [Header("Designer Friendly Options")]
     [SerializeField] bool fixedWanderer;
-    [SerializeField] Transform[] fixedWanderSpots;
+    [SerializeField, Tooltip("The first stop will always be the badoom's starting position. That means the first value of this array will be the SECOND stop and so on")]
+    Vector3[] fixedWanderSpots;
     [SerializeField] float freeWanderRadius, playerDetectionRadius, maxSpeed, idleTime, turningSpeed = 0.08f;
 
     [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
@@ -34,6 +35,8 @@ public class SpookyBalloonScript : MonoBehaviour
         aud = GetComponent<AudioSource>();
         idleTimer = idleTime;
         startPos = transform.position;
+
+        Gizmos.color = Color.cyan;
     }
 
     private void Update()
@@ -122,7 +125,7 @@ public class SpookyBalloonScript : MonoBehaviour
         Vector3 spot;
         if (fixedWanderer)
         {
-            spot = (fixedWandererIterator == 0) ? startPos : fixedWanderSpots[fixedWandererIterator].position;
+            spot = (fixedWandererIterator == 0) ? startPos : fixedWanderSpots[fixedWandererIterator - 1];
             fixedWandererIterator += forwardWanderOrder ? 1 : -1;
 
             if (fixedWandererIterator > fixedWanderSpots.Length - 1)
@@ -205,6 +208,19 @@ public class SpookyBalloonScript : MonoBehaviour
                     print("player got badoomed");
                 }
                 break;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!fixedWanderer)
+            return;
+
+        for(int i = 0; i < fixedWanderSpots.Length; i++)
+        {
+            if(i > 0)
+                Gizmos.DrawSphere(fixedWanderSpots[i], 0.15f);
+
         }
     }
 }
