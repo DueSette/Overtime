@@ -44,6 +44,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
                 GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
+                GameStateManager.GetPlayer().transform.rotation = hallwaySpot.rotation;
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
                 LevelManager.onLevelEvent("LevelSolved");
             }
