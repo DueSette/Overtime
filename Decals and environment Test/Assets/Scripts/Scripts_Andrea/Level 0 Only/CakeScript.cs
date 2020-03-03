@@ -21,6 +21,9 @@ public class CakeScript : MonoBehaviour, ITextPrompt, IInteractable
         yield return new WaitForSeconds(1.5f);
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
         GameStateManager.GetPlayer().transform.position = memoryRoomSpawnPoint.position;
+        GameStateManager.GetPlayer().transform.rotation = memoryRoomSpawnPoint.rotation;
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+
+        LevelManager.onLevelEvent("LerpRoom");
     }
 }

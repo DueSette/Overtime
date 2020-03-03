@@ -16,12 +16,14 @@ public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
         inventory.itemManager.UnlockNewItem(item);
         inventory.ForceToggleItemInventoryWindow(true);
 
-        InteractionEvent(); 
+        InteractionEvent();
+
+        if (destroyOnPickup)
+            Destroy(gameObject);
     }
 
     protected virtual void InteractionEvent()
     {
-        if (destroyOnPickup)
-            Destroy(gameObject);
+        
     }
 }
