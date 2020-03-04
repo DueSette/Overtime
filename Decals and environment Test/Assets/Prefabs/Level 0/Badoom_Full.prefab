@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4022077813093576393}
   - component: {fileID: 4022077813093576396}
-  - component: {fileID: 4022077813093576395}
   - component: {fileID: 4022077813093576394}
+  - component: {fileID: 8872366543622696551}
   m_Layer: 0
   m_Name: Badoom_Full
   m_TagString: Untagged
@@ -130,32 +130,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4022077813093576395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4022077813093576392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd94e31b4fcb7046a87aa671f2539d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fixedWanderer: 1
-  fixedWanderSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  freeWanderRadius: 1
-  playerDetectionRadius: 2.3
-  maxSpeed: 2
-  idleTime: 2
-  turningSpeed: 0.1
-  hoveringSound: {fileID: 0}
-  chasingSound: {fileID: 0}
-  explosionSound: {fileID: 0}
-  fixedWandererIterator: 1
 --- !u!136 &4022077813093576394
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -170,6 +144,83 @@ CapsuleCollider:
   m_Height: 0.66
   m_Direction: 1
   m_Center: {x: 0, y: 0.23298693, z: 0}
+--- !u!114 &8872366543622696551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022077813093576392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdd94e31b4fcb7046a87aa671f2539d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixedWanderer: 0
+  fixedWanderSpots:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  freeWanderRadius: 0
+  playerDetectionRadius: 0
+  maxSpeed: 0
+  idleTime: 0
+  turningSpeed: 0.08
+  hoveringSound: {fileID: 0}
+  chasingSound: {fileID: 0}
+  explosionSound: {fileID: 0}
+--- !u!1 &6560683017976931020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4914356595239176722}
+  - component: {fileID: 914548534515718099}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4914356595239176722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560683017976931020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.738, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8262978011541143379}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &914548534515718099
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560683017976931020}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 0.18321833, y: 0.20202184, z: 0.13981375}
+  - {x: 0.18321833, y: 0.20202184, z: -0.13547802}
+  - {x: 0.18321833, y: -0.22948629, z: 0.13981375}
+  - {x: 0.18321833, y: -0.22948629, z: -0.13547802}
+  - {x: -0.18156052, y: 0.20202184, z: 0.13981375}
+  - {x: -0.18156052, y: 0.20202184, z: -0.13547802}
+  - {x: -0.18156052, y: -0.22948629, z: 0.13981375}
+  - {x: -0.18156052, y: -0.22948629, z: -0.13547802}
+  m_Dering: 1
 --- !u!1001 &4022077814719927369
 PrefabInstance:
   m_ObjectHideFlags: 0
