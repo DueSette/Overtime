@@ -358,6 +358,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             mainCamera.transform.localPosition = newCameraPosition;
         }
 
+        public void SetRotation(Quaternion newRotation)
+        {
+            this.transform.rotation = newRotation;
+            m_MouseLook.ForceRotation(newRotation);
+        }
         private void RotateView()
         {
             m_MouseLook.LookRotation(transform, mainCamera.transform);
