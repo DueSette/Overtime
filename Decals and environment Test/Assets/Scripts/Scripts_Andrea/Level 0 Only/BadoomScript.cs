@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class SpookyBalloonScript : MonoBehaviour
+public class BadoomScript : MonoBehaviour
 {
     [Header("Designer Friendly Options")]
     [SerializeField] bool fixedWanderer;
@@ -20,7 +20,7 @@ public class SpookyBalloonScript : MonoBehaviour
     private Vector3 wanderSpot;
 
     private Vector3 startPos;
-    public int fixedWandererIterator = 1; //determines the current node the fixed patroller is supposed to visit
+    private int fixedWandererIterator = 1; //determines the current node the fixed patroller is supposed to visit
     bool forwardWanderOrder = true; //for fixed patrolling logic
 
     private enum BalloonState { IDLE, WANDERING, CHASING };
@@ -197,7 +197,7 @@ public class SpookyBalloonScript : MonoBehaviour
             case "BalloonStopper":
                 {
                     ResetActivity();
-                    print("stopped");
+                    print("Badoom hit Wall!");
                 }
                 break;
 
@@ -205,7 +205,8 @@ public class SpookyBalloonScript : MonoBehaviour
                 {
                     //explode on player contact
                     //this means screen fx, sound, maybe camera shake, maybe slowed speed
-                    print("player got badoomed");
+                    print("Player got badoomed!");
+                    Destroy(gameObject);
                 }
                 break;
         }
@@ -216,11 +217,7 @@ public class SpookyBalloonScript : MonoBehaviour
         if (!fixedWanderer)
             return;
 
-        for(int i = 0; i < fixedWanderSpots.Length; i++)
-        {
-            if(i > 0)
-                Gizmos.DrawSphere(fixedWanderSpots[i], 0.15f);
-
-        }
+        for (int i = 0; i < fixedWanderSpots.Length; i++)
+            Gizmos.DrawWireSphere(fixedWanderSpots[i], 0.15f);
     }
 }
