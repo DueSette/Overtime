@@ -27,7 +27,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
-
+        public void ForceRotation(Quaternion newRotation)
+        {
+            m_CharacterTargetRot = newRotation;
+            m_CameraTargetRot = new Quaternion(0.0f, 0.0f, 0.0f, 1.0f);
+        }
         public void LookRotation(Transform character, Transform camera)
         {
             float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;

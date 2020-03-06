@@ -28,6 +28,9 @@ public class BadoomNotePickup : NoteInGameObjectScript
 
     private void SetupBackupReferences()
     {
+        if (materialToBeSwappedIn == null)
+            return;
+
         materialToBeSwappedIn = emissiveMaterialsToSwap[0].GetComponent<Renderer>().material; //take a reference to reinstate the previous emissive materials
         originalIntensities = new float[lightSourcesToTurnOff.Length];
 
