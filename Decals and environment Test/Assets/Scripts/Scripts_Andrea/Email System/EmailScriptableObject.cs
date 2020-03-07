@@ -6,5 +6,4 @@ using UnityEngine;
 public class EmailScriptableObject : ScriptableObject
 {
     public string title, sender, receivers, body;
-    public bool read;
 }
