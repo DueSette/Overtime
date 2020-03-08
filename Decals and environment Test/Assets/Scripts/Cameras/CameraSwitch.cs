@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class CameraSwitch : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class CameraSwitch : MonoBehaviour
     public Camera playerCamera;
     public Camera dynamicCamera;
     public CharacterController controller;
+
+    public bool isCameraMain;
 
     AudioListener playerCamAud;
     AudioListener dynamicCamAud;
@@ -50,14 +53,16 @@ public class CameraSwitch : MonoBehaviour
 
         if (cameraNum == 1)
         {
-            thefpsController.SetActive(true);
-            dynamicCameraHolder.SetActive(false);
+            thefpsController.SetActive(true);           
             playerCamera.enabled = true;
             playerCamAud.enabled = true;
             controller.enabled = true;
+            dynamicCameraHolder.SetActive(false);
             dynamicCamera.enabled = false;
             dynamicCamAud.enabled = false;
             dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
+            isCameraMain = true;
+
         }
 
         
@@ -65,35 +70,51 @@ public class CameraSwitch : MonoBehaviour
         if (cameraNum == 2)
         {
             dynamicCameraHolder.SetActive(true);
-            thefpsController.SetActive(false);
             dynamicCamera.enabled = true;
             dynamicCamAud.enabled = true;
+            dynamicCameraGameObj.transform.parent = null;
+            thefpsController.SetActive(false);
             dynamicCameraGameObj.transform.parent = null;
             controller.enabled = false;
             playerCamera.enabled = false;
             playerCamAud.enabled = false;
+
         }
 
     }
 
-
-   /* void CameraChange()
+/*
+    IEnumerator CloseDynamicCamera()
     {
-        if (cameraNum == 1)
-        {
-            playerCamera.enabled = true;
-            playerCamAud.enabled = true;
-            dynamicCamera.enabled = false;
-            dynamicCamAud.enabled = false;
-        }
+        yield return new WaitForSeconds(1f);
+        dynamicCameraHolder.SetActive(false);
+        dynamicCamera.enabled = false;
+        dynamicCamAud.enabled = false;
+        dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
+        isCameraMain = true;
+    }
 
-        if (cameraNum == 2)
-        {
-            
-            dynamicCamera.enabled = true;
-            dynamicCamAud.enabled = true;
-            playerCamera.enabled = false;
-            playerCamAud.enabled = false;
-        }
-    }*/
+    IEnumerator CloseMainCamera()
+    {
+        yield return new WaitForSeconds(1f);
+        thefpsController.SetActive(false);
+        dynamicCameraGameObj.transform.parent = null;
+        controller.enabled = false;
+        playerCamera.enabled = false;
+        playerCamAud.enabled = false;
+        isCameraMain = false;
+    }
+    */
+
+    public void CameraChange()
+    {
+        cameraNum = 2;
+    }
+
+    public void CameraChangeToMain()
+    {
+        cameraNum = 1;
+    }
+
+
 }

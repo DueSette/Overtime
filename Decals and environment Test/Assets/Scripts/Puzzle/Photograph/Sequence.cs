@@ -70,4 +70,5 @@ public class Sequence : MonoBehaviour
         localPhotograph.SetActive(false);
         player.GetComponent<FirstPersonController>().enabled = true;
     }
+
 }
