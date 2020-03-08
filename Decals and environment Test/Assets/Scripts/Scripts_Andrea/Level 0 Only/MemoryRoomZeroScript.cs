@@ -39,7 +39,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
             else
             {
-                //parent.GetComponent<Renderer>().material = dissolver;
+                parent.GetComponent<Renderer>().material = dissolver;
                 parent.SetActive(false);
 
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
@@ -48,8 +48,6 @@ public class MemoryRoomZeroScript : MonoBehaviour
                 GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
 
                 GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-
-                OpenableDoor.OnDoorUnlockEvent("MemoryReturn");
                 LevelManager.onLevelEvent("LevelSolved");
             }
     }
