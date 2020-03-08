@@ -35,7 +35,7 @@ public class CameraSwitch : MonoBehaviour
     void Update()
     {
 
-        cameraNum = BoardScript.camNum;
+       // cameraNum = BoardScript.camNum;
 
 
         if(Input.GetKey(KeyCode.J))
