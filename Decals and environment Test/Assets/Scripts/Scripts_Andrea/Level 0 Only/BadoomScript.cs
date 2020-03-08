@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(AudioSource))]
 public class BadoomScript : MonoBehaviour
@@ -13,8 +14,10 @@ public class BadoomScript : MonoBehaviour
 
     [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
 
-    #region Internal stuff
+    #region Internal fields
     private static UnityStandardAssets.Characters.FirstPerson.FirstPersonController player; //static ref to player - all hail nested namespaces
+    NavMeshAgent balloonAI;
+
     AudioSource aud;
     private float idleTimer, chaseTimer;
     private Vector3 wanderSpot;
@@ -33,6 +36,9 @@ public class BadoomScript : MonoBehaviour
             player = FindObjectOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
 
         aud = GetComponent<AudioSource>();
+        balloonAI = GetComponent<NavMeshAgent>();
+        balloonAI.angularSpeed = 0;
+
         idleTimer = idleTime;
         startPos = transform.position;
 
@@ -60,8 +66,7 @@ public class BadoomScript : MonoBehaviour
                 }
             case BalloonState.WANDERING:
                 {
-                    Vector3 dir = (wanderSpot - transform.position).normalized;
-                    transform.position += dir * (maxSpeed / 3.0f) * Time.deltaTime;
+                    balloonAI.SetDestination(wanderSpot);
 
                     BalloonLookAt(wanderSpot);
 
@@ -74,10 +79,9 @@ public class BadoomScript : MonoBehaviour
                 }
             case BalloonState.CHASING:
                 {
-                    Vector3 dir = (player.transform.position - transform.position).normalized;
-                    float chaseSpeed = Mathf.Lerp(0.1f, maxSpeed, Mathf.Clamp(chaseTimer / maxSpeed, 0, 1)); //the balloon accelerates base on how much time passed since the chase began
+                    balloonAI.speed = Mathf.Lerp(0.1f, maxSpeed, Mathf.Clamp(chaseTimer / maxSpeed, 0, 1));
+                    balloonAI.SetDestination(player.transform.position);
 
-                    transform.position += dir * chaseSpeed * Time.deltaTime;
                     chaseTimer += Time.deltaTime;
 
                     BalloonLookAt(player.transform);
@@ -103,6 +107,8 @@ public class BadoomScript : MonoBehaviour
             case BalloonState.WANDERING:
                 {
                     PickWanderSpot();
+                    balloonAI.speed = (maxSpeed / 3.0f);
+
                     break;
                 }
             case BalloonState.CHASING:
@@ -190,9 +196,9 @@ public class BadoomScript : MonoBehaviour
         wanderSpot = startPos;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider coll)
     {
-        switch (collision.collider.tag)
+        switch (coll.GetComponent<Collider>().tag)
         {
             case "BalloonStopper":
                 {
