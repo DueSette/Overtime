@@ -97,6 +97,18 @@ public class InventoriesManager : MonoBehaviour
         return false;
     }
 
+    public bool HasItemAndRemove(string itemName) //checks if we have an item by searching its name, if it does also removes the item from the list
+    {
+        foreach (ItemInventory.Item i in itemManager.itemList)
+            if (i.name == itemName)
+            {
+                itemManager.RemoveItem(i);
+                return true;
+            }
+
+        return false;
+    }
+
     #region NoteInventory Methods
     void ToggleNoteInventoryWindow() //opens or closes the note inventory, based on its current status
     {

@@ -36,8 +36,11 @@ public class NoteInventory : MonoBehaviour
 
     void Start()
     {
-        InitialiseNoteUIObjects(); //fills and spawns the contents of a list, one UI entry for each owned item
-        InitialiseOwnedNotes3D(); //spawns the 3D models. Loads stuff that was set via editor or from save file
+        if (noteList.Count != 0)
+        {
+            InitialiseNoteUIObjects(); //fills and spawns the contents of a list, one UI entry for each owned item
+            InitialiseOwnedNotes3D(); //spawns the 3D models. Loads stuff that was set via editor or from save file
+        }
 
         parent.SetActive(false); //initialise everything and then disappear from view
     }
@@ -92,6 +95,8 @@ public class NoteInventory : MonoBehaviour
 
     public void CleanPreviousNoteUI() //clear previously in-focus entry (set color and style back to normal, clear related 3D Object from view
     {
+        if(noteList.Count == 0) { return; }
+
         GameObject currentNoteObject = noteUINameGameObjects[currentFocus]; //this needs to always be the first line of the method
 
         currentNoteObject.GetComponent<TextMeshProUGUI>().color = Color.white;
@@ -103,6 +108,8 @@ public class NoteInventory : MonoBehaviour
 
     void UpdateNoteDescriptionUI() //updates description, background model, color of the currently selected entry
     {
+        if(noteList.Count == 0) { return; } //guard clause
+
         NoteEntryItem currentNote = noteList[currentFocus];
 
         GameObject current3DObj = currentNote.noteModel;
@@ -137,6 +144,7 @@ public class NoteInventory : MonoBehaviour
         //SPAWNS UI OBJECT OF NEW NOTE AND UPDATES IT WITH NOTE'S DATA
         noteUINameGameObjects.Add(Instantiate(noteNamePrefab, noteNameContainer.transform));
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<TextMeshProUGUI>().text = newNote.entryName;
+        noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<NoteUIObjectScript>().noteID = newNote.noteID;
 
         ScrollEntries(noteList.Count);
     }
