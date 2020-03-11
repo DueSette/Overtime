@@ -98,7 +98,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 07005d8f38fbe6a4fb5f433b10b97f75,
+  m_LightingDataAsset: {fileID: 112000000, guid: 5bf9e6ef1d4befa4eb429974e8c5bed7,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -1839,7 +1839,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BakedTexture
       value: 
-      objectReference: {fileID: 8900000, guid: 01762c39036806648a0c2a7a1fc14fb7, type: 3}
+      objectReference: {fileID: 8900000, guid: fd19364441bdcc64a9ab2eb8c33a9b52, type: 3}
     - target: {fileID: 4445237618855658948, guid: f54562b1871b30c499ebbf544ebc798c,
         type: 3}
       propertyPath: m_ProbeSettings.lighting.weight
@@ -8356,6 +8356,68 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 185693052}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &189241156
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189241158}
+  - component: {fileID: 189241157}
+  m_Layer: 0
+  m_Name: SceneIDMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &189241157
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189241156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1236675580}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 1708695219}
+  - id: 1
+    category: 0
+    gameObject: {fileID: 1048647469}
+  - id: 2
+    category: 0
+    gameObject: {fileID: 1821616479}
+  - id: 3
+    category: 0
+    gameObject: {fileID: 1075006892}
+  - id: 4
+    category: 0
+    gameObject: {fileID: 860647084}
+  - id: 5
+    category: 0
+    gameObject: {fileID: 922355468}
+--- !u!4 &189241158
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189241156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &194137350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18435,7 +18497,6 @@ MonoBehaviour:
     entryName: 
     entryDescription: 
     noteModel: {fileID: 0}
-  noteID: 0
   destroyOnPickup: 0
 --- !u!1001 &408993216
 PrefabInstance:
@@ -25254,6 +25315,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2427907034586833262, guid: fd36b0db1189c0a49b8fec0f9187acf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3737606015779375618, guid: fd36b0db1189c0a49b8fec0f9187acf7,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -27622,7 +27688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -33232,7 +33298,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: dec96ca170c5762418eb94537dfcfada, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: c8cfbb9152739d54980a61e46446757a, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -33677,8 +33743,8 @@ Transform:
   - {fileID: 220130875}
   - {fileID: 1765619651}
   - {fileID: 834341014}
-  - {fileID: 1102207433}
   - {fileID: 2068568017}
+  - {fileID: 1102207433}
   m_Father: {fileID: 30368156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -35395,7 +35461,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: fd19364441bdcc64a9ab2eb8c33a9b52, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 01762c39036806648a0c2a7a1fc14fb7, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -39809,28 +39875,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025859454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1847291738}
+  m_Script: {fileID: 1236675580}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Entries:
   - id: 0
     category: 0
-    gameObject: {fileID: 1075006892}
+    gameObject: {fileID: 1708695219}
   - id: 1
     category: 0
-    gameObject: {fileID: 1048647469}
+    gameObject: {fileID: 922355468}
   - id: 2
     category: 0
-    gameObject: {fileID: 1821616479}
+    gameObject: {fileID: 860647084}
   - id: 3
     category: 0
-    gameObject: {fileID: 860647084}
+    gameObject: {fileID: 1075006892}
   - id: 4
     category: 0
-    gameObject: {fileID: 922355468}
+    gameObject: {fileID: 1048647469}
   - id: 5
     category: 0
-    gameObject: {fileID: 1708695219}
+    gameObject: {fileID: 1821616479}
 --- !u!4 &1025859456
 Transform:
   m_ObjectHideFlags: 19
@@ -40114,6 +40180,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2427907034586833262, guid: fd36b0db1189c0a49b8fec0f9187acf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3737606015779375618, guid: fd36b0db1189c0a49b8fec0f9187acf7,
         type: 3}
@@ -41247,7 +41318,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 0db08de4266c9d845b2bf2565a0ac5b6, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: dec96ca170c5762418eb94537dfcfada, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -45491,6 +45562,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1279070253}
     m_Modifications:
+    - target: {fileID: 223931246748422382, guid: 94d029d2c8c25f642865a2cbd4ced6ff,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5deaeb83ed0b28a42979be2476b689d6, type: 2}
     - target: {fileID: 1241977447088537460, guid: 94d029d2c8c25f642865a2cbd4ced6ff,
         type: 3}
       propertyPath: m_Name
@@ -47326,6 +47402,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1235949972}
   m_PrefabAsset: {fileID: 0}
+--- !u!115 &1236675580
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: SceneObjectIDMapSceneAsset
+  m_Namespace: UnityEngine.Rendering.HighDefinition
 --- !u!1001 &1237700329
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62604,7 +62694,6 @@ MonoBehaviour:
     entryName: 
     entryDescription: 
     noteModel: {fileID: 0}
-  noteID: 1
   destroyOnPickup: 0
 --- !u!1001 &1572839255
 PrefabInstance:
@@ -64112,7 +64201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1597324495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64275,8 +64364,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597324494}
-  m_LocalRotation: {x: -0.025136335, y: -0.68872267, z: 0.024071328, w: -0.72418916}
-  m_LocalPosition: {x: -16.308702, y: 34.004593, z: 17.593895}
+  m_LocalRotation: {x: -0.0064454847, y: -0.9908277, z: 0.124319166, w: -0.05257237}
+  m_LocalPosition: {x: -5.109846, y: 33.747543, z: 4.276375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70212,7 +70301,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 5a2d5c8839113f84aa9535eb819eb586, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 0db08de4266c9d845b2bf2565a0ac5b6, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -75288,7 +75377,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: c8cfbb9152739d54980a61e46446757a, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 5a2d5c8839113f84aa9535eb819eb586, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -76134,20 +76223,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1843176415}
   m_PrefabAsset: {fileID: 0}
---- !u!115 &1847291738
-MonoScript:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  serializedVersion: 5
-  m_Script: 
-  m_DefaultReferences: {}
-  m_Icon: {fileID: 0}
-  m_ExecutionOrder: 0
-  m_ClassName: SceneObjectIDMapSceneAsset
-  m_Namespace: UnityEngine.Rendering.HighDefinition
 --- !u!1001 &1854974209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78709,6 +78784,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2685784470187081638, guid: 8fb8020dd0f64aa4b81305243534f016,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2799698773741379294, guid: 8fb8020dd0f64aa4b81305243534f016,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -78813,6 +78893,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3926441302685565135, guid: 8fb8020dd0f64aa4b81305243534f016,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4223880476385878116, guid: 8fb8020dd0f64aa4b81305243534f016,
         type: 3}
@@ -79113,6 +79198,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921985890471359777, guid: 8fb8020dd0f64aa4b81305243534f016,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7997985140805022307, guid: 8fb8020dd0f64aa4b81305243534f016,
         type: 3}
@@ -83583,7 +83673,6 @@ MonoBehaviour:
     entryDescription: aaaaaaaa
     noteModel: {fileID: -927199367670048503, guid: c14f44f429a588b4d9769a6f1d61a7f0,
       type: 3}
-  noteID: 2
   destroyOnPickup: 1
   badooms: []
   emissiveMaterialsToSwap: []
