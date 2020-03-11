@@ -7,13 +7,17 @@ using TMPro;
 public class ComputerScript : MonoBehaviour, IInteractable
 {
     [SerializeField] List<EmailScriptableObject> containedEmails = new List<EmailScriptableObject>();
-    private List<GameObject> EmailGameObjects = new List<GameObject>(); //internal reference to the present mails
+    private List<GameObject> EmailUIGameObjects = new List<GameObject>(); //internal reference to the present mails
     [SerializeField] GameObject emailEntryPrefab;
     [SerializeField] GameObject leftSidePanel;
     [SerializeField] TextMeshProUGUI rightPanelTitle, rightPanelPeople, rightPanelBody;
     [SerializeField] GameObject standbyScreen;
     bool beingInteractedWith = false;
 
+    public delegate void ReadEmailDelegate(string s);
+    public static event ReadEmailDelegate ReadEmailEvent;
+
+    #region Unity methods
     private void OnEnable()
     {
         //possible setup logic
@@ -24,7 +28,9 @@ public class ComputerScript : MonoBehaviour, IInteractable
     {
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= LeaveInteraction;
     }
+    #endregion
 
+    #region Email operations related methods
     void Initialise()
     {
         standbyScreen.SetActive(true);
@@ -35,58 +41,75 @@ public class ComputerScript : MonoBehaviour, IInteractable
             GameObject g = Instantiate(emailEntryPrefab, leftSidePanel.transform);
             g.GetComponent<TextMeshProUGUI>().SetText(email.title);
             g.SetActive(true);
-            EmailGameObjects.Add(g);
+            EmailUIGameObjects.Add(g);
         }
-
     }
 
-    private void Update()
+    private void DisplayEmail(EmailScriptableObject email) //fills the right side display with the content of the selected email scriptable object's data
     {
-        if (beingInteractedWith)
-            CheckInput();
-    }
-
-    void CheckInput()
-    {
-        //navigation stuff: up arrow, down arrow, onClick
-    }
-
-    private void DisplayEmail(EmailScriptableObject email)
-    {
-        //update right panel with the data found within the clicked email
-        //also inform maanger that this email has been read
-
         rightPanelTitle.SetText(email.title);
         rightPanelPeople.SetText("From: " + email.sender + ". To: " + email.receivers);
         rightPanelBody.SetText(email.title);
+
+        ReadEmailEvent(email.title);
     }
 
-    public void DisplayEmailOnClick(TextMeshProUGUI title)
+    public void DisplayEmailOnClick(TextMeshProUGUI title) //called via the button component on the object
     {
         foreach(EmailScriptableObject email in containedEmails)
-        {
             if (email.title == title.text)
                 DisplayEmail(email);
+    }
+
+    private void CheckIfPlayerReadEmails() //checks if email title was added to a list of emails that were read once already and acts upon it
+    {
+        foreach (GameObject mail in EmailUIGameObjects)
+        {
+            string mailTitle = mail.GetComponent<TextMeshProUGUI>().text;
+
+            if (!EmailManager.HasReadEmail(mailTitle)) //if the email in the PC was never read it will have a different font appearance
+            {
+                mail.GetComponent<TextMeshProUGUI>().color = Color.red;
+                mail.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+            }
+            else
+            {
+                mail.GetComponent<TextMeshProUGUI>().color = Color.white;
+                mail.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+            }
         }
     }
+    #endregion
 
-    void IInteractable.InteractWith()
+    #region Interaction related methods
+    void IInteractable.InteractWith() //removes standby screen, wakes up cursor
     {
         beingInteractedWith = true;
+
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         standbyScreen.SetActive(false);
+        CheckIfPlayerReadEmails();
+
         DisplayEmail(containedEmails[0]);
-        EmailGameObjects[0].GetComponent<Button>().Select();
-        //go from standbyscreen to displaying stuff
-        //load entries, keep right hand panel blank
-        //should probably make mouse visible and unlocked
-        //tell camera to do something maybe
+        EmailUIGameObjects[0].GetComponent<Button>().Select();
+         
+        //TODO make camera do something cool
     }
 
-    public void LeaveInteraction()
+    public void LeaveInteraction() //reverts the computer back to how it was before being interacted with
     {
-        GameStateManager.SetGameState(GameState.IN_GAME);
+        if(!beingInteractedWith) { return; }
+        beingInteractedWith = false;
 
+        GameStateManager.SetGameState(GameState.IN_GAME);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        standbyScreen.SetActive(true);
     }
+
+    #endregion
 }

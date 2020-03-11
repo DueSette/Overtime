@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5794167704386210283}
   - component: {fileID: 5794167704386210294}
   - component: {fileID: 5794167704386210281}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Right side display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   containedEmails:
   - {fileID: 11400000, guid: 1920707e0714d1747a03d5a4004af2ff, type: 2}
+  - {fileID: 11400000, guid: 9dc5621a39d16a9439d5f0f0287a4be8, type: 2}
   emailEntryPrefab: {fileID: 5794167705611471437}
   leftSidePanel: {fileID: 5794167705134492963}
   rightPanelTitle: {fileID: 5794167704978709324}
@@ -154,7 +155,7 @@ GameObject:
   - component: {fileID: 5794167704978709327}
   - component: {fileID: 5794167704978709325}
   - component: {fileID: 5794167704978709324}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Email Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +310,7 @@ GameObject:
   - component: {fileID: 5794167705010524504}
   - component: {fileID: 5794167705010524454}
   - component: {fileID: 5794167705010524505}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Email Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +472,7 @@ GameObject:
   - component: {fileID: 5794167705033354291}
   - component: {fileID: 5794167705033354290}
   - component: {fileID: 5794167705033354293}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StandbyScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +546,7 @@ GameObject:
   - component: {fileID: 5794167705134492975}
   - component: {fileID: 5794167705134492974}
   - component: {fileID: 5794167705134492961}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Left side panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -643,7 +644,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5794167705149371200}
   - component: {fileID: 5794167705149371201}
-  m_Layer: 0
+  - component: {fileID: 995790827}
+  m_Layer: 5
   m_Name: InWorldCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,8 +684,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 4443443444345712485, guid: 7a069bc3ea99ce14a9b310b38300d871,
-    type: 2}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -694,6 +695,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &995790827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794167705149371203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5794167705297914995
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +816,7 @@ GameObject:
   - component: {fileID: 5794167705385477956}
   - component: {fileID: 5794167705385477954}
   - component: {fileID: 5794167705385477957}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Email People involved
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -942,6 +960,18 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9118367958462505866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794167705611471437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c02cbdc3570504191a949a23cf3bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5794167705722055168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1081,7 @@ PrefabInstance:
     - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
@@ -1108,6 +1138,31 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 9118367958462505866}
+    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ClearEmailTextStyles
+      objectReference: {fileID: 0}
+    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_Name
@@ -1116,7 +1171,12 @@ PrefabInstance:
     - target: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095916, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
@@ -1226,24 +1286,22 @@ PrefabInstance:
     - target: {fileID: 4425377759115095917, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_text
-      value: 'EMAIL TITLE
-
-'
+      value: ' EMAIL TITLE'
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095917, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095917, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095917, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095917, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}

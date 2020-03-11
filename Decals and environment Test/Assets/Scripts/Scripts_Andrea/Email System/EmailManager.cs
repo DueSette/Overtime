@@ -4,26 +4,34 @@ using UnityEngine;
 
 public class EmailManager : MonoBehaviour
 {
-    public static EmailManager singleton;
-    private List<string> readEmails = new List<string>();
+    private static List<string> readEmails = new List<string>();
 
-    private void Start()
+    private void OnEnable()
     {
-        if (singleton == null)
-            singleton = this;
+        ComputerScript.ReadEmailEvent += AddToList;
+    }
+    private void OnDisable()
+    {
+        ComputerScript.ReadEmailEvent -= AddToList;
     }
 
-    public void AddReadEmail(string title)
-    {
-        readEmails.Add(title);
-    }
-
-    public bool HasReadEmail(string title)
+    public static bool HasReadEmail(string title)
     {
         foreach (string readTitle in readEmails)
         {
             if (readTitle == title) { return true; }
         }
         return false;
+    }
+
+    private void AddToList(string s)
+    {
+        print(readEmails.Count);
+
+        foreach (string readTitle in readEmails)
+        {
+            if (readTitle == s) { return; }
+        }
+        readEmails.Add(s);
     }
 }

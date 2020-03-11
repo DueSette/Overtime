@@ -7,8 +7,9 @@ public class NoteUIObjectScript : MonoBehaviour
 {
     public int noteID = -1;
     static NoteInventory noteInventoryRef;
+    
 
-   public void UpdateUI()
+    public void UpdateUI() //Called via onClick from the Button component
     {
         if(noteInventoryRef == null)
            noteInventoryRef = GetComponentInParent<NoteInventory>();
@@ -16,7 +17,7 @@ public class NoteUIObjectScript : MonoBehaviour
         noteInventoryRef.ScrollEntries(noteID);
     }
 
-    public void PlaySound(AudioClip clip) //hooked to the OnClick button's method
+    public void PlaySound(AudioClip clip) //hooked to the onClick button's method
     {
         SoundManager.instance.PlaySound(clip);
     }
