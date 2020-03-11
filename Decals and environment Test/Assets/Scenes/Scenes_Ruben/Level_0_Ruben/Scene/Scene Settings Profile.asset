@@ -245,17 +245,17 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   threshold:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1.8
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.33
+    m_Value: 0.825
     min: 0
     max: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.75
+    m_Value: 0.665
     min: 0
     max: 1
   tint:
@@ -402,13 +402,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   rayTracing:
     m_OverrideState: 1
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.91
     min: 0
     max: 4
   directLightingStrength:
@@ -418,7 +418,7 @@ MonoBehaviour:
     max: 1
   radius:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 1.31
     min: 0.25
     max: 5
   temporalAccumulation:
@@ -426,7 +426,7 @@ MonoBehaviour:
     m_Value: 1
   ghostingReduction:
     m_OverrideState: 1
-    m_Value: 0.763
+    m_Value: 0.624
     min: 0
     max: 1
   blurSharpness:
@@ -769,7 +769,6 @@ MonoBehaviour:
   - {fileID: -292615152244305617}
   - {fileID: -5687508656368939423}
   - {fileID: 3229935845524809529}
-  - {fileID: 6930500787977580351}
   - {fileID: 42417080572995014}
   - {fileID: 3451183400562064515}
   - {fileID: -1838487498045917717}
@@ -1292,109 +1291,18 @@ MonoBehaviour:
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+    m_Value: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.9481132, b: 0.9481132, a: 1}
+    m_Value: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
   balance:
     m_OverrideState: 1
-    m_Value: -17
+    m_Value: -1
     min: -100
     max: 100
---- !u!114 &6930500787977580351
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 384c4d03a551c44448145f4093304119, type: 3}
-  m_Name: ScreenSpaceReflection
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  quality:
-    m_OverrideState: 1
-    m_Value: 0
-  rayTracing:
-    m_OverrideState: 1
-    m_Value: 0
-  minSmoothness:
-    m_OverrideState: 1
-    m_Value: 0.877
-    min: 0
-    max: 1
-  smoothnessFadeStart:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0
-    max: 1
-  reflectSky:
-    m_OverrideState: 1
-    m_Value: 0
-  depthBufferThickness:
-    m_OverrideState: 1
-    m_Value: 0.01
-    min: 0
-    max: 1
-  screenFadeDistance:
-    m_OverrideState: 1
-    m_Value: 0.1
-    min: 0
-    max: 1
-  layerMask:
-    m_OverrideState: 1
-    m_Value:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  rayLength:
-    m_OverrideState: 1
-    m_Value: 10
-    min: 0.001
-    max: 50
-  clampValue:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0.001
-    max: 10
-  denoise:
-    m_OverrideState: 1
-    m_Value: 0
-  denoiserRadius:
-    m_OverrideState: 1
-    m_Value: 16
-    min: 1
-    max: 32
-  upscaleRadius:
-    m_OverrideState: 1
-    m_Value: 4
-  fullResolution:
-    m_OverrideState: 1
-    m_Value: 0
-  deferredMode:
-    m_OverrideState: 1
-    m_Value: 0
-  rayBinning:
-    m_OverrideState: 1
-    m_Value: 0
-  sampleCount:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 1
-    max: 32
-  bounceCount:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 1
-    max: 31
-  m_RayMaxIterations:
-    m_OverrideState: 1
-    m_Value: 32
