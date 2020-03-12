@@ -12,6 +12,7 @@ public class OpenableDoor : MonoBehaviour, IInteractable
 
     // Default Door Information
     bool open = false;
+    bool canInteract = true; // Temp var to prevent double clicking doors
 
     [Header("Door Animations")]
     [SerializeField] private Animator doorAnimController;
@@ -44,28 +45,33 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     */
     void IInteractable.InteractWith() //called when the player clicks the door
     {
-        if (!canBeOpened)
+        if (canInteract)
         {
-            doorAnimController.SetTrigger("DoorLocked");
-            audioSource.PlayOneShot(lockedSound);
-            return;
-        }
+            if (!canBeOpened)
+            {
+                doorAnimController.SetTrigger("DoorLocked");
+                audioSource.PlayOneShot(lockedSound);
+                return;
+            }
 
-        if (!open)
-        {
-            doorAnimController.SetTrigger("DoorOpen");
-            open = true;
+            if (!open)
+            {
+                doorAnimController.SetTrigger("DoorOpen");
+                open = true;
 
-            audioSource.Stop();
-            audioSource.PlayOneShot(openingSound);
-        }
-        else
-        {
-            doorAnimController.SetTrigger("DoorClose");
-            open = false;
+                audioSource.Stop();
+                audioSource.PlayOneShot(openingSound);
+            }
+            else
+            {
+                doorAnimController.SetTrigger("DoorClose");
+                open = false;
 
-            audioSource.Stop();
-            audioSource.PlayOneShot(closedSound);
+                audioSource.Stop();
+                audioSource.PlayOneShot(closedSound);
+            }
+
+            StartCoroutine(preventDoubleClick());
         }
     }
 
@@ -81,5 +87,14 @@ public class OpenableDoor : MonoBehaviour, IInteractable
             Debug.Log("Unlocking Door: " + doorUnlockEventCode);
             canBeOpened = true;
         }
+    }
+
+    IEnumerator preventDoubleClick()
+    {
+        canInteract = false;
+
+        yield return new WaitForSeconds(2.0f);
+
+        canInteract = true;
     }
 }
