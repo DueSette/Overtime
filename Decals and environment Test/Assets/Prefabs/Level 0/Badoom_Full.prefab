@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4022077813093576393}
   - component: {fileID: 4022077813093576396}
-  - component: {fileID: 4022077813093576395}
   - component: {fileID: 4022077813093576394}
+  - component: {fileID: 8872366543622696551}
+  - component: {fileID: 324030704864439855}
+  - component: {fileID: 2953178506658063003}
   m_Layer: 0
   m_Name: Badoom_Full
   m_TagString: Untagged
@@ -130,7 +132,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4022077813093576395
+--- !u!136 &4022077813093576394
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022077813093576392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.66
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.23298693, z: 0}
+--- !u!114 &8872366543622696551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,34 +158,109 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd94e31b4fcb7046a87aa671f2539d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixedWanderer: 1
+  fixedWanderer: 0
   fixedWanderSpots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  freeWanderRadius: 1
-  playerDetectionRadius: 2.3
-  maxSpeed: 2
-  idleTime: 2
-  turningSpeed: 0.1
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  freeWanderRadius: 2
+  playerDetectionRadius: 2
+  maxSpeed: 5
+  idleTime: 0
+  turningSpeed: 0.08
   hoveringSound: {fileID: 0}
   chasingSound: {fileID: 0}
   explosionSound: {fileID: 0}
-  fixedWandererIterator: 1
---- !u!136 &4022077813093576394
-CapsuleCollider:
+--- !u!195 &324030704864439855
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4022077813093576392}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.66
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.23298693, z: 0}
+  m_AgentTypeID: 0
+  m_Radius: 0.09
+  m_Speed: 3
+  m_Acceleration: 1
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.6
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!54 &2953178506658063003
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022077813093576392}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!1 &6560683017976931020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4914356595239176722}
+  - component: {fileID: 914548534515718099}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4914356595239176722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560683017976931020}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.738, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8262978011541143379}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!220 &914548534515718099
+LightProbeGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560683017976931020}
+  m_Enabled: 1
+  m_SourcePositions:
+  - {x: 0.18321833, y: 0.20202184, z: 0.13981375}
+  - {x: 0.18321833, y: 0.20202184, z: -0.13547802}
+  - {x: 0.18321833, y: -0.22948629, z: 0.13981375}
+  - {x: 0.18321833, y: -0.22948629, z: -0.13547802}
+  - {x: -0.18156052, y: 0.20202184, z: 0.13981375}
+  - {x: -0.18156052, y: 0.20202184, z: -0.13547802}
+  - {x: -0.18156052, y: -0.22948629, z: 0.13981375}
+  - {x: -0.18156052, y: -0.22948629, z: -0.13547802}
+  m_Dering: 1
 --- !u!1001 &4022077814719927369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,11 +268,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4022077813093576393}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 6c5b32d7ee2d5b543b5f5ba3a44eba2e,
-        type: 3}
-      propertyPath: m_Name
-      value: Baloon_geo
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6c5b32d7ee2d5b543b5f5ba3a44eba2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -237,6 +323,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 6c5b32d7ee2d5b543b5f5ba3a44eba2e,
+        type: 3}
+      propertyPath: m_Name
+      value: Baloon_geo
+      objectReference: {fileID: 0}
     - target: {fileID: 246095911360927298, guid: 6c5b32d7ee2d5b543b5f5ba3a44eba2e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -246,7 +337,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a369f01f01e6f874a8e6fcf7ce566ecf, type: 2}
+      objectReference: {fileID: 2100000, guid: 11eaef3bc4d65eb45abe46e8841d3099, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c5b32d7ee2d5b543b5f5ba3a44eba2e, type: 3}
 --- !u!4 &8262978011541143379 stripped

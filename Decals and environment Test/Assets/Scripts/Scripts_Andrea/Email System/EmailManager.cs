@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class EmailManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EmailManager singleton;
+    private List<string> readEmails = new List<string>();
+
+    private void Start()
     {
-        
+        if (singleton == null)
+            singleton = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddReadEmail(string title)
     {
-        
+        readEmails.Add(title);
+    }
+
+    public bool HasReadEmail(string title)
+    {
+        foreach (string readTitle in readEmails)
+        {
+            if (readTitle == title) { return true; }
+        }
+        return false;
     }
 }

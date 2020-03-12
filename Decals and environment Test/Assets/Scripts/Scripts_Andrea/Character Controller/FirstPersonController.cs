@@ -358,6 +358,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             mainCamera.transform.localPosition = newCameraPosition;
         }
 
+        public void SetRotation(Quaternion newRotation)
+        {
+            this.transform.rotation = newRotation;
+            m_MouseLook.ForceRotation(newRotation);
+        }
         private void RotateView()
         {
             m_MouseLook.LookRotation(transform, mainCamera.transform);
@@ -397,7 +402,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
-                Debug.Log(hit.collider.GetComponent<IInteractable>());
+                //Debug.Log(hit.collider.GetComponent<IInteractable>());
 
                 if (hit.collider.GetComponent<IInteractable>() != null)
                     hit.collider.GetComponent<IInteractable>().InteractWith();

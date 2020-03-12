@@ -7,7 +7,7 @@ public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
     static InventoriesManager inventoriesManager;
     [SerializeField] NoteInventory.NoteEntryItem note;
 
-    [SerializeField, Tooltip("Which note does this unlock?")] int noteID = -1;
+    [SerializeField, Tooltip("Note number, ideally they should focus an aenumerated order")] int noteID = -1;
     [SerializeField] bool destroyOnPickup = false;
 
     public void InteractWith()
