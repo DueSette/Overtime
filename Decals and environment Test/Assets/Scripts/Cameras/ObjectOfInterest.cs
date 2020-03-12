@@ -13,11 +13,6 @@ public class ObjectOfInterest : MonoBehaviour
         cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
     }
 
-    void Update()
-    {
-       
-    }
-
     public void FocusCamera()
     {
         cameraController.CameraChange();
@@ -37,5 +32,6 @@ public class ObjectOfInterest : MonoBehaviour
                 theCamera.viewList.Add(child);
             }
         }
+        theCamera.viewNum = 1; // Starts the camera at viewpoint everytime it's clicked.
     }        
 }

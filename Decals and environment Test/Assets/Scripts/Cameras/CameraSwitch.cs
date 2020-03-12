@@ -10,6 +10,7 @@ public class CameraSwitch : MonoBehaviour
     public Camera playerCamera;
     public Camera dynamicCamera;
     public CharacterController controller;
+    public DynamicCamera dynCamScript;
 
     public bool isCameraMain;
 
@@ -27,6 +28,7 @@ public class CameraSwitch : MonoBehaviour
         controller = thefpsController.GetComponent<CharacterController>();
         playerCamAud = thefpsController.GetComponent<AudioListener>();
         dynamicCamAud = dynamicCameraGameObj.GetComponent<AudioListener>();
+        dynCamScript = dynamicCameraGameObj.GetComponent<DynamicCamera>();
 
         cameraNum = 1;
 
@@ -41,9 +43,12 @@ public class CameraSwitch : MonoBehaviour
        // cameraNum = BoardScript.camNum;
 
 
-        if(Input.GetKey(KeyCode.J))
+        if(Input.GetKey(KeyCode.Return))
         {
-            cameraNum = 1;
+            Debug.Log("normal UPDATE");
+            dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
+            dynCamScript.viewNum = 0;
+            StartCoroutine(CameraDelay());
         }
 
         if (Input.GetKey(KeyCode.K))
@@ -83,28 +88,14 @@ public class CameraSwitch : MonoBehaviour
 
     }
 
-/*
-    IEnumerator CloseDynamicCamera()
+
+    IEnumerator CameraDelay()
     {
         yield return new WaitForSeconds(1f);
-        dynamicCameraHolder.SetActive(false);
-        dynamicCamera.enabled = false;
-        dynamicCamAud.enabled = false;
-        dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
-        isCameraMain = true;
+        Debug.Log("LATE UPDATE");
+        cameraNum = 1;
     }
 
-    IEnumerator CloseMainCamera()
-    {
-        yield return new WaitForSeconds(1f);
-        thefpsController.SetActive(false);
-        dynamicCameraGameObj.transform.parent = null;
-        controller.enabled = false;
-        playerCamera.enabled = false;
-        playerCamAud.enabled = false;
-        isCameraMain = false;
-    }
-    */
 
     public void CameraChange()
     {
