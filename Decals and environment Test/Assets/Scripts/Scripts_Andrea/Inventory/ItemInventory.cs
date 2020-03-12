@@ -82,6 +82,12 @@ public class ItemInventory : MonoBehaviour
 
         itemUINamesList.Add(Instantiate(entryNamePrefab, leftPanel));
         itemUINamesList[itemUINamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
+        itemUINamesList[itemUINamesList.Count - 1].GetComponent<ItemUIObjectScript>().containedItem = newItem;
+    }
+
+    public void RemoveItem(Item itemToRemove)
+    {
+        itemList.Remove(itemToRemove);
     }
 
     public void UpdateUI() //updates render texture, description, entry names to the currently selected item
@@ -119,12 +125,13 @@ public class ItemInventory : MonoBehaviour
         UpdateUI();
     }
 
-    public void ScrollItemsFromUI(Item i) //this is called via item inventory UI when clicking on an entry
+    public void ScrollItemsFromUI(string nameToSearchFor) //this is called via item inventory UI when clicking on an entry
     {
-        int x = 0;
+        int x = 0; //TODO FIX THIS THING
         foreach (Item it in itemList) //we search through the owned items, when one matches we set it as the current focus and update UI accodingly
         {
-            if (i == it)
+            string itemName = it.name;
+            if (itemName == nameToSearchFor)
             {
                 CleanPreviousUI();
                 currentFocus = x;
@@ -133,8 +140,6 @@ public class ItemInventory : MonoBehaviour
             }
             x++;
         }
-
-
     }
 
     public void CleanPreviousUI()  //just reverts some changes caused by highlighting an item in the list

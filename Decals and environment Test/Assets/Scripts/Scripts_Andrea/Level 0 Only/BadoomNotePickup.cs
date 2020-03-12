@@ -66,6 +66,6 @@ public class BadoomNotePickup : NoteInGameObjectScript
 
     void EnableDarkPostProcess(bool start)
     {
-        darkPostProcess.SetActive(start);
+        darkPostProcess?.SetActive(start);
     }
 }
