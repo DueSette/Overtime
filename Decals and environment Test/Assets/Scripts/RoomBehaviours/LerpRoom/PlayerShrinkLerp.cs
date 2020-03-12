@@ -34,6 +34,12 @@ public class PlayerShrinkLerp : MonoBehaviour
             canLerp = true;
             playerCharacter = GameStateManager.GetPlayer();
         }
+
+        if (eventName == "LevelSolved")
+        {
+            canLerp = false;
+            playerCharacter.transform.localScale = Vector3.one;
+        }
     }
 
 
