@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 4832946715738396632}
   - component: {fileID: 1166038703512070945}
   - component: {fileID: 2220026735621169470}
+  - component: {fileID: 1571092656}
   m_Layer: 0
   m_Name: Note_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4488142493312183790
 Transform:
@@ -26,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581610905178185725}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.010000011, y: 0.01, z: 0.010000011}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -66,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -89,5 +92,28 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.6, y: 0.40029204, z: 7.6}
-  m_Center: {x: 0, y: 0.20014614, z: 0}
+  m_Size: {x: 15.057602, y: 2.3972387, z: 10.660224}
+  m_Center: {x: 0.9522642, y: 1.1986198, z: 1.5301127}
+--- !u!114 &1571092656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581610905178185725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7399c40bc15361478d1c2b53ca7b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  note:
+    noteID: 1
+    entryName: Friendly note
+    entryDescription: Hey there, just wanted to let you know that what you're doing
+      is brave. I never would have thought that there was so much courage behind
+      that wall of silence!  And remember, monsters don't exist. I hope you get her
+      back.
+    noteModel: {fileID: 3444223378357581304, guid: 00aa7c124f5256040ba5b72d517d5a09,
+      type: 3}
+  destroyOnPickup: 0
