@@ -49,7 +49,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
     {
         rightPanelTitle.SetText(email.title);
         rightPanelPeople.SetText("From: " + email.sender + ". To: " + email.receivers);
-        rightPanelBody.SetText(email.title);
+        rightPanelBody.SetText(email.body);
 
         ReadEmailEvent(email.title);
     }
