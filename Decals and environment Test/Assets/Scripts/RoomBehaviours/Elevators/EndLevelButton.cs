@@ -6,7 +6,7 @@ public class EndLevelButton : MonoBehaviour, IInteractable, ITextPrompt
 {
     void IInteractable.InteractWith()
     {
-        LevelManager.onLevelEvent("LevelEnd");
+        LevelManager.onLevelEvent("EndLevel");
     }
 
     string ITextPrompt.PromptText()

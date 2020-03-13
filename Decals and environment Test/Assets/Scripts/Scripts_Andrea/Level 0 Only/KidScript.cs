@@ -109,6 +109,7 @@ public class KidScript : MonoBehaviour
         candle.transform.SetParent(null);
         candle.transform.position = new Vector3(2.25f, 1.5f, -4.0f);
         candle.GetComponent<Rigidbody>().useGravity = true;
+        candle.GetComponent<Collider>().enabled = true;
         gameObject.SetActive(false);
 
 

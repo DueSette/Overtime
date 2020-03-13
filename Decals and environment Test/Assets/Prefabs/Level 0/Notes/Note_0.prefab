@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 8471911032791383585}
   - component: {fileID: 2787393204624147160}
   - component: {fileID: 2349544077584493260}
+  - component: {fileID: 407833650}
   m_Layer: 0
   m_Name: Note_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &633108199791199255
 Transform:
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4508694031012197892}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -10.576, y: 0.592, z: 16.7488}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
@@ -55,6 +56,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -66,6 +68,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -89,5 +92,30 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.8, y: 0.04, z: 21}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 27.973557, y: 0.04, z: 28.386688}
+  m_Center: {x: -0.33140182, y: 0, z: -1.5426636}
+--- !u!114 &407833650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508694031012197892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7399c40bc15361478d1c2b53ca7b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  note:
+    noteID: 0
+    entryName: Note to self
+    entryDescription: 'It''s about to kick in, I already feel the numbness of my
+      fingertips creeping into my whole body. I''ve never felt so scared, but this
+      is my only chance and I know our surroundings will be strangers, still we must
+      pull through. Even if it will all soon fade, I must remember of my promise.
+      I am not alone in this. They will be watching. The picture in the wallet will
+      keep us warm. '
+    noteModel: {fileID: 9027513553544259539, guid: 6564fbd02301ae8459aedab80f4a72ae,
+      type: 3}
+  destroyOnPickup: 0
