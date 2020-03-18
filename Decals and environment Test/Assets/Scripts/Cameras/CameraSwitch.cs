@@ -92,6 +92,7 @@ public class CameraSwitch : MonoBehaviour
     IEnumerator CameraDelay()
     {
         yield return new WaitForSeconds(1f);
+        GameStateManager.RestorePreviousState();
         Debug.Log("LATE UPDATE");
         cameraNum = 1;
     }
@@ -99,6 +100,7 @@ public class CameraSwitch : MonoBehaviour
 
     public void CameraChange()
     {
+        GameStateManager.SetGameState(GameState.CAMERA_FOCUS);
         cameraNum = 2;
     }
 

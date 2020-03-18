@@ -22,6 +22,8 @@ public class DynamicCamera : MonoBehaviour
     void Start()
     {
         //currentView = views[0];
+        cameraHolder = GameObject.FindGameObjectWithTag("DynamicCameraHolder");
+        startView = cameraHolder.transform;
         dynamicCamera = this.gameObject.GetComponent<Camera>();
         viewList.Add(startView);
         viewNum = 0;
