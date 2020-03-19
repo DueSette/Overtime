@@ -5,15 +5,26 @@ using UnityEngine;
 public class RatScript : MonoBehaviour
 {
     public GameObject theRat;
+    public GameObject ratAnimObj;
     Rigidbody r_RigidBody;
     public float ratSpeed;
     public float ratDistance;
     public int ratState;
+    public GameObject ratSensor;
+    bool hasCollided;
 
+
+    float turnTime;
     public int directionNum;
+
+    RaycastHit hit;
+    Ray ratRay;
+
+    Vector3 testRay;
 
 
     private Animation speakerAnim;
+    public Animator animator;
 
 
     //Variables that control Rat Rotation
@@ -22,15 +33,15 @@ public class RatScript : MonoBehaviour
     public Transform currentRotation;
     public GameObject currentSpeaker;
     public float transitionSpeed;
-
-    private Quaternion lookRotation;
-    private Vector3 _direction;
+    public int speakerNumber;
 
     // Start is called before the first frame update
     void Start()
     {
         ratState = 2;
         directionNum = 0;
+        turnTime = 1.8f;
+        animator = ratAnimObj.transform.GetComponent<Animator>();
         currentSpeaker = speakers[directionNum];
         currentRotation = directionList[directionNum];
         speakerAnim = currentSpeaker.GetComponent<Animation>();
@@ -39,33 +50,25 @@ public class RatScript : MonoBehaviour
         ratDistance = 1f;
         ratSpeed = 1f;
         transitionSpeed = 3F;
+        hasCollided = false;
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
-
-
         currentSpeaker = speakers[directionNum];
         speakerAnim = currentSpeaker.GetComponent<Animation>();
         currentRotation = directionList[directionNum];
 
 
         Vector3 forward = theRat.transform.TransformDirection(Vector3.forward) * ratDistance;
+        Vector3 backward = theRat.transform.TransformDirection(Vector3.back) * ratDistance;
+        Vector3 left = theRat.transform.TransformDirection(Vector3.left) * ratDistance;
+        Vector3 right = theRat.transform.TransformDirection(Vector3.right) * ratDistance;
 
         RaycastHit hit;
-        Ray ratRay = new Ray(theRat.transform.position, Vector3.forward);
-        Debug.DrawRay(theRat.transform.position, forward, Color.red);
-
-
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-
-
-            ratState++;
-            if (ratState > 3)
-                ratState = 1;
-        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -73,73 +76,107 @@ public class RatScript : MonoBehaviour
         }
 
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {            
-            Debug.Log("viewnum is " + directionNum);
-        
-            if (directionNum == 0)
-            {
-                directionNum = directionList.Count - 1;
-            }
-            else
-            {
-                directionNum = directionNum - 1;
-            }
 
-            currentRotation = directionList[directionNum];
-            }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+           // ratRay = new Ray(theRat.transform.position, Vector3.forward);
+            testRay = forward;
+            directionNum = 0;
+            ratState = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+          //  ratRay = new Ray(theRat.transform.position, Vector3.right);
+            testRay = right;
+            directionNum = 1;
+            ratState = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+          //  ratRay = new Ray(theRat.transform.position, Vector3.back);
+            testRay = backward;
+            directionNum = 2;
+            ratState = 3;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+           // ratRay = new Ray(theRat.transform.position, Vector3.left);
+            testRay = left;
+            directionNum = 3;
+            ratState = 3;
+        }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-            Debug.Log("viewnum is " + directionNum);
-
-            directionNum = directionNum + 1;
-
-                if (directionNum > directionList.Count - 1)
-                {
-                directionNum = 0;
-                }
-                Debug.Log(directionNum);
-            currentRotation = directionList[directionNum];
-            }
-
-
-            switch (ratState)
+        switch (ratState)
         {
             case 1:
-
-                r_RigidBody.position += Vector3.forward * Time.deltaTime * ratSpeed;
-                break;
+                animator.SetBool("Idle", false);
+                animator.SetBool("Sniff", false);
+                animator.SetBool("Walking", true);
+                    if (directionNum == 0)
+                {
+                    ratRay = new Ray(theRat.transform.position, Vector3.forward);
+                    r_RigidBody.position += Vector3.forward * Time.deltaTime * ratSpeed;
+                }
+                else
+                    if (directionNum == 1)
+                {
+                    ratRay = new Ray(theRat.transform.position, Vector3.right);
+                    r_RigidBody.position += Vector3.right * Time.deltaTime * ratSpeed;
+                }
+                else
+                    if (directionNum == 2)
+                {
+                    ratRay = new Ray(theRat.transform.position, Vector3.back);
+                    r_RigidBody.position += Vector3.back * Time.deltaTime * ratSpeed;
+                }
+                else
+                    if (directionNum == 3)
+                {
+                    ratRay = new Ray(theRat.transform.position, Vector3.left);
+                    r_RigidBody.position += Vector3.left * Time.deltaTime * ratSpeed;
+                }
+                    break;
 
             case 2:
-
+                animator.SetBool("Sniff", false);
+                animator.SetBool("Walking", false);
+                animator.SetBool("Idle", true);
                 break;
 
             case 3:
-                Debug.Log("Rat is turning");
+                turnTime -= Time.deltaTime;
+                animator.SetBool("Idle", false);
+                animator.SetBool("Walking", false);
+                animator.SetBool("Sniff", true);
+
+                if(turnTime < 0)
+                {
+                    ratState = 1;
+                    hasCollided = false;
+                }
                 break;
 
             default:
                 Debug.Log("Ratstate is undeclared");
                 break;
         }
- 
-
-
-        if(Physics.Raycast(ratRay,out hit, ratDistance))
-        {
-            if(hit.collider)
-            {
-                ratState = 2;
-            }
-        }
-
     }
 
-
-    void stopMovement()
+    private void FixedUpdate()
     {
-        ratSpeed = 0;
+        if (Physics.Raycast(ratRay, out hit, ratDistance))
+        {
+            if (hasCollided == false)
+            {
+                if (hit.collider.tag == "Block")
+                {
+                    Debug.Log("collider is " + hit.collider.name);
+                    hasCollided = true;
+                    ratState = 2;
+                    return;
+                }
+            }
+        }
     }
 
 
