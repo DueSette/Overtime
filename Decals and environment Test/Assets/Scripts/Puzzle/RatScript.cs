@@ -13,9 +13,14 @@ public class RatScript : MonoBehaviour
     public int directionNum;
 
 
+    private Animation speakerAnim;
+
+
     //Variables that control Rat Rotation
     public List<Transform> directionList;
+    public List<GameObject> speakers;
     public Transform currentRotation;
+    public GameObject currentSpeaker;
     public float transitionSpeed;
 
     private Quaternion lookRotation;
@@ -26,7 +31,9 @@ public class RatScript : MonoBehaviour
     {
         ratState = 2;
         directionNum = 0;
+        currentSpeaker = speakers[directionNum];
         currentRotation = directionList[directionNum];
+        speakerAnim = currentSpeaker.GetComponent<Animation>();
         theRat = this.gameObject;
         r_RigidBody = theRat.GetComponent<Rigidbody>();
         ratDistance = 1f;
@@ -38,6 +45,9 @@ public class RatScript : MonoBehaviour
     void Update()
     {
 
+
+        currentSpeaker = speakers[directionNum];
+        speakerAnim = currentSpeaker.GetComponent<Animation>();
         currentRotation = directionList[directionNum];
 
 
@@ -50,34 +60,44 @@ public class RatScript : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.A))
         {
+
+
             ratState++;
             if (ratState > 3)
                 ratState = 1;
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            speakerAnim.Play("SpeakerAnim");
+        }
+
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {            
+            Debug.Log("viewnum is " + directionNum);
+        
+            if (directionNum == 0)
             {
-                Debug.Log("viewnum is " + directionNum);
-                directionNum = directionNum - 1;
-
-                if (directionNum < 0)
-                {
                 directionNum = directionList.Count - 1;
-                }
+            }
+            else
+            {
+                directionNum = directionNum - 1;
+            }
 
-                currentRotation = directionList[directionNum];
+            currentRotation = directionList[directionNum];
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Debug.Log("viewnum is " + directionNum);
+            Debug.Log("viewnum is " + directionNum);
 
             directionNum = directionNum + 1;
 
-                if (directionNum > directionList.Count)
+                if (directionNum > directionList.Count - 1)
                 {
-                directionNum = 1;
+                directionNum = 0;
                 }
                 Debug.Log(directionNum);
             currentRotation = directionList[directionNum];
