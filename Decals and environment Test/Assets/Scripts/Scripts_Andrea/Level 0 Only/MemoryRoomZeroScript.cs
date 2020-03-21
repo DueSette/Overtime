@@ -22,34 +22,38 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
     void VanishItem()
     {
-        //try
-            if (fluffFurniture.Count > 0)
-            {
-                int rand = Random.Range(0, fluffFurniture.Count);
-                fluffFurniture[rand].GetComponent<Renderer>().material = dissolver;
-                StartCoroutine(LerpDissolve(fluffFurniture[rand].GetComponent<Renderer>().material));
-                fluffFurniture.RemoveAt(rand);
-            }
-            else if (importantFurniture.Count > 0)
-            {
-                int rand = Random.Range(0, importantFurniture.Count);
-                importantFurniture[rand].GetComponent<Renderer>().material = dissolver;
-                importantFurniture.RemoveAt(rand);
-            }
+        if (fluffFurniture.Count > 0)
+        {
+            int rand = Random.Range(0, fluffFurniture.Count);
+            //fluffFurniture[rand].GetComponent<Renderer>().material = dissolver;
+            //StartCoroutine(LerpDissolve(fluffFurniture[rand].GetComponent<Renderer>().material));
+            SetForDissolutionWithChildren(fluffFurniture[rand]);
+            fluffFurniture.RemoveAt(rand);
+        }
 
-            else
-            {
-                parent.GetComponent<Renderer>().material = dissolver;
-                parent.SetActive(false);
+        else if (importantFurniture.Count > 0)
+        {
+            int rand = Random.Range(0, importantFurniture.Count);
+            //importantFurniture[rand].GetComponent<Renderer>().material = dissolver;
+            //StartCoroutine(LerpDissolve(importantFurniture[rand].GetComponent<Renderer>().material));
+            SetForDissolutionWithChildren(importantFurniture[rand]);
+            importantFurniture.RemoveAt(rand);
+        }
 
-                GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+        else
+        {
+            //parent.GetComponent<Renderer>().material = dissolver;
+            SetForDissolutionWithChildren(parent);
+            parent.GetComponent<Collider>().enabled = false;
 
-                GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
-                GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
 
-                GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-                LevelManager.onLevelEvent("LevelSolved");
-            }
+            GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
+            GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
+            
+            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+            LevelManager.onLevelEvent("LevelSolved");
+        }
     }
 
     //updates dissolve value of dissolve shader
@@ -57,11 +61,25 @@ public class MemoryRoomZeroScript : MonoBehaviour
     {
         float lapsed = 0f;
 
-        while(lapsed < 1)
+        while (lapsed < 1)
         {
             lapsed += Time.deltaTime / 2;
             mat.SetFloat("_DissolveAmount", Mathf.Lerp(0, 1, lapsed));
             yield return null;
         }
+    }
+
+    void SetForDissolutionWithChildren(GameObject obj)
+    {
+        if (obj.GetComponent<Renderer>() != null)
+        {
+            obj.GetComponent<Renderer>().material = dissolver;
+            StartCoroutine(LerpDissolve(obj.GetComponent<Renderer>().material));
+        }
+        foreach (Renderer r in obj.GetComponentsInChildren<Renderer>())
+        {
+            r.material = dissolver;
+            StartCoroutine(LerpDissolve(r.material));
+        }      
     }
 }
