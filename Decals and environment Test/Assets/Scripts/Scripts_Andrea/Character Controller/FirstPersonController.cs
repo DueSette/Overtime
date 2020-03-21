@@ -371,7 +371,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void CheckActionInput()
         {
             if (Input.GetMouseButtonDown(0)) //interacting with objects
+            {
                 CheckForInteractible();
+                CheckForViewport();
+            }
 
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 ToggleCrouch();
@@ -382,6 +385,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 Zoom(true);
             else
                 Zoom(false);
+        }
+
+        private void CheckForViewport()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
+            if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
+            {
+                if (hit.collider.GetComponent<ObjectOfInterest>() != null)
+                    hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
+            }
         }
 
         private void CheckForInteractible() //called when player clicks

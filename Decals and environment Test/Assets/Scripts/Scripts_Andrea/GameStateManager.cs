@@ -10,7 +10,8 @@ public enum GameState
     CUTSCENE = 4,
     PAUSE = 8,
     IN_GAME_LOOK_ONLY = 16, //this one is for specific cases where you can move the camera but can't walk
-    INTERACTING_W_ITEM = 32
+    INTERACTING_W_ITEM = 32,
+    CAMERA_FOCUS = 64
 } 
 
 public class GameStateManager : MonoBehaviour
@@ -59,6 +60,11 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.CUTSCENE:
+                break;
+
+            case GameState.CAMERA_FOCUS:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 break;
 
             default:

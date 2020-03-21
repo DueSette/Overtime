@@ -6,6 +6,7 @@ public class DynamicCamera : MonoBehaviour
 {
 
     public Transform[] views;
+    public GameObject fpsController;
     public List<Transform> viewList; // Make stuff assigned to list tomorrow
     public float transitionSpeed;
     Transform currentView;
@@ -14,25 +15,29 @@ public class DynamicCamera : MonoBehaviour
     public int viewNum;
     public int maxviews;
     public Camera dynamicCamera;
+    public bool tester;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        currentView = views[0];
+        //currentView = views[0];
+        cameraHolder = GameObject.FindGameObjectWithTag("DynamicCameraHolder");
+        startView = cameraHolder.transform;
         dynamicCamera = this.gameObject.GetComponent<Camera>();
+        viewList.Add(startView);
         viewNum = 0;
+        currentView = viewList[viewNum];
         transitionSpeed = 3F;
-        
-
         maxviews = views.Length;
     }
 
 
     void Update()
     {
+        currentView = viewList[viewNum];
 
-        currentView = views[viewNum];
+
 
 
 
@@ -45,37 +50,36 @@ public class DynamicCamera : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                Debug.Log("hitting R");
+                Debug.Log("viewnum is " + viewNum);
                 viewNum = viewNum - 1;
 
-                if (viewNum < 0)
+                if (viewNum < 1)
                 {
-                    viewNum = views.Length - 1;
+                    viewNum = viewList.Count - 1;
 
                 }
 
-                currentView = views[viewNum];
+                currentView = viewList[viewNum];
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                Debug.Log("hitting R");
+                Debug.Log("viewnum is " + viewNum);
 
                 viewNum = viewNum + 1;
 
-                if (viewNum > views.Length - 1)
+                if (viewNum > viewList.Count - 1)
                 {
-                    viewNum = 0;
+                    viewNum = 1;
                 }
-
-
                 Debug.Log(viewNum);
-                currentView = views[viewNum];
+                currentView = viewList[viewNum];
             }
         }
-        
     }
-    
+
+
+
     private void LateUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, currentView.position, Time.deltaTime * transitionSpeed);
@@ -88,7 +92,11 @@ public class DynamicCamera : MonoBehaviour
         transform.eulerAngles = currentAngle;
     }
 
+    IEnumerator ResetCamera()
+    {
+        yield return new WaitForSeconds(1f);
+    }
 }
 
-  
+
 
