@@ -6,9 +6,13 @@ public class KidScript : MonoBehaviour
 {
     // VERY QUICK AND DIRTY THING DONT JUDGE ME
     // TODO: ALL THE JUDGEMENT WILL BE GIVEN
+    // TODO: </3
 
     [SerializeField]
     private GameObject candle;
+
+    [SerializeField]
+    private Transform candleSpot;
 
     [SerializeField]
     private Animator anim;
@@ -35,7 +39,7 @@ public class KidScript : MonoBehaviour
     bool IsPlayerNear()
     {
         Vector3 playerPos = GameStateManager.GetPlayer().transform.position;
-        if (Vector3.Distance(playerPos, transform.position) < 3)
+        if (Vector3.Distance(playerPos, transform.position) < 5)
         {
             return true;
         }
@@ -77,7 +81,6 @@ public class KidScript : MonoBehaviour
         // Start Event
         canTrigger = false;
 
-
         //StartCoroutine(LerpTowardRotation(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 180.0f, 0.0f), 1.0f)); // Rotation Handled By Animations
         anim.SetTrigger("approached1");
         yield return new WaitForSeconds(0.75f);
@@ -107,7 +110,7 @@ public class KidScript : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         candle.transform.SetParent(null);
-        candle.transform.position = new Vector3(2.25f, 1.5f, -4.0f);
+        candle.transform.position = candleSpot.position;
         candle.GetComponent<Rigidbody>().useGravity = true;
         candle.GetComponent<Collider>().enabled = true;
         gameObject.SetActive(false);

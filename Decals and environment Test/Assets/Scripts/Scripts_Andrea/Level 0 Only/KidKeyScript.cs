@@ -2,25 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CandleScript : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class KidKeyScript : MonoBehaviour
 {
-    Rigidbody rb;
     AudioSource aud;
-    [SerializeField] GameObject cake;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         aud = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        rb.isKinematic = false;
-        GetComponent<Collider>().isTrigger = false;
-
         aud.Play();
-        transform.parent = null;
     }
 
     private void OnCollisionEnter(Collision collision)
