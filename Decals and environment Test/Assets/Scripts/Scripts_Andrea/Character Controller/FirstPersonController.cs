@@ -386,15 +386,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (Input.GetMouseButtonDown(0)) //interacting with objects
             {
-                CheckForInteractible();
-<<<<<<< HEAD
-            
-            /* Not needed for now
-=======
+                CheckForInteractible();           
                 CheckForViewport();
             }
 
->>>>>>> master
+            /* Not needed for now
+
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 ToggleCrouch();
             */
