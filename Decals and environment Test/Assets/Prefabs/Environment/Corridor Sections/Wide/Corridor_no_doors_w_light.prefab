@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 103896911094126390}
   - component: {fileID: 6175170619361656003}
   - component: {fileID: 4930233641428861769}
+  - component: {fileID: 8673932707085473909}
   m_Layer: 0
   m_Name: Collider Floor (1)
   m_TagString: Untagged
@@ -235,9 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dce50107609f7a44ae9b9605caba922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xLock: 0.5
-  yLock: 0.5
-  zLock: 0.5
+  xLock: 0.25
+  yLock: 0.25
+  zLock: 0.25
 --- !u!65 &4930233641428861769
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -249,8 +250,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.1, z: 2}
+  m_Size: {x: 2, y: 0.1, z: 2.5}
   m_Center: {x: 0, y: -0.05, z: 0}
+--- !u!114 &8673932707085473909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425467384861242331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32d00f4de8a06e40ab7eb2baa23fedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &1712902802102890726
 GameObject:
   m_ObjectHideFlags: 0

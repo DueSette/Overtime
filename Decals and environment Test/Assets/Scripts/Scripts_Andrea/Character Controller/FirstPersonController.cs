@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Space]
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
-        [SerializeField] Transform m_FloorDetector;
+        public Transform m_FloorDetector;
         [SerializeField] Transform m_CeilingDetector;
 
         private bool m_Jump;

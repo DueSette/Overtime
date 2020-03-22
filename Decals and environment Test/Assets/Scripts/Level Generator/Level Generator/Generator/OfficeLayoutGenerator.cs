@@ -292,7 +292,22 @@ public class OfficeLayoutGenerator : MonoBehaviour
                     connectionPrevious.connected = true;
                     nextRoom.placed = true;
 
-                    connectionPoints.Add(connectionNext.transform);
+
+                    GameObject newDoor = Instantiate(doorPrefab, connectionNext.transform);
+                    Debug.Log(newDoor.transform.lossyScale);
+
+                    newDoor.transform.position = connectionNext.transform.position;
+                    newDoor.transform.rotation = connectionNext.transform.rotation;
+
+                    // Locking Doors
+                    string doorLockCode = currentElement.connectionLockCodes[i];
+                    doorLockCode = doorLockCode.Trim();
+
+                    if (doorLockCode != "")
+                    {
+                        OpenableDoor doorController = newDoor.GetComponentInChildren<OpenableDoor>();
+                        doorController.LockDoor(doorLockCode);
+                    }
                 }
             }
 
@@ -312,16 +327,6 @@ public class OfficeLayoutGenerator : MonoBehaviour
     */
     private void DecorateRooms()
     {
-        // Adding Doors To Rooms
-        for (int i = 0; i < connectionPoints.Count; i++)
-        {
-            GameObject newDoor = Instantiate(doorPrefab, connectionPoints[i]);
-            Debug.Log(newDoor.transform.lossyScale);
-
-            newDoor.transform.position = connectionPoints[i].position;
-            newDoor.transform.rotation = connectionPoints[i].rotation;
-        }
-
         // Individual Room Decoration
         for (int i = 0; i < spawnedRooms.Count; i++)
         {
