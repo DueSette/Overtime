@@ -80,6 +80,12 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     Door Unlocking
     ====================================================================================================
     */
+    public void LockDoor(string newLockCode)
+    {
+        doorUnlockEventCode = newLockCode;
+        canBeOpened = false;
+    }
+
     private void UnlockDoor(string unlockEventCode)
     {
         if (unlockEventCode == doorUnlockEventCode)
