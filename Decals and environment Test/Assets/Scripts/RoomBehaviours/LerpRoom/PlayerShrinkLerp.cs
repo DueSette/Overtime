@@ -44,6 +44,7 @@ public class PlayerShrinkLerp : MonoBehaviour
         {
             canLerp = false;
             playerCharacterController.height = heightMax;
+            floorController.transform.localPosition = new Vector3(0, floorOffsetStart, 0);
         }
     }
 
