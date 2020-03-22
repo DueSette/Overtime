@@ -391,17 +391,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             /* Not needed for now
-
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 ToggleCrouch();
             */
 
             CheckForPrompt();
-
-            if (Input.GetMouseButton(1))
-                Zoom(true);
-            else
-                Zoom(false);
+            Zoom(Input.GetMouseButton(1));
         }
 
         private void CheckForViewport()
@@ -438,6 +433,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
+                    FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                else
+                    FacingPromptTextEvent?.Invoke("");
+            }
+            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.0f))
+            {
+                if (hit.collider.GetComponent<SimplePromptObjectTextOnly>() != null)
                     FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
                 else
                     FacingPromptTextEvent?.Invoke("");

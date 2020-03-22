@@ -15,4 +15,3 @@ public class SimplePromptObjectTextOnly : MonoBehaviour, ITextPrompt
         return promptText;
     }
 }
-
