@@ -16,7 +16,7 @@ public class ObjectOfInterest : MonoBehaviour
     public void FocusCamera()
     {
         cameraController.CameraChange();
-        Invoke("FindCamera", 0.2f);       
+        Invoke("FindCamera", 0.2f);
     }
 
     void FindCamera()
