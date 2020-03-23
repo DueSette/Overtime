@@ -13,7 +13,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
         {
             kid.SetActive(true);
             once = false;
-            GetComponent<AudioSource>().Play();
         }
+        GetComponent<AudioSource>().Play();
     }
 }

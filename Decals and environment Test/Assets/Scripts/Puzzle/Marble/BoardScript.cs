@@ -55,7 +55,7 @@ public class BoardScript : MonoBehaviour, IInteractable
         }
 
 
-        if(camNum == 2)
+     /*   if(camNum == 2)
         {
             cameraHolder.transform.parent = null;
         }
@@ -63,6 +63,7 @@ public class BoardScript : MonoBehaviour, IInteractable
         {
             cameraHolder.transform.parent = this.transform;
         }
+        */
         
 
 
