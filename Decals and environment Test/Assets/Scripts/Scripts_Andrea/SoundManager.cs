@@ -5,23 +5,50 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
-    private List<AudioSource> sources = new List<AudioSource>();
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
 
-        sources.Add(GetComponent<AudioSource>());
-    }
+    [SerializeField] private AudioSource bgmA, bgmB;
+
+    private AudioClip previousBGM;
+    private List<AudioSource> sources = new List<AudioSource>();
 
     public void PlaySound(AudioClip clip)
     {
-        //if (currentlyPlayingClip == clip) can cause strange bugs related to audio sound muffled
-           // return;
-
         FindAvailableSource().PlayOneShot(clip);
     }
-    private AudioSource FindAvailableSource()
+
+    //brings volume to 0, changes music, brings volume to 1 - can add crossfade if necessary
+    public IEnumerator FadeBGM(AudioClip clip, float fadeOutTime, float fadeInTime)
+    {
+        if (bgmB.clip == clip) { yield break; } //guard clause
+
+        bgmB.clip = clip;
+        bgmB.Play();
+        
+        float lapsed = 0.0f;
+
+        while(lapsed < fadeOutTime)
+        {
+            lapsed += Time.deltaTime;
+            bgmA.volume = -(lapsed / fadeInTime) + 1; //volume going down
+            bgmB.volume = lapsed / fadeOutTime; //volume going up
+
+            yield return null;
+        }
+        bgmA.Stop();
+
+        //We swap positions so next time this is called the procedure happens the same way
+        AudioSource temp = bgmA;
+        bgmA = bgmB;
+        bgmB = temp;
+    }
+
+    public void RestorePreviousBGM(float fadeOutTime, float fadeInTime)
+    {
+        StartCoroutine(FadeBGM(previousBGM, fadeOutTime, fadeInTime));
+    }
+
+    #region Internal logic
+    private AudioSource FindAvailableSource() //Finds an audio source that is not currently playing anything, if there are none, creates another one
     {
         for (int i = 0; i < sources.Count; i++)
         {
@@ -33,4 +60,11 @@ public class SoundManager : MonoBehaviour
         sources[sources.Count - 1].playOnAwake = false;
         return sources[sources.Count - 1];
     }
+
+    private void Awake()
+    {
+        if (instance == null) { instance = this; }
+        sources.Add(GetComponent<AudioSource>());
+    }
+    #endregion
 }
