@@ -7,14 +7,16 @@ using TMPro;
 
 public class UIPromptsScript : MonoBehaviour
 {
-    Image image;
-    [SerializeField, Range(0.1f, 3)] float fadeSpeed = 1;
+    Image crossHair;
+    [SerializeField] Sprite interactionCrosshairSprite;
+    private Sprite idleCrosshairSprite;
+
     [SerializeField] private TextMeshProUGUI promptTextBox;
-    float alpha = 0;
 
     private void Start()
     {
-        image = GetComponent<Image>();
+        crossHair = GetComponent<Image>();
+        idleCrosshairSprite = crossHair.sprite;
     }
 
     private void OnEnable()
@@ -29,14 +31,11 @@ public class UIPromptsScript : MonoBehaviour
         FirstPersonController.FacingPromptTextEvent -= SetPromptText;
     }
 
-    private void ManageFade(bool up)
+    private void ManageFade(bool facingInteractable)
     {
-        if (image == null)
-            return;
+        if (crossHair == null) { return; }
 
-        alpha = Mathf.Clamp(alpha + (up ? 0.025f : -0.025f) * fadeSpeed, 0, 1);
-        Color c = new Color(255, 255, 255, alpha);
-        image.color = c;
+        crossHair.sprite = facingInteractable ? interactionCrosshairSprite : idleCrosshairSprite;
     }
 
     private void SetPromptText(string s)
