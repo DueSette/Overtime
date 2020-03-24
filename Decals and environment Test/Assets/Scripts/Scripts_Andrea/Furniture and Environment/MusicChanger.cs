@@ -8,6 +8,7 @@ public class MusicChanger : MonoBehaviour
     [SerializeField] AudioClip newBackgroundMusic;
     [SerializeField] float fadeOutTime = 3;
     [SerializeField] float fadeInTime = 3;
+    [SerializeField] bool restorePreviousMusicOnExit;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +17,7 @@ public class MusicChanger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if(!restorePreviousMusicOnExit) { return; }
         SoundManager.instance.RestorePreviousBGM(fadeOutTime, fadeInTime);
     }
 }
