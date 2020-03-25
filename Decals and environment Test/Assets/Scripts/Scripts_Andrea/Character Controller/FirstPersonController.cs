@@ -448,13 +448,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 FacingPromptTextEvent?.Invoke("");
 
             //FOR PROMPT ICON
-            if (Physics.Raycast(ray, out hit, 1.9f))
-            {
-                if (hit.collider.GetComponent<IInteractable>() != null)
-                    FacingPromptIconEvent?.Invoke(true);
-                else
-                    FacingPromptIconEvent?.Invoke(false);
-            }
+            if (Physics.Raycast(ray, out hit, 1.9f))           
+                FacingPromptIconEvent?.Invoke(hit.collider.GetComponent<IInteractable>() != null);            
             else
                 FacingPromptIconEvent?.Invoke(false);
         }
