@@ -6,11 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject settingsMenu;
+
     [SerializeField] Image dissolvePanel;
     [SerializeField] AudioSource audio;
+
     public void LoadWorld(int level)
     {
         StartCoroutine(DissolveAndPlay(level));
+    }
+    public void OpenSettings()
+    {
+        mainMenu.SetActive(false);
+        settingsMenu.SetActive(true);
     }
     public void QuitGame()
     {
