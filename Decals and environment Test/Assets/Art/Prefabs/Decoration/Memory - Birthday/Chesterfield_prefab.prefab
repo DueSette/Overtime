@@ -54,6 +54,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -65,6 +66,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -88,6 +90,7 @@ GameObject:
   - component: {fileID: 8033673250913015177}
   - component: {fileID: 9167230917505923357}
   - component: {fileID: 7434629020931617552}
+  - component: {fileID: 3246891926705559010}
   m_Layer: 0
   m_Name: Chesterfield_couch_geo
   m_TagString: Untagged
@@ -131,6 +134,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -138,7 +142,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 6c9243e055884ce4580f0fbba1cb72ee, type: 2}
   - {fileID: 2100000, guid: b496d3809e9c914498f2e9601496600c, type: 2}
   - {fileID: 2100000, guid: b449933992934d3459cb48dfada2f690, type: 2}
-  - {fileID: 2100000, guid: d229c62888ce8ca459012696a30bd8b2, type: 2}
+  - {fileID: 2100000, guid: 24ad555103f383b4dbd191b90249711e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,6 +150,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -158,6 +163,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3246891926705559010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922130484139252923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 254.4342, y: 97.82655, z: 137.24689}
+  m_Center: {x: 0, y: 48.677757, z: -8.698578}
 --- !u!1 &3264907766065390328
 GameObject:
   m_ObjectHideFlags: 0

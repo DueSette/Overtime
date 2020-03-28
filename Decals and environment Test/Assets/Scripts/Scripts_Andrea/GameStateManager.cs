@@ -12,13 +12,16 @@ public enum GameState
     IN_GAME_LOOK_ONLY = 16, //this one is for specific cases where you can move the camera but can't walk
     INTERACTING_W_ITEM = 32,
     CAMERA_FOCUS = 64
-} 
+}
 
 public class GameStateManager : MonoBehaviour
 {
     public static GameState gameState { get; private set; } = GameState.IN_GAME;
     private static GameState previousState;
     private static GameObject player;
+
+    public delegate void StateChangeDelegate(GameState gs);
+    public static StateChangeDelegate OnStateChange;
 
     private void Awake()
     {
@@ -70,6 +73,7 @@ public class GameStateManager : MonoBehaviour
             default:
                 break;
         }
+        OnStateChange(gameState);
 
         print("Cursor state: " + Cursor.lockState);
     }
