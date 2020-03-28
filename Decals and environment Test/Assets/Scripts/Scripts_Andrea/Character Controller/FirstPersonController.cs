@@ -399,8 +399,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Zoom(Input.GetMouseButton(1));
         }
 
+        
         private void CheckForViewport()
         {
+            return; //this was added by Andrea as for now the script does not really work/is not hooked up properly, and creates nullreferences
+
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
@@ -408,7 +411,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
             }
         }
-
+        
         private void CheckForInteractible() //called when player clicks
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));

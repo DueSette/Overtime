@@ -5,15 +5,15 @@ using UnityEngine.UI;
 using UnityStandardAssets.Characters.FirstPerson;
 using TMPro;
 
-public class UIPromptsScript : MonoBehaviour
+public class CrosshairScript : MonoBehaviour
 {
     Image crossHair;
-    [SerializeField] Sprite interactionCrosshairSprite;
+    [SerializeField] private Sprite interactionCrosshairSprite;
     private Sprite idleCrosshairSprite;
 
     [SerializeField] private TextMeshProUGUI promptTextBox;
 
-    private void Start()
+    private void Awake()
     {
         crossHair = GetComponent<Image>();
         idleCrosshairSprite = crossHair.sprite;
@@ -23,12 +23,14 @@ public class UIPromptsScript : MonoBehaviour
     {
         FirstPersonController.FacingPromptIconEvent += ManageFade;
         FirstPersonController.FacingPromptTextEvent += SetPromptText;
+        GameStateManager.OnStateChange += SetCrosshairVisibility;
     }
 
     private void OnDisable()
     {
         FirstPersonController.FacingPromptIconEvent -= ManageFade;
         FirstPersonController.FacingPromptTextEvent -= SetPromptText;
+        GameStateManager.OnStateChange -= SetCrosshairVisibility;
     }
 
     private void ManageFade(bool facingInteractable)
@@ -41,5 +43,10 @@ public class UIPromptsScript : MonoBehaviour
     private void SetPromptText(string s)
     {
         promptTextBox.SetText(s);
+    }
+
+    void SetCrosshairVisibility(GameState gs)
+    {
+        crossHair.enabled = gs == (GameState.CAMERA_FOCUS & GameState.IN_GAME_LOOK_ONLY & GameState.IN_GAME & GameState.INTERACTING_W_ITEM & GameState.IN_GAME_LOOK_ONLY);
     }
 }
