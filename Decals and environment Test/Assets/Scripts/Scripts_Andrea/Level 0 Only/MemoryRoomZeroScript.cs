@@ -25,8 +25,6 @@ public class MemoryRoomZeroScript : MonoBehaviour
         if (fluffFurniture.Count > 0)
         {
             int rand = Random.Range(0, fluffFurniture.Count);
-            //fluffFurniture[rand].GetComponent<Renderer>().material = dissolver;
-            //StartCoroutine(LerpDissolve(fluffFurniture[rand].GetComponent<Renderer>().material));
             SetForDissolutionWithChildren(fluffFurniture[rand]);
             fluffFurniture.RemoveAt(rand);
         }
@@ -34,15 +32,12 @@ public class MemoryRoomZeroScript : MonoBehaviour
         else if (importantFurniture.Count > 0)
         {
             int rand = Random.Range(0, importantFurniture.Count);
-            //importantFurniture[rand].GetComponent<Renderer>().material = dissolver;
-            //StartCoroutine(LerpDissolve(importantFurniture[rand].GetComponent<Renderer>().material));
             SetForDissolutionWithChildren(importantFurniture[rand]);
             importantFurniture.RemoveAt(rand);
         }
 
         else
         {
-            //parent.GetComponent<Renderer>().material = dissolver;
             SetForDissolutionWithChildren(parent);
             parent.GetComponent<Collider>().enabled = false;
 

@@ -15,17 +15,19 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     FuseSlotScript[] fuseSlots; // all the places where you can fit a fuse in, they are classes as they contain a package of info
 
-    [SerializeField, Tooltip("All the places on the side of the box where unallocated fuses appear")]
-    Transform[] traySlots;
+    FuseTrayScript tray;
 
     [SerializeField] LayerMask fuseBoxLayer;
-    public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
+    [HideInInspector] public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
 
     bool inUse = false;
+    int slotsFilled = 0; //used for keeping track of how many items have been spawned on the tray, internal logic
     private float cameraDist;
 
     private void Start()
     {
+        tray = GetComponentInChildren<FuseTrayScript>();
+
         int i = 0;
         var temp = new List<FuseSlotScript>();
         temp.AddRange(GetComponentsInChildren<FuseSlotScript>());
@@ -59,10 +61,14 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
             if (f != null) //did we hit a fuseslot?
                 f.Interact();
 
-            else //or did we hit a fuse laying on the fuse tray?
+            else if(hit.collider.name.Contains("Tray"))
             {
-                currentlyHeldFuse = hit.collider.gameObject;
-                currentlyHeldFuse.GetComponent<Collider>().enabled = false;
+                //TODO tray should hand a fuse to the controller
+                //tray should keep track of which tray slots are empty and which aren't
+                if (currentlyHeldFuse == null)
+                    tray.HandFuse();
+                else
+                    tray.StoreFuse(currentlyHeldFuse);
             }
         }
     }
@@ -93,11 +99,12 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     {
         PollInventoryForFuses();
 
-        for (int i = 0; i < traySlots.Length; i++)
-            if(fusePrefabs[i] != null)
+        for (; slotsFilled < tray.slots.Length; slotsFilled++)
+            if(fusePrefabs[slotsFilled] != null)
             {
-                GameObject g = Instantiate(fusePrefabs[i], traySlots[i]);
-                g.transform.position = traySlots[i].position;
+                GameObject g = Instantiate(fusePrefabs[slotsFilled], tray.slots[slotsFilled]);
+                //g.transform.position = tray.slots[slotsFilled].position;
+                tray.AssignFilledSlot(g);
             }
     }
 
@@ -112,16 +119,16 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     private void OnEnable()
     {
-        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += ExitInteraction();
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += ExitInteraction;
     }
     private void OnDisable()
     {
-        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= ExitInteraction();
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= ExitInteraction;
     }
     
     void ExitInteraction()
     {
-
+        inUse = false;
     }
 
     #endregion
@@ -130,6 +137,5 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
      * DEACTIVATE ALL RELEVANT THINGS (SLOTS, FUSES)
      * WORRY ABOUT STUFF THAT MIGHT GET LOADED TWICE
      * PUT DOWN ANY HELD FUSE (TRAY OR INVENTORY?)
-     * inUse = false;
      */
 }
