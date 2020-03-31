@@ -111,7 +111,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(GameStateManager.gameState == GameState.INTERACTING_W_ITEM)
             {
                 if (Input.GetButton("Cancel"))
-                    ExitInteraction();
+                {
+                    GameStateManager.SetGameState(GameState.IN_GAME);
+                    ExitInteraction();             
+                }
             }
 
             if (m_IsCrouching) //makes sure that when moving the child controller the parent follows
