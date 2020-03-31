@@ -22,7 +22,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     bool inUse = false;
     int slotsFilled = 0; //used for keeping track of how many items have been spawned on the tray, internal logic
-    private float cameraDist;
+    private float cameraDist; //will be used as the distance between the player cam and the held fusebox
 
     private void Start()
     {
@@ -49,10 +49,11 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         if (currentlyHeldFuse != null) { UpdateHeldFusePosition(); }
     }
 
+    #region Interaction
     void CheckFuseboxInteraction()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 3;
+        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 3; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
         {
@@ -63,8 +64,6 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
             else if(hit.collider.name.Contains("Tray"))
             {
-                //TODO tray should hand a fuse to the controller
-                //tray should keep track of which tray slots are empty and which aren't
                 if (currentlyHeldFuse == null)
                     tray.HandFuse();
                 else
@@ -73,12 +72,15 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         }
     }
 
-    void UpdateHeldFusePosition()
+    void UpdateHeldFusePosition() //makes the fuse follow the cursor on the X and Y, uses a fixed Z distance
     {
         Vector3 v = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
+        Vector3 vel = Vector3.zero;
 
-        currentlyHeldFuse.transform.position = v;
+        currentlyHeldFuse.transform.position = Vector3.SmoothDamp(currentlyHeldFuse.transform.position, v, ref vel, 0.025f);
     }
+
+    #endregion
 
     #region Startup Methods
     void IInteractable.InteractWith()
@@ -92,6 +94,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        tray.enabled = true;
         LoadAvailableFuses();
     }
 
@@ -103,7 +106,6 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
             if(fusePrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(fusePrefabs[slotsFilled], tray.slots[slotsFilled]);
-                //g.transform.position = tray.slots[slotsFilled].position;
                 tray.AssignFilledSlot(g);
             }
     }
@@ -129,13 +131,16 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     void ExitInteraction()
     {
         inUse = false;
+        if (currentlyHeldFuse != null)
+            tray.StoreFuse(currentlyHeldFuse);
+
+        tray.enabled = false; //prevents mishaps from happening
     }
 
     #endregion
+
     /*
      * TODO: ONLEAVE() LOGICS:
      * DEACTIVATE ALL RELEVANT THINGS (SLOTS, FUSES)
-     * WORRY ABOUT STUFF THAT MIGHT GET LOADED TWICE
-     * PUT DOWN ANY HELD FUSE (TRAY OR INVENTORY?)
      */
 }

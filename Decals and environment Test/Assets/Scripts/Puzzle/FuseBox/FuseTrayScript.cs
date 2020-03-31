@@ -5,53 +5,51 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class FuseTrayScript : MonoBehaviour
 {
+    /*===========
+     * TO BE USED WITHIN A FUSEBOX PUZZLE
+    =============*/
     [Tooltip("All the places on the side of the box where unallocated fuses appear")]
     public Transform[] slots;
-    class TraySlot 
-    {
-        public GameObject embeddedFuse = null;
-    }
+    private GameObject[] embeddedFuses;
 
-    TraySlot[] traySlots;
     private FuseBoxScript fuseBox;
 
     private void Start()
     {
         fuseBox = GetComponentInParent<FuseBoxScript>();
 
-        traySlots = new TraySlot[slots.Length];
-        for (int i = 0; i < traySlots.Length; i++)
-            traySlots[i] = new TraySlot();
+        embeddedFuses = new GameObject[slots.Length];
+        enabled = false;
     }
 
-    public void AssignFilledSlot(GameObject g)
+    public void AssignFilledSlot(GameObject g) //this way the tray remembers how many slots have ever been filled (it avoids spawning things twice)
     {
-        for (int i = 0; i < traySlots.Length; i++)
-            if (traySlots[i].embeddedFuse == null) // if there is no embedded fuse
+        for (int i = 0; i < embeddedFuses.Length; i++)
+            if (embeddedFuses[i] == null) // if there is no embedded fuse
             {
                 g.transform.position = slots[i].position;
-                traySlots[i].embeddedFuse = g;
+                embeddedFuses[i] = g;
                 return;
             }
     }
 
-    public void HandFuse()
+    public void HandFuse() //equips a fuse to the cursor
     {
-        for (int i = 0; i < traySlots.Length; i++)
-            if (traySlots[i].embeddedFuse != null) //if there is embedded fuse
+        for (int i = 0; i < embeddedFuses.Length; i++)
+            if (embeddedFuses[i] != null) //if there is embedded fuse
             {
-                fuseBox.currentlyHeldFuse = traySlots[i].embeddedFuse;
-                traySlots[i].embeddedFuse = null;
+                fuseBox.currentlyHeldFuse = embeddedFuses[i];
+                embeddedFuses[i] = null;
                 return;
             }
     }
 
-    public void StoreFuse(GameObject fuse)
+    public void StoreFuse(GameObject fuse) //accept a fuse from the cursor and stores it
     {
-        for (int i = 0; i < traySlots.Length; i++)
-            if (traySlots[i].embeddedFuse == null) //if there is no embedded fuse
+        for (int i = 0; i < embeddedFuses.Length; i++)
+            if (embeddedFuses[i] == null) //if there is no embedded fuse
             {
-                traySlots[i].embeddedFuse = fuse;
+                embeddedFuses[i] = fuse;
                 fuse.transform.position = slots[i].position;
                 fuseBox.currentlyHeldFuse = null;
                 return;

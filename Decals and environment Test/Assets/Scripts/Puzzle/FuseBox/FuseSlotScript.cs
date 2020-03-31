@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class FuseSlotScript : MonoBehaviour
 {
+    /*===========
+     * TO BE USED WITHIN A FUSEBOX PUZZLE
+    =============*/
+
     [SerializeField] GameObject lightIndicator;
     [SerializeField] GameObject containedFuse;
     bool isFilled;
