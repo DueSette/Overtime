@@ -7,21 +7,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: whiteboard_base
+  m_Name: Baloon_material_1
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
-  m_ShaderKeywords: _DISABLE_SSR _DOUBLESIDED_ON _MASKMAP _MATERIAL_FEATURE_CLEAR_COAT
-    _NORMALMAP _NORMALMAP_TANGENT_SPACE
+<<<<<<< HEAD:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Chesterfield/Chesterfield_material_temp.mat
+  m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+=======
+  m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
+>>>>>>> master:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Baloon/Baloon_material_1.mat
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses:
   - DistortionVectors
-  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -30,8 +33,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 081b169e8db48424389bce26043476ec, type: 3}
+<<<<<<< HEAD:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Chesterfield/Chesterfield_material_temp.mat
+        m_Texture: {fileID: 2800000, guid: 48807f64b92219b4b907e103c49ccd80, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+=======
+        m_Texture: {fileID: 2800000, guid: e7d54ce3bc07aaa4584fc1cb9ddc1053, type: 3}
         m_Scale: {x: 1, y: 1}
+>>>>>>> master:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Baloon/Baloon_material_1.mat
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
         m_Texture: {fileID: 0}
@@ -70,15 +78,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 081b169e8db48424389bce26043476ec, type: 3}
+<<<<<<< HEAD:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Chesterfield/Chesterfield_material_temp.mat
+        m_Texture: {fileID: 2800000, guid: 48807f64b92219b4b907e103c49ccd80, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 47a21f7e26391a84eb5ac3a0d7ec7c96, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5c054f89a41f3604c939a0a3eaaeaa13, type: 3}
+=======
+        m_Texture: {fileID: 2800000, guid: e7d54ce3bc07aaa4584fc1cb9ddc1053, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 0}
+>>>>>>> master:Decals and environment Test/Assets/Art/Assets/Memory - Birthday/Baloon/Baloon_material_1.mat
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 12638b55fb61fa0439c90a24adac9411, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5bf6cc890c2389f4ead0476f9e68c830, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -124,9 +140,9 @@ Material:
     - _AlphaSrcBlend: 1
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _CoatMask: 0.145
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CoatMask: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _Cutoff: 0.5
     - _DepthOffsetEnable: 0
     - _DetailAlbedoScale: 1
@@ -151,9 +167,8 @@ Material:
     - _DistortionSrcBlend: 1
     - _DistortionVectorBias: -1
     - _DistortionVectorScale: 2
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 1
-    - _Drag: 1
     - _DstBlend: 0
     - _EmissiveColorMode: 1
     - _EmissiveExposureWeight: 1
@@ -162,9 +177,6 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
-    - _EnableMotionVectorForVertexAnimation: 0
-    - _EnableSpecularOcclusion: 0
-    - _EnableWind: 0
     - _EnergyConservingSpecularColor: 1
     - _HdrpVersion: 2
     - _HeightAmplitude: 0.02
@@ -176,26 +188,23 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _InitialBend: 1
     - _InvTilingScale: 1
-    - _Ior: 1
+    - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
     - _NormalMapSpace: 0
-    - _NormalScale: 0.62
+    - _NormalScale: 1
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
-    - _ReceivesSSR: 0
+    - _ReceivesSSR: 1
     - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
-    - _ShiverDirectionality: 0.5
-    - _ShiverDrag: 0.2
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -204,23 +213,21 @@ Material:
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
     - _StencilRef: 2
-    - _StencilRefDepth: 32
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 64
-    - _StencilRefGBuffer: 34
-    - _StencilRefMV: 160
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 128
     - _StencilWriteMask: 3
     - _StencilWriteMaskDepth: 48
     - _StencilWriteMaskDistortionVec: 64
     - _StencilWriteMaskGBuffer: 51
     - _StencilWriteMaskMV: 176
-    - _Stiffness: 1
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _ThicknessMultiplier: 1
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -228,7 +235,6 @@ Material:
     - _TransparentDepthPrepassEnable: 0
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
-    - _TransparentWritingVelocity: 0
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
@@ -240,9 +246,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
@@ -256,3 +262,16 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
+--- !u!114 &3222930903038387723
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
