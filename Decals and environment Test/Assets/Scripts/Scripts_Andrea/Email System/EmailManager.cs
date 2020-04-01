@@ -26,8 +26,6 @@ public class EmailManager : MonoBehaviour
 
     private void AddToList(string s)
     {
-        print(readEmails.Count);
-
         foreach (string readTitle in readEmails)
         {
             if (readTitle == s) { return; }
