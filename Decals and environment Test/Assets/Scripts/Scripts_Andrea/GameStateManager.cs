@@ -21,7 +21,7 @@ public class GameStateManager : MonoBehaviour
     private static GameObject player;
 
     public delegate void StateChangeDelegate(GameState gs);
-    public static StateChangeDelegate OnStateChange;
+    public static event StateChangeDelegate OnStateChange;
 
     private void Awake()
     {
@@ -66,6 +66,11 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.CAMERA_FOCUS:
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                break;
+
+            case GameState.INTERACTING_W_ITEM:               
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 break;

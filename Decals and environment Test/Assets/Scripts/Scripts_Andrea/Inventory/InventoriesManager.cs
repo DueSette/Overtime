@@ -97,15 +97,18 @@ public class InventoriesManager : MonoBehaviour
         return false;
     }
 
-    public bool HasItemAndRemove(string itemName) //checks if we have an item by searching its name, if it does also removes the item from the list
+    //checks if we have an item by searching its name, if it does also removes the item from the list, also returns the item via out keyword
+    public bool HasItemAndRemove(string itemName, out GameObject objectReturned)
     {
         foreach (ItemInventory.Item i in itemManager.itemList)
             if (i.name == itemName)
             {
                 itemManager.RemoveItem(i);
+                objectReturned = i.model;
                 return true;
             }
 
+        objectReturned = null;
         return false;
     }
 
