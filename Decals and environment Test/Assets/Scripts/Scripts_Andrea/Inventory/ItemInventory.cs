@@ -28,13 +28,7 @@ public class ItemInventory : MonoBehaviour
         public string description;
     }
 
-    private void Start()
-    {
-        InitialiseOwnedItems();
-        gameObject.SetActive(false);
-    }
-
-    private void InitialiseOwnedItems()
+    public void InitialiseOwnedItems()
     {
         //populate itemList - possibly load from save
         int x = 0;
@@ -63,6 +57,9 @@ public class ItemInventory : MonoBehaviour
     #region Reoccurring Methods
     public void UnlockNewItem(Item newItem) //adds a new item to the inventory
     {
+        CleanPreviousUI();
+        InventoriesManager.instance.SetGeneralMenu(true);
+
         currentFocus = itemList.Count;
 
         for (int i = 0; i < itemList.Count; i++)
@@ -83,6 +80,7 @@ public class ItemInventory : MonoBehaviour
         itemUINamesList.Add(Instantiate(entryNamePrefab, leftPanel));
         itemUINamesList[itemUINamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
         itemUINamesList[itemUINamesList.Count - 1].GetComponent<ItemUIObjectScript>().containedItem = newItem;
+        UpdateUI();
     }
 
     public void RemoveItem(Item itemToRemove)

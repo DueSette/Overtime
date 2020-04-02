@@ -8,7 +8,7 @@ public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
     [SerializeField] NoteInventory.NoteEntryItem note;
 
     int noteID;
-    [SerializeField] bool destroyOnPickup = false;
+    [SerializeField] bool destroyOnPickup;
 
     private void Start()
     {
@@ -29,6 +29,6 @@ public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
     protected virtual void OnInteraction()
     {
         if (destroyOnPickup)
-            Destroy(gameObject);
+            gameObject.SetActive(false);
     }
 }

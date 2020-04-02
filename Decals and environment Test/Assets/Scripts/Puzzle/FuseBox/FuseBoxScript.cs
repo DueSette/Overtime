@@ -138,9 +138,4 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     }
 
     #endregion
-
-    /*
-     * TODO: ONLEAVE() LOGICS:
-     * DEACTIVATE ALL RELEVANT THINGS (SLOTS, FUSES)
-     */
 }
