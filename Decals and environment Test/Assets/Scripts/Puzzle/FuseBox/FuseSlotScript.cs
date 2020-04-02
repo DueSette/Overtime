@@ -39,13 +39,13 @@ public class FuseSlotScript : MonoBehaviour
         isFilled = true;
 
         containedFuse = fuseBox.currentlyHeldFuse;
-        containedFuse.transform.position = transform.position;
+        StartCoroutine(FuseTrayScript.PlaceFuseOnTray(containedFuse.transform, transform.position));
         containedFuse.GetComponent<Collider>().enabled = false;
 
         fuseBox.currentlyHeldFuse = null;
     }
 
-    void ExtractFuse()
+    void ExtractFuse() //extracts the fuse from the slot and hands it to the player
     {
         if(fuseBox.currentlyHeldFuse != null) { return; }
 

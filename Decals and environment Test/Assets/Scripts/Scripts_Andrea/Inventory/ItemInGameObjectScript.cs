@@ -17,13 +17,11 @@ public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
         inventory.ForceToggleItemInventoryWindow(true);
 
         InteractionEvent();
-
-        if (destroyOnPickup)
-            Destroy(gameObject);
     }
 
     protected virtual void InteractionEvent()
     {
-        
+        if (destroyOnPickup)
+            Destroy(gameObject);
     }
 }

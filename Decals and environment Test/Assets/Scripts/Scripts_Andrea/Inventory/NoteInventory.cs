@@ -34,15 +34,13 @@ public class NoteInventory : MonoBehaviour
 
     int currentFocus = 0;
 
-    void Start()
+    public void Initialise()
     {
         if (noteList.Count != 0)
         {
             InitialiseNoteUIObjects(); //fills and spawns the contents of a list, one UI entry for each owned item
             InitialiseOwnedNotes3D(); //spawns the 3D models. Loads stuff that was set via editor or from save file
         }
-
-        parent.SetActive(false); //initialise everything and then disappear from view
     }
 
     #region StartUp Functions
@@ -147,6 +145,7 @@ public class NoteInventory : MonoBehaviour
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<NoteUIObjectScript>().noteID = newNote.noteID;
 
         ScrollEntries(noteList.Count);
+        InventoriesManager.instance.SetGeneralMenu(true);
     }
     #endregion
 }
