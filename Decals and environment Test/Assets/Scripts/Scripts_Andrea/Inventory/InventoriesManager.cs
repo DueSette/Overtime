@@ -23,7 +23,7 @@ public class InventoriesManager : MonoBehaviour
 
     public static InventoriesManager instance;
 
-    void Awake()
+    void Start()
     {
         if (instance == null)
             instance = this;
@@ -37,11 +37,6 @@ public class InventoriesManager : MonoBehaviour
         itemManager.gameObject.SetActive(false);
         ManageTitlesSprites();
         SetGeneralMenu(false);
-    }
-
-    private void Start()
-    {
-        
     }
 
     void Update()
