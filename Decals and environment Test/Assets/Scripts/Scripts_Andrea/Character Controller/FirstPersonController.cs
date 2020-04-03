@@ -123,7 +123,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_PreviouslyGrounded && currentCharController.isGrounded)
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
+
+                if(m_MoveDir.y < -0.9f)
+                    PlayLandingSound();
+
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
             }
