@@ -127,6 +127,8 @@ public class NoteInventory : MonoBehaviour
 
     public void UnlockNewNote(NoteEntryItem newNote) //call when a player finds a new note
     {
+        InventoriesManager.instance.SetGeneralMenu(true);
+
         //MAKING SURE THE ITEM IS NOT ALREADY IN OUR POSSESSION
         for (int i = 0; i < noteList.Count; i++)
             if (noteList[i].noteID == newNote.noteID) //if the new item is actually an Item that is still on the map but is clicked again
@@ -144,8 +146,7 @@ public class NoteInventory : MonoBehaviour
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<TextMeshProUGUI>().text = newNote.entryName;
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<NoteUIObjectScript>().noteID = newNote.noteID;
 
-        ScrollEntries(noteList.Count);
-        InventoriesManager.instance.SetGeneralMenu(true);
+        ScrollEntries(noteList.Count);      
     }
     #endregion
 }
