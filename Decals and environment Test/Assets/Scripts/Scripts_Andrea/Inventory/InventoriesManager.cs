@@ -47,10 +47,25 @@ public class InventoriesManager : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab)) //OPEN OR CLOSE MENU
             SetGeneralMenu(!mainPanel.activeSelf);
 
-        if (noteManager.transform.parent.gameObject.activeSelf)
+        if (mainPanel.activeSelf) //TOGGLE INVENTORIES 
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+               ForceToggleNoteInventoryWindow(true);
+               ForceToggleItemInventoryWindow(false);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ForceToggleNoteInventoryWindow(false);
+                ForceToggleItemInventoryWindow(true);
+            }
+        }
+
+        if (noteManager.transform.parent.gameObject.activeSelf) //NAVIGATE NOTE INVENTORY
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
             {
@@ -71,7 +86,7 @@ public class InventoriesManager : MonoBehaviour
             }
         }
 
-        else if (itemManager.gameObject.activeSelf)
+        else if (itemManager.gameObject.activeSelf) //NAVIGATE ITEM INVENTORY
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
             {
