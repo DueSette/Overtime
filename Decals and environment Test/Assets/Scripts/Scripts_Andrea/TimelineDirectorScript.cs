@@ -26,7 +26,10 @@ public class TimelineDirectorScript : MonoBehaviour
         director = GetComponent<PlayableDirector>();
         director.played += OnPlayableDirectorPlayed; //these events exist by default, we are just subscribing new methods to them
         director.stopped += OnPlayableDirectorStopped;
+    }
 
+    private void Start()
+    {
         director.playableAsset = sequences[0];
         director.Play();
     }
