@@ -47,22 +47,6 @@ public class InventoriesManager : MonoBehaviour
 
     void CheckInput()
     {
-        //Just input stuff
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            if (itemManager.gameObject.activeSelf) //if the other inventory is open, close it
-                ForceToggleItemInventoryWindow(false);
-
-            ToggleNoteInventoryWindow();
-        }
-        else if (Input.GetKeyDown(KeyCode.I))
-        {
-            if (noteManager.transform.parent.gameObject.activeSelf) //if the other inventory is open, close it
-                ForceToggleNoteInventoryWindow(false);
-
-            ToggleItemInventoryWindow();
-        }
-
         if (Input.GetKeyDown(KeyCode.Tab))
             SetGeneralMenu(!mainPanel.activeSelf);
 
@@ -74,7 +58,7 @@ public class InventoriesManager : MonoBehaviour
                 SoundManager.instance.PlaySound(navigateInventory);
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 noteManager.ScrollEntries(true);
                 SoundManager.instance.PlaySound(navigateInventory);
@@ -85,8 +69,8 @@ public class InventoriesManager : MonoBehaviour
                 SoundManager.instance.PlaySound(navigateInventory);
                 ToggleNotesDescriptionBox();
             }
-
         }
+
         else if (itemManager.gameObject.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
@@ -95,7 +79,7 @@ public class InventoriesManager : MonoBehaviour
                 SoundManager.instance.PlaySound(navigateInventory);
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
             {
                 itemManager.ScrollItems(true);
                 SoundManager.instance.PlaySound(navigateInventory);
