@@ -7,7 +7,8 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     [SerializeField] Transform dial;
     [SerializeField] float rotationSpeed;
     [SerializeField] int[] numberSequence = { 9, 15, 27 };
-
+    [SerializeField] AudioClip turningSound, correctSound, wrongSound;
+    AudioSource aud;
     public int currentStep = 0;
 
     const int range = 6;
@@ -16,7 +17,8 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     float safeDialTimer = 0.0f, checkThreshold = 1.65f;
     float proxyRotation = 3.0f; //internal value that keeps track of the dial's X rotation, since eulerAngles cannot be used here
 
-    bool inUse = false;
+    enum SafeState { PASSIVE, ACTIVE, SOLVED };
+    SafeState safeState = SafeState.PASSIVE;
 
     enum TimerState { SUSPENDED = 0, INCREASING = 2};
     TimerState tState = TimerState.SUSPENDED;
@@ -25,14 +27,17 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     TurningState currentTurningDirection = TurningState.NONE;
     TurningState targetTurningDirection = TurningState.RIGHT;
 
+    Quaternion startRot;
     private void Start()
     {
+        aud = GetComponent<AudioSource>();
+        startRot = dial.rotation;
         UpdateTargetSpot();
     }
 
     private void Update()
     {
-        if (!inUse) { return; }
+        if (safeState != SafeState.ACTIVE) { return; }
 
         CheckInput();
         CheckDirection();
@@ -45,7 +50,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             tState = TimerState.SUSPENDED;
 
             targetIterator = CheckIfOnCorrectSpot() ? ++targetIterator : 0; //if player left the dial on correct value put next value on, else go back to value one
-
+            
             UpdateTargetSpot();
         }
     }
@@ -54,11 +59,16 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     {
         if(currentTurningDirection == TurningState.NONE) { return; }
 
-        if (currentTurningDirection != targetTurningDirection) { targetIterator = 0; }
+        if (currentTurningDirection != targetTurningDirection)
+        {
+            StartCoroutine(ResetSafe());
+            aud.PlayOneShot(wrongSound);
+            targetIterator = 0;
+        }
 
         UpdateTargetSpot();
     }
-
+ 
     void ManageTimer() //updates timer value in accordance to current state
     {
         switch(tState)
@@ -104,32 +114,90 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
     bool CheckIfOnCorrectSpot() //when enough time standing still on a tick has passed, it checks whether or not we are on the right tick
     {
-        return targetStep == currentStep;
+        bool result = targetStep == currentStep;
+
+        if(result)
+            aud.PlayOneShot(correctSound);
+        else
+        {
+            aud.PlayOneShot(wrongSound);
+            StartCoroutine(ResetSafe());
+        }
+
+        return result;
     }
 
     void CalculateCurrentStep() //calculates what is the rotation expressed in degrees of the dial and maps it to the amount of available values
     {
+        int oldStep = currentStep;
+
         if (proxyRotation < -0.1f) { proxyRotation = 357.0f; }
         else if (proxyRotation > 357.1f) { proxyRotation = 3.0f; }
 
         currentStep = (int)proxyRotation / range;
+        if (oldStep != currentStep) { aud.PlayOneShot(turningSound); } //playus sound only if the player turned the dial enough
     }
 
     void UpdateTargetSpot() //sets new "correct" dial number and direction that the player has to leave the dial on
     {
-        targetStep = numberSequence[targetIterator];
+        try
+        {
+            targetStep = numberSequence[targetIterator];
+        }
+        catch
+        {
+            safeState = SafeState.SOLVED;
+            LeavePuzzle(Object);
+        }
         targetTurningDirection = targetIterator % 2 == 0 ? TurningState.RIGHT : TurningState.LEFT;
+    }
+
+    IEnumerator ResetSafe() //resets safe to starting state
+    {
+        safeState = SafeState.PASSIVE;
+        currentTurningDirection = TurningState.NONE;
+
+        targetIterator = 0;
+        proxyRotation = 3.0f;
+        UpdateTargetSpot();
+
+        float lapsed = 0.0f;
+        float duration = 0.5f;
+
+        Quaternion currRot = dial.rotation;
+        while(lapsed < duration)
+        {
+            lapsed += Time.deltaTime;
+            dial.rotation = Quaternion.Lerp(currRot, startRot, lapsed / duration);
+            yield return null;
+        }
+
+        safeState = SafeState.ACTIVE;
+    }
+
+    void LeavePuzzle()
+    {
+
     }
 
     void IInteractable.InteractWith()
     {
-        if (inUse) { return; }
+        if (safeState == SafeState.ACTIVE) { return; }
 
-        inUse = true;
+        safeState = SafeState.ACTIVE;
         //should also play animation
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    private void OnEnable()
+    {
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += LeavePuzzle;
+    }
+    private void OnDisable()
+    {
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= LeavePuzzle;
     }
 }
