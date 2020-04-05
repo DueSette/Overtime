@@ -10,7 +10,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("When the player interacts, the game searches for the fuses in the inventory using the name of the item(s)")]
     string[] nameOfFusesToSearchInInventory;
 
-    [SerializeField, Tooltip(" each fuse object that STARTS within the box - do not put inventory fuses here")]
+    [SerializeField, Tooltip("Each fuse object that STARTS within the box - do not put inventory fuses here")]
     List<GameObject> fusePrefabs = new List<GameObject>();
 
     FuseSlotScript[] fuseSlots; // all the places where you can fit a fuse in, they are classes as they contain a package of info
