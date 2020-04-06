@@ -17,7 +17,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     float safeDialTimer = 0.0f, checkThreshold = 1.65f;
     float proxyRotation = 3.0f; //internal value that keeps track of the dial's X rotation, since eulerAngles cannot be used here
 
-    enum SafeState { PASSIVE, ACTIVE, SOLVED };
+    enum SafeState { PASSIVE = 0, ACTIVE = 2, SOLVED = 4};
     SafeState safeState = SafeState.PASSIVE;
 
     enum TimerState { SUSPENDED = 0, INCREASING = 2};
@@ -61,7 +61,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
         if (currentTurningDirection != targetTurningDirection)
         {
-            StartCoroutine(ResetSafe());
+            StartCoroutine(ResetSafe(false));
             aud.PlayOneShot(wrongSound);
             targetIterator = 0;
         }
@@ -121,7 +121,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         else
         {
             aud.PlayOneShot(wrongSound);
-            StartCoroutine(ResetSafe());
+            StartCoroutine(ResetSafe(false));
         }
 
         return result;
@@ -147,12 +147,12 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         catch
         {
             safeState = SafeState.SOLVED;
-            LeavePuzzle(Object);
+            LeavePuzzle();
         }
         targetTurningDirection = targetIterator % 2 == 0 ? TurningState.RIGHT : TurningState.LEFT;
     }
 
-    IEnumerator ResetSafe() //resets safe to starting state
+    IEnumerator ResetSafe(bool onExit) //resets safe to starting state
     {
         safeState = SafeState.PASSIVE;
         currentTurningDirection = TurningState.NONE;
@@ -172,17 +172,17 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        safeState = SafeState.ACTIVE;
+        safeState = onExit? SafeState.PASSIVE : SafeState.ACTIVE;
     }
 
     void LeavePuzzle()
     {
-
+        StartCoroutine(ResetSafe(true));
     }
 
     void IInteractable.InteractWith()
     {
-        if (safeState == SafeState.ACTIVE) { return; }
+        if (safeState == (SafeState.ACTIVE | SafeState.SOLVED)) { return; }
 
         safeState = SafeState.ACTIVE;
         //should also play animation

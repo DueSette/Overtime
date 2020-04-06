@@ -20,7 +20,9 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     [SerializeField] LayerMask fuseBoxLayer;
     [HideInInspector] public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
 
-    bool inUse = false;
+    enum PuzzleState { ACTIVE = 0, PASSIVE = 2, SOLVED = 4 }
+    PuzzleState state = PuzzleState.PASSIVE;
+
     int slotsFilled = 0; //used for keeping track of how many items have been spawned on the tray, internal logic
     private float cameraDist; //will be used as the distance between the player cam and the held fusebox
 
@@ -42,7 +44,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if (!inUse) { return; }
+        if (state != PuzzleState.ACTIVE) { return; }
 
         if (Input.GetButtonUp("Fire1")) { CheckFuseboxInteraction(); }
 
@@ -85,9 +87,9 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     #region Startup Methods
     void IInteractable.InteractWith()
     {
-        if(inUse) { return; }
+        if(state == (PuzzleState.ACTIVE & PuzzleState.SOLVED)) { return; }
 
-        inUse = true;
+        state = PuzzleState.ACTIVE;
         //should also play animation
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
 
@@ -130,7 +132,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     
     void ExitInteraction()
     {
-        inUse = false;
+        state = PuzzleState.PASSIVE;
         if (currentlyHeldFuse != null)
             tray.StoreFuse(currentlyHeldFuse);
 
