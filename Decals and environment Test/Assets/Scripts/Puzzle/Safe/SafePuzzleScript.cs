@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class SafePuzzleScript : MonoBehaviour, IInteractable
 {
+    #region Fields
     [SerializeField] Transform dial;
     [SerializeField] float rotationSpeed;
     [SerializeField] int[] numberSequence = { 9, 15, 27 };
+
     [SerializeField] AudioClip turningSound, correctSound, wrongSound;
     AudioSource aud;
-    public int currentStep = 0;
+    Animator anim;
 
-    const int range = 6;
+    int currentStep = 0; //the current tick on the dial (goes from 0 to 60 in this safe)
+
+    const int range = 6; //basically, we divide this by the amount of degrees in a circle, so 360/6 gives us 60. Meaning each tick on the safe has a 6 degrees space
     int targetStep, targetIterator = 0; //which number to be checking for and which tick in the safe's sequence is the current correct number
 
-    float safeDialTimer = 0.0f, checkThreshold = 1.65f;
+    float safeDialTimer = 0.0f, checkThreshold = 1.65f; //how long to wait before checking whether or not the player left the dial on the right spot
     float proxyRotation = 3.0f; //internal value that keeps track of the dial's X rotation, since eulerAngles cannot be used here
 
     enum SafeState { PASSIVE = 0, ACTIVE = 2, SOLVED = 4};
@@ -28,9 +32,12 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     TurningState targetTurningDirection = TurningState.RIGHT;
 
     Quaternion startRot;
+    #endregion
+
     private void Start()
     {
         aud = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
         startRot = dial.rotation;
         UpdateTargetSpot();
     }
@@ -147,7 +154,9 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         catch
         {
             safeState = SafeState.SOLVED;
+            GameStateManager.SetGameState(GameState.IN_GAME);
             LeavePuzzle();
+            anim.SetTrigger("Open");
         }
         targetTurningDirection = targetIterator % 2 == 0 ? TurningState.RIGHT : TurningState.LEFT;
     }
