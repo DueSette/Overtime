@@ -12,13 +12,17 @@ public class FuseSlotScript : MonoBehaviour
 
     [SerializeField] GameObject lightIndicator;
     [SerializeField] GameObject containedFuse;
+    [SerializeField] AudioClip putIntoFuseSlot, retrieveFromFuseSlot;
     bool isFilled;
 
     private FuseBoxScript fuseBox;
+    private AudioSource aud;
 
     private void Start()
     {
         fuseBox = GetComponentInParent<FuseBoxScript>();
+        aud = GetComponent<AudioSource>();
+
         isFilled = containedFuse != null ? true : false;
         if (isFilled)
             containedFuse.GetComponent<Collider>().enabled = false;
@@ -27,9 +31,15 @@ public class FuseSlotScript : MonoBehaviour
     public void Interact()
     {
         if (isFilled)
+        {
+            aud.PlayOneShot(retrieveFromFuseSlot);
             ExtractFuse();
+        }
         else
+        {
+            aud.PlayOneShot(putIntoFuseSlot);
             EmbedFuse();
+        }
     }
 
     void EmbedFuse() //puts the fuse the player is holding in the slot

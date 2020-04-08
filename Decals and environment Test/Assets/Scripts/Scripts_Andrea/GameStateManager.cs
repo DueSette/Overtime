@@ -79,8 +79,6 @@ public class GameStateManager : MonoBehaviour
                 break;
         }
         OnStateChange(gameState);
-
-        print("Cursor state: " + Cursor.lockState);
     }
 
     public static GameObject GetPlayer() { return player; }
