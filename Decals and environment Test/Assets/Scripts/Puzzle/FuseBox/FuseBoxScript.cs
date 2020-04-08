@@ -13,9 +13,13 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("Each fuse object that STARTS within the box - do not put inventory fuses here")]
     List<GameObject> fusePrefabs = new List<GameObject>();
 
+    [SerializeField] AudioClip idleSound, doorOpen, doorClose, pickFuse, putFuseTray, solvedSound;
+
     FuseSlotScript[] fuseSlots; // all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     FuseTrayScript tray;
+    Animator anim;
+    AudioSource aud;
 
     [SerializeField] LayerMask fuseBoxLayer;
     [HideInInspector] public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
@@ -29,6 +33,8 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     private void Start()
     {
         tray = GetComponentInChildren<FuseTrayScript>();
+        anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
 
         int i = 0;
         var temp = new List<FuseSlotScript>();
@@ -67,9 +73,15 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
             else if(hit.collider.name.Contains("Tray"))
             {
                 if (currentlyHeldFuse == null)
+                {
+                    aud.PlayOneShot(pickFuse);
                     tray.HandFuse();
+                }
                 else
+                {
+                    aud.PlayOneShot(putFuseTray);
                     tray.StoreFuse(currentlyHeldFuse);
+                }
             }
         }
     }
@@ -90,8 +102,10 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         if(state == (PuzzleState.ACTIVE & PuzzleState.SOLVED)) { return; }
 
         state = PuzzleState.ACTIVE;
-        //should also play animation
+
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
+        anim.SetTrigger("Open");
+        aud.PlayOneShot(doorOpen);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -133,6 +147,10 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     void ExitInteraction()
     {
         state = PuzzleState.PASSIVE;
+
+        anim.SetTrigger("Close");
+        aud.PlayOneShot(doorClose);
+
         if (currentlyHeldFuse != null)
             tray.StoreFuse(currentlyHeldFuse);
 
