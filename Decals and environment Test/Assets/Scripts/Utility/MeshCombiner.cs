@@ -17,16 +17,22 @@ public class MeshCombiner : MonoBehaviour
     {
         Debug.Log("Combining " + meshesToCombine.Count + " Meshes");
 
-        List<Tuple<Mesh, List<Material>>> modelsInfo = GetMeshAndMaterialInformation(meshesToCombine);
+        //Getting Info
+        meshesToCombine = GetChildrenWithModels(meshesToCombine);
+        List<Tuple<Mesh, List<Material>>> modelsInfo = GetMeshAndMaterialInformation(GetChildrenWithModels(meshesToCombine));
+        List<Material> uniqueMaterials = GetUniqueMaterials(modelsInfo);
 
+        // Creating Combined Mesh
         List<Mesh> submeshes = CreateSubMeshes(modelsInfo);
-
         Mesh finalMesh = CombineSubMeshes(submeshes);
 
 #if UNITY_EDITOR
         // Save Combined Mesh
         SaveMeshToAssets(finalMesh, outputFileName + "Full");
 #endif
+
+        // Creating Gameobject into the scene
+        MakeGameobject(finalMesh, uniqueMaterials);
     }
 
 
@@ -35,6 +41,24 @@ public class MeshCombiner : MonoBehaviour
     Getting Mesh & Material Information
     ====================================================================================================
     */
+    private List<GameObject> GetChildrenWithModels(List<GameObject> objectsToCheck)
+    {
+        List<GameObject> children = new List<GameObject>();
+
+        for (int i = 0; i < objectsToCheck.Count; i++)
+        {
+            MeshRenderer[] childMRs = objectsToCheck[i].GetComponentsInChildren<MeshRenderer>();
+
+            foreach (MeshRenderer mr in childMRs)
+            {
+                GameObject childWithModel = mr.gameObject;
+                children.Add(childWithModel);
+            }
+        }
+
+        return children;
+    }
+
     private List<Tuple<Mesh, List<Material>>> GetMeshAndMaterialInformation(List<GameObject> objectsWithModelsToCombine)
     {
         List<Tuple<Mesh, List<Material>>> collectedInfo = new List<Tuple<Mesh, List<Material>>>();
@@ -55,17 +79,8 @@ public class MeshCombiner : MonoBehaviour
         return collectedInfo;
     }
 
-
-    /*
-    ====================================================================================================
-    Generating Meshes
-    ====================================================================================================
-    */
-    private List<Mesh> CreateSubMeshes(List<Tuple<Mesh, List<Material>>> modelsInfo)
+    private List<Material> GetUniqueMaterials(List<Tuple<Mesh, List<Material>>> modelsInfo)
     {
-        List<Mesh> createdSubmeshes = new List<Mesh>();
-
-
         // Getting Number Of Different Materials That Make Up The Seperate Meshes
         List<Material> meshMaterials = new List<Material>();
         for (int i = 0; i < modelsInfo.Count; i++)
@@ -75,12 +90,22 @@ public class MeshCombiner : MonoBehaviour
                 if (!meshMaterials.Contains(modelsInfo[i].Item2[j]))
                 {
                     meshMaterials.Add(modelsInfo[i].Item2[j]);
-                    Debug.Log("New Material Found: " + modelsInfo[i].Item2[j].name);
                 }
             }
         }
-        Debug.Log("Number Of Required SubMeshes: " + meshMaterials.Count);
+        return meshMaterials;
+    }
 
+
+    /*
+    ====================================================================================================
+    Generating Model
+    ====================================================================================================
+    */
+    private List<Mesh> CreateSubMeshes(List<Tuple<Mesh, List<Material>>> modelsInfo)
+    {
+        List<Mesh> createdSubmeshes = new List<Mesh>();
+        List<Material> meshMaterials = GetUniqueMaterials(modelsInfo);
 
         // Creating a submesh for each material
         for (int i = 0; i < meshMaterials.Count; i++)
@@ -114,6 +139,7 @@ public class MeshCombiner : MonoBehaviour
                         CombineInstance newInstance = new CombineInstance();
                         newInstance.mesh = subMesh;
                         newInstance.transform = meshesToCombine[j].transform.localToWorldMatrix;
+                        meshesToCombine[j].gameObject.SetActive(false);
 
                         combineInstance.Add(newInstance);
                     }
@@ -147,6 +173,16 @@ public class MeshCombiner : MonoBehaviour
         Unwrapping.GenerateSecondaryUVSet(combinedMesh);
         
         return combinedMesh;
+    }
+
+    private void MakeGameobject(Mesh newMesh, List<Material> meshMaterials)
+    {
+        MeshFilter mf = this.gameObject.AddComponent<MeshFilter>();
+        mf.sharedMesh = newMesh;
+
+
+        MeshRenderer mr = this.gameObject.AddComponent<MeshRenderer>();
+        mr.sharedMaterials = meshMaterials.ToArray();
     }
 
 
