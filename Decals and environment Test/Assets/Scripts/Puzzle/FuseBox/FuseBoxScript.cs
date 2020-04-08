@@ -10,23 +10,31 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("When the player interacts, the game searches for the fuses in the inventory using the name of the item(s)")]
     string[] nameOfFusesToSearchInInventory;
 
-    [SerializeField, Tooltip(" each fuse object that STARTS within the box - do not put inventory fuses here")]
+    [SerializeField, Tooltip("Each fuse object that STARTS within the box - do not put inventory fuses here")]
     List<GameObject> fusePrefabs = new List<GameObject>();
+
+    [SerializeField] AudioClip idleSound, doorOpen, doorClose, pickFuse, putFuseTray, solvedSound;
 
     FuseSlotScript[] fuseSlots; // all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     FuseTrayScript tray;
+    Animator anim;
+    AudioSource aud;
 
     [SerializeField] LayerMask fuseBoxLayer;
     [HideInInspector] public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
 
-    bool inUse = false;
+    enum PuzzleState { ACTIVE = 0, PASSIVE = 2, SOLVED = 4 }
+    PuzzleState state = PuzzleState.PASSIVE;
+
     int slotsFilled = 0; //used for keeping track of how many items have been spawned on the tray, internal logic
     private float cameraDist; //will be used as the distance between the player cam and the held fusebox
 
     private void Start()
     {
         tray = GetComponentInChildren<FuseTrayScript>();
+        anim = GetComponent<Animator>();
+        aud = GetComponent<AudioSource>();
 
         int i = 0;
         var temp = new List<FuseSlotScript>();
@@ -42,7 +50,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        if (!inUse) { return; }
+        if (state != PuzzleState.ACTIVE) { return; }
 
         if (Input.GetButtonUp("Fire1")) { CheckFuseboxInteraction(); }
 
@@ -65,9 +73,15 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
             else if(hit.collider.name.Contains("Tray"))
             {
                 if (currentlyHeldFuse == null)
+                {
+                    aud.PlayOneShot(pickFuse);
                     tray.HandFuse();
+                }
                 else
+                {
+                    aud.PlayOneShot(putFuseTray);
                     tray.StoreFuse(currentlyHeldFuse);
+                }
             }
         }
     }
@@ -85,11 +99,13 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     #region Startup Methods
     void IInteractable.InteractWith()
     {
-        if(inUse) { return; }
+        if(state == (PuzzleState.ACTIVE & PuzzleState.SOLVED)) { return; }
 
-        inUse = true;
-        //should also play animation
+        state = PuzzleState.ACTIVE;
+
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
+        anim.SetTrigger("Open");
+        aud.PlayOneShot(doorOpen);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -130,7 +146,11 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     
     void ExitInteraction()
     {
-        inUse = false;
+        state = PuzzleState.PASSIVE;
+
+        anim.SetTrigger("Close");
+        aud.PlayOneShot(doorClose);
+
         if (currentlyHeldFuse != null)
             tray.StoreFuse(currentlyHeldFuse);
 
