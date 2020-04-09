@@ -54,6 +54,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
             
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
             LevelManager.onLevelEvent("MemoryReturn");
+            OpenableDoor.OnDoorUnlockEvent("MemoryReturn"); 
 
             // Changing the cake room to appear normal
             foreach (GameObject g in objectsToRemove)
