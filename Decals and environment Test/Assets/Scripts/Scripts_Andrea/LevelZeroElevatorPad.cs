@@ -4,16 +4,41 @@ using UnityEngine;
 
 public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
 {
-    bool once = true;
+    bool levelComplete = false;
+    bool kidTriggered = false;
     [SerializeField] GameObject kid;
+
+    private void OnEnable()
+    {
+        LevelManager.onLevelEvent += UnlockElevator;
+    }
+    private void OnDisable()
+    {
+        LevelManager.onLevelEvent -= UnlockElevator;
+    }
 
     void IInteractable.InteractWith()
     {
-        if(once)
+        if (levelComplete)
         {
-            kid.SetActive(true);
-            once = false;
+            LevelManager.onLevelEvent("LevelSolved");
         }
-        GetComponent<AudioSource>().Play();
+        else
+        {
+            if (!kidTriggered)
+            {
+                kid.SetActive(true);
+                kidTriggered = false;
+            }
+            GetComponent<AudioSource>().Play();
+        }
+    }
+
+    private void UnlockElevator(string eventCode)
+    {
+        if (eventCode == "UnlockElevator")
+        {
+            this.levelComplete = true;
+        }
     }
 }

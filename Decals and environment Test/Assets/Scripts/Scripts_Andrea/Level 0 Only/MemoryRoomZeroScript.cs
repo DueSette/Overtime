@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class MemoryRoomZeroScript : MonoBehaviour
 {
+    [Header("Mom Memory Event Objects")]
     public List<GameObject> fluffFurniture = new List<GameObject>();
     public List<GameObject> importantFurniture = new List<GameObject>();
     [SerializeField] GameObject parent;
+
+    [Header("Memory Return Event Objects")]
     [SerializeField] Material dissolver;
     [SerializeField] Transform hallwaySpot;
+    [SerializeField] private BadoomNotePickup badoomSpawner;
+    [SerializeField] private List<GameObject> objectsToRemove;
+    [SerializeField] private List<GameObject> objectsToAdd;
 
     void OnEnable()
     {
@@ -41,13 +47,27 @@ public class MemoryRoomZeroScript : MonoBehaviour
             SetForDissolutionWithChildren(parent);
             parent.GetComponent<Collider>().enabled = false;
 
+            // Moving the player back to the office environment
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
-
             GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
             GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
             
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-            LevelManager.onLevelEvent("LevelSolved");
+            LevelManager.onLevelEvent("MemoryReturn");
+            OpenableDoor.OnDoorUnlockEvent("MemoryReturn"); 
+
+            // Changing the cake room to appear normal
+            foreach (GameObject g in objectsToRemove)
+            {
+                g.SetActive(false);
+            }
+            foreach (GameObject g in objectsToAdd)
+            {
+                g.SetActive(true);
+            }
+
+            // Removing Badooms
+            badoomSpawner.EndBadoomSequence();
         }
     }
 
