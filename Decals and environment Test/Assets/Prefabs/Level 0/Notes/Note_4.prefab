@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5483808180818493804}
   - component: {fileID: 2244744347005926805}
   - component: {fileID: 1806895272046138753}
+  - component: {fileID: 1421044240}
   m_Layer: 0
   m_Name: Note_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &3549224374074506074
 Transform:
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511784298257877321}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
@@ -91,5 +92,37 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.8, y: 0.04, z: 21}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 14.8, y: 3.2958171, z: 21}
+  m_Center: {x: 0, y: 1.6279091, z: 0}
+--- !u!114 &1421044240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511784298257877321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7399c40bc15361478d1c2b53ca7b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  note:
+    noteID: 3
+    entryName: Neuronal Implant - PR Draft
+    entryDescription: Neuronal Implant - public address draft<br><br>The device,
+      for now simply referred to as Implant Project, or IP, consists of a chip that
+      is inserted in the spine, directly beneath the brain.<br><br>Its state of the
+      art technology enables the device to synchronise with the brainwaves of the
+      host.<br><br>After reaching full sync, it will over time release substances
+      that will bring the brain's chemical production to that of a regular, healthy
+      adult.<br><br>This has the potential to solve anxiety, degenerative brain conditions,
+      and many forms of psychosis.<br><br>In its current state, however, it certainly
+      needs more work before we can release any more details about it.<br><br>We
+      are making sure to take the safest approach for testing and further developing
+      our product.<br><br>At one point later in the year we will move on to human
+      testing, but additional safety measures have to be taken before any of that
+      can be greenlit.
+    noteModel: {fileID: 6613157846276757046, guid: edc395ddf0a805b4bba22ad3b3e0a967,
+      type: 3}
+  destroyOnPickup: 0
