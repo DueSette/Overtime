@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8374134946483205421}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_outer_shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2564379839814011843}
-  m_Layer: 0
+  - component: {fileID: 143086016}
+  - component: {fileID: 143086015}
+  m_Layer: 11
   m_Name: Fuse_slot_3_postion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +65,35 @@ Transform:
   m_Father: {fileID: 6729199381730815468}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210697199369040864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.13, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &143086015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210697199369040864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightIndicator: {fileID: 0}
+  containedFuse: {fileID: 0}
+  putIntoFuseSlot: {fileID: 0}
+  retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &237937653151962774
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +105,7 @@ GameObject:
   - component: {fileID: 6874700754776075565}
   - component: {fileID: 3359886587514380421}
   - component: {fileID: 7175031192869195100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Outer_shell_sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,8 +182,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4536584458883406333}
+  - component: {fileID: 143086010}
+  - component: {fileID: 143086008}
+  - component: {fileID: 143086007}
+  - component: {fileID: 143086009}
   m_Layer: 0
-  m_Name: Fuse_box_geo 1
+  m_Name: Fuse_box_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625567550303595502}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -177,6 +212,162 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625567550303595502}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.50201035, y: 0.81591964, z: 0.24801874}
+  m_Center: {x: 0.0031490326, y: -0.00653708, z: -0.000993967}
+--- !u!82 &143086008
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625567550303595502}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!95 &143086007
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625567550303595502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3920d22fad0082242be046905439b549, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &143086009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625567550303595502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421b55bc73e969c47816a55a4f2dc81e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfFusesToSearchInInventory: []
+  fusePrefabs:
+  - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
+  - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
+  - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
+  - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
+  idleSound: {fileID: 0}
+  doorOpen: {fileID: 0}
+  doorClose: {fileID: 0}
+  pickFuse: {fileID: 0}
+  putFuseTray: {fileID: 0}
+  solvedSound: {fileID: 0}
+  fuseBoxLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  currentlyHeldFuse: {fileID: 0}
 --- !u!1 &656130543917884628
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4749656216014014031}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_4_position 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +409,7 @@ GameObject:
   - component: {fileID: 2450786210329023725}
   - component: {fileID: 5836140272972724586}
   - component: {fileID: 3353895977612919291}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_lightning_bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +488,7 @@ GameObject:
   - component: {fileID: 8516094054601595651}
   - component: {fileID: 2174161025272987787}
   - component: {fileID: 1182152473633611520}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_hinges_shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +567,7 @@ GameObject:
   - component: {fileID: 7661683472183629478}
   - component: {fileID: 8727077748824082215}
   - component: {fileID: 4661773615561752268}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Outer_shell_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +646,7 @@ GameObject:
   - component: {fileID: 5382502837809604489}
   - component: {fileID: 4039609496322244545}
   - component: {fileID: 7069328477320532698}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuses_static
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +725,7 @@ GameObject:
   - component: {fileID: 374885328679867970}
   - component: {fileID: 9156910660903207297}
   - component: {fileID: 5141513713212298292}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Status_indicator_light_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -611,7 +802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8820512203830323564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_4_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +835,7 @@ GameObject:
   - component: {fileID: 6180847372423412012}
   - component: {fileID: 8658556705775854930}
   - component: {fileID: 7178381476688954313}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Outer_shell_top_and_bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -721,7 +912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4409898900752753886}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door_pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,7 +947,7 @@ GameObject:
   - component: {fileID: 2435904009206259891}
   - component: {fileID: 567339913771979861}
   - component: {fileID: 4185908235157949639}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Status_indicator_light_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -835,7 +1026,7 @@ GameObject:
   - component: {fileID: 722764999766743828}
   - component: {fileID: 1774827876914630569}
   - component: {fileID: 3934384668662059333}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +1105,7 @@ GameObject:
   - component: {fileID: 3982138373586503258}
   - component: {fileID: 3670980613342263623}
   - component: {fileID: 3890806576926283939}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_hinges_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -991,7 +1182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2964082998280946979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slot_1_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1024,8 +1215,8 @@ GameObject:
   - component: {fileID: 5031258688363264275}
   - component: {fileID: 965495179538650530}
   - component: {fileID: 2371532422961295235}
-  m_Layer: 0
-  m_Name: Fuse_box_main_panel
+  m_Layer: 11
+  m_Name: Fuse_box_MAIN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1105,7 +1296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187585643097235197}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_3_position 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,7 +1326,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291105922363911904}
-  m_Layer: 0
+  - component: {fileID: 143086020}
+  - component: {fileID: 143086019}
+  m_Layer: 11
   m_Name: Fuse_slot_1_postion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,6 +1349,35 @@ Transform:
   m_Father: {fileID: 2964082998280946979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392752352744803367}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.13, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &143086019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392752352744803367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightIndicator: {fileID: 0}
+  containedFuse: {fileID: 0}
+  putIntoFuseSlot: {fileID: 0}
+  retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &3396443899767149511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,7 +1387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6729199381730815468}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slot_3_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2329842192028626193}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_1_position 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1226,7 +1448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7036410040118124563}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slot_2_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,7 +1481,7 @@ GameObject:
   - component: {fileID: 369965757847161569}
   - component: {fileID: 9186723845380973543}
   - component: {fileID: 1928208768874232574}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_hub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1336,8 +1558,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3688706396462153017}
-  m_Layer: 0
-  m_Name: Fuse_slot_positions
+  m_Layer: 11
+  m_Name: Fusebox Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1372,7 +1594,7 @@ GameObject:
   - component: {fileID: 198963192546306697}
   - component: {fileID: 606580419176047646}
   - component: {fileID: 5570584210382112247}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1449,7 +1671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3653793381721691574}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_2_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5827641599446166465}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slot_4_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1513,7 +1735,7 @@ GameObject:
   - component: {fileID: 8099785291686141945}
   - component: {fileID: 7240812348461820934}
   - component: {fileID: 4743126902854982086}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Status_indicator_light_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1590,7 +1812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5763191070100820798}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_1_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1621,7 +1843,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 44656216844673344}
-  m_Layer: 0
+  - component: {fileID: 143086018}
+  - component: {fileID: 143086017}
+  m_Layer: 11
   m_Name: Fuse_slot_2_postion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,6 +1866,35 @@ Transform:
   m_Father: {fileID: 7036410040118124563}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502108281486111095}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.13, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &143086017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6502108281486111095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightIndicator: {fileID: 0}
+  containedFuse: {fileID: 0}
+  putIntoFuseSlot: {fileID: 0}
+  retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &7197657322269048345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1651,7 +1904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9136799692781904897}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Status_indicator_lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1685,7 +1938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3660084752527853414}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_inner_parts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1726,7 +1979,7 @@ GameObject:
   - component: {fileID: 8673455609226171007}
   - component: {fileID: 2586919964669411211}
   - component: {fileID: 4936801825082969529}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slots_bot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1803,7 +2056,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 222383169198835033}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_2_position 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1835,7 +2088,7 @@ GameObject:
   - component: {fileID: 8179333952713876366}
   - component: {fileID: 6898451749989698507}
   - component: {fileID: 4734515007164726152}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Status_indicator_light_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1912,7 +2165,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3514475840832453}
-  m_Layer: 0
+  - component: {fileID: 143086014}
+  - component: {fileID: 143086013}
+  m_Layer: 11
   m_Name: Fuse_slot_4_postion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1933,6 +2188,35 @@ Transform:
   m_Father: {fileID: 5827641599446166465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086014
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473066852762736810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 0.13, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &143086013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8473066852762736810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightIndicator: {fileID: 0}
+  containedFuse: {fileID: 0}
+  putIntoFuseSlot: {fileID: 0}
+  retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &8618660901528360255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,7 +2228,7 @@ GameObject:
   - component: {fileID: 5463979474595769314}
   - component: {fileID: 6440209915361718057}
   - component: {fileID: 2623667130288992259}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_slots_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2023,7 +2307,7 @@ GameObject:
   - component: {fileID: 1931030436990065311}
   - component: {fileID: 540895982128226297}
   - component: {fileID: 7406524914400194911}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_box_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2100,8 +2384,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514724926456148196}
-  m_Layer: 0
-  m_Name: Fuse_tray_slot_positions
+  - component: {fileID: 143086012}
+  - component: {fileID: 143086011}
+  m_Layer: 11
+  m_Name: Fuse Tray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2125,6 +2411,36 @@ Transform:
   m_Father: {fileID: 4536584458883406333}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &143086012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123918424629331015}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.48, y: 0.10189259, z: 0.1}
+  m_Center: {x: 0, y: -0.34905368, z: 0}
+--- !u!114 &143086011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123918424629331015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c11e0f05d2a9c846bee656592d42a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slots:
+  - {fileID: 2329842192028626193}
+  - {fileID: 222383169198835033}
+  - {fileID: 187585643097235197}
+  - {fileID: 4749656216014014031}
 --- !u!1 &9166745288108003209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8178130818042640456}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fuse_tray_slot_3_position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
