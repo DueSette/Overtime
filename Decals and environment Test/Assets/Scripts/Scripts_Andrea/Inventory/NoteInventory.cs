@@ -30,7 +30,7 @@ public class NoteInventory : MonoBehaviour
 
     [SerializeField] Transform inventoryCameraSpot;
     [SerializeField] Transform modelContainer;
-    [SerializeField] GameObject parent;
+    public GameObject spotlight;
 
     int currentFocus = 0;
 
@@ -120,7 +120,7 @@ public class NoteInventory : MonoBehaviour
         }
 
         //Set entry name the correct color and font style, also set its button component as selected
-        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
+        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = new Color(255, 214, 28);
         noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
         noteUINameGameObjects[currentFocus].GetComponent<Button>().Select();
     }
