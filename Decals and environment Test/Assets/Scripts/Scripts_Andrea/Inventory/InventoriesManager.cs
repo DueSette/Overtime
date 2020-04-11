@@ -67,13 +67,13 @@ public class InventoriesManager : MonoBehaviour
 
         if (noteManager.transform.parent.gameObject.activeSelf) //NAVIGATE NOTE INVENTORY
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
             {
                 noteManager.ScrollEntries(false);
                 SoundManager.instance.PlaySound(navigateInventory);
             }
 
-            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
             {
                 noteManager.ScrollEntries(true);
                 SoundManager.instance.PlaySound(navigateInventory);
@@ -88,13 +88,13 @@ public class InventoriesManager : MonoBehaviour
 
         else if (itemManager.gameObject.activeSelf) //NAVIGATE ITEM INVENTORY
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0)
+            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
             {
                 itemManager.ScrollItems(false);
                 SoundManager.instance.PlaySound(navigateInventory);
             }
 
-            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0)
+            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
             {
                 itemManager.ScrollItems(true);
                 SoundManager.instance.PlaySound(navigateInventory);
@@ -194,7 +194,7 @@ public class InventoriesManager : MonoBehaviour
     void ToggleNotesDescriptionBox()
     {
         noteManager.descriptionUIText.enabled = !noteManager.descriptionUIText.enabled;
-        noteManager.descriptionVeil.SetActive(noteManager.descriptionUIText.enabled);
+        noteManager.spotlight.SetActive(!noteManager.descriptionUIText.enabled);
     }
     #endregion
 
