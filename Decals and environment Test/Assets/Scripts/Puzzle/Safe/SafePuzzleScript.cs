@@ -186,6 +186,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
     void LeavePuzzle()
     {
+        if(safeState == SafeState.PASSIVE) { return; }
         StartCoroutine(ResetSafe(true));
     }
 
