@@ -47,7 +47,7 @@ public class InventoriesManager : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetKeyDown(KeyCode.Tab)) //OPEN OR CLOSE MENU
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I)) //OPEN OR CLOSE MENU
             SetGeneralMenu(!mainPanel.activeSelf);
 
         if (mainPanel.activeSelf) //TOGGLE INVENTORIES 
