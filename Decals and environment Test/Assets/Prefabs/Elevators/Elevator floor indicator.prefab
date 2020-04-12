@@ -47,6 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kid: {fileID: 0}
+  sharedEmissiveMaterial: {fileID: 2100000, guid: 02c2767dfdf8af04f92858d16cf708d6,
+    type: 2}
+  defaultColor: {r: 0, g: 0, b: 0.78431374, a: 0}
+  litRed: {r: 1, g: 0, b: 0, a: 0}
+  unlitRed: {r: 0.29411766, g: 0, b: 0, a: 0}
+  numberOfBlinks: 3
+  litTime: 0.05
+  timeBetweenLit: 0.1
 --- !u!82 &7478576715725109399
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56,7 +64,8 @@ AudioSource:
   m_GameObject: {fileID: 7478576715725109394}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8288163556850598478, guid: 0214601a257af63459d06a3ef41447a9,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f3818d323120bc5478b27a57d53f1b0a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
