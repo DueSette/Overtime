@@ -13,13 +13,13 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("Each fuse object that STARTS within the box - do not put inventory fuses here")]
     List<GameObject> fusePrefabs = new List<GameObject>();
 
-    [SerializeField] AudioClip idleSound, doorOpen, doorClose, pickFuse, putFuseTray, solvedSound;
+    [SerializeField] AudioClip idleSolved, doorOpen, doorClose, pickFuse, putFuseTray, solvedSound, unsolvedSound;
 
-    FuseSlotScript[] fuseSlots; // all the places where you can fit a fuse in, they are classes as they contain a package of info
+    FuseSlotScript[] fuseSlots; //all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     FuseTrayScript tray;
     Animator anim;
-    AudioSource aud;
+    [SerializeField] AudioSource aud, idleAud;
 
     [SerializeField] LayerMask fuseBoxLayer;
     [HideInInspector] public GameObject currentlyHeldFuse = null; //the fuse the player is currently using
@@ -61,7 +61,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     void CheckFuseboxInteraction()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 3; //updates the distance from the fusebox to the camera
+        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
         {
@@ -92,6 +92,21 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         Vector3 vel = Vector3.zero;
 
         currentlyHeldFuse.transform.position = Vector3.SmoothDamp(currentlyHeldFuse.transform.position, v, ref vel, 0.025f);
+    }
+
+    void ExitInteraction()
+    {
+        if(state == PuzzleState.PASSIVE) { return; }
+
+        state = PuzzleState.PASSIVE;
+
+        anim.SetTrigger("Close");
+        StartCoroutine(DelaySound(doorClose));
+
+        if (currentlyHeldFuse != null)
+            tray.StoreFuse(currentlyHeldFuse);
+
+        tray.enabled = false; //prevents mishaps from happening
     }
 
     #endregion
@@ -143,19 +158,30 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     {
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= ExitInteraction;
     }
-    
-    void ExitInteraction()
+
+#endregion
+
+    public void SetSolvedState()
     {
-        state = PuzzleState.PASSIVE;
+        aud.PlayOneShot(solvedSound);
+        StartCoroutine(DelaySound(idleSolved));
 
+        state = PuzzleState.SOLVED;
         anim.SetTrigger("Close");
-        aud.PlayOneShot(doorClose);
 
-        if (currentlyHeldFuse != null)
-            tray.StoreFuse(currentlyHeldFuse);
-
-        tray.enabled = false; //prevents mishaps from happening
+        GameStateManager.SetGameState(GameState.IN_GAME);
     }
 
-    #endregion
+    IEnumerator DelaySound(AudioClip clip)
+    {
+        float lapsed = 0.0f;
+
+        while(lapsed < 0.45f)
+        {
+            lapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        aud.PlayOneShot(clip);
+    }
 }
