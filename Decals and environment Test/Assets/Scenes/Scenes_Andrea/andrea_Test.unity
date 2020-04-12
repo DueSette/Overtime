@@ -1468,7 +1468,7 @@ MonoBehaviour:
   - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
   - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
   - {fileID: 6927959288837234559, guid: 7fc90fa17df60814a850e6802343ccd3, type: 3}
-  idleSolved: {fileID: 0}
+  idleSolvedSound: {fileID: 0}
   doorOpen: {fileID: 0}
   doorClose: {fileID: 0}
   pickFuse: {fileID: 0}
@@ -1476,11 +1476,15 @@ MonoBehaviour:
   solvedSound: {fileID: 0}
   unsolvedSound: {fileID: 0}
   aud: {fileID: 0}
-  idleAud: {fileID: 0}
   fuseBoxLayer:
     serializedVersion: 2
     m_Bits: 2048
   currentlyHeldFuse: {fileID: 0}
+  mainShell: {fileID: 0}
+  hubShell: {fileID: 0}
+  lightningBolt: {fileID: 0}
+  ledIndicators: []
+  correctSolvedMaterial: {fileID: 0}
 --- !u!65 &874948303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1690,7 +1694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 0
+  litColor: {r: 0, g: 0, b: 0, a: 0}
   containedFuse: {fileID: 0}
   correctFuseColor: 
   putIntoFuseSlot: {fileID: 0}
@@ -1955,7 +1960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 0
+  litColor: {r: 0, g: 0, b: 0, a: 0}
   containedFuse: {fileID: 0}
   correctFuseColor: 
   putIntoFuseSlot: {fileID: 0}
@@ -2688,7 +2694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 0
+  litColor: {r: 0, g: 0, b: 0, a: 0}
   containedFuse: {fileID: 0}
   correctFuseColor: 
   putIntoFuseSlot: {fileID: 0}
@@ -2952,6 +2959,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 789625156, guid: 40a39a50353847f41aad86fe72ffee27, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1385928738, guid: 40a39a50353847f41aad86fe72ffee27, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8248587869472072325, guid: 40a39a50353847f41aad86fe72ffee27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3061,7 +3076,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 0
+  litColor: {r: 0, g: 0, b: 0, a: 0}
   containedFuse: {fileID: 0}
   correctFuseColor: 
   putIntoFuseSlot: {fileID: 0}

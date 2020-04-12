@@ -91,9 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 4
+  litColor: {r: 0.5411765, g: 0.03529412, b: 1, a: 1}
   containedFuse: {fileID: 0}
-  correctFuseColor: Green
+  correctFuseColor: Blue
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,
     type: 3}
@@ -335,7 +336,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8ac49dab8c0fa8b419ed1622d4891137, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -554,10 +555,10 @@ MonoBehaviour:
   - {fileID: 5231111402125689514, guid: c79e4722d632dae4fbab000c41ae6e55, type: 3}
   - {fileID: 3994152312818774075, guid: 7c2a180ea3ae74746a709bf24b83e354, type: 3}
   - {fileID: 7940022190182727259, guid: cdb22ff58bb5c234bb9ec871619424b5, type: 3}
-  idleSolved: {fileID: 8300000, guid: 82393569240d26e419244c251248bf20, type: 3}
+  idleSolvedSound: {fileID: 0}
   doorOpen: {fileID: 8300000, guid: 64b72c64d8b5c9345b0e267d1700f934, type: 3}
   doorClose: {fileID: 8300000, guid: 7c1c3b8e3fa2fce468e2932ad51d9eb5, type: 3}
-  pickFuse: {fileID: 8300000, guid: c06323660a0870a46bbbd383784ae7bc, type: 3}
+  pickFuse: {fileID: 8300000, guid: 71d42a21eedb50748963ab2eaed4e7f9, type: 3}
   putFuseTray: {fileID: 8300000, guid: 8ac49dab8c0fa8b419ed1622d4891137, type: 3}
   solvedSound: {fileID: 8300000, guid: 2191c0b9c3c096d41aa2c965552cabe7, type: 3}
   unsolvedSound: {fileID: 8300000, guid: 4763f52f68dd9bb439fbf28e4707651a, type: 3}
@@ -567,6 +568,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   currentlyHeldFuse: {fileID: 0}
+  mainShell: {fileID: 2371532422961295235}
+  hubShell: {fileID: 1928208768874232574}
+  lightningBolt: {fileID: 3353895977612919291}
+  ledIndicators:
+  - {fileID: 4185908235157949639}
+  - {fileID: 4734515007164726152}
+  - {fileID: 5141513713212298292}
+  - {fileID: 4743126902854982086}
+  correctSolvedMaterial: {fileID: 2100000, guid: ea9cfc5c333ef7e4c9d4648172c152f7,
+    type: 2}
 --- !u!1 &656130543917884628
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +666,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 646cd30bf92e32243934dff93d413e75, type: 3}
+  - {fileID: 2100000, guid: 57e87553f3c819a41a97a0565b6e7c68, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -971,7 +982,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 646cd30bf92e32243934dff93d413e75, type: 3}
+  - {fileID: 2100000, guid: 3e2d19c4c66c4e349ad9eb2865419af4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1126,7 +1137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723298890217100767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24674064, y: 0, z: -0.07350843}
+  m_LocalPosition: {x: -0.24674064, y: 0.881, z: -0.07350843}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1931030436990065311}
@@ -1193,7 +1204,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 646cd30bf92e32243934dff93d413e75, type: 3}
+  - {fileID: 2100000, guid: 3e2d19c4c66c4e349ad9eb2865419af4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1574,7 +1585,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 2
+  litColor: {r: 1, g: 0, b: 0, a: 1}
   containedFuse: {fileID: 0}
   correctFuseColor: Red
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
@@ -1780,7 +1792,7 @@ GameObject:
   - component: {fileID: 9186723845380973543}
   - component: {fileID: 1928208768874232574}
   m_Layer: 11
-  m_Name: Fuse_box_hub
+  m_Name: Fuse_box_HUB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2080,7 +2092,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 646cd30bf92e32243934dff93d413e75, type: 3}
+  - {fileID: 2100000, guid: 3e2d19c4c66c4e349ad9eb2865419af4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2190,9 +2202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 3
+  litColor: {r: 0, g: 1, b: 0.047058824, a: 1}
   containedFuse: {fileID: 0}
-  correctFuseColor: Orange
+  correctFuseColor: Green
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,
     type: 3}
@@ -2532,7 +2545,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 646cd30bf92e32243934dff93d413e75, type: 3}
+  - {fileID: 2100000, guid: 3e2d19c4c66c4e349ad9eb2865419af4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2611,9 +2624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378720c13fe22ee42838affea5c779bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightIndicator: {fileID: 0}
+  slotNumber: 1
+  litColor: {r: 1, g: 0.49803922, b: 0, a: 1}
   containedFuse: {fileID: 0}
-  correctFuseColor: Blue
+  correctFuseColor: Orange
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,
     type: 3}
