@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4289134022673097776
+--- !u!1 &2300524388910050960
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4653858397882362700}
-  - component: {fileID: 8698610141342438877}
-  - component: {fileID: 40698849161244114}
+  - component: {fileID: 7652193377788970809}
+  - component: {fileID: 8429196004048919226}
+  - component: {fileID: 7050565698832939944}
   m_Layer: 0
   m_Name: Fuse_geo
   m_TagString: Untagged
@@ -18,35 +18,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4653858397882362700
+--- !u!4 &7652193377788970809
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289134022673097776}
+  m_GameObject: {fileID: 2300524388910050960}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.0000000047683715, z: 0.00015574932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7708861519402035171}
+  m_Father: {fileID: 7167443995594207491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8698610141342438877
+--- !u!33 &8429196004048919226
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289134022673097776}
+  m_GameObject: {fileID: 2300524388910050960}
   m_Mesh: {fileID: 6392236194681007698, guid: f394bf74cf38dac4cab6fe93cb01d475, type: 3}
---- !u!23 &40698849161244114
+--- !u!23 &7050565698832939944
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4289134022673097776}
+  m_GameObject: {fileID: 2300524388910050960}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4b75c9e35b1e9b4a977e9625da2e23e, type: 2}
+  - {fileID: 2100000, guid: 0a0ffd6fc91f27d4a83265171837ba4b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,7 +79,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &6674397790379185648
+--- !u!1 &3994152312818774075
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,26 +87,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7708861519402035171}
+  - component: {fileID: 7167443995594207491}
+  - component: {fileID: 3686740276189568774}
   m_Layer: 0
-  m_Name: Fuse_prefab
+  m_Name: Fuse_Orange_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7708861519402035171
+--- !u!4 &7167443995594207491
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6674397790379185648}
+  m_GameObject: {fileID: 3994152312818774075}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -25.143, y: 3.237, z: -3.845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4653858397882362700}
+  - {fileID: 7652193377788970809}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3686740276189568774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3994152312818774075}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.032868378, y: 0.13583761, z: 0.075558506}
+  m_Center: {x: 0.000000004656613, y: -0.000000011175871, z: -0.023517279}

@@ -12,11 +12,13 @@ public class FuseSlotScript : MonoBehaviour
 
     [SerializeField] GameObject lightIndicator;
     [SerializeField] GameObject containedFuse;
+    [SerializeField] string correctFuseColor;
     [SerializeField] AudioClip putIntoFuseSlot, retrieveFromFuseSlot;
     bool isFilled;
 
     private FuseBoxScript fuseBox;
     private AudioSource aud;
+    static int correctFuses = 0;
 
     private void Start()
     {
@@ -49,10 +51,14 @@ public class FuseSlotScript : MonoBehaviour
         isFilled = true;
 
         containedFuse = fuseBox.currentlyHeldFuse;
+        if (CheckFuse()) { correctFuses++; }
+
         StartCoroutine(FuseTrayScript.PlaceFuseOnTray(containedFuse.transform, transform.position));
         containedFuse.GetComponent<Collider>().enabled = false;
 
         fuseBox.currentlyHeldFuse = null;
+
+        if(correctFuses == 4) { fuseBox.SetSolvedState(); }
     }
 
     void ExtractFuse() //extracts the fuse from the slot and hands it to the player
@@ -61,8 +67,15 @@ public class FuseSlotScript : MonoBehaviour
 
         isFilled = false;
 
+        if(CheckFuse()) { correctFuses--; }
+
         containedFuse.GetComponent<Collider>().enabled = false;
         fuseBox.currentlyHeldFuse = containedFuse;
         containedFuse = null;
+    }
+
+    bool CheckFuse()
+    {
+        return containedFuse.name.Contains(correctFuseColor);
     }
 }
