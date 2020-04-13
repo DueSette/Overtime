@@ -127,6 +127,7 @@ public class MeshCombiner : MonoBehaviour
                         subMesh.uv = modelsInfo[j].Item1.uv;
                         subMesh.uv2 = modelsInfo[j].Item1.uv2;
 
+#if UNITY_EDITOR
                         UnwrapParam unwrapParams = new UnwrapParam
                         {
                             hardAngle = 60,
@@ -135,6 +136,7 @@ public class MeshCombiner : MonoBehaviour
                             areaError = 1
                         };
                         Unwrapping.GenerateSecondaryUVSet(subMesh, unwrapParams);
+#endif
 
                         CombineInstance newInstance = new CombineInstance();
                         newInstance.mesh = subMesh;
@@ -170,8 +172,10 @@ public class MeshCombiner : MonoBehaviour
         combinedMesh.CombineMeshes(combineInstance, false);
 
         // Generating Lightmap UV Settings
+#if UNITY_EDITOR
         Unwrapping.GenerateSecondaryUVSet(combinedMesh);
-        
+#endif
+
         return combinedMesh;
     }
 
@@ -197,6 +201,9 @@ public class MeshCombiner : MonoBehaviour
         string filePath = "Assets/";
         filePath += fileName;
         filePath += "_Mesh.asset";
+
+#if UNITY_EDITOR
         AssetDatabase.CreateAsset(meshToSave, filePath);
+#endif
     }
 }
