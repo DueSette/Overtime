@@ -11,9 +11,6 @@ public class OfficeRoomController : MonoBehaviour
     [Header("Room Details")]
     public string eventCode;
     public List<Connector> roomConnectors = new List<Connector>();
-    public bool preSetConnectors = true;
-    public GameObject wallPrefab;
-    public GameObject doorPrefab;
 
     [Header("Generator Details")]
     public OfficeRoomController previousRoom;
@@ -203,25 +200,7 @@ public class OfficeRoomController : MonoBehaviour
     */
     public void DecorateRoom()
     {
-        if (!this.preSetConnectors)
-        {
-            foreach (Connector c in roomConnectors)
-            {
-                GameObject newPrefab;
 
-                if (c.connected)
-                {
-                    newPrefab = Instantiate(doorPrefab, this.transform);
-                }
-                else
-                {
-                    newPrefab = Instantiate(wallPrefab, this.transform);
-                }
-
-                newPrefab.transform.position = c.transform.position;
-                newPrefab.transform.rotation = c.transform.rotation;
-            }
-        }
     }
 
 
