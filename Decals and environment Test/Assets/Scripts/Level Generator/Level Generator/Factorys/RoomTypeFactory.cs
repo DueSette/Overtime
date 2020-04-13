@@ -38,19 +38,10 @@ public class RoomTypeFactory : MonoBehaviour
         for (int i = 0; i < currentRooms.Count; i++)
         {
             OfficeRoomController orc = currentRooms[i].GetComponent<OfficeRoomController>();
-            // Checks whether the room has hard designed connections or not 
-            if (!orc.preSetConnectors)
+            // Number of room connectors must match the required amount
+            if (orc.roomConnectors.Count == requiredConnections)
             {
-                // Room can have any number of connectors as these will be decorated later
                 possibleRooms.Add(currentRooms[i]);
-            }
-            else
-            {
-                // Number of room connectors must match the required amount
-                if (orc.roomConnectors.Count == requiredConnections)
-                {
-                    possibleRooms.Add(currentRooms[i]);
-                }
             }
         }
 
