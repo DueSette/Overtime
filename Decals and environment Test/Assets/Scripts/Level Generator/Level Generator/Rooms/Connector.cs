@@ -6,7 +6,6 @@ public class Connector : MonoBehaviour
 {
     public Directions connectorDirection;
     public bool connected;
-    public bool decorated;
 
     public void UpdateConnector()
     {
