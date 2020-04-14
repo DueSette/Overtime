@@ -60,4 +60,18 @@ public class SecurityCameraScript : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         camMove = true;
     }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        // Drawing Cone Of Movement
+        Vector3 camPos = this.transform.position;
+        Vector3 camStartLook = this.transform.position + this.transform.forward;
+        Vector3 camEndLook = this.transform.position + (Quaternion.AngleAxis(90, Vector3.up) * this.transform.forward);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(camPos, camStartLook);
+        Gizmos.DrawLine(camPos, camEndLook);
+        Gizmos.DrawLine(camStartLook, camEndLook);
+    }
 }
