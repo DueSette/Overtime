@@ -13,6 +13,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
     [SerializeField] Material dissolver;
     [SerializeField] Transform hallwaySpot;
     [SerializeField] private BadoomNotePickup badoomSpawner;
+    [SerializeField] private ReflectionProbe cakeRoomReflectionProbe;
     [SerializeField] private List<GameObject> objectsToRemove;
     [SerializeField] private List<GameObject> objectsToAdd;
 
@@ -65,6 +66,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
             {
                 g.SetActive(true);
             }
+            cakeRoomReflectionProbe.RenderProbe();
 
             // Removing Badooms
             badoomSpawner.EndBadoomSequence();
