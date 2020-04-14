@@ -205,7 +205,6 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
     IEnumerator PlayResetSounds(float previousStep) //plays ticks according to the dial's position
     {
-        print(previousStep);
         float delta = 30 - previousStep;
         float ticks = 30 - Mathf.Abs(delta);
 

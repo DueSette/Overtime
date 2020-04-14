@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 public class InventoriesManager : MonoBehaviour
@@ -13,6 +15,8 @@ public class InventoriesManager : MonoBehaviour
     public ItemInventory itemManager;
 
     [SerializeField] GameObject mainPanel;
+
+    [SerializeField] VolumeProfile pauseMenuPostProcess;
 
     [SerializeField] Image notesTitle, itemsTitle;
     [SerializeField, Tooltip("If this is unpopulated just call Andrea, easier done than said")] Sprite selectedNotesImage, selectedItemsImage;
@@ -105,6 +109,12 @@ public class InventoriesManager : MonoBehaviour
     public void SetMainPanel(bool open)
     {
         mainPanel.SetActive(open);
+
+        if (open)
+            SceneSettingsManager.instance.ChangeToPause(pauseMenuPostProcess);
+        else
+            SceneSettingsManager.instance.RevertToPreviousProfile();
+
         GameStateManager.SetGameState(open ? GameState.MENU : GameState.IN_GAME);
     }
 
