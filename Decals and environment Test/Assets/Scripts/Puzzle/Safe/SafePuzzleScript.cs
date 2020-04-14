@@ -165,8 +165,8 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     {
         safeState = SafeState.PASSIVE;
         currentTurningDirection = TurningState.NONE;
-        StartCoroutine(PlayResetSounds());
 
+        StartCoroutine(PlayResetSounds(currentStep));
         targetIterator = 0;
         proxyRotation = 3.0f;
         UpdateTargetSpot();
@@ -203,14 +203,15 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         Cursor.visible = true;
     }
 
-    IEnumerator PlayResetSounds() //plays ticks according to the dial's position
+    IEnumerator PlayResetSounds(float previousStep) //plays ticks according to the dial's position
     {
-        float delta = 30 - currentStep;
+        print(previousStep);
+        float delta = 30 - previousStep;
         float ticks = 30 - Mathf.Abs(delta);
 
-        float soundFrequence = 0.8f / (float)ticks;
-        print(ticks);
-        for(int i = 0; i < currentStep; i++)
+        float soundFrequence = 0.8f / ticks;
+
+        for(int i = 0; i < ticks; i++)
         {
             aud.PlayOneShot(turningSound);
             yield return new WaitForSeconds(soundFrequence);
