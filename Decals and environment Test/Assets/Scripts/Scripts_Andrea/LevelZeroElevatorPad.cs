@@ -21,6 +21,10 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     [SerializeField] private float litTime;
     [SerializeField] private float timeBetweenLit;
 
+    [Header("Success Animation")]
+    [SerializeField] private Color litGreen;
+    [SerializeField] private Color unlitGreen;
+
     private void Start()
     {
         SetEmissiveMaterialColor(defaultColor);
@@ -120,7 +124,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     Pad Animations
     ====================================================================================================
     */
-    private IEnumerator PadFailAnimation()
+    public IEnumerator PadFailAnimation()
     {
         // Gets The Pad To Blink Red Three Times
         for (int i = 0; i < numberOfBlinks; i++)
@@ -130,15 +134,26 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
 
             SetEmissiveMaterialColor(unlitRed);
             yield return new WaitForSeconds(timeBetweenLit);
-
-            yield return null;
         }
+
+        StartCoroutine(LerpEmissiveMaterial(unlitRed, defaultColor, 0.5f));
+        yield return new WaitForSeconds(0.5f);
 
         SetEmissiveMaterialColor(defaultColor);
     }
 
-    private IEnumerator PadSuccessAnimation()
+    public IEnumerator PadSuccessAnimation()
     {
-        yield return null;
+        // Gets The Pad To Blink Red Three Times
+        for (int i = 0; i < numberOfBlinks; i++)
+        {
+            SetEmissiveMaterialColor(litGreen);
+            yield return new WaitForSeconds(litTime);
+
+            SetEmissiveMaterialColor(unlitGreen);
+            yield return new WaitForSeconds(timeBetweenLit);
+        }
+
+        SetEmissiveMaterialColor(litGreen);
     }
 }
