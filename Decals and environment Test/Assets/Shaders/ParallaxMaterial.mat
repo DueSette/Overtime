@@ -23,8 +23,7 @@ Material:
   m_Name: ParallaxMaterial
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _DEPTHOFFSET_ON _DISPLACEMENT_LOCK_TILING_SCALE _HEIGHTMAP _MASKMAP
-    _MATERIAL_FEATURE_SUBSURFACE_SCATTERING _MATERIAL_FEATURE_TRANSMISSION _NORMALMAP
-    _NORMALMAP_TANGENT_SPACE _PIXEL_DISPLACEMENT _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
+    _NORMALMAP _NORMALMAP_TANGENT_SPACE _PIXEL_DISPLACEMENT _PIXEL_DISPLACEMENT_LOCK_OBJECT_SCALE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -148,7 +147,7 @@ Material:
     - Vector1_A3EFE2E8: 0
     - Vector1_E9AD53E4: 5
     - _AORemapMax: 1
-    - _AORemapMin: 0
+    - _AORemapMin: 0.5128834
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
@@ -170,7 +169,7 @@ Material:
     - _DetailNormalScale: 1
     - _DetailSmoothnessScale: 1
     - _DiffusionProfile: 0
-    - _DiffusionProfileHash: 3.8136563
+    - _DiffusionProfileHash: 2.5863569
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 2
@@ -214,7 +213,7 @@ Material:
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
-    - _MaterialID: 0
+    - _MaterialID: 1
     - _Metallic: 0
     - _NormalMapSpace: 0
     - _NormalScale: 8
@@ -235,10 +234,10 @@ Material:
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
     - _SrcBlend: 1
-    - _StencilRef: 1
+    - _StencilRef: 2
     - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 64
-    - _StencilRefGBuffer: 1
+    - _StencilRefGBuffer: 2
     - _StencilRefMV: 128
     - _StencilWriteMask: 3
     - _StencilWriteMaskDepth: 48
@@ -257,7 +256,7 @@ Material:
     - _TessellationShapeFactor: 0.75
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
-    - _Thickness: 0.034
+    - _Thickness: 0.429
     - _ThicknessMultiplier: 1
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
@@ -278,11 +277,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Vector2_9AAB7A9B: {r: 600, g: 600, b: 100, a: 10}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.6603774, g: 0.6339, b: 0.5825027, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DiffusionProfileAsset: {r: -6.7226366e-34, g: 5.3620756e-17, b: 2.890743e+31,
-        a: -4.2954014e+20}
+    - _Color: {r: 0.6603774, g: 0.6339, b: 0.58250266, a: 1}
+    - _DiffusionProfileAsset: {r: -1.6366785e-26, g: -9.932626e-27, b: 1.8777947e+20,
+        a: 1321.3425}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
