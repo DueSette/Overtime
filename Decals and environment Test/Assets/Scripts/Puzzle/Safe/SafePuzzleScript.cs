@@ -56,13 +56,13 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         {
             tState = TimerState.SUSPENDED;
 
-            targetIterator = CheckIfOnCorrectSpot() ? ++targetIterator : 0; //if player left the dial on correct value put next value on, else go back to value one
+            targetIterator = CheckIfOnCorrectStep() ? ++targetIterator : 0; //if player left the dial on correct value put next value on, else go back to value one
             
             UpdateTargetSpot();
         }
     }
 
-    void CheckDirection()
+    void CheckDirection() //check whether or not the player is turning the dial in the right direction
     {
         if(currentTurningDirection == TurningState.NONE) { return; }
 
@@ -119,7 +119,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         }
     }
 
-    bool CheckIfOnCorrectSpot() //when enough time standing still on a tick has passed, it checks whether or not we are on the right tick
+    bool CheckIfOnCorrectStep() //when enough time standing still on a tick has passed, it checks whether or not we are on the right tick
     {
         bool result = targetStep == currentStep;
 
@@ -151,7 +151,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         {
             targetStep = numberSequence[targetIterator];
         }
-        catch
+        catch //means the iterator got out of the array's left bound, which means we solved the puzzle
         {
             safeState = SafeState.SOLVED;
             GameStateManager.SetGameState(GameState.IN_GAME);
@@ -165,13 +165,14 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     {
         safeState = SafeState.PASSIVE;
         currentTurningDirection = TurningState.NONE;
+        StartCoroutine(PlayResetSounds());
 
         targetIterator = 0;
         proxyRotation = 3.0f;
         UpdateTargetSpot();
 
         float lapsed = 0.0f;
-        float duration = 0.5f;
+        float duration = 0.8f;
 
         Quaternion currRot = dial.rotation;
         while(lapsed < duration)
@@ -200,6 +201,20 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    IEnumerator PlayResetSounds() //plays ticks according to the dial's position
+    {
+        float delta = 30 - currentStep;
+        float ticks = 30 - Mathf.Abs(delta);
+
+        float soundFrequence = 0.8f / (float)ticks;
+        print(ticks);
+        for(int i = 0; i < currentStep; i++)
+        {
+            aud.PlayOneShot(turningSound);
+            yield return new WaitForSeconds(soundFrequence);
+        }
     }
 
     private void OnEnable()
