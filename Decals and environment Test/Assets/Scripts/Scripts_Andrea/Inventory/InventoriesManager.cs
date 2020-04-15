@@ -68,7 +68,7 @@ public class InventoriesManager : MonoBehaviour
                 ForceToggleItemInventoryWindow(true);
             }
             
-            if (noteManager.transform.parent.gameObject.activeSelf) //NAVIGATE NOTE INVENTORY
+            if (noteManager.transform.parent.gameObject.activeInHierarchy) //NAVIGATE NOTE INVENTORY
             {
                 if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
                 {
@@ -89,7 +89,7 @@ public class InventoriesManager : MonoBehaviour
                 }
             }
 
-            else if (itemManager.gameObject.activeSelf) //NAVIGATE ITEM INVENTORY
+            else if (itemManager.gameObject.activeInHierarchy) //NAVIGATE ITEM INVENTORY
             {
                 if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
                 {
@@ -128,8 +128,8 @@ public class InventoriesManager : MonoBehaviour
     //checks and sets which title on the top part of the menu to highlight
     private void ManageTitlesSprites()
     {
-        notesTitle.sprite = noteManager.transform.parent.gameObject.activeSelf ? selectedNotesImage : unselectedNotesImage;
-        itemsTitle.sprite = itemManager.gameObject.activeSelf ? selectedItemsImage : unselectedItemsImage;
+        notesTitle.sprite = noteManager.transform.parent.gameObject.activeInHierarchy ? selectedNotesImage : unselectedNotesImage;
+        itemsTitle.sprite = itemManager.gameObject.activeInHierarchy ? selectedItemsImage : unselectedItemsImage;
     }
 
     public bool HasItem(string itemName) //checks if we have an item by searching its name 
@@ -159,7 +159,7 @@ public class InventoriesManager : MonoBehaviour
     #region NoteInventory Methods
     void ToggleNoteInventoryWindow() //opens or closes the note inventory, based on its current status
     {
-        if (noteManager.transform.parent.gameObject.activeSelf) //if note inventory was open, reset UI-related stuff and close
+        if (noteManager.transform.parent.gameObject.activeInHierarchy) //if note inventory was open, reset UI-related stuff and close
         {
             noteManager.CleanPreviousNoteUI();
             noteManager.ScrollEntriesToLast();
@@ -169,7 +169,7 @@ public class InventoriesManager : MonoBehaviour
             GameStateManager.SetGameState(GameState.MENU);
 
         SoundManager.instance.PlaySound(openInventory);
-        noteManager.transform.parent.gameObject.SetActive(!noteManager.transform.parent.gameObject.activeSelf);
+        noteManager.transform.parent.gameObject.SetActive(!noteManager.transform.parent.gameObject.activeInHierarchy);
         ManageTitlesSprites();
     }
 
@@ -198,6 +198,7 @@ public class InventoriesManager : MonoBehaviour
         GameStateManager.SetGameState(GameState.MENU);
         noteManager.transform.parent.gameObject.SetActive(true);
         itemManager.gameObject.SetActive(false);
+        ManageTitlesSprites();
     }
 
     void ToggleNotesDescriptionBox()
@@ -210,9 +211,9 @@ public class InventoriesManager : MonoBehaviour
     #region ItemInventory methods
     void ToggleItemInventoryWindow()
     {
-        itemManager.gameObject.SetActive(!itemManager.gameObject.activeSelf);
+        itemManager.gameObject.SetActive(!itemManager.gameObject.activeInHierarchy);
 
-        if (itemManager.gameObject.activeSelf) //if it means that we opened it, then set up item inventory
+        if (itemManager.gameObject.activeInHierarchy) //if it means that we opened it, then set up item inventory
         {
             itemManager.CleanPreviousUI();
             itemManager.UpdateUI();
@@ -235,7 +236,7 @@ public class InventoriesManager : MonoBehaviour
         if (openOverride)
             noteManager.transform.parent.gameObject.SetActive(false);
 
-        if (itemManager.gameObject.activeSelf) //if we opened it, then set up item inventory
+        if (itemManager.gameObject.activeInHierarchy) //if we opened it, then set up item inventory
         {
             itemManager.UpdateUI();
             SoundManager.instance.PlaySound(openInventory);
