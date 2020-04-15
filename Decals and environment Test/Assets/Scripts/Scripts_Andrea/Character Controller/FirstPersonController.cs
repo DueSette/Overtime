@@ -17,6 +17,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Header("Walking and running")]
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private bool m_IsCrouching = false;
+        [SerializeField] private float accelerationRate;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
         [SerializeField, Range(0.2f, 0.95f)] private float m_CrouchSpeedModifier;
@@ -43,11 +44,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [Space]
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
-        [SerializeField] Transform m_FloorDetector;
+        public Transform m_FloorDetector;
         [SerializeField] Transform m_CeilingDetector;
 
         private bool m_Jump;
         private float m_YRotation;
+        float acceleration = 0.0f;
+
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
         private CharacterController m_StandingCharacterController; //character controller used for standing
@@ -174,12 +177,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
            // m_MouseLook.UpdateCursorLock();
         }
 
+        void ManageMovementAcceleration(bool moving)
+        {
+            if (moving)
+                acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelerationRate, 0.0f, 1.0f);
+            else
+                acceleration = 0.0f;       
+        }
+
         #region Movement Related Methods
         private void CheckMovementInput(out float speed)
         {
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            ManageMovementAcceleration(m_Input.sqrMagnitude != 0);
 
             bool waswalking = m_IsWalking;
 
@@ -194,6 +206,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
                 speed = m_WalkSpeed * m_CrouchSpeedModifier;
 
+            speed *= acceleration;
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
@@ -207,6 +220,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 StopAllCoroutines();
                 StartCoroutine(!m_IsWalking ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
             }
+
         }
 
         private void ProgressStepCycle(float speed)
@@ -372,19 +386,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (Input.GetMouseButtonDown(0)) //interacting with objects
             {
-                CheckForInteractible();
+                CheckForInteractible();           
                 CheckForViewport();
             }
 
+            /* Not needed for now
             if (Input.GetKeyDown(KeyCode.LeftControl))
                 ToggleCrouch();
+            */
 
             CheckForPrompt();
-
-            if (Input.GetMouseButton(1))
-                Zoom(true);
-            else
-                Zoom(false);
+            Zoom(Input.GetMouseButton(1));
         }
 
         private void CheckForViewport()
@@ -421,6 +433,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ITextPrompt>() != null)
+                    FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                else
+                    FacingPromptTextEvent?.Invoke("");
+            }
+            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.0f))
+            {
+                if (hit.collider.GetComponent<SimplePromptObjectTextOnly>() != null)
                     FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
                 else
                     FacingPromptTextEvent?.Invoke("");

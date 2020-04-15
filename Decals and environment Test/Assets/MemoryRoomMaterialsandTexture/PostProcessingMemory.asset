@@ -254,98 +254,6 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
     min: 0.001
---- !u!114 &-2250198860859912358
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9008a067f4d626c4d8bc4bc48f04bb89, type: 3}
-  m_Name: AmbientOcclusion
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  quality:
-    m_OverrideState: 1
-    m_Value: 3
-  rayTracing:
-    m_OverrideState: 1
-    m_Value: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1.77
-    min: 0
-    max: 4
-  directLightingStrength:
-    m_OverrideState: 1
-    m_Value: 0
-    min: 0
-    max: 1
-  radius:
-    m_OverrideState: 1
-    m_Value: 1.88
-    min: 0.25
-    max: 5
-  temporalAccumulation:
-    m_OverrideState: 1
-    m_Value: 1
-  ghostingReduction:
-    m_OverrideState: 1
-    m_Value: 1
-    min: 0
-    max: 1
-  blurSharpness:
-    m_OverrideState: 1
-    m_Value: 0.1
-    min: 0
-    max: 1
-  layerMask:
-    m_OverrideState: 1
-    m_Value:
-      serializedVersion: 2
-      m_Bits: 4294967295
-  rayLength:
-    m_OverrideState: 1
-    m_Value: 0.5
-    min: 0
-    max: 50
-  sampleCount:
-    m_OverrideState: 1
-    m_Value: 4
-    min: 1
-    max: 64
-  denoise:
-    m_OverrideState: 1
-    m_Value: 0
-  denoiserRadius:
-    m_OverrideState: 1
-    m_Value: 0.5
-    min: 0.001
-    max: 1
-  m_StepCount:
-    m_OverrideState: 1
-    m_Value: 8
-    min: 2
-    max: 32
-  m_FullResolution:
-    m_OverrideState: 1
-    m_Value: 0
-  m_MaximumRadiusInPixels:
-    m_OverrideState: 1
-    m_Value: 72
-    min: 16
-    max: 256
-  m_BilateralUpsample:
-    m_OverrideState: 1
-    m_Value: 1
-  m_DirectionCount:
-    m_OverrideState: 1
-    m_Value: 2
-    min: 1
-    max: 6
 --- !u!114 &-1511357148545433453
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -424,15 +332,15 @@ MonoBehaviour:
     min: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 1.6
+    m_Value: 0.8
     min: 0
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 13.76
+    m_Value: 10.6
     min: 0
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 70.22
+    m_Value: 38.06
     min: 0
   m_NearSampleCount:
     m_OverrideState: 0
@@ -542,7 +450,6 @@ MonoBehaviour:
   - {fileID: 7016309194857760223}
   - {fileID: -1511357148545433453}
   - {fileID: 109071006916363620}
-  - {fileID: -2250198860859912358}
   - {fileID: -6035089778897118498}
   - {fileID: 7987543583414981869}
   - {fileID: -1363523848880290698}
