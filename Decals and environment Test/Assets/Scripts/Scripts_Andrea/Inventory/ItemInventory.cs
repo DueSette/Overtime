@@ -59,7 +59,7 @@ public class ItemInventory : MonoBehaviour
     public void UnlockNewItem(Item newItem) //adds a new item to the inventory
     {
         CleanPreviousUI();
-        InventoriesManager.instance.SetGeneralMenu(true);
+        InventoriesManager.instance.SetMainPanel(true);
 
         currentFocus = itemList.Count;
 

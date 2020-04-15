@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
-    static InventoriesManager inventory;
+    static InventoriesManager inventoriesManager;
     [SerializeField] ItemInventory.Item item;
     [SerializeField] bool destroyOnPickup = false;
 
     void IInteractable.InteractWith()
     {
-        if (inventory == null)
-            inventory = FindObjectOfType<InventoriesManager>();
+        if (inventoriesManager == null)
+            inventoriesManager = FindObjectOfType<InventoriesManager>();
 
-        inventory.itemManager.UnlockNewItem(item);
-        inventory.ForceToggleItemInventoryWindow(true);
+        inventoriesManager.itemManager.UnlockNewItem(item);
+        inventoriesManager.ForceToggleItemInventoryWindow(true);
 
-        InteractionEvent();
+        OnInteraction();
     }
 
-    protected virtual void InteractionEvent()
+    protected virtual void OnInteraction()
     {
         if (destroyOnPickup)
             Destroy(gameObject);
