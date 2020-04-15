@@ -19,7 +19,8 @@ public enum RoomTypes
     CUBICLE,
     ELEVATOR_START,
     ELEVATOR_END,
-    KITCHEN,
+    HR_ROOM,
     OFFICE,
-    WAITING_AREA
+    FUSE_ROOM,
+    LIBRARY
 }
