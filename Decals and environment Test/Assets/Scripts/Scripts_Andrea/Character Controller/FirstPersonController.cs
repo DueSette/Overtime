@@ -111,7 +111,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(GameStateManager.gameState == GameState.INTERACTING_W_ITEM)
             {
                 if (Input.GetButton("Cancel"))
-                    ExitInteraction();
+                {
+                    GameStateManager.SetGameState(GameState.IN_GAME);
+                    ExitInteraction();             
+                }
             }
 
             if (m_IsCrouching) //makes sure that when moving the child controller the parent follows
@@ -120,7 +123,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (!m_PreviouslyGrounded && currentCharController.isGrounded)
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
-                PlayLandingSound();
+
+                if(m_MoveDir.y < -0.9f)
+                    PlayLandingSound();
+
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
             }
@@ -399,8 +405,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Zoom(Input.GetMouseButton(1));
         }
 
+        
         private void CheckForViewport()
         {
+            return; //this was added by Andrea as for now the script does not really work/is not hooked up properly, and creates nullreferences
+
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
@@ -408,7 +417,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
             }
         }
-
+        
         private void CheckForInteractible() //called when player clicks
         {
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
@@ -448,13 +457,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 FacingPromptTextEvent?.Invoke("");
 
             //FOR PROMPT ICON
-            if (Physics.Raycast(ray, out hit, 1.9f))
-            {
-                if (hit.collider.GetComponent<IInteractable>() != null)
-                    FacingPromptIconEvent?.Invoke(true);
-                else
-                    FacingPromptIconEvent?.Invoke(false);
-            }
+            if (Physics.Raycast(ray, out hit, 1.9f))           
+                FacingPromptIconEvent?.Invoke(hit.collider.GetComponent<IInteractable>() != null);            
             else
                 FacingPromptIconEvent?.Invoke(false);
         }

@@ -30,19 +30,17 @@ public class NoteInventory : MonoBehaviour
 
     [SerializeField] Transform inventoryCameraSpot;
     [SerializeField] Transform modelContainer;
-    [SerializeField] GameObject parent;
+    public GameObject spotlight;
 
     int currentFocus = 0;
 
-    void Start()
+    public void Initialise()
     {
         if (noteList.Count != 0)
         {
             InitialiseNoteUIObjects(); //fills and spawns the contents of a list, one UI entry for each owned item
             InitialiseOwnedNotes3D(); //spawns the 3D models. Loads stuff that was set via editor or from save file
         }
-
-        parent.SetActive(false); //initialise everything and then disappear from view
     }
 
     #region StartUp Functions
@@ -122,13 +120,15 @@ public class NoteInventory : MonoBehaviour
         }
 
         //Set entry name the correct color and font style, also set its button component as selected
-        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
+        noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().color = new Color(255, 214, 28);
         noteUINameGameObjects[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
         noteUINameGameObjects[currentFocus].GetComponent<Button>().Select();
     }
 
     public void UnlockNewNote(NoteEntryItem newNote) //call when a player finds a new note
     {
+        InventoriesManager.instance.SetGeneralMenu(true);
+
         //MAKING SURE THE ITEM IS NOT ALREADY IN OUR POSSESSION
         for (int i = 0; i < noteList.Count; i++)
             if (noteList[i].noteID == newNote.noteID) //if the new item is actually an Item that is still on the map but is clicked again
@@ -146,7 +146,7 @@ public class NoteInventory : MonoBehaviour
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<TextMeshProUGUI>().text = newNote.entryName;
         noteUINameGameObjects[noteUINameGameObjects.Count - 1].GetComponent<NoteUIObjectScript>().noteID = newNote.noteID;
 
-        ScrollEntries(noteList.Count);
+        ScrollEntries(noteList.Count);      
     }
     #endregion
 }

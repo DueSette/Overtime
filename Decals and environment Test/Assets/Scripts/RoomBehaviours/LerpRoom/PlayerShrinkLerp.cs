@@ -40,7 +40,7 @@ public class PlayerShrinkLerp : MonoBehaviour
             floorController = GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_FloorDetector.gameObject;
         }
 
-        if (eventName == "LevelSolved")
+        if (eventName == "MemoryReturn")
         {
             canLerp = false;
             playerCharacterController.height = heightMax;

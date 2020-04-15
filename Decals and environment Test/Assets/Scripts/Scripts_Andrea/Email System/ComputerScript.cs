@@ -104,10 +104,6 @@ public class ComputerScript : MonoBehaviour, IInteractable
         if(!beingInteractedWith) { return; }
         beingInteractedWith = false;
 
-        GameStateManager.SetGameState(GameState.IN_GAME);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         standbyScreen.SetActive(true);
     }
 

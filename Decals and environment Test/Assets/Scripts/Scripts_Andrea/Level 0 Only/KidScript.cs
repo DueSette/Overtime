@@ -107,12 +107,14 @@ public class KidScript : MonoBehaviour
         StartCoroutine(LerpTowardRotation(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 60.0f, 0.0f), 0.25f, LerpType.LINEAR));
         StartCoroutine(LerpTowardPosition(this.transform.position, new Vector3(3f, 0.0f, -4.0f), 0.75f, LerpType.ACCELERATED));
         anim.SetTrigger("approached2");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         candle.transform.SetParent(null);
         candle.transform.position = candleSpot.position;
         candle.GetComponent<Rigidbody>().useGravity = true;
         candle.GetComponent<Collider>().enabled = true;
+        yield return new WaitForSeconds(0.5f);
+
         gameObject.SetActive(false);
 
 

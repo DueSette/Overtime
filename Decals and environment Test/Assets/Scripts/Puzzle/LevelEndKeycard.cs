@@ -6,6 +6,8 @@ public class LevelEndKeycard : ItemInGameObjectScript
 {
     protected override void InteractionEvent()
     {
-        LevelManager.onLevelEvent("LevelSolved");
+        base.InteractionEvent();
+
+        LevelManager.onLevelEvent("UnlockElevator");
     }
 }

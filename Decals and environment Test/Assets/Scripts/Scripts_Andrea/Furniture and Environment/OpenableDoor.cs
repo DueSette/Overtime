@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenableDoor : MonoBehaviour, IInteractable
@@ -71,7 +70,7 @@ public class OpenableDoor : MonoBehaviour, IInteractable
                 audioSource.PlayOneShot(closedSound);
             }
 
-            StartCoroutine(preventDoubleClick());
+            StartCoroutine(PreventDoubleClick());
         }
     }
 
@@ -82,6 +81,8 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     */
     public void LockDoor(string newLockCode)
     {
+        doorAnimController.SetTrigger("DoorForceClose");
+
         doorUnlockEventCode = newLockCode;
         canBeOpened = false;
     }
@@ -95,7 +96,7 @@ public class OpenableDoor : MonoBehaviour, IInteractable
         }
     }
 
-    IEnumerator preventDoubleClick()
+    private IEnumerator PreventDoubleClick()
     {
         canInteract = false;
 

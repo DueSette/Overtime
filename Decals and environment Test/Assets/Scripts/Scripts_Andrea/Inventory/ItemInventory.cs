@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ItemInventory : MonoBehaviour
@@ -8,7 +9,7 @@ public class ItemInventory : MonoBehaviour
     [SerializeField] Transform inventoryCameraSpot;
     [SerializeField] Transform modelContainer;
     [SerializeField] Transform leftPanel;
-
+    
     [SerializeField] TextMeshProUGUI descriptionBox;
     [SerializeField] GameObject entryNamePrefab;
 
@@ -28,13 +29,7 @@ public class ItemInventory : MonoBehaviour
         public string description;
     }
 
-    private void Start()
-    {
-        InitialiseOwnedItems();
-        gameObject.SetActive(false);
-    }
-
-    private void InitialiseOwnedItems()
+    public void InitialiseOwnedItems()
     {
         //populate itemList - possibly load from save
         int x = 0;
@@ -63,6 +58,9 @@ public class ItemInventory : MonoBehaviour
     #region Reoccurring Methods
     public void UnlockNewItem(Item newItem) //adds a new item to the inventory
     {
+        CleanPreviousUI();
+        InventoriesManager.instance.SetGeneralMenu(true);
+
         currentFocus = itemList.Count;
 
         for (int i = 0; i < itemList.Count; i++)
@@ -83,6 +81,7 @@ public class ItemInventory : MonoBehaviour
         itemUINamesList.Add(Instantiate(entryNamePrefab, leftPanel));
         itemUINamesList[itemUINamesList.Count - 1].GetComponent<TextMeshProUGUI>().text = newItem.name;
         itemUINamesList[itemUINamesList.Count - 1].GetComponent<ItemUIObjectScript>().containedItem = newItem;
+        UpdateUI();
     }
 
     public void RemoveItem(Item itemToRemove)
@@ -100,8 +99,9 @@ public class ItemInventory : MonoBehaviour
         PutItemInView(itemList[currentFocus].model);
         descriptionBox.text = itemList[currentFocus].description;
 
-        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = Color.red;
+        itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().color = new Color(255, 214, 28);
         itemUINamesList[currentFocus].GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+        itemUINamesList[currentFocus].GetComponent<Button>().Select();
     }
     
     void SetObjectWithChildrenOnLayer(GameObject model)
@@ -127,7 +127,7 @@ public class ItemInventory : MonoBehaviour
 
     public void ScrollItemsFromUI(string nameToSearchFor) //this is called via item inventory UI when clicking on an entry
     {
-        int x = 0; //TODO FIX THIS THING
+        int x = 0;
         foreach (Item it in itemList) //we search through the owned items, when one matches we set it as the current focus and update UI accodingly
         {
             string itemName = it.name;

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class MemoryRoomZeroScript : MonoBehaviour
 {
+    [Header("Mom Memory Event Objects")]
     public List<GameObject> fluffFurniture = new List<GameObject>();
     public List<GameObject> importantFurniture = new List<GameObject>();
     [SerializeField] GameObject parent;
+
+    [Header("Memory Return Event Objects")]
     [SerializeField] Material dissolver;
     [SerializeField] Transform hallwaySpot;
+    [SerializeField] private BadoomNotePickup badoomSpawner;
+    [SerializeField] private ReflectionProbe cakeRoomReflectionProbe;
+    [SerializeField] private List<GameObject> objectsToRemove;
+    [SerializeField] private List<GameObject> objectsToAdd;
 
     void OnEnable()
     {
@@ -25,8 +32,6 @@ public class MemoryRoomZeroScript : MonoBehaviour
         if (fluffFurniture.Count > 0)
         {
             int rand = Random.Range(0, fluffFurniture.Count);
-            //fluffFurniture[rand].GetComponent<Renderer>().material = dissolver;
-            //StartCoroutine(LerpDissolve(fluffFurniture[rand].GetComponent<Renderer>().material));
             SetForDissolutionWithChildren(fluffFurniture[rand]);
             fluffFurniture.RemoveAt(rand);
         }
@@ -34,25 +39,37 @@ public class MemoryRoomZeroScript : MonoBehaviour
         else if (importantFurniture.Count > 0)
         {
             int rand = Random.Range(0, importantFurniture.Count);
-            //importantFurniture[rand].GetComponent<Renderer>().material = dissolver;
-            //StartCoroutine(LerpDissolve(importantFurniture[rand].GetComponent<Renderer>().material));
             SetForDissolutionWithChildren(importantFurniture[rand]);
             importantFurniture.RemoveAt(rand);
         }
 
         else
         {
-            //parent.GetComponent<Renderer>().material = dissolver;
             SetForDissolutionWithChildren(parent);
             parent.GetComponent<Collider>().enabled = false;
 
+            // Moving the player back to the office environment
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
-
             GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
             GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
             
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-            LevelManager.onLevelEvent("LevelSolved");
+            LevelManager.onLevelEvent("MemoryReturn");
+            OpenableDoor.OnDoorUnlockEvent("MemoryReturn"); 
+
+            // Changing the cake room to appear normal
+            foreach (GameObject g in objectsToRemove)
+            {
+                g.SetActive(false);
+            }
+            foreach (GameObject g in objectsToAdd)
+            {
+                g.SetActive(true);
+            }
+            cakeRoomReflectionProbe.RenderProbe();
+
+            // Removing Badooms
+            badoomSpawner.EndBadoomSequence();
         }
     }
 

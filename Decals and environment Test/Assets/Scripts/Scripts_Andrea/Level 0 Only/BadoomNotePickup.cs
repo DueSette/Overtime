@@ -12,6 +12,8 @@ public class BadoomNotePickup : NoteInGameObjectScript
     [SerializeField] Light[] lightSourcesToTurnOff;
     [SerializeField] GameObject darkPostProcess;
 
+    [SerializeField] OpenableDoor doorToLock;
+
     private Material originalEmissiveMaterial;
     private float[] originalIntensities;
 
@@ -20,9 +22,15 @@ public class BadoomNotePickup : NoteInGameObjectScript
         base.OnInteraction();
         SetupBackupReferences();
 
+        // Locking Player in badoom room
+        doorToLock.LockDoor("MemoryReturn");
+
+        // Unlocking door to cake room
+        OpenableDoor.OnDoorUnlockEvent("Badooms");
+
         //Starts badoom sequence
         ActivateBadooms(true);
-        TurnLightsOff(true);
+        //TurnLightsOff(true);
         EnableDarkPostProcess(true);
     }
 
@@ -41,14 +49,19 @@ public class BadoomNotePickup : NoteInGameObjectScript
     public void EndBadoomSequence() //brings everything backtonormal, should happen offscreen
     {
         ActivateBadooms(false);
-        TurnLightsOff(false);
+        //TurnLightsOff(false);
         EnableDarkPostProcess(false);
     }
 
     void ActivateBadooms(bool start)
     {
         foreach (GameObject bad in badooms)
-            bad.SetActive(start);
+        {
+            if (bad != null)
+            {
+                bad.SetActive(start);
+            }
+        }
     }
 
     void TurnLightsOff(bool start)
