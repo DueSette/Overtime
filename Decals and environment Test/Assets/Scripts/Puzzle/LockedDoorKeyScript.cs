@@ -7,9 +7,9 @@ public class LockedDoorKeyScript : ItemInGameObjectScript
     [SerializeField]
     private string keyUnlockEventCode;
 
-    protected override void InteractionEvent()
+    protected override void OnInteraction()
     {
-        base.InteractionEvent();
+        base.OnInteraction();
         Debug.Log("Picked Up Door Key: " + keyUnlockEventCode);
         OpenableDoor.OnDoorUnlockEvent(keyUnlockEventCode);
     }
