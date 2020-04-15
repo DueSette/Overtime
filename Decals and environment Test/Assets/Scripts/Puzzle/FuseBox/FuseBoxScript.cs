@@ -137,9 +137,11 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         ManageColouredStrips(true);
         TurnOnLightsOnSolved();
 
-        yield return new WaitForSeconds(1.75f);
         aud.PlayOneShot(solvedSound);
+
+        yield return new WaitForSeconds(1.75f);
         anim.SetTrigger("Close");
+        StartCoroutine(DelaySound(doorClose));
 
         GameStateManager.SetGameState(GameState.IN_GAME);
     }
