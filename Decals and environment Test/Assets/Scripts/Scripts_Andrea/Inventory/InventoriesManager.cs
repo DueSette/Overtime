@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 public class InventoriesManager : MonoBehaviour
@@ -13,6 +15,8 @@ public class InventoriesManager : MonoBehaviour
     public ItemInventory itemManager;
 
     [SerializeField] GameObject mainPanel;
+
+    [SerializeField] VolumeProfile pauseMenuPostProcess;
 
     [SerializeField] Image notesTitle, itemsTitle;
     [SerializeField, Tooltip("If this is unpopulated just call Andrea, easier done than said")] Sprite selectedNotesImage, selectedItemsImage;
@@ -28,7 +32,7 @@ public class InventoriesManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        SetGeneralMenu(true);
+        SetMainPanel(true);
         unselectedNotesImage = notesTitle.sprite;
         unselectedItemsImage = itemsTitle.sprite;
 
@@ -36,7 +40,7 @@ public class InventoriesManager : MonoBehaviour
         noteManager.Initialise();
         itemManager.gameObject.SetActive(false);
         ManageTitlesSprites();
-        SetGeneralMenu(false);
+        SetMainPanel(false);
     }
 
     void Update()
@@ -48,14 +52,14 @@ public class InventoriesManager : MonoBehaviour
     void CheckInput()
     {
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I)) //OPEN OR CLOSE MENU
-            SetGeneralMenu(!mainPanel.activeSelf);
+            SetMainPanel(!mainPanel.activeSelf);
 
-        if (mainPanel.activeSelf) //TOGGLE INVENTORIES 
+        if (mainPanel.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-               ForceToggleNoteInventoryWindow(true);
-               ForceToggleItemInventoryWindow(false);
+                ForceToggleNoteInventoryWindow(true);
+                ForceToggleItemInventoryWindow(false);
             }
 
             if (Input.GetKeyDown(KeyCode.E))
@@ -63,49 +67,54 @@ public class InventoriesManager : MonoBehaviour
                 ForceToggleNoteInventoryWindow(false);
                 ForceToggleItemInventoryWindow(true);
             }
-        }
-
-        if (noteManager.transform.parent.gameObject.activeSelf) //NAVIGATE NOTE INVENTORY
-        {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
+            
+            if (noteManager.transform.parent.gameObject.activeSelf) //NAVIGATE NOTE INVENTORY
             {
-                noteManager.ScrollEntries(false);
-                SoundManager.instance.PlaySound(navigateInventory);
+                if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
+                {
+                    noteManager.ScrollEntries(false);
+                    SoundManager.instance.PlaySound(navigateInventory);
+                }
+
+                else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
+                {
+                    noteManager.ScrollEntries(true);
+                    SoundManager.instance.PlaySound(navigateInventory);
+                }
+
+                if (Input.GetKeyDown(KeyCode.M))
+                {
+                    SoundManager.instance.PlaySound(navigateInventory);
+                    ToggleNotesDescriptionBox();
+                }
             }
 
-            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
+            else if (itemManager.gameObject.activeSelf) //NAVIGATE ITEM INVENTORY
             {
-                noteManager.ScrollEntries(true);
-                SoundManager.instance.PlaySound(navigateInventory);
-            }
+                if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
+                {
+                    itemManager.ScrollItems(false);
+                    SoundManager.instance.PlaySound(navigateInventory);
+                }
 
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                SoundManager.instance.PlaySound(navigateInventory);
-                ToggleNotesDescriptionBox();
-            }
-        }
-
-        else if (itemManager.gameObject.activeSelf) //NAVIGATE ITEM INVENTORY
-        {
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0 || Input.GetKeyDown(KeyCode.S))
-            {
-                itemManager.ScrollItems(false);
-                SoundManager.instance.PlaySound(navigateInventory);
-            }
-
-            else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
-            {
-                itemManager.ScrollItems(true);
-                SoundManager.instance.PlaySound(navigateInventory);
+                else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0 || Input.GetKeyDown(KeyCode.W))
+                {
+                    itemManager.ScrollItems(true);
+                    SoundManager.instance.PlaySound(navigateInventory);
+                }
             }
         }
     }
-
     //opens/Closes the UI obejct that holds the inventories
-    public void SetGeneralMenu(bool open)
+    public void SetMainPanel(bool open)
     {
         mainPanel.SetActive(open);
+
+        if (open)
+            SceneSettingsManager.instance.ChangeToPause(pauseMenuPostProcess);
+        else
+            SceneSettingsManager.instance.RevertToPreviousProfile();
+
         GameStateManager.SetGameState(open ? GameState.MENU : GameState.IN_GAME);
     }
 

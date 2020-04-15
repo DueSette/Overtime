@@ -9,6 +9,8 @@ public class BadoomNotePickup : NoteInGameObjectScript
     [SerializeField] GameObject[] emissiveMaterialsToSwap;
     [SerializeField] Material materialToBeSwappedIn;
 
+    [SerializeField] ParticleSystem wallParticle;
+
     [SerializeField] Light[] lightSourcesToTurnOff;
     [SerializeField] GameObject darkPostProcess;
 
@@ -30,8 +32,11 @@ public class BadoomNotePickup : NoteInGameObjectScript
 
         //Starts badoom sequence
         ActivateBadooms(true);
-        //TurnLightsOff(true);
+
+        //TurnLightsOff(true); ENABLE IF NEEDED (DESIGN CHOICE)
         EnableDarkPostProcess(true);
+
+        wallParticle.Play();
     }
 
     private void SetupBackupReferences()
@@ -51,17 +56,14 @@ public class BadoomNotePickup : NoteInGameObjectScript
         ActivateBadooms(false);
         //TurnLightsOff(false);
         EnableDarkPostProcess(false);
+        wallParticle.Stop();
     }
 
     void ActivateBadooms(bool start)
     {
         foreach (GameObject bad in badooms)
-        {
             if (bad != null)
-            {
                 bad.SetActive(start);
-            }
-        }
     }
 
     void TurnLightsOff(bool start)

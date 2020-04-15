@@ -127,7 +127,7 @@ public class NoteInventory : MonoBehaviour
 
     public void UnlockNewNote(NoteEntryItem newNote) //call when a player finds a new note
     {
-        InventoriesManager.instance.SetGeneralMenu(true);
+        InventoriesManager.instance.SetMainPanel(true);
 
         //MAKING SURE THE ITEM IS NOT ALREADY IN OUR POSSESSION
         for (int i = 0; i < noteList.Count; i++)

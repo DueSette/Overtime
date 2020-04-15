@@ -36,6 +36,9 @@ public class BadoomScript : MonoBehaviour
             player = FindObjectOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
 
         aud = GetComponent<AudioSource>();
+        aud.clip = hoveringSound;
+        aud.Play();
+
         balloonAI = GetComponent<NavMeshAgent>();
         balloonAI.angularSpeed = 0;
 
@@ -211,7 +214,8 @@ public class BadoomScript : MonoBehaviour
                 {
                     //explode on player contact
                     //this means screen fx, sound, maybe camera shake, maybe slowed speed
-                    print("Player got badoomed!");
+                    aud.PlayOneShot(explosionSound);
+                    print("Badoom");
                     Destroy(gameObject);
                 }
                 break;
@@ -220,8 +224,7 @@ public class BadoomScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!fixedWanderer)
-            return;
+        if (!fixedWanderer) { return; }
 
         for (int i = 0; i < fixedWanderSpots.Length; i++)
             Gizmos.DrawWireSphere(fixedWanderSpots[i], 0.15f);
