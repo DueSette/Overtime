@@ -11,6 +11,6 @@ public class EndLevelButton : MonoBehaviour, IInteractable, ITextPrompt
 
     string ITextPrompt.PromptText()
     {
-        return "Time to move to the next level...";
+        return "It seems this only goes one way...";
     }
 }
