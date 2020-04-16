@@ -47,7 +47,7 @@ public class CameraSwitch : MonoBehaviour
        // cameraNum = BoardScript.camNum;
 
 
-        if(Input.GetKey(KeyCode.Return))
+        if(Input.GetKey(KeyCode.Space))
         {
             Debug.Log("normal UPDATE");
             dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
