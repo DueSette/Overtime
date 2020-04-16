@@ -105,6 +105,7 @@ public class CameraSwitch : MonoBehaviour
     public void CameraChange()
     {
         GameStateManager.SetGameState(GameState.CAMERA_FOCUS);
+        Debug.Log("hello");
         cameraNum = 2;
     }
 

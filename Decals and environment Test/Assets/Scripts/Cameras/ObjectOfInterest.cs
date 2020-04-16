@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class ObjectOfInterest : MonoBehaviour
 {
-    private DynamicCamera theCamera;
-    private CameraSwitch cameraController;
+    public DynamicCamera theCamera;
+    public CameraSwitch cameraController;
     public int checker = 1;
+
+    /// <summary>
+    /// Attatch this script to the Parent Gameobject you want the player to interact with.
+    /// 
+    /// The gameobject must have a child gameobject attatched with the "Viewport" tag.
+    /// 
+    /// MAKE SURE DYNAMIC CAMERA IS TURNED ON IN EDITOR BEFORE GAME STARTS
+    /// </summary>
+
+
+
 
     void Start()
     {
@@ -16,7 +27,7 @@ public class ObjectOfInterest : MonoBehaviour
     public void FocusCamera()
     {
         cameraController.CameraChange();
-        Invoke("FindCamera", 0.2f);
+        Invoke("FindCamera", 1.2f);
     }
 
     void FindCamera()
