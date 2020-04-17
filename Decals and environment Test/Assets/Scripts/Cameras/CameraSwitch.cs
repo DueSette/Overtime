@@ -23,7 +23,11 @@ public class CameraSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerCamera = theCharacter.GetComponent<Camera>();
+       // dynamicCameraHolder = GameObject.FindGameObjectWithTag("DynamicCameraHolder");
+        //dynamicCameraGameObj = dynamicCameraHolder.transform.GetChild(0).gameObject;
+        theCharacter = GameObject.FindGameObjectWithTag("MainCamera");
+        thefpsController = theCharacter.transform.parent.gameObject;
+        playerCamera = theCharacter.GetComponent<Camera>();       
         dynamicCamera = dynamicCameraGameObj.GetComponent<Camera>();
         controller = thefpsController.GetComponent<CharacterController>();
         playerCamAud = thefpsController.GetComponent<AudioListener>();

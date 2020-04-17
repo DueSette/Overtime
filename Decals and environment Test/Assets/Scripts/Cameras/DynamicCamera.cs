@@ -21,7 +21,7 @@ public class DynamicCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //currentView = views[0];
+        currentView = views[0];
         cameraHolder = GameObject.FindGameObjectWithTag("DynamicCameraHolder");
         startView = cameraHolder.transform;
         dynamicCamera = this.gameObject.GetComponent<Camera>();
