@@ -10,8 +10,8 @@ Material:
   m_Name: Flower
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _BLENDMODE_ALPHA _BLENDMODE_PRESERVE_SPECULAR_LIGHTING
-    _ENABLE_FOG_ON_TRANSPARENT _MATERIAL_FEATURE_TRANSMISSION _NORMALMAP_TANGENT_SPACE
-    _SURFACE_TYPE_TRANSPARENT
+    _ENABLE_FOG_ON_TRANSPARENT _MASKMAP _MATERIAL_FEATURE_TRANSMISSION _NORMALMAP
+    _NORMALMAP_TANGENT_SPACE _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -32,7 +32,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: 8b191c4b5a842764c9727fa4bc13c5cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5feec77379e79144aa13a11877293ecb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -72,15 +72,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 8b191c4b5a842764c9727fa4bc13c5cc, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5feec77379e79144aa13a11877293ecb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a0a84ff291d5c294e85f3255e00f9275, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: dec688c664d879842918ffc22bc3dab3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -112,7 +112,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AORemapMax: 1
+    - _AORemapMax: 0.50632715
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
@@ -182,7 +182,7 @@ Material:
     - _MaterialID: 5
     - _Metallic: 0
     - _NormalMapSpace: 0
-    - _NormalScale: 1.09
+    - _NormalScale: 3.59
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -213,7 +213,7 @@ Material:
     - _SurfaceType: 1
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
-    - _Thickness: 0.859
+    - _Thickness: 0.525
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -232,9 +232,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.8204432, g: 0.8535302, b: 0.9716981, a: 1}
+    - _BaseColor: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.8204432, g: 0.8535302, b: 0.9716981, a: 1}
+    - _Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
     - _DiffusionProfileAsset: {r: 2.4993107e+15, g: 1.2001773e+32, b: 0.0000070158612,
         a: 2.3969874e+35}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
