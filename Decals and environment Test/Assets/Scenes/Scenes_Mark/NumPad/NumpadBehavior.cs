@@ -13,6 +13,10 @@ public class NumpadBehavior : MonoBehaviour
     /// Only variables to be assigned in inspector is the text boxes for the acces code, and current code used.
     /// </summary>
 
+    public delegate void PasswordDelegate(string s);
+    public static event PasswordDelegate PasswordEvent;
+
+
     public GameObject numpad1;
     public GameObject numpad2;
     public GameObject numpad3;
@@ -41,12 +45,11 @@ public class NumpadBehavior : MonoBehaviour
     {
         DoorScript = theDoor.GetComponent<OpenableDoor>();
         DoorScript.canBeOpened = false;
-        //accessCode = Random.Range(1000, 9999);
-        accessCode = 2972;
+        accessCode = Random.Range(1000, 9999);
         Debug.Log("access code is " + accessCode);
         accessCodeString = accessCode.ToString();
         Debug.Log("access code(ToString) is " + accessCodeString);
-
+        generateCode();
         state = "Unanswered";
     }
 
@@ -166,9 +169,11 @@ public class NumpadBehavior : MonoBehaviour
         }
     }
 
-    void UnlockDoor()
+
+    void generateCode()
     {
-        Debug.Log("IT SHOULD BE ANIMATING");
-                    theDoor.GetComponent<Animation>().Play("DoorOpen");
+        string password = accessCodeString;
+        Debug.Log("Password is " + accessCodeString);
+        PasswordEvent(password);
     }
 }
