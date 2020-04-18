@@ -7,10 +7,14 @@ using TMPro;
 public class ComputerScript : MonoBehaviour, IInteractable
 {
     [SerializeField] List<EmailScriptableObject> containedEmails = new List<EmailScriptableObject>();
-    private List<GameObject> EmailUIGameObjects = new List<GameObject>(); //internal reference to the present mails
+
+    private readonly List<GameObject> EmailUIGameObjects = new List<GameObject>(); //internal reference to the present mails
+
     [SerializeField] GameObject emailEntryPrefab;
     [SerializeField] GameObject leftSidePanel;
+
     [SerializeField] TextMeshProUGUI rightPanelTitle, rightPanelPeople, rightPanelBody;
+    [SerializeField] Image rightPanelEmailVeil;
     [SerializeField] GameObject standbyScreen;
     bool beingInteractedWith = false;
 
@@ -22,11 +26,13 @@ public class ComputerScript : MonoBehaviour, IInteractable
     {
         //possible setup logic
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += LeaveInteraction;
+        EmailClickUtility.EmailDeselectEvent += CleanRightPanel;
         Initialise();
     }
     private void OnDisable()
     {
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= LeaveInteraction;
+        EmailClickUtility.EmailDeselectEvent -= CleanRightPanel;
     }
     #endregion
 
@@ -39,7 +45,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
        foreach(EmailScriptableObject email in containedEmails)
         {
             GameObject g = Instantiate(emailEntryPrefab, leftSidePanel.transform);
-            g.GetComponent<TextMeshProUGUI>().SetText(email.title);
+            g.GetComponentInChildren<TextMeshProUGUI>().SetText(email.title);
             g.SetActive(true);
             EmailUIGameObjects.Add(g);
         }
@@ -51,7 +57,16 @@ public class ComputerScript : MonoBehaviour, IInteractable
         rightPanelPeople.SetText("From: " + email.sender + ". To: " + email.receivers);
         rightPanelBody.SetText(email.body);
 
+        rightPanelEmailVeil.enabled = true;
         ReadEmailEvent(email.title);
+    }
+
+    public void CleanRightPanel()
+    {
+        rightPanelTitle.SetText("");
+        rightPanelPeople.SetText("");
+        rightPanelBody.SetText("");
+        rightPanelEmailVeil.enabled = false;
     }
 
     public void DisplayEmailOnClick(TextMeshProUGUI title) //called via the button component on the object
@@ -61,21 +76,21 @@ public class ComputerScript : MonoBehaviour, IInteractable
                 DisplayEmail(email);
     }
 
-    private void CheckIfPlayerReadEmails() //checks if email title was added to a list of emails that were read once already and acts upon it
+    private void CheckIfPlayerReadEmails() // [NOT NEEDED FOR NOW] checks if email title was added to a list of emails that were read once already and acts upon it
     {
         foreach (GameObject mail in EmailUIGameObjects)
         {
-            string mailTitle = mail.GetComponent<TextMeshProUGUI>().text;
+            string mailTitle = mail.GetComponentInChildren<TextMeshProUGUI>().text;
 
             if (!EmailManager.HasReadEmail(mailTitle)) //if the email in the PC was never read it will have a different font appearance
             {
-                mail.GetComponent<TextMeshProUGUI>().color = Color.red;
-                mail.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+                mail.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                mail.GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
             }
             else
             {
-                mail.GetComponent<TextMeshProUGUI>().color = Color.white;
-                mail.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                mail.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+                mail.GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
             }
         }
     }
@@ -91,7 +106,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
         Cursor.visible = true;
 
         standbyScreen.SetActive(false);
-        CheckIfPlayerReadEmails();
+       // CheckIfPlayerReadEmails();
 
         DisplayEmail(containedEmails[0]);
         EmailUIGameObjects[0].GetComponent<Button>().Select();

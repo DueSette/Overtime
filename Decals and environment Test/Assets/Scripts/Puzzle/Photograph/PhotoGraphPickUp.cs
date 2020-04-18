@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhotoGraphPickUp : ItemInGameObjectScript
 {
-    protected override void InteractionEvent()
+    protected override void OnInteraction()
     {
         Debug.Log("ActionPressed");
 

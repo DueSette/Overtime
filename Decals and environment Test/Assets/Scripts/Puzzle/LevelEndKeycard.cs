@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LevelEndKeycard : ItemInGameObjectScript
 {
-    protected override void InteractionEvent()
+    protected override void OnInteraction()
     {
-        base.InteractionEvent();
+        base.OnInteraction();
 
         LevelManager.onLevelEvent("UnlockElevator");
     }

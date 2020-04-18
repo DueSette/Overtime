@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(AudioSource))]
 public class BadoomScript : MonoBehaviour
@@ -13,6 +14,7 @@ public class BadoomScript : MonoBehaviour
     [SerializeField] float freeWanderRadius, playerDetectionRadius, maxSpeed, idleTime, turningSpeed = 0.08f;
 
     [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
+    [SerializeField] VisualEffect visualEffect;
 
     #region Internal fields
     private static UnityStandardAssets.Characters.FirstPerson.FirstPersonController player; //static ref to player - all hail nested namespaces
@@ -36,6 +38,9 @@ public class BadoomScript : MonoBehaviour
             player = FindObjectOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
 
         aud = GetComponent<AudioSource>();
+        aud.clip = hoveringSound;
+        aud.Play();
+
         balloonAI = GetComponent<NavMeshAgent>();
         balloonAI.angularSpeed = 0;
 
@@ -101,6 +106,8 @@ public class BadoomScript : MonoBehaviour
         {
             case BalloonState.IDLE:
                 {
+                    aud.clip = hoveringSound;
+                    aud.Play();
                     idleTimer = idleTime;
                     break;
                 }
@@ -113,7 +120,8 @@ public class BadoomScript : MonoBehaviour
                 }
             case BalloonState.CHASING:
                 {
-                    //TODO: play "chasing" clip
+                    aud.clip = chasingSound;
+                    aud.Play();
                     chaseTimer = 0.0f;
                     break;
                 }
@@ -190,6 +198,16 @@ public class BadoomScript : MonoBehaviour
         transform.rotation = Quaternion.Euler(prev.x, v.y, prev.z);
     }
 
+    private void Pop() //badoom behaviour for explosion
+    {
+        //this means screen fx, sound, maybe camera shake, maybe slowed speed
+       // visualEffect.gameObject.transform.parent = null;
+       // visualEffect.Play();
+        //visualEffect.gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);
+        
+        Destroy(gameObject);
+    }
+
     private void ResetActivity() //back to square one and in wandering state
     {
         ChangeState(BalloonState.WANDERING);
@@ -209,10 +227,8 @@ public class BadoomScript : MonoBehaviour
 
             case "Player":
                 {
-                    //explode on player contact
-                    //this means screen fx, sound, maybe camera shake, maybe slowed speed
-                    print("Player got badoomed!");
-                    Destroy(gameObject);
+                    Pop();
+                    print("Badoom popped");
                 }
                 break;
         }
@@ -220,8 +236,7 @@ public class BadoomScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!fixedWanderer)
-            return;
+        if (!fixedWanderer) { return; }
 
         for (int i = 0; i < fixedWanderSpots.Length; i++)
             Gizmos.DrawWireSphere(fixedWanderSpots[i], 0.15f);
