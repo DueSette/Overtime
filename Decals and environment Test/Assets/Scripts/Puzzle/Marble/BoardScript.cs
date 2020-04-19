@@ -61,7 +61,8 @@ public class BoardScript : ObjectOfInterest
 
 
 
-        if (camNum == 2 && marbleActve == true && puzzleComplete == false)
+        //if (camNum == 2 && marbleActve == true && puzzleComplete == false)
+        if(interacting)
         {
             localMarble.gameObject.SetActive(true);
         }
