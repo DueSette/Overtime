@@ -21,13 +21,14 @@ public class ObjectOfInterest : MonoBehaviour
 
     void Start()
     {
-        cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
+       // cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
     }
 
-    public void FocusCamera()
+    public virtual void FocusCamera()
     {
+        cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
         cameraController.CameraChange();
-        Invoke("FindCamera", .3f);
+        Invoke("FindCamera", .2f);
     }
 
     void FindCamera()
@@ -42,6 +43,7 @@ public class ObjectOfInterest : MonoBehaviour
                 Debug.Log("child found");
                 theCamera.viewList.Add(child);
             }
+               
         }
         theCamera.viewNum = 1; // Starts the camera at viewpoint everytime it's clicked.
     }        

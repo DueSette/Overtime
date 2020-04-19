@@ -563,7 +563,6 @@ GameObject:
   - component: {fileID: 755920730213539357}
   - component: {fileID: 759676086241708987}
   - component: {fileID: 7452366588761140506}
-  - component: {fileID: 3092287853393706998}
   m_Layer: 0
   m_Name: DoorWithKeypad
   m_TagString: Keypad
@@ -613,6 +612,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c43f2b5b7b457c44a2ba69ed2d67664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theCamera: {fileID: 0}
+  cameraController: {fileID: 0}
+  checker: 1
   numpad1: {fileID: 750177018413816065}
   numpad2: {fileID: 750060489069446237}
   numpad3: {fileID: 751801803503943007}
@@ -632,21 +634,6 @@ MonoBehaviour:
   currentCode: 
   accessCode: 0
   accessCodeString: 
---- !u!114 &3092287853393706998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 750296161988247251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e586935af10db841b36c2fe4cd96b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theCamera: {fileID: 0}
-  cameraController: {fileID: 0}
-  checker: 1
 --- !u!1 &750330839615343585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,12 +1685,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7646f784d5bdc5f4a9152d5dbb377270, type: 3}
---- !u!4 &8735722345418282029 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6039756300840800935, guid: 7646f784d5bdc5f4a9152d5dbb377270,
-    type: 3}
-  m_PrefabInstance: {fileID: 3092287854363166346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2262648801847776894 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3858609010853531892, guid: 7646f784d5bdc5f4a9152d5dbb377270,
@@ -1713,6 +1694,12 @@ Animator:
 --- !u!1 &5501769006287034178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7399474289552675272, guid: 7646f784d5bdc5f4a9152d5dbb377270,
+    type: 3}
+  m_PrefabInstance: {fileID: 3092287854363166346}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8735722345418282029 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6039756300840800935, guid: 7646f784d5bdc5f4a9152d5dbb377270,
     type: 3}
   m_PrefabInstance: {fileID: 3092287854363166346}
   m_PrefabAsset: {fileID: 0}
