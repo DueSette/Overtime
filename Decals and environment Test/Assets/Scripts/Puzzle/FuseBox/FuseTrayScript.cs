@@ -33,15 +33,31 @@ public class FuseTrayScript : MonoBehaviour
             }
     }
 
-    public void HandFuse() //equips a fuse to the cursor
+    public void HandFuse(Vector3 point) //equips a fuse to the cursor, selecting the nearest one
     {
+        GameObject nearest = null; //default values, never used
+        float nearestDist = 9999; 
+        int fuseNum = -1;
+
         for (int i = 0; i < embeddedFuses.Length; i++)
-            if (embeddedFuses[i] != null) //if there is embedded fuse
+            if (embeddedFuses[i] != null)
             {
-                fuseBox.currentlyHeldFuse = embeddedFuses[i];
-                embeddedFuses[i] = null;
-                return;
+                //Check the distance between the point the player clicked and each available fuse
+                Vector3 fusePos = embeddedFuses[i].transform.position;
+                float dist = Vector3.Distance(fusePos, point);
+
+                if (dist < nearestDist) //Save the nearest fuse and then hand it to the player
+                {
+                    nearest = embeddedFuses[i];
+                    nearestDist = dist;
+                    fuseNum = i;
+                }              
             }
+
+        if(fuseNum == -1) { return; } //means there are no fuses in the tray
+
+        fuseBox.currentlyHeldFuse = nearest;
+        embeddedFuses[fuseNum] = null;
     }
 
     public void StoreFuse(GameObject fuse) //accept a fuse from the cursor and stores it
