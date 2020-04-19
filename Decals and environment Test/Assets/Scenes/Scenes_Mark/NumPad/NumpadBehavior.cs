@@ -67,7 +67,7 @@ public class NumpadBehavior : ObjectOfInterest
         if (Input.GetKey(KeyCode.Space))
         {
             state = "NotInteracting";
-}
+        }
 
 
         accessCodeTextBox.GetComponent<Text>().text = "" + accessCode;

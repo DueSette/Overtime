@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardScript : MonoBehaviour, IInteractable
+public class BoardScript : ObjectOfInterest
 {
     public float limiter = 10f;
     public float rotspeed = 200;
@@ -11,7 +11,7 @@ public class BoardScript : MonoBehaviour, IInteractable
 
     public bool marbleActve = false;
     public bool puzzleComplete = false;
-    public GameObject cameraHolder;
+    public List<GameObject> cameraViews;
 
 
     public static int camNum;
@@ -35,10 +35,22 @@ public class BoardScript : MonoBehaviour, IInteractable
     public Quaternion startRot;
     Vector3 currentposition;
 
+    public bool interacting = false;
+
     void Start()
     {
         startRot = transform.rotation;
         camNum = 1;
+
+        foreach (Transform child in transform)
+        {
+            if (child.tag == "ViewPort")
+            {
+                Debug.Log("child found");
+                cameraViews.Add(child.gameObject);
+            }
+
+        }
     }
 
     void Update()
@@ -49,22 +61,25 @@ public class BoardScript : MonoBehaviour, IInteractable
 
 
 
-        if(camNum == 2 && marbleActve == true && puzzleComplete == false)
+        if (camNum == 2 && marbleActve == true && puzzleComplete == false)
         {
             localMarble.gameObject.SetActive(true);
         }
 
 
-     /*   if(camNum == 2)
+        if (interacting)
         {
-            cameraHolder.transform.parent = null;
+            Invoke("RemoveCameras", .7f);
         }
         else
         {
-            cameraHolder.transform.parent = this.transform;
+            foreach (GameObject g in cameraViews)
+            {
+                g.transform.parent = this.transform;
+            }
         }
-        */
-        
+
+
 
 
 
@@ -104,7 +119,7 @@ public class BoardScript : MonoBehaviour, IInteractable
         }
 
 
-        if (camNum == 2)
+        if (interacting == true)
         {
             if (!Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.A))
             {
@@ -146,7 +161,7 @@ public class BoardScript : MonoBehaviour, IInteractable
 
         }
 
-        
+
 
 
         if (Input.GetKey(KeyCode.Q))
@@ -164,13 +179,30 @@ public class BoardScript : MonoBehaviour, IInteractable
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, startRot, rotspeed * Time.deltaTime);
         }
+
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            interacting = false;
+        }
     }
 
 
 
 
-    void IInteractable.InteractWith()
+    public override void FocusCamera()
     {
-        camNum = 2;
+        base.FocusCamera();
+        interacting = true;
+        Debug.Log("The Changed class was called");
+    }
+
+
+    public void RemoveCameras()
+    {
+        foreach (GameObject g in cameraViews)
+        {
+            g.transform.parent = null;
+        }
     }
 }
