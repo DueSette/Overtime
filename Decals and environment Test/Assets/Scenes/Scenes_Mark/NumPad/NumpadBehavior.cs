@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NumpadBehavior : MonoBehaviour
+public class NumpadBehavior : ObjectOfInterest
 {
 
     /// <summary>
@@ -16,6 +16,8 @@ public class NumpadBehavior : MonoBehaviour
     public delegate void PasswordDelegate(string s);
     public static event PasswordDelegate PasswordEvent;
 
+
+    AudioSource audioSource;
 
     public GameObject numpad1;
     public GameObject numpad2;
@@ -36,6 +38,10 @@ public class NumpadBehavior : MonoBehaviour
     bool open = false;
     private OpenableDoor DoorScript;
 
+    [SerializeField] private AudioClip BtnSound;
+    [SerializeField] private AudioClip GrantedSound;
+    [SerializeField] private AudioClip DeniedSound;
+
 
     public string currentCode;
     public int accessCode;
@@ -49,19 +55,31 @@ public class NumpadBehavior : MonoBehaviour
         Debug.Log("access code is " + accessCode);
         accessCodeString = accessCode.ToString();
         Debug.Log("access code(ToString) is " + accessCodeString);
+        audioSource = GetComponent<AudioSource>();
         generateCode();
-        state = "Unanswered";
+        state = "NotInteracting";
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            state = "NotInteracting";
+        }
+
 
         accessCodeTextBox.GetComponent<Text>().text = "" + accessCode;
 
         switch (state)
         {
+            case "NotInteracting":
+                {
+                    currentCode = "";
+                }
+                break;
+
             case "Unanswered":
                 if (currentCode.Length < 4)
                 {
@@ -70,69 +88,69 @@ public class NumpadBehavior : MonoBehaviour
                     {
                         numpad1.GetComponent<Animation>().Play("Numpad1Anim");
                         currentCode = currentCode + "1";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("2"))
                     {
                         numpad2.GetComponent<Animation>().Play("Numpad2Anim");
                         currentCode = currentCode + "2";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("3"))
                     {
                         numpad3.GetComponent<Animation>().Play("Numpad3Anim");
                         currentCode = currentCode + "3";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("4"))
                     {
                         numpad4.GetComponent<Animation>().Play("Numpad4Anim");
                         currentCode = currentCode + "4";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("5"))
                     {
                         numpad5.GetComponent<Animation>().Play("Numpad5Anim");
                         currentCode = currentCode + "5";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("6"))
                     {
                         numpad6.GetComponent<Animation>().Play("Numpad6Anim");
                         currentCode = currentCode + "6";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("7"))
                     {
                         numpad7.GetComponent<Animation>().Play("Numpad7Anim");
                         currentCode = currentCode + "7";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("8"))
                     {
                         numpad8.GetComponent<Animation>().Play("Numpad8Anim");
                         currentCode = currentCode + "8";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                     if (Input.GetKeyDown("9"))
                     {
                         numpad9.GetComponent<Animation>().Play("Numpad9Anim");
                         currentCode = currentCode + "9";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
                     if (Input.GetKeyDown("0"))
                     {
                         numpad0.GetComponent<Animation>().Play("Numpad0Anim");
                         currentCode = currentCode + "0";
-                        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+                        ButtonPress();
                     }
 
                 }
@@ -140,6 +158,7 @@ public class NumpadBehavior : MonoBehaviour
                     if (currentCode == accessCodeString)
                 {
                     accessBar.GetComponent<Animation>().Play("AccessGrantedAnim");
+                    audioSource.PlayOneShot(GrantedSound);
                     DoorScript.canBeOpened = true;
                     state = "Complete";
                 }
@@ -147,6 +166,7 @@ public class NumpadBehavior : MonoBehaviour
                     if (currentCode != accessCodeString)
                 {
                     currentCode = "";
+                    audioSource.PlayOneShot(DeniedSound);
                     accessBar.GetComponent<Animation>().Play("AccessDeniedAnim");
                     Debug.Log("state is " + state);
                 }
@@ -167,13 +187,29 @@ public class NumpadBehavior : MonoBehaviour
                 break;
 
         }
+
+
+    }
+
+    private void ButtonPress()
+    {
+        currentCodeTextBox.GetComponent<Text>().text = currentCode;
+        audioSource.PlayOneShot(BtnSound);
+    }
+
+    public override void FocusCamera()
+    {
+        base.FocusCamera();
+        state = "Unanswered";
+        Debug.Log("The Changed class was called");
     }
 
 
-    void generateCode()
+
+void generateCode()
     {
         string password = accessCodeString;
         Debug.Log("Password is " + accessCodeString);
-        PasswordEvent(password);
+        //PasswordEvent(accessCodeString);
     }
 }
