@@ -124,8 +124,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 StartCoroutine(m_JumpBob.DoBobCycle());
 
-                if(m_MoveDir.y < -0.9f)
-                    PlayLandingSound();
+                //if(m_MoveDir.y < -0.9f)
+                //    PlayLandingSound();
 
                 m_MoveDir.y = 0f;
                 m_Jumping = false;
