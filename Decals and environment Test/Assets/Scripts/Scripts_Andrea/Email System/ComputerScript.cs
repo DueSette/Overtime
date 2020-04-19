@@ -58,7 +58,10 @@ public class ComputerScript : MonoBehaviour, IInteractable
         rightPanelBody.SetText(email.body);
 
         rightPanelEmailVeil.enabled = true;
-        ReadEmailEvent(email.title);
+        if (ReadEmailEvent != null)
+        {
+            ReadEmailEvent(email.title);
+        }
     }
 
     public void CleanRightPanel()
