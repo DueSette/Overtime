@@ -201,7 +201,8 @@ public class BadoomScript : MonoBehaviour
     private void Pop() //badoom behaviour for explosion
     {
         //this means screen fx, sound, maybe camera shake, maybe slowed speed
-        //visualEffect.gameObject.transform.parent = null;
+        visualEffect.gameObject.transform.parent = null;
+        visualEffect.SendEvent("BadoomExplodes");
         //visualEffect.Play();
         //visualEffect.gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);
         
