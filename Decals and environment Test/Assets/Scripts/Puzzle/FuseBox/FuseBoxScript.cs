@@ -94,7 +94,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
                 if (currentlyHeldFuse == null)
                 {
                     aud.PlayOneShot(pickFuse);
-                    tray.HandFuse();
+                    tray.HandFuse(hit.point);
                 }
                 else
                 {

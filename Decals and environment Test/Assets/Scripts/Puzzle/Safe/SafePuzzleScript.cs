@@ -142,7 +142,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         else if (proxyRotation > 357.1f) { proxyRotation = 3.0f; }
 
         currentStep = (int)proxyRotation / range;
-        if (oldStep != currentStep) { aud.PlayOneShot(turningSound); } //playus sound only if the player turned the dial enough
+        if (oldStep != currentStep && !aud.isPlaying) { aud.PlayOneShot(turningSound); } //plays sound only if the player turned the dial enough
     }
 
     void UpdateTargetSpot() //sets new "correct" dial number and direction that the player has to leave the dial on
