@@ -62,6 +62,12 @@ public class NumpadBehavior : MonoBehaviour
 
         switch (state)
         {
+            case "NotInteracting":
+                {
+
+                }
+                break;
+
             case "Unanswered":
                 if (currentCode.Length < 4)
                 {
@@ -174,6 +180,6 @@ public class NumpadBehavior : MonoBehaviour
     {
         string password = accessCodeString;
         Debug.Log("Password is " + accessCodeString);
-        PasswordEvent(password);
+        //PasswordEvent(accessCodeString);
     }
 }
