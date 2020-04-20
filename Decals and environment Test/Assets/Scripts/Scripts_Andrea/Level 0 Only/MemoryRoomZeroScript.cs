@@ -5,9 +5,9 @@ using UnityEngine;
 public class MemoryRoomZeroScript : MonoBehaviour
 {
     [Header("Mom Memory Event Objects")]
-    public List<GameObject> fluffFurniture = new List<GameObject>();
-    public List<GameObject> importantFurniture = new List<GameObject>();
+    public List<GameObject> furnitureToRemove = new List<GameObject>();
     [SerializeField] GameObject parent;
+    private bool vanished = false;
 
     [Header("Memory Return Event Objects")]
     [SerializeField] Material dissolver;
@@ -29,20 +29,14 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
     void VanishItem()
     {
-        if (fluffFurniture.Count > 0)
+        if (!vanished)
         {
-            int rand = Random.Range(0, fluffFurniture.Count);
-            SetForDissolutionWithChildren(fluffFurniture[rand]);
-            fluffFurniture.RemoveAt(rand);
+            foreach (GameObject g in furnitureToRemove)
+            {
+                SetForDissolutionWithChildren(g);
+                vanished = true;
+            }
         }
-
-        else if (importantFurniture.Count > 0)
-        {
-            int rand = Random.Range(0, importantFurniture.Count);
-            SetForDissolutionWithChildren(importantFurniture[rand]);
-            importantFurniture.RemoveAt(rand);
-        }
-
         else
         {
             SetForDissolutionWithChildren(parent);
@@ -52,10 +46,10 @@ public class MemoryRoomZeroScript : MonoBehaviour
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
             GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
             GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
-            
+
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
             LevelManager.onLevelEvent("MemoryReturn");
-            OpenableDoor.OnDoorUnlockEvent("MemoryReturn"); 
+            OpenableDoor.OnDoorUnlockEvent("MemoryReturn");
 
             // Changing the cake room to appear normal
             foreach (GameObject g in objectsToRemove)

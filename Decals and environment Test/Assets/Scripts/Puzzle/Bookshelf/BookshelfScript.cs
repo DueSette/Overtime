@@ -18,10 +18,9 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     ShelfSlotScript[] fuseSlots; //all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     StoolScript stool;
-    Animator anim;
     [SerializeField] AudioSource aud;
 
-    [SerializeField] LayerMask fuseBoxLayer;
+    [SerializeField] LayerMask bookshelfLayer;
     [HideInInspector] public GameObject currentlyHeldBook = null; //the fuse the player is currently using
 
     enum PuzzleState { ACTIVE = 0, PASSIVE = 2, SOLVED = 4 }
@@ -34,7 +33,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     private void Start()
     {
         stool = GetComponentInChildren<StoolScript>();
-        anim = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
 
         int i = 0;
@@ -74,9 +72,9 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, bookshelfLayer))
         {
-            FuseSlotScript f = hit.collider.gameObject.GetComponent<FuseSlotScript>();
+            ShelfSlotScript f = hit.collider.gameObject.GetComponent<ShelfSlotScript>();
 
             if (f != null) //did we hit a fuseslot?
                 f.Interact();
@@ -124,7 +122,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         aud.PlayOneShot(solvedSound);
 
         yield return new WaitForSeconds(1.75f);
-        anim.SetTrigger("Close");
 
         GameStateManager.SetGameState(GameState.IN_GAME);
     }
@@ -138,7 +135,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         state = PuzzleState.ACTIVE;
 
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the bookshelf in focus
-        anim.SetTrigger("Open");
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

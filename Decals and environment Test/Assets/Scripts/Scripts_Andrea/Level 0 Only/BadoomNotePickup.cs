@@ -21,7 +21,9 @@ public class BadoomNotePickup : NoteInGameObjectScript
 
     protected override void OnInteraction()
     {
-        base.OnInteraction();
+        GetComponent<Collider>().enabled = false;
+        GetComponentInChildren<MeshRenderer>().enabled = false;
+
         SetupBackupReferences();
 
         // Locking Player in badoom room
