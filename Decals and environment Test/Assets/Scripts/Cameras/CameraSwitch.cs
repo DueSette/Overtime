@@ -11,6 +11,7 @@ public class CameraSwitch : MonoBehaviour
     public Camera dynamicCamera;
     public CharacterController controller;
     public DynamicCamera dynCamScript;
+    public bool camerafocus;
 
     public bool isCameraMain;
 
@@ -44,12 +45,13 @@ public class CameraSwitch : MonoBehaviour
     void Update()
     {
 
-       // cameraNum = BoardScript.camNum;
+        // cameraNum = BoardScript.camNum;
 
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && camerafocus == true)
         {
             Debug.Log("normal UPDATE");
+            camerafocus = false;
             dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
             dynCamScript.viewNum = 0;
             StartCoroutine(CameraDelay());
@@ -105,6 +107,7 @@ public class CameraSwitch : MonoBehaviour
     public void CameraChange()
     {
         GameStateManager.SetGameState(GameState.CAMERA_FOCUS);
+        camerafocus = true;
         Debug.Log("hello");
         cameraNum = 2;
     }
