@@ -68,12 +68,27 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
         if (currentTurningDirection != targetTurningDirection)
         {
+            if (lastCorrectStep == -1) { lastCorrectStep = currentStep; }
+
+            ToleranceProcedure();
+        }
+        else
+            lastCorrectStep = -1;
+
+        UpdateTargetSpot();
+    }
+
+    int lastCorrectStep = -1;
+
+    void ToleranceProcedure() //checks whether or not we turned too much in the wrong direction
+    {
+        if (Mathf.Abs(currentStep - lastCorrectStep) > 1)
+        {
             StartCoroutine(ResetSafe(false));
             aud.PlayOneShot(wrongSound);
             targetIterator = 0;
+            lastCorrectStep = -1;
         }
-
-        UpdateTargetSpot();
     }
  
     void ManageTimer() //updates timer value in accordance to current state
@@ -127,7 +142,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             aud.PlayOneShot(correctSound);
         else
         {
-            aud.PlayOneShot(wrongSound);
+            if (currentStep != 0) { aud.PlayOneShot(wrongSound); }
             StartCoroutine(ResetSafe(false));
         }
 
@@ -142,7 +157,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         else if (proxyRotation > 357.1f) { proxyRotation = 3.0f; }
 
         currentStep = (int)proxyRotation / range;
-        if (oldStep != currentStep) { aud.PlayOneShot(turningSound); } //playus sound only if the player turned the dial enough
+        if (oldStep != currentStep) { aud.PlayOneShot(turningSound); } //plays sound only if the player turned the dial enough
     }
 
     void UpdateTargetSpot() //sets new "correct" dial number and direction that the player has to leave the dial on

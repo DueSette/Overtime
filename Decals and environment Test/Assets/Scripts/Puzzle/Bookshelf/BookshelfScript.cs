@@ -17,7 +17,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     ShelfSlotScript[] fuseSlots; //all the places where you can fit a fuse in, they are classes as they contain a package of info
 
-    FuseTrayScript tray;
+    StoolScript stool;
     Animator anim;
     [SerializeField] AudioSource aud;
 
@@ -33,7 +33,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     #region Unity methods
     private void Start()
     {
-        tray = GetComponentInChildren<FuseTrayScript>();
+        stool = GetComponentInChildren<StoolScript>();
         anim = GetComponent<Animator>();
         aud = GetComponent<AudioSource>();
 
@@ -86,12 +86,12 @@ public class BookshelfScript : MonoBehaviour, IInteractable
                 if (currentlyHeldBook == null)
                 {
                     aud.PlayOneShot(pickBook);
-                    tray.HandFuse();
+                    stool.HandBook(hit.point);
                 }
                 else
                 {
                     aud.PlayOneShot(putBookStool);
-                    tray.StoreFuse(currentlyHeldBook);
+                    stool.StoreBook(currentlyHeldBook);
                 }
             }
         }
@@ -112,9 +112,9 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         state = PuzzleState.PASSIVE;
 
         if (currentlyHeldBook != null)
-            tray.StoreFuse(currentlyHeldBook);
+            stool.StoreBook(currentlyHeldBook);
 
-        tray.enabled = false; //prevents mishaps from happening
+        stool.enabled = false; //prevents mishaps from happening
     }
 
     public IEnumerator SetSolvedState()
@@ -143,7 +143,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        tray.enabled = true;
+        stool.enabled = true;
         LoadAvailableBooks();
     }
 
@@ -151,11 +151,11 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     {
         PollInventoryForBooks();
 
-        for (; slotsFilled < tray.slots.Length; slotsFilled++)
+        for (; slotsFilled < stool.slots.Length; slotsFilled++)
             if (bookPrefabs[slotsFilled] != null)
             {
-                GameObject g = Instantiate(bookPrefabs[slotsFilled], tray.slots[slotsFilled]);
-                tray.AssignFilledSlot(g);
+                GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
+                stool.AssignFilledSlot(g);
             }
     }
 

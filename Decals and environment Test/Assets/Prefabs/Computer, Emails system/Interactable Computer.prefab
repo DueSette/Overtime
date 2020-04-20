@@ -534,6 +534,36 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4546091290498801224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8888654019711228408}
+  m_Layer: 0
+  m_Name: ViewPort
+  m_TagString: ViewPort
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8888654019711228408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546091290498801224}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -80, y: 40, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7524603028695319572}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &5116614889350616725
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,6 +884,7 @@ GameObject:
   - component: {fileID: 5047212754120884955}
   - component: {fileID: 8379350180507057427}
   - component: {fileID: 739966874916638717}
+  - component: {fileID: 5879848999087816979}
   m_Layer: 0
   m_Name: Interactable Computer
   m_TagString: Untagged
@@ -873,6 +904,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 7089559716404658188}
+  - {fileID: 8888654019711228408}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -958,6 +990,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.942945, y: 47.273815, z: 83.71246}
   m_Center: {x: 0.00000037252906, y: 39.960236, z: 1.4823089e-21}
+--- !u!114 &5879848999087816979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789065724852729351}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e586935af10db841b36c2fe4cd96b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCamera: {fileID: 0}
+  cameraController: {fileID: 0}
+  checker: 1
 --- !u!1 &6989977521433140193
 GameObject:
   m_ObjectHideFlags: 0
