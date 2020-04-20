@@ -1263,6 +1263,7 @@ GameObject:
   - component: {fileID: 1082067010434393430}
   - component: {fileID: 521455484042651131}
   - component: {fileID: 3825021858968929435}
+  - component: {fileID: 1921034380}
   m_Layer: 0
   m_Name: Mom_prefab
   m_TagString: Untagged
@@ -1279,7 +1280,7 @@ Transform:
   m_GameObject: {fileID: 6328995842843621951}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4992504, y: 1.4992504, z: 1.4992504}
   m_Children:
   - {fileID: 1782311552350788410}
   - {fileID: 6445574203930155030}
@@ -1331,23 +1332,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fluffFurniture:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   importantFurniture:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  parent: {fileID: 0}
-  dissolver: {fileID: 0}
+  parent: {fileID: 6328995842843621951}
+  dissolver: {fileID: 2100000, guid: 6e21e707f13101048aa677f4d5be031f, type: 2}
   hallwaySpot: {fileID: 0}
   badoomSpawner: {fileID: 0}
   cakeRoomReflectionProbe: {fileID: 0}
-  objectsToRemove: []
-  objectsToAdd: []
+  objectsToRemove:
+  - {fileID: 0}
+  objectsToAdd:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!136 &1921034380
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328995842843621951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.26
+  m_Height: 1.32
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!1 &6343304379698468737
 GameObject:
   m_ObjectHideFlags: 0
