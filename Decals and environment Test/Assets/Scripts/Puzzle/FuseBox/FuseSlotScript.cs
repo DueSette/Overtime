@@ -12,7 +12,7 @@ public class FuseSlotScript : MonoBehaviour
 
     [SerializeField] int slotNumber;
     [SerializeField] Color litColor;
-    [SerializeField] GameObject containedFuse;
+    GameObject containedFuse;
     [SerializeField] string correctFuseColor;
     [SerializeField] AudioClip putIntoFuseSlot, retrieveFromFuseSlot;
     bool isFilled;
