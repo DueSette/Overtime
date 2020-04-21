@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FuseBoxScript : MonoBehaviour, IInteractable
+public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
 {
     /*===========
      * SELF CONTAINED CLASS FOR FUSEBOX PUZZLE LOGIC
@@ -216,6 +216,14 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     }
 
     #endregion
+
+    #region Text Prompt
+    string ITextPrompt.PromptText()
+    {
+        return "This Should Return Power To The Office";
+    }
+    #endregion
+
 
     IEnumerator DelaySound(AudioClip clip) //simply delays a sound
     {

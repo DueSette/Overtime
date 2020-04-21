@@ -93,7 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 4
   litColor: {r: 0.5411765, g: 0.03529412, b: 1, a: 1}
-  containedFuse: {fileID: 0}
   correctFuseColor: Blue
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,
@@ -287,6 +286,7 @@ GameObject:
   - component: {fileID: 143086008}
   - component: {fileID: 143086007}
   - component: {fileID: 143086009}
+  - component: {fileID: 211534301759783076}
   m_Layer: 0
   m_Name: Fusebox_prefab
   m_TagString: Untagged
@@ -310,6 +310,7 @@ Transform:
   - {fileID: 8374134946483205421}
   - {fileID: 3688706396462153017}
   - {fileID: 5514724926456148196}
+  - {fileID: 9015875566961546973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -577,6 +578,21 @@ MonoBehaviour:
   - {fileID: 4743126902854982086}
   correctSolvedMaterial: {fileID: 2100000, guid: ea9cfc5c333ef7e4c9d4648172c152f7,
     type: 2}
+--- !u!114 &211534301759783076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625567550303595502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e586935af10db841b36c2fe4cd96b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCamera: {fileID: 0}
+  cameraController: {fileID: 0}
+  checker: 1
 --- !u!1 &656130543917884628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1602,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 2
   litColor: {r: 1, g: 0, b: 0, a: 1}
-  containedFuse: {fileID: 0}
   correctFuseColor: Red
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: b16e17d6881e21247a44a6c3d8c03da1,
@@ -1891,6 +1906,36 @@ Transform:
   - {fileID: 5827641599446166465}
   m_Father: {fileID: 4536584458883406333}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4380092592725597745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9015875566961546973}
+  m_Layer: 0
+  m_Name: ViewPort
+  m_TagString: ViewPort
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9015875566961546973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380092592725597745}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4536584458883406333}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4568606564474513826
 GameObject:
@@ -2203,7 +2248,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 3
   litColor: {r: 0, g: 1, b: 0.047058824, a: 1}
-  containedFuse: {fileID: 0}
   correctFuseColor: Green
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,
@@ -2625,7 +2669,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 1
   litColor: {r: 1, g: 0.49803922, b: 0, a: 1}
-  containedFuse: {fileID: 0}
   correctFuseColor: Orange
   putIntoFuseSlot: {fileID: 8300000, guid: 5c48716363ec12a42b371cc0ac2aa5c4, type: 3}
   retrieveFromFuseSlot: {fileID: 8300000, guid: 659a7350f2e284b488c130777facd365,

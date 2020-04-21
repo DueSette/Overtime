@@ -46,8 +46,6 @@ public class CameraSwitch : MonoBehaviour
     {
 
         // cameraNum = BoardScript.camNum;
-
-
         if (Input.GetKey(KeyCode.Space) && camerafocus == true)
         {
             Debug.Log("normal UPDATE");
@@ -62,28 +60,34 @@ public class CameraSwitch : MonoBehaviour
             cameraNum = 2;
         }
 
+
         if (cameraNum == 1)
         {
+            // Use the main fps controller and main camera
             thefpsController.SetActive(true);           
             playerCamera.enabled = true;
             playerCamAud.enabled = true;
             controller.enabled = true;
+
+            // Hiding The Dynamic Camera
             dynamicCameraHolder.SetActive(false);
             dynamicCamera.enabled = false;
             dynamicCamAud.enabled = false;
             dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
             isCameraMain = true;
-
         }
 
         
-
         if (cameraNum == 2)
         {
+            // Use he dynamic camera
             dynamicCameraHolder.SetActive(true);
             dynamicCamera.enabled = true;
             dynamicCamAud.enabled = true;
             dynamicCameraGameObj.transform.parent = null;
+
+
+            // Hide the main fps controller and main camera
             thefpsController.SetActive(false);
             dynamicCameraGameObj.transform.parent = null;
             controller.enabled = false;
