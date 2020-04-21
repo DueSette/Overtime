@@ -36,11 +36,6 @@ public class DynamicCamera : MonoBehaviour
     void Update()
     {
         currentView = viewList[viewNum];
-
-
-
-
-
         //---------------------------------------
         // Functions for cycling between cameras,
         //---------------------------------------
