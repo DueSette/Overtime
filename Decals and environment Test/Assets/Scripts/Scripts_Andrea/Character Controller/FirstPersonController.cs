@@ -112,7 +112,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if(GameStateManager.gameState == GameState.INTERACTING_W_ITEM)
             {
-                if (Input.GetButton("Cancel"))
+                if (Input.GetButtonDown("Cancel"))
                 {
                     GameStateManager.SetGameState(GameState.IN_GAME);
                     ExitInteraction();             
@@ -410,25 +410,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void CheckForViewport()
         {
-            //return; //this was added by Andrea as for now the script does not really work/is not hooked up properly, and creates nullreferences
+            if(Camera.main == null) { return; }
 
             Ray Vray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             if (Physics.Raycast(Vray, out RaycastHit hit, 1.9f))
             {
                 if (hit.collider.GetComponent<ObjectOfInterest>() != null)
                 {
-                    Debug.Log("I hit a viewport");
                     hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
-                }
-                else
-                {
-                    Debug.Log("NoViewPort");
                 }
             }
         }
         
         private void CheckForInteractible() //called when player clicks
         {
+            if(Camera.main == null) { return; }
+
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
@@ -437,10 +434,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (hit.collider.GetComponent<IInteractable>() != null)
                 {
                     hit.collider.GetComponent<IInteractable>().InteractWith();
-                }
-                else
-                {
-                    Debug.Log("NoInteractable");
                 }
             }
         }

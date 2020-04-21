@@ -16,9 +16,6 @@ public class ObjectOfInterest : MonoBehaviour
     /// MAKE SURE DYNAMIC CAMERA IS TURNED ON IN EDITOR BEFORE GAME STARTS
     /// </summary>
 
-
-
-
     void Start()
     {
        // cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
@@ -33,14 +30,12 @@ public class ObjectOfInterest : MonoBehaviour
 
     void FindCamera()
     {
-        Debug.Log("findcamera called");
         theCamera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<DynamicCamera>();
 
         foreach (Transform child in transform)
         {
             if (child.tag == "ViewPort")
             {
-                Debug.Log("child found");
                 theCamera.viewList.Add(child);
             }
                
