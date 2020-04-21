@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
     static InventoriesManager inventoriesManager;
+    [SerializeField] AudioClip pickupSound; 
     [SerializeField] ItemInventory.Item item;
     [SerializeField] bool destroyOnPickup = false;
 
@@ -15,6 +16,7 @@ public class ItemInGameObjectScript : InGameObjectBaseClass, IInteractable
 
         inventoriesManager.itemManager.UnlockNewItem(item);
         inventoriesManager.ForceToggleItemInventoryWindow(true);
+        SoundManager.instance.PlaySound(pickupSound);
 
         OnInteraction();
     }
