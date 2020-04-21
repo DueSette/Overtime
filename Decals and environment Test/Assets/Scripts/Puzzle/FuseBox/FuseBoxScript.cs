@@ -175,7 +175,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
     {
         PollInventoryForFuses();
 
-        for (; slotsFilled < tray.slots.Length; slotsFilled++)
+        for (; slotsFilled < fusePrefabs.Count; slotsFilled++)
             if(fusePrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(fusePrefabs[slotsFilled], tray.slots[slotsFilled]);
