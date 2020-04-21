@@ -48,6 +48,7 @@ public class LevelLightsController : MonoBehaviour
             // Get light Strength at current time
             float strength = blinkCurve.Evaluate(currentAnimTime);
             light.color = Color.Lerp(dimmedLightColor1, dimmedLightColor2, strength);
+            //light.intensity = Mathf.Lerp(0, dimmedLightStrength, strength);
         }
     }
 
@@ -62,7 +63,25 @@ public class LevelLightsController : MonoBehaviour
     {
         if (eventCode == "FuseBoxPuzzleSolved")
         {
-            light.intensity = defaultLightStrength;
+            lowPower = false;
+            StartCoroutine(PowerLightsUp(light.color, light.intensity));
         }
+    }
+
+    private IEnumerator PowerLightsUp(Color currentLightColor, float currentLightIntensity)
+    {
+        float t = 0;
+        while (t < 1)
+        {
+            t += (Time.deltaTime / 2);
+            
+            light.color = Color.Lerp(currentLightColor, defaultLightColor, t);
+            light.intensity = Mathf.Lerp(currentLightIntensity, defaultLightStrength, t);
+
+            yield return null;
+        }
+
+        light.color = defaultLightColor;
+        light.intensity = defaultLightStrength;
     }
 }
