@@ -189,7 +189,11 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
 
         foreach (string s in nameOfFusesToSearchInInventory)
             if (InventoriesManager.instance.HasItemAndRemove(s, out newFuse))
+            {
+                newFuse.transform.localScale /= 5.367f;
+                newFuse.transform.rotation = Quaternion.identity;
                 fusePrefabs.Add(newFuse);
+            }
     }
     #endregion
 
@@ -236,7 +240,6 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         }
     }
     #endregion
-
 
     IEnumerator DelaySound(AudioClip clip) //simply delays a sound
     {
