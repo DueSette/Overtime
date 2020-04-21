@@ -13,7 +13,7 @@ public class BadoomScript : MonoBehaviour
     Vector3[] fixedWanderSpots;
     [SerializeField] float freeWanderRadius, playerDetectionRadius, maxSpeed, idleTime, turningSpeed = 0.08f;
 
-    [SerializeField] AudioClip hoveringSound, chasingSound, explosionSound;
+    [SerializeField] AudioClip chasingSound, explosionSound;
     [SerializeField] VisualEffect visualEffect;
 
     #region Internal fields
@@ -38,7 +38,6 @@ public class BadoomScript : MonoBehaviour
             player = FindObjectOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
 
         aud = GetComponent<AudioSource>();
-        aud.clip = hoveringSound;
         aud.Play();
 
         balloonAI = GetComponent<NavMeshAgent>();
@@ -76,10 +75,16 @@ public class BadoomScript : MonoBehaviour
                     BalloonLookAt(wanderSpot);
 
                     if (ReachedWanderSpot())
+                    {
+                        aud.Stop();
                         ChangeState(BalloonState.IDLE);
+                    }
 
                     if (IsPlayerNear())
+                    {
+                        aud.Stop();
                         ChangeState(BalloonState.CHASING);
+                    }
                     break;
                 }
             case BalloonState.CHASING:
@@ -106,8 +111,8 @@ public class BadoomScript : MonoBehaviour
         {
             case BalloonState.IDLE:
                 {
-                    aud.clip = hoveringSound;
                     aud.Play();
+                    aud.loop = true;
                     idleTimer = idleTime;
                     break;
                 }
@@ -203,8 +208,7 @@ public class BadoomScript : MonoBehaviour
         //this means screen fx, sound, maybe camera shake, maybe slowed speed
         visualEffect.gameObject.transform.parent = null;
         visualEffect.SendEvent("BadoomExplodes");
-        //visualEffect.Play();
-        //visualEffect.gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);
+        visualEffect.gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);
         
         Destroy(gameObject);
     }
