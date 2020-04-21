@@ -13,7 +13,7 @@ public class CameraSwitch : MonoBehaviour
     public DynamicCamera dynCamScript;
     public bool camerafocus;
 
-    public bool isCameraMain;
+    public static bool isCameraMain = true;
 
     AudioListener playerCamAud;
     AudioListener dynamicCamAud;
@@ -74,7 +74,7 @@ public class CameraSwitch : MonoBehaviour
             dynamicCamera.enabled = false;
             dynamicCamAud.enabled = false;
             dynamicCameraGameObj.transform.parent = dynamicCameraHolder.transform;
-            isCameraMain = true;
+            CameraSwitch.isCameraMain = true;
         }
 
         
@@ -93,7 +93,7 @@ public class CameraSwitch : MonoBehaviour
             controller.enabled = false;
             playerCamera.enabled = false;
             playerCamAud.enabled = false;
-
+            CameraSwitch.isCameraMain = false;
         }
 
     }
@@ -121,5 +121,17 @@ public class CameraSwitch : MonoBehaviour
         cameraNum = 1;
     }
 
-
+    public static Camera GetCurrentCamera()
+    {
+        if (isCameraMain)
+        {
+            GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            return mainCamera.GetComponent<Camera>();
+        }
+        else
+        {
+            GameObject mainCamera = GameObject.FindGameObjectWithTag("DynamicCamera");
+            return mainCamera.GetComponent<Camera>();
+        }
+    }
 }

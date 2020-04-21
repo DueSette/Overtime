@@ -79,7 +79,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
     #region Interaction
     void CheckFuseboxInteraction()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraSwitch.GetCurrentCamera().ScreenPointToRay(Input.mousePosition);
         cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
@@ -107,7 +107,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
 
     void UpdateHeldFusePosition() //makes the fuse follow the cursor on the X and Y, uses a fixed Z distance
     {
-        Vector3 v = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
+        Vector3 v = CameraSwitch.GetCurrentCamera().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
         Vector3 vel = Vector3.zero;
 
         currentlyHeldFuse.transform.position = Vector3.SmoothDamp(currentlyHeldFuse.transform.position, v, ref vel, 0.025f);
@@ -150,7 +150,10 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
     #region Startup Methods
     void IInteractable.InteractWith()
     {
-        if(state == (PuzzleState.ACTIVE | PuzzleState.SOLVED)) { return; }
+        if(state == (PuzzleState.ACTIVE | PuzzleState.SOLVED))
+        {
+            return;
+        }
 
         state = PuzzleState.ACTIVE;
 
@@ -220,7 +223,14 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
     #region Text Prompt
     string ITextPrompt.PromptText()
     {
-        return "This Should Return Power To The Office";
+        if (state == PuzzleState.PASSIVE)
+        {
+            return "This Should Return Power To The Office";
+        }
+        else
+        {
+            return "";
+        }
     }
     #endregion
 
