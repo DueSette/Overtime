@@ -77,6 +77,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public static event FacingIconPromptDelegate FacingPromptIconEvent;
         public delegate void FacingTextPromptDelegate(string s);
         public static event FacingTextPromptDelegate FacingPromptTextEvent;
+        public delegate void FacingTextPromptTimedDelegate(string s, float time);
+        public static event FacingTextPromptTimedDelegate FacingPromptTextTimedEvent;
         
         private void Start()
         {
@@ -459,10 +461,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 else
                     FacingPromptTextEvent?.Invoke("");
             }
-            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.0f))
+            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.5f))
             {
-                if (hit.collider.GetComponent<SimplePromptObjectTextOnly>() != null)
-                    FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                if (hit.collider.GetComponent<SimplePromptObjectTimedText>() != null)
+                    FacingPromptTextTimedEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText(), hit.collider.GetComponent<SimplePromptObjectTimedText>().lingerTime);
                 else
                     FacingPromptTextEvent?.Invoke("");
             }

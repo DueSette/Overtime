@@ -23,6 +23,7 @@ public class CrosshairScript : MonoBehaviour
     {
         FirstPersonController.FacingPromptIconEvent += ManageFade;
         FirstPersonController.FacingPromptTextEvent += SetPromptText;
+        FirstPersonController.FacingPromptTextTimedEvent += SetPromptText;
         GameStateManager.OnStateChange += SetCrosshairVisibility;
     }
 
@@ -30,6 +31,7 @@ public class CrosshairScript : MonoBehaviour
     {
         FirstPersonController.FacingPromptIconEvent -= ManageFade;
         FirstPersonController.FacingPromptTextEvent -= SetPromptText;
+        FirstPersonController.FacingPromptTextTimedEvent -= SetPromptText;
         GameStateManager.OnStateChange -= SetCrosshairVisibility;
     }
 
@@ -43,6 +45,25 @@ public class CrosshairScript : MonoBehaviour
     private void SetPromptText(string s)
     {
         promptTextBox.SetText(s);
+    }
+
+    private void SetPromptText(string s, float lingerTime)
+    {
+        StartCoroutine(SetTextForSetTime(s, lingerTime));
+    }
+
+    IEnumerator SetTextForSetTime(string s, float t)
+    {
+        //super quick and super dirty but hey 3 days from the deadline
+        float lapsed = 0f;
+        while (lapsed < t)
+        {
+            promptTextBox.SetText(s);
+            lapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        promptTextBox.SetText("");
     }
 
     void SetCrosshairVisibility(GameState gs)
