@@ -48,7 +48,6 @@ public class CameraSwitch : MonoBehaviour
         // cameraNum = BoardScript.camNum;
         if (Input.GetKey(KeyCode.Space) && camerafocus == true)
         {
-            Debug.Log("normal UPDATE");
             camerafocus = false;
             dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
             dynCamScript.viewNum = 0;
@@ -88,7 +87,7 @@ public class CameraSwitch : MonoBehaviour
 
 
             // Hide the main fps controller and main camera
-            thefpsController.SetActive(false);
+            //thefpsController.GetComponent<Camera>().enabled = false;
             dynamicCameraGameObj.transform.parent = null;
             controller.enabled = false;
             playerCamera.enabled = false;
@@ -101,18 +100,16 @@ public class CameraSwitch : MonoBehaviour
 
     IEnumerator CameraDelay()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.15f);
         GameStateManager.SetGameState(GameState.IN_GAME);
-        Debug.Log("LATE UPDATE");
         cameraNum = 1;
     }
 
 
     public void CameraChange()
     {
-        GameStateManager.SetGameState(GameState.CAMERA_FOCUS);
+        //GameStateManager.SetGameState(GameState.CAMERA_FOCUS);
         camerafocus = true;
-        Debug.Log("hello");
         cameraNum = 2;
     }
 
