@@ -5,6 +5,7 @@ using UnityEngine;
 public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
 {
     static InventoriesManager inventoriesManager;
+    [SerializeField] AudioClip pickupSound;
     [SerializeField] NoteInventory.NoteEntryItem note;
 
     int noteID;
@@ -20,6 +21,7 @@ public class NoteInGameObjectScript : InGameObjectBaseClass, IInteractable
         if (inventoriesManager == null)
             inventoriesManager = FindObjectOfType<InventoriesManager>();
 
+        SoundManager.instance.PlaySound(pickupSound);
         inventoriesManager.noteManager.UnlockNewNote(note);
         inventoriesManager.OpenNoteInventoryWindowOnUnlock(noteID);
 
