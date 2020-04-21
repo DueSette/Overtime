@@ -22,7 +22,7 @@ public class InventoriesManager : MonoBehaviour
     [SerializeField, Tooltip("If this is unpopulated just call Andrea, easier done than said")] Sprite selectedNotesImage, selectedItemsImage;
     Sprite unselectedNotesImage, unselectedItemsImage;
 
-    [SerializeField] AudioClip openInventory;
+    [SerializeField] AudioClip openInventory, closeInventory;
     [SerializeField] AudioClip navigateInventory;
 
     public static InventoriesManager instance;
@@ -109,6 +109,8 @@ public class InventoriesManager : MonoBehaviour
     public void SetMainPanel(bool open)
     {
         mainPanel.SetActive(open);
+
+        SoundManager.instance.PlaySound(open ? openInventory : closeInventory);
 
         if (open)
             SceneSettingsManager.instance.ChangeToPause(pauseMenuPostProcess);

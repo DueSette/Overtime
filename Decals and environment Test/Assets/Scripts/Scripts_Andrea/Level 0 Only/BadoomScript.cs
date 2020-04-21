@@ -111,13 +111,13 @@ public class BadoomScript : MonoBehaviour
         {
             case BalloonState.IDLE:
                 {
-                    aud.Play();
-                    aud.loop = true;
+                    aud.loop = false;
                     idleTimer = idleTime;
                     break;
                 }
             case BalloonState.WANDERING:
                 {
+                    aud.loop = false;
                     PickWanderSpot();
                     balloonAI.speed = (maxSpeed / 3.0f);
 
@@ -127,6 +127,8 @@ public class BadoomScript : MonoBehaviour
                 {
                     aud.clip = chasingSound;
                     aud.Play();
+                    aud.loop = true;
+
                     chaseTimer = 0.0f;
                     break;
                 }
