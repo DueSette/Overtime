@@ -144,6 +144,9 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         StartCoroutine(DelaySound(doorClose));
 
         GameStateManager.SetGameState(GameState.IN_GAME);
+
+        // Triggering Next Level Event
+        LevelManager.onLevelEvent("FuseBoxPuzzleSolved");
     }
     #endregion
 
