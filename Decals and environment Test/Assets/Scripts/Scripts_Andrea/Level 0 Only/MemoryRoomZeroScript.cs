@@ -34,8 +34,8 @@ public class MemoryRoomZeroScript : MonoBehaviour
             foreach (GameObject g in furnitureToRemove)
             {
                 SetForDissolutionWithChildren(g);
-                vanished = true;
             }
+            vanished = true;
         }
         else
         {
@@ -80,6 +80,12 @@ public class MemoryRoomZeroScript : MonoBehaviour
         }
     }
 
+    IEnumerator WaitToRemove(GameObject obj)
+    {
+        yield return new WaitForSeconds(1.0f);
+        obj.SetActive(false);
+    }
+
     void SetForDissolutionWithChildren(GameObject obj)
     {
         if (obj.GetComponent<Renderer>() != null)
@@ -91,6 +97,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
         {
             r.material = dissolver;
             StartCoroutine(LerpDissolve(r.material));
-        }      
+        }
+        StartCoroutine(WaitToRemove(obj));
     }
 }
