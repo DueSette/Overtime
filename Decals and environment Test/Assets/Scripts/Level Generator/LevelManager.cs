@@ -9,8 +9,6 @@ public class LevelManager : MonoBehaviour
     private List<LayoutData> spawnedLayouts;
     private LayoutData pickedLayout;
 
-    public GameObject player;
-
     public string nextLevel;
 
     // Level Events
@@ -28,10 +26,15 @@ public class LevelManager : MonoBehaviour
         pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position = elevatorStartPos;
 
         // Places the player in the start elevator of the selected level
+        GameObject player = GameStateManager.GetPlayer();
+        player.GetComponent<CharacterController>().enabled = false;
+        player.SetActive(false);
+
         player.transform.parent = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform;
         player.transform.localPosition = PlayerPositioning.Instance.playerPreviousPos;
         player.transform.localEulerAngles = PlayerPositioning.Instance.playerPreviousRot;
         player.transform.parent = null;
+
 
         player.GetComponent<CharacterController>().enabled = true;
         player.SetActive(true);

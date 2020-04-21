@@ -69,7 +69,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     #region Interaction
     void CheckFuseboxInteraction()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraSwitch.GetCurrentCamera().ScreenPointToRay(Input.mousePosition);
         cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, bookshelfLayer))
@@ -97,7 +97,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     void UpdateHeldBookPosition() //makes the fuse follow the cursor on the X and Y, uses a fixed Z distance
     {
-        Vector3 v = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
+        Vector3 v = CameraSwitch.GetCurrentCamera().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
         Vector3 vel = Vector3.zero;
 
         currentlyHeldBook.transform.position = Vector3.SmoothDamp(currentlyHeldBook.transform.position, v, ref vel, 0.025f);
