@@ -9,6 +9,7 @@ public class MusicChanger : MonoBehaviour
     [SerializeField] float fadeOutTime = 3;
     [SerializeField] float fadeInTime = 3;
     [SerializeField] bool restorePreviousMusicOnExit;
+    [SerializeField] bool destroyOnExit;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,7 +18,14 @@ public class MusicChanger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(!restorePreviousMusicOnExit) { return; }
-        SoundManager.instance.RestorePreviousBGM(fadeOutTime, fadeInTime);
+        if(restorePreviousMusicOnExit)
+        {
+            SoundManager.instance.RestorePreviousBGM(fadeOutTime, fadeInTime);
+        }
+     
+        if (destroyOnExit)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

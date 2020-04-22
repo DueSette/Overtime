@@ -22,7 +22,6 @@ public class OpenableDoor : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip closedSound;
     [SerializeField] private AudioClip lockedSound;
 
-
     private void OnEnable()
     {
         OpenableDoor.OnDoorUnlockEvent += UnlockDoor;

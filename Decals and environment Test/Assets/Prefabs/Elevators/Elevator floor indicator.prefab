@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7478576715725109393
 Transform:
@@ -55,8 +55,13 @@ MonoBehaviour:
   numberOfBlinks: 3
   litTime: 0.05
   timeBetweenLit: 0.1
+  failSFX: {fileID: 8300000, guid: cd847531d00e26f4cb08c7f614cdeba5, type: 3}
   litGreen: {r: 0, g: 0.88235295, b: 0, a: 0}
   unlitGreen: {r: 0, g: 0.29411766, b: 0, a: 0}
+  successSFX: {fileID: 8300000, guid: 595a73013344775418d36f0e1fcb9b26, type: 3}
+  newBackgroundMusic: {fileID: 8300000, guid: b128203144a4cbe42bf56c38224f16ce, type: 3}
+  fadeOutTime: 3
+  fadeInTime: 3
 --- !u!82 &7478576715725109399
 AudioSource:
   m_ObjectHideFlags: 0
@@ -68,7 +73,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8288163556850598478, guid: 0214601a257af63459d06a3ef41447a9,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2cc98c44090cc564d9a9e167e77bd0b3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cd847531d00e26f4cb08c7f614cdeba5, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -79,7 +84,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0.19705963
-  MaxDistance: 1.5798874
+  MaxDistance: 1.0797062
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -114,7 +119,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
