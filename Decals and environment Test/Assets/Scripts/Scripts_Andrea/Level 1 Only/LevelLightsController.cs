@@ -32,7 +32,10 @@ public class LevelLightsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (light == null)
+        {
+            light = this.GetComponent<Light>();
+        }
     }
 
     private void Update()
