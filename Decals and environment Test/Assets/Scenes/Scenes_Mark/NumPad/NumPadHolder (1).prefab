@@ -1143,6 +1143,7 @@ Transform:
   - {fileID: 2348591811650746113}
   - {fileID: 2344639887589756665}
   - {fileID: 2344323310634392315}
+  - {fileID: 366510690839897050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1157,8 +1158,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 49.369335, y: 59.948505, z: 58.842625}
-  m_Center: {x: -24.184679, y: -3.240521, z: 1.7134881}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5586183753161751626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,6 +1172,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c43f2b5b7b457c44a2ba69ed2d67664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theCamera: {fileID: 0}
+  cameraController: {fileID: 0}
+  checker: 1
   numpad1: {fileID: 2342761780489275473}
   numpad2: {fileID: 2342649578526938381}
   numpad3: {fileID: 2343257923259657231}
@@ -1182,10 +1186,10 @@ MonoBehaviour:
   numpad9: {fileID: 2342916922587241137}
   numpad0: {fileID: 2342965868886030303}
   accessBar: {fileID: 2342187064291186669}
-  currentCodeTextBox: {fileID: 0}
-  accessCodeTextBox: {fileID: 0}
   state: 
-  theDoor: {fileID: 0}
+  BtnSound: {fileID: 0}
+  GrantedSound: {fileID: 0}
+  DeniedSound: {fileID: 0}
   currentCode: 
   accessCode: 0
   accessCodeString: 
@@ -1520,3 +1524,33 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!1 &4658420198123039973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366510690839897050}
+  m_Layer: 0
+  m_Name: Viewport (1)
+  m_TagString: ViewPort
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366510690839897050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4658420198123039973}
+  m_LocalRotation: {x: 0.14387564, y: 0.6923148, z: -0.14387564, w: 0.6923148}
+  m_LocalPosition: {x: -6.64, y: 2.64, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2348506866610343757}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 23.480001, y: 90, z: 0}

@@ -415,9 +415,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Ray Vray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             if (Physics.Raycast(Vray, out RaycastHit hit, 1.9f))
             {
-                if (hit.collider.GetComponent<ObjectOfInterest>() != null)
+                ObjectOfInterest ooi = hit.collider.GetComponent<ObjectOfInterest>();
+                if (ooi != null)
                 {
-                    hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
+                    ooi.FocusCamera();
                 }
             }
         }
