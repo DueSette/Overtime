@@ -34,16 +34,16 @@ public class ShelfSlotScript : MonoBehaviour
         if (IsFilled)
         {
             aud.PlayOneShot(retrieveFromFuseSlot);
-            ExtractFuse();
+            RetrieveBook();
         }
         else
         {
             aud.PlayOneShot(putIntoFuseSlot);
-            EmbedFuse();
+            PlaceBook();
         }
     }
 
-    void EmbedFuse() //puts the fuse the player is holding in the slot
+    void PlaceBook() //puts the fuse the player is holding in the slot
     {
         if (bookshelf.currentlyHeldBook == null) { return; }
 
@@ -52,7 +52,7 @@ public class ShelfSlotScript : MonoBehaviour
         if (CheckFuse())
             correctBooks++;
 
-        StartCoroutine(FuseTrayScript.PlaceFuseOnTray(containedBook.transform, transform.position));
+        StartCoroutine(StoolScript.PlaceBookOnStool(containedBook.transform, transform.position));
         containedBook.GetComponent<Collider>().enabled = false;
 
         bookshelf.currentlyHeldBook = null;
@@ -61,7 +61,7 @@ public class ShelfSlotScript : MonoBehaviour
             StartCoroutine(bookshelf.SetSolvedState());
     }
 
-    void ExtractFuse() //extracts the fuse from the slot and hands it to the player
+    void RetrieveBook() //extracts the fuse from the slot and hands it to the player
     {
         if (bookshelf.currentlyHeldBook != null) { return; }
 
