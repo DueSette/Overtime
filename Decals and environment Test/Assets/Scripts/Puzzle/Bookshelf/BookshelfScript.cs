@@ -151,6 +151,8 @@ public class BookshelfScript : MonoBehaviour, IInteractable
             if (bookPrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
+                g.SetActive(true);
+                g.transform.rotation = Quaternion.Euler(0, -90, 0);
                 stool.AssignFilledSlot(g);
             }
     }
@@ -162,6 +164,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         foreach (string s in nameOfBooksToSearchInInventory)
             if (InventoriesManager.instance.HasItemAndRemove(s, out newBook))
             {
+                newBook.transform.localScale /= 3.5f;
                 newBook.transform.rotation = Quaternion.identity;
                 bookPrefabs.Add(newBook);
             }
