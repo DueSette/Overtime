@@ -16,7 +16,6 @@ public class OfficeLayoutGenerator : MonoBehaviour
     private List<OfficeRoomController> spawnedRooms = new List<OfficeRoomController>();
     private Dictionary<LayoutGraphElement, OfficeRoomController> spawnedRoomDict = new Dictionary<LayoutGraphElement, OfficeRoomController>();
     private List<Transform> connectionPoints;
-    public GameObject doorPrefab;
 
     private bool generationFailed = false;
 
@@ -293,8 +292,7 @@ public class OfficeLayoutGenerator : MonoBehaviour
                     nextRoom.placed = true;
 
 
-                    GameObject newDoor = Instantiate(doorPrefab, connectionNext.transform);
-                    Debug.Log(newDoor.transform.lossyScale);
+                    GameObject newDoor = Instantiate(currentElement.doorToSpawn[i], connectionNext.transform);
 
                     newDoor.transform.position = connectionNext.transform.position;
                     newDoor.transform.rotation = connectionNext.transform.rotation;

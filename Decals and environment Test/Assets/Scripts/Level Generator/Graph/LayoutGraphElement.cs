@@ -8,7 +8,8 @@ public class LayoutGraphElement : ScriptableObject
     public RoomTypes roomType;
 
     public List<LayoutGraphElement> connections;
-    public List<string> connectionLockCodes; 
+    public List<GameObject> doorToSpawn;
+    public List<string> connectionLockCodes;
 }
 
 public enum RoomTypes
