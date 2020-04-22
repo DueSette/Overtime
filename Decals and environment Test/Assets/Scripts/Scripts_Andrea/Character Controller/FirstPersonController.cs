@@ -77,6 +77,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public static event FacingIconPromptDelegate FacingPromptIconEvent;
         public delegate void FacingTextPromptDelegate(string s);
         public static event FacingTextPromptDelegate FacingPromptTextEvent;
+        public delegate void FacingTextPromptTimedDelegate(string s, float time);
+        public static event FacingTextPromptTimedDelegate FacingPromptTextTimedEvent;
         
         private void Start()
         {
@@ -110,7 +112,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if(GameStateManager.gameState == GameState.INTERACTING_W_ITEM)
             {
-                if (Input.GetButton("Cancel"))
+                if (Input.GetButtonDown("Cancel"))
                 {
                     GameStateManager.SetGameState(GameState.IN_GAME);
                     ExitInteraction();             
@@ -408,25 +410,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void CheckForViewport()
         {
-            //return; //this was added by Andrea as for now the script does not really work/is not hooked up properly, and creates nullreferences
+            if(Camera.main == null) { return; }
 
             Ray Vray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height / 2));
             if (Physics.Raycast(Vray, out RaycastHit hit, 1.9f))
             {
-                if (hit.collider.GetComponent<ObjectOfInterest>() != null)
+                ObjectOfInterest ooi = hit.collider.GetComponent<ObjectOfInterest>();
+                if (ooi != null)
                 {
-                    Debug.Log("I hit a viewport");
-                    hit.collider.GetComponent<ObjectOfInterest>().FocusCamera();
-                }
-                else
-                {
-                    Debug.Log("NoViewPort");
+                    ooi.FocusCamera();
                 }
             }
         }
         
         private void CheckForInteractible() //called when player clicks
         {
+            if(Camera.main == null) { return; }
+
             Ray ray = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2, Screen.height /2));
             if (Physics.Raycast(ray, out RaycastHit hit, 1.9f))
             {
@@ -435,10 +435,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (hit.collider.GetComponent<IInteractable>() != null)
                 {
                     hit.collider.GetComponent<IInteractable>().InteractWith();
-                }
-                else
-                {
-                    Debug.Log("NoInteractable");
                 }
             }
         }
@@ -459,10 +455,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 else
                     FacingPromptTextEvent?.Invoke("");
             }
-            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.0f))
+            else if (Physics.SphereCast(ray.origin, 2, ray.direction, out hit, 2.5f))
             {
-                if (hit.collider.GetComponent<SimplePromptObjectTextOnly>() != null)
-                    FacingPromptTextEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText());
+                if (hit.collider.GetComponent<SimplePromptObjectTimedText>() != null)
+                    FacingPromptTextTimedEvent?.Invoke(hit.collider.GetComponent<ITextPrompt>().PromptText(), hit.collider.GetComponent<SimplePromptObjectTimedText>().lingerTime);
                 else
                     FacingPromptTextEvent?.Invoke("");
             }

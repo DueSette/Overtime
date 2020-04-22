@@ -16,6 +16,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
     [SerializeField] TextMeshProUGUI rightPanelTitle, rightPanelPeople, rightPanelBody;
     [SerializeField] Image rightPanelEmailVeil;
     [SerializeField] GameObject standbyScreen;
+    [SerializeField] AudioClip clickSound, logon, logoff;
     bool beingInteractedWith = false;
 
     public delegate void ReadEmailDelegate(string s);
@@ -33,6 +34,13 @@ public class ComputerScript : MonoBehaviour, IInteractable
     {
         UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= LeaveInteraction;
         EmailClickUtility.EmailDeselectEvent -= CleanRightPanel;
+    }
+
+    private void Update() //quick and dirty scrolling sound logic
+    {
+        if(beingInteractedWith == false) { return; }
+        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            SoundManager.instance.PlaySound(clickSound);
     }
     #endregion
 
@@ -58,10 +66,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
         rightPanelBody.SetText(email.body);
 
         rightPanelEmailVeil.enabled = true;
-        if (ReadEmailEvent != null)
-        {
-            ReadEmailEvent(email.title);
-        }
+        ReadEmailEvent?.Invoke(email.title);
     }
 
     public void CleanRightPanel()
@@ -108,13 +113,12 @@ public class ComputerScript : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        SoundManager.instance.PlaySound(logon);
         standbyScreen.SetActive(false);
        // CheckIfPlayerReadEmails();
 
         DisplayEmail(containedEmails[0]);
-        EmailUIGameObjects[0].GetComponent<Button>().Select();
-         
-        //TODO make camera do something cool
+        EmailUIGameObjects[0].GetComponent<Button>().Select();         
     }
 
     public void LeaveInteraction() //reverts the computer back to how it was before being interacted with
@@ -122,6 +126,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
         if(!beingInteractedWith) { return; }
         beingInteractedWith = false;
 
+        SoundManager.instance.PlaySound(logoff);
         standbyScreen.SetActive(true);
     }
 

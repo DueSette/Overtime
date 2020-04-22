@@ -10,6 +10,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     [SerializeField] int[] numberSequence = { 9, 15, 27 };
 
     [SerializeField] AudioClip turningSound, correctSound, wrongSound;
+    [SerializeField] Canvas canvas;
     AudioSource aud;
     Animator anim;
 
@@ -202,6 +203,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
     void LeavePuzzle()
     {
+        canvas.enabled = false;
         if(safeState == SafeState.PASSIVE) { return; }
         StartCoroutine(ResetSafe(true));
     }
@@ -216,6 +218,8 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        canvas.enabled = true;
     }
 
     IEnumerator PlayResetSounds(float previousStep) //plays ticks according to the dial's position

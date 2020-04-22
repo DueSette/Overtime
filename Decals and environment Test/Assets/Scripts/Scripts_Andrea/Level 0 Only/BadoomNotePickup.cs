@@ -18,6 +18,11 @@ public class BadoomNotePickup : NoteInGameObjectScript
 
     private Material originalEmissiveMaterial;
     private float[] originalIntensities;
+    
+    [Header("Music Changing")]
+    [SerializeField] AudioClip newBackgroundMusic;
+    [SerializeField] float fadeOutTime = 4;
+    [SerializeField] float fadeInTime = 4;
 
     protected override void OnInteraction()
     {
@@ -39,6 +44,10 @@ public class BadoomNotePickup : NoteInGameObjectScript
         EnableDarkPostProcess(true);
 
         wallParticle.Play();
+
+        // Badoom Music
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
+
     }
 
     private void SetupBackupReferences()

@@ -8,6 +8,11 @@ public class MemoryRoomZeroScript : MonoBehaviour
     public List<GameObject> furnitureToRemove = new List<GameObject>();
     [SerializeField] GameObject parent;
     private bool vanished = false;
+    
+    [Header("Music Changing")]
+    [SerializeField] AudioClip newBackgroundMusic;
+    [SerializeField] float fadeOutTime = 3;
+    [SerializeField] float fadeInTime = 3;
 
     [Header("Memory Return Event Objects")]
     [SerializeField] Material dissolver;
@@ -34,8 +39,8 @@ public class MemoryRoomZeroScript : MonoBehaviour
             foreach (GameObject g in furnitureToRemove)
             {
                 SetForDissolutionWithChildren(g);
-                vanished = true;
             }
+            vanished = true;
         }
         else
         {
@@ -64,6 +69,10 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
             // Removing Badooms
             badoomSpawner.EndBadoomSequence();
+
+
+            // Music
+            SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
         }
     }
 
@@ -80,6 +89,12 @@ public class MemoryRoomZeroScript : MonoBehaviour
         }
     }
 
+    IEnumerator WaitToRemove(GameObject obj)
+    {
+        yield return new WaitForSeconds(1.0f);
+        obj.SetActive(false);
+    }
+
     void SetForDissolutionWithChildren(GameObject obj)
     {
         if (obj.GetComponent<Renderer>() != null)
@@ -91,6 +106,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
         {
             r.material = dissolver;
             StartCoroutine(LerpDissolve(r.material));
-        }      
+        }
+        StartCoroutine(WaitToRemove(obj));
     }
 }

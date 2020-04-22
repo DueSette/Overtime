@@ -18,7 +18,7 @@ public class SecurityCameraScript : MonoBehaviour
     {
         camPos = 1;
         camMove = true;
-        camSpeed = 2.5f;
+        //camSpeed = 2.5f;
     }
 
     // Update is called once per frame

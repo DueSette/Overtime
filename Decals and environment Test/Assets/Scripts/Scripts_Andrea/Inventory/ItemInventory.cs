@@ -86,7 +86,18 @@ public class ItemInventory : MonoBehaviour
 
     public void RemoveItem(Item itemToRemove)
     {
+        for(int i = 0; i < itemList.Count; i++)
+        {
+            if (itemList[i] == itemToRemove)
+            {
+                Destroy(itemList[i].model);
+                Destroy(itemUINamesList[i]);
+                itemUINamesList.RemoveAt(i);
+            }
+        }
         itemList.Remove(itemToRemove);
+        descriptionBox.SetText("");
+        currentFocus = 0;
     }
 
     public void UpdateUI() //updates render texture, description, entry names to the currently selected item

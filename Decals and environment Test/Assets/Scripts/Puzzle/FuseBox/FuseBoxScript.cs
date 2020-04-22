@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FuseBoxScript : MonoBehaviour, IInteractable
+public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
 {
     /*===========
      * SELF CONTAINED CLASS FOR FUSEBOX PUZZLE LOGIC
@@ -79,7 +79,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     #region Interaction
     void CheckFuseboxInteraction()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraSwitch.GetCurrentCamera().ScreenPointToRay(Input.mousePosition);
         cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
@@ -107,7 +107,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
     void UpdateHeldFusePosition() //makes the fuse follow the cursor on the X and Y, uses a fixed Z distance
     {
-        Vector3 v = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
+        Vector3 v = CameraSwitch.GetCurrentCamera().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
         Vector3 vel = Vector3.zero;
 
         currentlyHeldFuse.transform.position = Vector3.SmoothDamp(currentlyHeldFuse.transform.position, v, ref vel, 0.025f);
@@ -118,6 +118,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         if(state == PuzzleState.PASSIVE) { return; }
 
         state = PuzzleState.PASSIVE;
+        GetComponentInChildren<Canvas>().enabled = false;
 
         anim.SetTrigger("Close");
         StartCoroutine(DelaySound(doorClose));
@@ -143,15 +144,24 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         anim.SetTrigger("Close");
         StartCoroutine(DelaySound(doorClose));
 
+        Destroy(GetComponent<ObjectOfInterest>());
         GameStateManager.SetGameState(GameState.IN_GAME);
+
+        // Triggering Next Level Event
+        LevelManager.onLevelEvent("FuseBoxPuzzleSolved");
+        OpenableDoor.OnDoorUnlockEvent("FuseBoxPuzzleSolved");
     }
     #endregion
 
     #region Startup Methods
     void IInteractable.InteractWith()
     {
-        if(state == (PuzzleState.ACTIVE | PuzzleState.SOLVED)) { return; }
+        if(state == (PuzzleState.ACTIVE | PuzzleState.SOLVED))
+        {
+            return;
+        }
 
+        GetComponentInChildren<Canvas>().enabled = true;
         state = PuzzleState.ACTIVE;
 
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
@@ -169,7 +179,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
     {
         PollInventoryForFuses();
 
-        for (; slotsFilled < tray.slots.Length; slotsFilled++)
+        for (; slotsFilled < fusePrefabs.Count; slotsFilled++)
             if(fusePrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(fusePrefabs[slotsFilled], tray.slots[slotsFilled]);
@@ -183,7 +193,11 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
 
         foreach (string s in nameOfFusesToSearchInInventory)
             if (InventoriesManager.instance.HasItemAndRemove(s, out newFuse))
+            {
+                newFuse.transform.localScale /= 5.367f;
+                newFuse.transform.rotation = Quaternion.identity;
                 fusePrefabs.Add(newFuse);
+            }
     }
     #endregion
 
@@ -215,6 +229,20 @@ public class FuseBoxScript : MonoBehaviour, IInteractable
         lightningBolt.material.SetColor("_EmissiveColor", new Color(0, 66, 255));
     }
 
+    #endregion
+
+    #region Text Prompt
+    string ITextPrompt.PromptText()
+    {
+        if (state == PuzzleState.PASSIVE)
+        {
+            return "This Should Return Power To The Office";
+        }
+        else
+        {
+            return "";
+        }
+    }
     #endregion
 
     IEnumerator DelaySound(AudioClip clip) //simply delays a sound

@@ -71,8 +71,8 @@ public class GameStateManager : MonoBehaviour
                 break;
 
             case GameState.INTERACTING_W_ITEM:               
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 break;
 
             default:

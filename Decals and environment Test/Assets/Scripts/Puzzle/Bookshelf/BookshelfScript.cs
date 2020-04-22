@@ -18,7 +18,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     ShelfSlotScript[] fuseSlots; //all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     StoolScript stool;
-    [SerializeField] AudioSource aud;
+    AudioSource aud;
 
     [SerializeField] LayerMask bookshelfLayer;
     [HideInInspector] public GameObject currentlyHeldBook = null; //the fuse the player is currently using
@@ -69,7 +69,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     #region Interaction
     void CheckFuseboxInteraction()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = CameraSwitch.GetCurrentCamera().ScreenPointToRay(Input.mousePosition);
         cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, bookshelfLayer))
@@ -97,7 +97,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     void UpdateHeldBookPosition() //makes the fuse follow the cursor on the X and Y, uses a fixed Z distance
     {
-        Vector3 v = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
+        Vector3 v = CameraSwitch.GetCurrentCamera().ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDist));
         Vector3 vel = Vector3.zero;
 
         currentlyHeldBook.transform.position = Vector3.SmoothDamp(currentlyHeldBook.transform.position, v, ref vel, 0.025f);
@@ -147,7 +147,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     {
         PollInventoryForBooks();
 
-        for (; slotsFilled < stool.slots.Length; slotsFilled++)
+        for (; slotsFilled < bookPrefabs.Count; slotsFilled++)
             if (bookPrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
@@ -157,11 +157,14 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     private void PollInventoryForBooks() //checks if the inventory has books that are used within this puzzle
     {
-        GameObject newFuse = null;
+        GameObject newBook = null;
 
         foreach (string s in nameOfBooksToSearchInInventory)
-            if (InventoriesManager.instance.HasItemAndRemove(s, out newFuse))
-                bookPrefabs.Add(newFuse);
+            if (InventoriesManager.instance.HasItemAndRemove(s, out newBook))
+            {
+                newBook.transform.rotation = Quaternion.identity;
+                bookPrefabs.Add(newBook);
+            }
     }
     #endregion
 }

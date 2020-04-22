@@ -35,7 +35,7 @@ public class EndElevatorBehaviour : ElevatorBehaviour
     {
         // Closing Elevator Doors
         CloseDoors();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2.5f);
 
         // Moving Elevator Down
         while (this.transform.position.y > -3)

@@ -19,7 +19,11 @@ public class KidScript : MonoBehaviour
 
     int eventNumber = 0;
     bool canTrigger = true;
-
+    
+    [Header("Music Changing")]
+    [SerializeField] AudioClip newBackgroundMusic;
+    [SerializeField] float fadeOutTime = 3;
+    [SerializeField] float fadeInTime = 3;
 
     /*
     ====================================================================================================
@@ -114,9 +118,11 @@ public class KidScript : MonoBehaviour
         candle.GetComponent<Rigidbody>().useGravity = true;
         candle.GetComponent<Collider>().enabled = true;
         yield return new WaitForSeconds(0.5f);
-
+        
+        // Kid Music
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
+        
         gameObject.SetActive(false);
-
 
         // End Event
         eventNumber++;
