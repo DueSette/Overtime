@@ -118,6 +118,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         if(state == PuzzleState.PASSIVE) { return; }
 
         state = PuzzleState.PASSIVE;
+        GetComponentInChildren<Canvas>().enabled = false;
 
         anim.SetTrigger("Close");
         StartCoroutine(DelaySound(doorClose));
@@ -159,6 +160,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
             return;
         }
 
+        GetComponentInChildren<Canvas>().enabled = true;
         state = PuzzleState.ACTIVE;
 
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the fusebox in focus
