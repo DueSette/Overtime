@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NumpadBehavior : ObjectOfInterest, IInteractable
+public class NumpadBehavior : ObjectOfInterest
 {
 
     /// <summary>
@@ -35,6 +35,7 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
 
     public GameObject currentCodeTextBox;
     public GameObject accessCodeTextBox;
+<<<<<<< HEAD
 
     public Camera dynamicCamera;
 
@@ -43,6 +44,8 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     
 
 
+=======
+>>>>>>> parent of 19bf161e... NumpadWithCursor
     public string state;
     bool open = false;
 
@@ -59,7 +62,6 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     {
 
         DoorScript = theDoor.GetComponent<OpenableDoor>();
-        dynamicCamera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
         DoorScript.canBeOpened = false;
 
         accessCode = Random.Range(1000, 9999);
@@ -80,9 +82,12 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
             state = "NotInteracting";
         }
 
+<<<<<<< HEAD
 
         
 
+=======
+>>>>>>> parent of 19bf161e... NumpadWithCursor
 
         accessCodeTextBox.GetComponent<Text>().text = "" + accessCode;
 
@@ -98,88 +103,6 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
             case "Unanswered":
                 if (currentCode.Length < 4)
                 {
-
-
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        Ray ray = dynamicCamera.ScreenPointToRay(Input.mousePosition);
-                        Debug.Log("working part");
-
-                        if (Physics.Raycast(ray, out hit))
-                        {
-                            if (hit.transform.gameObject == numpad1)
-                            {
-                                numpad1.GetComponent<Animation>().Play("Numpad1Anim");
-                                currentCode = currentCode + "1";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad2)
-                            {
-                                numpad2.GetComponent<Animation>().Play("Numpad2Anim");
-                                currentCode = currentCode + "2";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad3)
-                            {
-                                numpad3.GetComponent<Animation>().Play("Numpad3Anim");
-                                currentCode = currentCode + "3";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad4)
-                            {
-                                numpad4.GetComponent<Animation>().Play("Numpad4Anim");
-                                currentCode = currentCode + "4";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad5)
-                            {
-                                numpad5.GetComponent<Animation>().Play("Numpad5Anim");
-                                currentCode = currentCode + "5";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad6)
-                            {
-                                numpad6.GetComponent<Animation>().Play("Numpad6Anim");
-                                currentCode = currentCode + "6";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad7)
-                            {
-                                numpad7.GetComponent<Animation>().Play("Numpad7Anim");
-                                currentCode = currentCode + "7";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad8)
-                            {
-                                numpad8.GetComponent<Animation>().Play("Numpad8Anim");
-                                currentCode = currentCode + "8";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad9)
-                            {
-                                numpad9.GetComponent<Animation>().Play("Numpad9Anim");
-                                currentCode = currentCode + "9";
-                                ButtonPress();
-                            }
-
-                            if (hit.transform.gameObject == numpad0)
-                            {
-                                numpad0.GetComponent<Animation>().Play("Numpad0Anim");
-                                currentCode = currentCode + "0";
-                                ButtonPress();
-                            }
-                        }
-                    }
-
 
                     if (Input.GetKeyDown("1"))
                     {
@@ -302,15 +225,10 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
 
 
 
-    void generateCode()
+void generateCode()
     {
         string password = accessCodeString;
         Debug.Log("Password is " + accessCodeString);
         //PasswordEvent(accessCodeString);
-    }
-
-    public void InteractWith()
-    {
-        Debug.Log("Interact Working");
     }
 }
