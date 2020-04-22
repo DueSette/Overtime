@@ -50,7 +50,10 @@ public class ElevatorBehaviour : MonoBehaviour
             theRB = this.GetComponent<Rigidbody>();
         }
         
-        this.GetComponent<AudioSource>().Play();
+        if (!this.GetComponent<AudioSource>().isPlaying)
+        {
+            this.GetComponent<AudioSource>().Play();
+        }
 
         theRB.isKinematic = false;
         theRB.velocity = Vector3.up * moveSpeed;
