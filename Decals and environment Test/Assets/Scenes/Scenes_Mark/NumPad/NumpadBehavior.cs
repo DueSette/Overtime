@@ -30,13 +30,8 @@ public class NumpadBehavior : ObjectOfInterest
     public GameObject numpad9;
     public GameObject numpad0;
     public GameObject accessBar;
-    public GameObject currentCodeTextBox;
-    public GameObject accessCodeTextBox;
     public string state;
-    public GameObject theDoor;
-    public Animator theDoorAnimator;
     bool open = false;
-    private OpenableDoor DoorScript;
 
     [SerializeField] private AudioClip BtnSound;
     [SerializeField] private AudioClip GrantedSound;
@@ -49,8 +44,6 @@ public class NumpadBehavior : ObjectOfInterest
 
     public void Start()
     {
-        DoorScript = theDoor.GetComponent<OpenableDoor>();
-        DoorScript.canBeOpened = false;
         accessCode = Random.Range(1000, 9999);
         Debug.Log("access code is " + accessCode);
         accessCodeString = accessCode.ToString();
@@ -68,10 +61,7 @@ public class NumpadBehavior : ObjectOfInterest
         {
             state = "NotInteracting";
         }
-
-
-        accessCodeTextBox.GetComponent<Text>().text = "" + accessCode;
-
+        
         switch (state)
         {
             case "NotInteracting":
@@ -159,7 +149,7 @@ public class NumpadBehavior : ObjectOfInterest
                 {
                     accessBar.GetComponent<Animation>().Play("AccessGrantedAnim");
                     audioSource.PlayOneShot(GrantedSound);
-                    DoorScript.canBeOpened = true;
+                    OpenableDoor.OnDoorUnlockEvent("ExecOfficeUnlock");
                     state = "Complete";
                 }
                 else
@@ -193,7 +183,6 @@ public class NumpadBehavior : ObjectOfInterest
 
     private void ButtonPress()
     {
-        currentCodeTextBox.GetComponent<Text>().text = currentCode;
         audioSource.PlayOneShot(BtnSound);
     }
 
@@ -206,7 +195,7 @@ public class NumpadBehavior : ObjectOfInterest
 
 
 
-void generateCode()
+    void generateCode()
     {
         string password = accessCodeString;
         Debug.Log("Password is " + accessCodeString);
