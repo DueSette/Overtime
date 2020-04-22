@@ -46,7 +46,7 @@ public class BadoomNotePickup : NoteInGameObjectScript
         wallParticle.Play();
 
         // Badoom Music
-        StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
 
     }
 
