@@ -59,7 +59,6 @@ public class ShelfSlotScript : MonoBehaviour
 
         if (correctBooks == 4)       
             StartCoroutine(bookshelf.SetSolvedState());
-        
     }
 
     void ExtractFuse() //extracts the fuse from the slot and hands it to the player
