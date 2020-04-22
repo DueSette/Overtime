@@ -18,7 +18,7 @@ public class InventoriesManager : MonoBehaviour
 
     [SerializeField] VolumeProfile pauseMenuPostProcess;
 
-    [SerializeField] Image notesTitle, itemsTitle;
+    [SerializeField] Image notesTitle, itemsTitle, fadeImage;
     [SerializeField, Tooltip("If this is unpopulated just call Andrea, easier done than said")] Sprite selectedNotesImage, selectedItemsImage;
     Sprite unselectedNotesImage, unselectedItemsImage;
 
@@ -41,6 +41,9 @@ public class InventoriesManager : MonoBehaviour
         itemManager.gameObject.SetActive(false);
         ManageTitlesSprites();
         SetMainPanel(false);
+
+        fadeImage.enabled = true;
+        StartCoroutine(FadeFromBlack());
     }
 
     void Update()
@@ -254,4 +257,16 @@ public class InventoriesManager : MonoBehaviour
         ManageTitlesSprites();
     }
     #endregion
+
+    IEnumerator FadeFromBlack()
+    {
+        float l = 0f;
+
+        while (l < 5)
+        {
+            l += Time.deltaTime;
+            fadeImage.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), (l/5f) * (l/5f));
+            yield return null;
+        }
+    }
 }
