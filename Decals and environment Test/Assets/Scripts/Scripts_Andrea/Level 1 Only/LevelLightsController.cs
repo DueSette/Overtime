@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Light))]
 public class LevelLightsController : MonoBehaviour
 {
+    [SerializeField] private Light light;
+
     [Header("Default Light Vals")]
     [SerializeField] private float defaultLightStrength;
     [SerializeField] private Color defaultLightColor;
@@ -14,7 +15,6 @@ public class LevelLightsController : MonoBehaviour
     [SerializeField] private Color dimmedLightColor1;
     [SerializeField] private Color dimmedLightColor2;
 
-    private Light light;
     private bool lowPower = true;
     [SerializeField] private AnimationCurve blinkCurve;
     [SerializeField] private float animTime;
@@ -32,7 +32,7 @@ public class LevelLightsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        light = this.GetComponent<Light>();
+
     }
 
     private void Update()
