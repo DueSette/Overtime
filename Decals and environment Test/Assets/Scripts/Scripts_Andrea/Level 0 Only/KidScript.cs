@@ -118,11 +118,11 @@ public class KidScript : MonoBehaviour
         candle.GetComponent<Rigidbody>().useGravity = true;
         candle.GetComponent<Collider>().enabled = true;
         yield return new WaitForSeconds(0.5f);
-
-        gameObject.SetActive(false);
-
+        
         // Kid Music
         StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+        
+        gameObject.SetActive(false);
 
         // End Event
         eventNumber++;
