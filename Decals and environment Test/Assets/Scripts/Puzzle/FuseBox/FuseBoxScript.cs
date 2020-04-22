@@ -150,6 +150,9 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         // Triggering Next Level Event
         LevelManager.onLevelEvent("FuseBoxPuzzleSolved");
         OpenableDoor.OnDoorUnlockEvent("FuseBoxPuzzleSolved");
+
+        yield return new WaitForSeconds(1);
+        Destroy(this);
     }
     #endregion
 
