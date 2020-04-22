@@ -30,31 +30,10 @@ public class NumpadBehavior : ObjectOfInterest
     public GameObject numpad9;
     public GameObject numpad0;
     public GameObject accessBar;
-
-
-
-    public GameObject currentCodeTextBox;
-    public GameObject accessCodeTextBox;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
     public Camera dynamicCamera;
 
     public RaycastHit hit;
     public Ray ray;
-    
-
-
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
     public string state;
     bool open = false;
 
@@ -69,10 +48,6 @@ public class NumpadBehavior : ObjectOfInterest
 
     public void Start()
     {
-
-        DoorScript = theDoor.GetComponent<OpenableDoor>();
-        DoorScript.canBeOpened = false;
-
         accessCode = Random.Range(1000, 9999);
         Debug.Log("access code is " + accessCode);
         accessCodeString = accessCode.ToString();
@@ -90,25 +65,6 @@ public class NumpadBehavior : ObjectOfInterest
         {
             state = "NotInteracting";
         }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        
-
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-=======
->>>>>>> parent of 19bf161e... NumpadWithCursor
-
-        accessCodeTextBox.GetComponent<Text>().text = "" + accessCode;
-
 
         switch (state)
         {
