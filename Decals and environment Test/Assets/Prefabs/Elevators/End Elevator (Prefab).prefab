@@ -337,7 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: -1
-  nextLevel: Level_0_Kyle
+  openSound: {fileID: 8300000, guid: 41edc686839813b4093072ed49443f6c, type: 3}
+  closeSound: {fileID: 8300000, guid: fb09a0a9e2e713243ac22f140544fcda, type: 3}
+  stopSound: {fileID: 8300000, guid: 7e569abd1363f574fae8037d98c9e6c3, type: 3}
+  nextLevel: Level 1 Generator
 --- !u!1001 &7999588729848937101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -404,6 +407,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974261204089587103, guid: 9949df18392e9554abd1fbb4c5107e80,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974261204089587103, guid: 9949df18392e9554abd1fbb4c5107e80,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2797214137061882146, guid: 9949df18392e9554abd1fbb4c5107e80,
         type: 3}
