@@ -168,8 +168,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7612652827020524102}
   - component: {fileID: 1820515211699801290}
+  - component: {fileID: 1375886577}
   m_Layer: 0
-  m_Name: Autobiography_book_prefab
+  m_Name: Autobiography_book_in_game_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,3 +205,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2815235, y: 0.046625033, z: 0.20821851}
   m_Center: {x: 0, y: 0.023, z: 0}
+--- !u!114 &1375886577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917188940578981973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650dd2d9961e7dd4394ca9df0d4ef03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  pickupSound: {fileID: 8300000, guid: e9cc75efb689aa6479dd590cc467e5a2, type: 3}
+  item:
+    model: {fileID: 3617747779730629180, guid: adb53e48617bb0e4ab342dc6b6c47f07, type: 3}
+    name: Autobiography
+    description: 
+  destroyOnPickup: 1
