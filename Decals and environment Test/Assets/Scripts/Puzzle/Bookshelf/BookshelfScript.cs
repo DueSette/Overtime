@@ -18,7 +18,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     ShelfSlotScript[] fuseSlots; //all the places where you can fit a fuse in, they are classes as they contain a package of info
 
     StoolScript stool;
-    [SerializeField] AudioSource aud;
+    AudioSource aud;
 
     [SerializeField] LayerMask bookshelfLayer;
     [HideInInspector] public GameObject currentlyHeldBook = null; //the fuse the player is currently using
@@ -147,7 +147,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     {
         PollInventoryForBooks();
 
-        for (; slotsFilled < stool.slots.Length; slotsFilled++)
+        for (; slotsFilled < bookPrefabs.Count; slotsFilled++)
             if (bookPrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
@@ -157,11 +157,14 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     private void PollInventoryForBooks() //checks if the inventory has books that are used within this puzzle
     {
-        GameObject newFuse = null;
+        GameObject newBook = null;
 
         foreach (string s in nameOfBooksToSearchInInventory)
-            if (InventoriesManager.instance.HasItemAndRemove(s, out newFuse))
-                bookPrefabs.Add(newFuse);
+            if (InventoriesManager.instance.HasItemAndRemove(s, out newBook))
+            {
+                newBook.transform.rotation = Quaternion.identity;
+                bookPrefabs.Add(newBook);
+            }
     }
     #endregion
 }
