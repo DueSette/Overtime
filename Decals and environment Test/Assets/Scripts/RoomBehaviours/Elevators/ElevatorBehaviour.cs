@@ -12,6 +12,11 @@ public class ElevatorBehaviour : MonoBehaviour
     // Animation (Door Opening/ Closing)
     private Animator theAnimController;
 
+    // Sound
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    [SerializeField] private AudioClip stopSound;
+
 
     /*
     ====================================================================================================
@@ -24,6 +29,9 @@ public class ElevatorBehaviour : MonoBehaviour
         {
             theRB = this.GetComponent<Rigidbody>();
         }
+        
+        this.GetComponent<AudioSource>().Stop();
+        this.GetComponent<AudioSource>().PlayOneShot(stopSound);
 
         theRB.isKinematic = true;
         theRB.velocity = Vector3.zero;
@@ -41,6 +49,8 @@ public class ElevatorBehaviour : MonoBehaviour
         {
             theRB = this.GetComponent<Rigidbody>();
         }
+        
+        this.GetComponent<AudioSource>().Play();
 
         theRB.isKinematic = false;
         theRB.velocity = Vector3.up * moveSpeed;
@@ -60,6 +70,8 @@ public class ElevatorBehaviour : MonoBehaviour
             theAnimController = this.GetComponent<Animator>();
         }
 
+        this.GetComponent<AudioSource>().PlayOneShot(openSound);
+
         theAnimController.SetTrigger("OpenDoors");
     }
 
@@ -69,6 +81,8 @@ public class ElevatorBehaviour : MonoBehaviour
         {
             theAnimController = this.GetComponent<Animator>();
         }
+
+        this.GetComponent<AudioSource>().PlayOneShot(closeSound);
 
         theAnimController.SetTrigger("CloseDoors");
     }
