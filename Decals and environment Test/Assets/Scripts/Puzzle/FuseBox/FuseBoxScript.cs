@@ -144,6 +144,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         anim.SetTrigger("Close");
         StartCoroutine(DelaySound(doorClose));
 
+        Destroy(GetComponent<ObjectOfInterest>());
         GameStateManager.SetGameState(GameState.IN_GAME);
 
         // Triggering Next Level Event
