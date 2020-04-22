@@ -16,8 +16,13 @@ public class SoundManager : MonoBehaviour
         FindAvailableSource().PlayOneShot(clip);
     }
 
+
+    public void FadeBGM(AudioClip clip, float fadeOutTime, float fadeInTime)
+    {
+        StartCoroutine(FadeClips(clip, fadeOutTime, fadeInTime));
+    }
     //brings volume to 0, changes music, brings volume to 1 - can add crossfade if necessary
-    public IEnumerator FadeBGM(AudioClip clip, float fadeOutTime, float fadeInTime)
+    private IEnumerator FadeClips(AudioClip clip, float fadeOutTime, float fadeInTime)
     {
         if (bgmB.clip == clip) { yield break; } //guard clause
 
@@ -47,7 +52,7 @@ public class SoundManager : MonoBehaviour
 
     public void RestorePreviousBGM(float fadeOutTime, float fadeInTime)
     {
-        StartCoroutine(FadeBGM(previousBGM, fadeOutTime, fadeInTime));
+        StartCoroutine(FadeClips(previousBGM, fadeOutTime, fadeInTime));
     }
 
     #region Internal logic

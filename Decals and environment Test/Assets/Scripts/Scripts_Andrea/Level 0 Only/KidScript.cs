@@ -120,7 +120,7 @@ public class KidScript : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         // Kid Music
-        StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
         
         gameObject.SetActive(false);
 
