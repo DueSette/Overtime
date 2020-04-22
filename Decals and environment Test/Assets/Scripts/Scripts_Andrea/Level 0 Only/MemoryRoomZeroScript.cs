@@ -72,7 +72,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
 
             // Music
-            StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+            SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
         }
     }
 

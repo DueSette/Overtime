@@ -81,7 +81,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
                 kidTriggered = true;
 
                 // Kid Music
-                StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+                SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
             }
 
             // Normal Pad Fail Animation

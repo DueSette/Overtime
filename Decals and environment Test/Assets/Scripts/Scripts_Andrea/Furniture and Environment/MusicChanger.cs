@@ -15,7 +15,7 @@ public class MusicChanger : MonoBehaviour
     {
         Debug.Log("HELLO WORLD");
 
-        StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
     }
 
     private void OnTriggerExit(Collider other)
