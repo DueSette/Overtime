@@ -262,10 +262,22 @@ public class InventoriesManager : MonoBehaviour
     {
         float l = 0f;
 
-        while (l < 5)
+        while (l < 4)
         {
             l += Time.deltaTime;
-            fadeImage.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), (l/5f) * (l/5f));
+            fadeImage.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), (l/4f) * (l/4f));
+            yield return null;
+        }
+    }
+
+    public IEnumerator FadeToBlack(float time)
+    {
+        float l = 0f;
+
+        while (l < time)
+        {
+            l += Time.deltaTime;
+            fadeImage.color = Color.Lerp(new Color(0, 0, 0, 0), Color.black, (l / time));
             yield return null;
         }
     }
