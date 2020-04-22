@@ -20,11 +20,13 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     [SerializeField] private uint numberOfBlinks;
     [SerializeField] private float litTime;
     [SerializeField] private float timeBetweenLit;
+    [SerializeField] private AudioClip failSFX;
 
     [Header("Success Animation")]
     [SerializeField] private Color litGreen;
     [SerializeField] private Color unlitGreen;
-    
+    [SerializeField] private AudioClip successSFX;
+
     [Header("Music Changing")]
     [SerializeField] AudioClip newBackgroundMusic;
     [SerializeField] float fadeOutTime = 3;
@@ -63,6 +65,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
             {
                 // Elevator Opening Event
                 LevelManager.onLevelEvent("LevelSolved");
+                GetComponent<AudioSource>().PlayOneShot(successSFX);
                 endTriggered = true;
 
                 // Normal Pad Success Animation
@@ -82,7 +85,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
             }
 
             // Normal Pad Fail Animation
-            GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().PlayOneShot(failSFX);
             StartCoroutine(PadFailAnimation());
         }
     }

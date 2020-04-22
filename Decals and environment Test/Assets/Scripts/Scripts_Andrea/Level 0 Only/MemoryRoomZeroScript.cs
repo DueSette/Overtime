@@ -8,6 +8,11 @@ public class MemoryRoomZeroScript : MonoBehaviour
     public List<GameObject> furnitureToRemove = new List<GameObject>();
     [SerializeField] GameObject parent;
     private bool vanished = false;
+    
+    [Header("Music Changing")]
+    [SerializeField] AudioClip newBackgroundMusic;
+    [SerializeField] float fadeOutTime = 3;
+    [SerializeField] float fadeInTime = 3;
 
     [Header("Memory Return Event Objects")]
     [SerializeField] Material dissolver;
@@ -64,6 +69,10 @@ public class MemoryRoomZeroScript : MonoBehaviour
 
             // Removing Badooms
             badoomSpawner.EndBadoomSequence();
+
+
+            // Music
+            StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
         }
     }
 
