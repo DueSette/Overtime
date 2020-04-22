@@ -35,8 +35,6 @@ public class SoundManager : MonoBehaviour
         {
             lapsed += Time.deltaTime;
 
-            Debug.Log(lapsed);
-
             bgmA.volume = -(lapsed / fadeInTime) + 1; //volume going down
             bgmB.volume = lapsed / fadeOutTime; //volume going up
 
