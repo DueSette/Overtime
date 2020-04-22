@@ -39,6 +39,7 @@ public class NumpadBehavior : ObjectOfInterest
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public Camera dynamicCamera;
 
@@ -47,6 +48,8 @@ public class NumpadBehavior : ObjectOfInterest
     
 
 
+=======
+>>>>>>> parent of 19bf161e... NumpadWithCursor
 =======
 >>>>>>> parent of 19bf161e... NumpadWithCursor
 =======
@@ -95,9 +98,12 @@ public class NumpadBehavior : ObjectOfInterest
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         
 
+=======
+>>>>>>> parent of 19bf161e... NumpadWithCursor
 =======
 >>>>>>> parent of 19bf161e... NumpadWithCursor
 =======
