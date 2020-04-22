@@ -24,6 +24,11 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     [Header("Success Animation")]
     [SerializeField] private Color litGreen;
     [SerializeField] private Color unlitGreen;
+    
+    [Header("Music Changing")]
+    [SerializeField] AudioClip newBackgroundMusic;
+    [SerializeField] float fadeOutTime = 3;
+    [SerializeField] float fadeInTime = 3;
 
     private void Start()
     {
@@ -71,6 +76,9 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
                 // Kid Spawning Event
                 kid.SetActive(true);
                 kidTriggered = true;
+
+                // Kid Music
+                StartCoroutine(SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime));
             }
 
             // Normal Pad Fail Animation
