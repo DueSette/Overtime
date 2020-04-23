@@ -48,7 +48,9 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     public int accessCode;
     public string accessCodeString;
 
-    public void Start()
+    public EmailScriptableObject codeEmail;
+
+    private void OnEnable()
     {
         interactWithKeypad = false;
         accessCode = Random.Range(1000, 9999);
@@ -59,8 +61,28 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
         audioSource = GetComponent<AudioSource>();
         generateCode();
         state = "NotInteracting";
+        LevelManager.onLevelEvent += InitNumpadEvent;
     }
 
+    private void OnDisable()
+    {
+        LevelManager.onLevelEvent -= InitNumpadEvent;
+    }
+
+    private void InitNumpadEvent(string eventCode)
+    {
+        if (eventCode == "LevelStart")
+        {
+            accessCode = Random.Range(1000, 9999);
+            Debug.Log("access code is " + accessCode);
+            codeEmail.body = accessCode.ToString();
+            accessCodeString = accessCode.ToString();
+            Debug.Log("access code(ToString) is " + accessCodeString);
+            audioSource = GetComponent<AudioSource>();
+            generateCode();
+            state = "NotInteracting";
+        }
+    }
 
     // Update is called once per frame
     void Update()

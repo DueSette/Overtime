@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5179599051853681410}
   - component: {fileID: 909817991067237764}
+  - component: {fileID: 955943918}
   m_Layer: 0
-  m_Name: Psychology_manual_book_prefab
+  m_Name: Psychology_manual_book_in_game_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8195135416910127377}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -44,8 +45,27 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.28032342, y: 0.04542503, z: 0.20415744}
-  m_Center: {x: 0, y: 0.023, z: 0}
+  m_Size: {x: 0.28032342, y: 0.056656096, z: 0.20415744}
+  m_Center: {x: 0, y: 0.017384468, z: 0}
+--- !u!114 &955943918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8195135416910127377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650dd2d9961e7dd4394ca9df0d4ef03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  pickupSound: {fileID: 8300000, guid: e9cc75efb689aa6479dd590cc467e5a2, type: 3}
+  item:
+    model: {fileID: 1493621869239312792, guid: 541d65aadef73344fb503a08e64bc2eb, type: 3}
+    name: Psychology book
+    description: 
+  destroyOnPickup: 1
 --- !u!1 &8688539527079201372
 GameObject:
   m_ObjectHideFlags: 0

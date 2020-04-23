@@ -41,6 +41,14 @@ public class CameraSwitch : MonoBehaviour
 
     }
 
+    public void AbandonDynamicCamera()
+    {
+        camerafocus = false;
+        dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
+        dynCamScript.viewNum = 0;
+        StartCoroutine(CameraDelay());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -48,10 +56,7 @@ public class CameraSwitch : MonoBehaviour
         // cameraNum = BoardScript.camNum;
         if (Input.GetKey(KeyCode.Space) && camerafocus == true)
         {
-            camerafocus = false;
-            dynCamScript.viewList.RemoveRange(1, dynCamScript.viewList.Count - 1);
-            dynCamScript.viewNum = 0;
-            StartCoroutine(CameraDelay());
+            AbandonDynamicCamera();
         }
 
         if (Input.GetKey(KeyCode.K))

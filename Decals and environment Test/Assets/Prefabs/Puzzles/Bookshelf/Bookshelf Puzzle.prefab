@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1252545965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1252545966}
+  m_Layer: 9
+  m_Name: Slot3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1252545966
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252545965}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.714, y: 0, z: -0.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5071548968915860560}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &85115696448142488
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,8 +55,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85115696448142488}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.39990392, y: 1.149287, z: -0.054951925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.41669247, y: 1.149287, z: -0.049210187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 223902504659634243}
@@ -188,8 +218,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 920051980805716668}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15009603, y: 1.149287, z: -0.15495192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15471873, y: 1.149287, z: -0.15448134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 223902504659634243}
@@ -301,7 +331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 3
   containedBook: {fileID: 0}
-  correctBookTitle: 
+  correctBookTitle: Autobiography
   putIntoFuseSlot: {fileID: 0}
   retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &3277509475673099519
@@ -363,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3837119644734863952}
-  m_LocalRotation: {x: -0, y: -0.9999835, z: -0, w: -0.0057613514}
+  m_LocalRotation: {x: -0, y: -0.99998343, z: 0, w: -0.005759512}
   m_LocalPosition: {x: -22.453169, y: 2.68, z: -2.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -403,11 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabca101f519bb546ab7e9b950a11688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOfBooksToSearchInInventory: []
-  bookPrefabs:
-  - {fileID: -927199367670048503, guid: 157f004853bc30245a47a92a55442105, type: 3}
-  - {fileID: -927199367670048503, guid: ce1547d73580f09428cf21c3ac075216, type: 3}
-  - {fileID: -927199367670048503, guid: d624cb69cf2fc274cb212b24d171a9e2, type: 3}
+  nameOfBooksToSearchInInventory:
+  - Psychology book
+  - Science magazine
+  - Autobiography
+  - Narrative book
   pickBook: {fileID: 0}
   putBookStool: {fileID: 0}
   solvedSound: {fileID: 0}
@@ -425,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5071548967867267169}
   m_Layer: 9
-  m_Name: GameObject (1)
+  m_Name: Slot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,7 +469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5071548967867267174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.326, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5071548968915860560}
@@ -455,7 +485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5071548968640225119}
   m_Layer: 9
-  m_Name: GameObject (2)
+  m_Name: Slot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,7 +499,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5071548968640225116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7, y: 0, z: 0.01}
+  m_LocalPosition: {x: -0.122, y: 0, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5071548968915860560}
@@ -485,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5071548968690678128}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Slot0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,7 +529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5071548968690678129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: 0, z: -0.01}
+  m_LocalPosition: {x: 0.653, y: 0, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5071548968915860560}
@@ -537,6 +567,7 @@ Transform:
   - {fileID: 5071548968690678128}
   - {fileID: 5071548967867267169}
   - {fileID: 5071548968640225119}
+  - {fileID: 1252545966}
   m_Father: {fileID: 223902504659634243}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -569,6 +600,7 @@ MonoBehaviour:
   - {fileID: 5071548968690678128}
   - {fileID: 5071548967867267169}
   - {fileID: 5071548968640225119}
+  - {fileID: 1252545966}
 --- !u!1 &5302508071000997508
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 0
   containedBook: {fileID: 0}
-  correctBookTitle: 
+  correctBookTitle: Narrative
   putIntoFuseSlot: {fileID: 0}
   retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &5828097624035126148
@@ -690,7 +722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 2
   containedBook: {fileID: 0}
-  correctBookTitle: 
+  correctBookTitle: Magazine
   putIntoFuseSlot: {fileID: 0}
   retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &6613302560531575942
@@ -718,8 +750,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6613302560531575942}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.40009606, y: 1.149287, z: -0.054951925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.41838568, y: 1.149287, z: -0.049171656}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 223902504659634243}
@@ -831,7 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slotNumber: 1
   containedBook: {fileID: 0}
-  correctBookTitle: 
+  correctBookTitle: Psychology
   putIntoFuseSlot: {fileID: 0}
   retrieveFromFuseSlot: {fileID: 0}
 --- !u!1 &8753882375707023733
@@ -859,8 +891,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8753882375707023733}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.14990397, y: 1.149287, z: -0.15495192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.1544984, y: 1.149287, z: -0.15448202}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 223902504659634243}

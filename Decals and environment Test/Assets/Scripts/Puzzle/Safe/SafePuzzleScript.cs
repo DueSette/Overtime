@@ -9,7 +9,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     [SerializeField] float rotationSpeed;
     [SerializeField] int[] numberSequence = { 9, 15, 27 };
 
-    [SerializeField] AudioClip turningSound, correctSound, wrongSound;
+    [SerializeField] AudioClip turningSound, correctSound, wrongSound, openingSound;
     [SerializeField] Canvas canvas;
     AudioSource aud;
     Animator anim;
@@ -173,6 +173,8 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             GameStateManager.SetGameState(GameState.IN_GAME);
             LeavePuzzle();
             anim.SetTrigger("Open");
+            aud.PlayOneShot(openingSound);
+            this.GetComponent<Collider>().enabled = false;
         }
         targetTurningDirection = targetIterator % 2 == 0 ? TurningState.RIGHT : TurningState.LEFT;
     }

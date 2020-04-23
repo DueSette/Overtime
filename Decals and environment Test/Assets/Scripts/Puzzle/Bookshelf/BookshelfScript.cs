@@ -10,7 +10,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("When the player interacts, the game searches for the fuses in the inventory using the name of the item(s)")]
     string[] nameOfBooksToSearchInInventory;
 
-    [SerializeField, Tooltip("Each book object that STARTS within the box - do not put inventory books here")]
     List<GameObject> bookPrefabs = new List<GameObject>();
 
     [SerializeField] AudioClip pickBook, putBookStool, solvedSound;
@@ -19,6 +18,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     StoolScript stool;
     AudioSource aud;
+    Canvas canvas;
 
     [SerializeField] LayerMask bookshelfLayer;
     [HideInInspector] public GameObject currentlyHeldBook = null; //the fuse the player is currently using
@@ -34,6 +34,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     {
         stool = GetComponentInChildren<StoolScript>();
         aud = GetComponent<AudioSource>();
+        canvas = GetComponentInChildren<Canvas>();
 
         int i = 0;
         var temp = new List<ShelfSlotScript>();
@@ -108,6 +109,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         if (state == PuzzleState.PASSIVE) { return; }
 
         state = PuzzleState.PASSIVE;
+        canvas.enabled = false;
 
         if (currentlyHeldBook != null)
             stool.StoreBook(currentlyHeldBook);
@@ -124,6 +126,23 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.75f);
 
         GameStateManager.SetGameState(GameState.IN_GAME);
+        FindObjectOfType<CameraSwitch>().AbandonDynamicCamera();
+        Destroy(GetComponent<ObjectOfInterest>());
+        canvas.enabled = false;
+
+        yield return new WaitForSeconds(1);
+
+        // Warps The Player To The Memory
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+
+        GameStateManager.GetPlayer().transform.position = GameObject.FindGameObjectWithTag("MemorySpawnPoint").transform.position;
+        GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(GameObject.FindGameObjectWithTag("MemorySpawnPoint").transform.rotation);
+
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+
+        LevelManager.onLevelEvent("MemoryStart");
+
+        Destroy(this);
     }
     #endregion
 
@@ -135,6 +154,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         state = PuzzleState.ACTIVE;
 
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the bookshelf in focus
+        canvas.enabled = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -151,6 +171,8 @@ public class BookshelfScript : MonoBehaviour, IInteractable
             if (bookPrefabs[slotsFilled] != null)
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
+                g.SetActive(true);
+                g.transform.rotation = Quaternion.Euler(0, 0, 0);
                 stool.AssignFilledSlot(g);
             }
     }
@@ -162,6 +184,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         foreach (string s in nameOfBooksToSearchInInventory)
             if (InventoriesManager.instance.HasItemAndRemove(s, out newBook))
             {
+                newBook.transform.localScale /= 3.5f;
                 newBook.transform.rotation = Quaternion.identity;
                 bookPrefabs.Add(newBook);
             }

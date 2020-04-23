@@ -6,7 +6,7 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
 {
     [Header("Event Handling")]
     private bool levelComplete = false;
-    private bool kidTriggered = false;
+    [SerializeField] private bool kidTriggered = false;
     private bool endTriggered = false;
     [SerializeField] GameObject kid;
 
