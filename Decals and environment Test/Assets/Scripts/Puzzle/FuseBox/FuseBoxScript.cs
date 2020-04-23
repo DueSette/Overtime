@@ -151,6 +151,8 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         LevelManager.onLevelEvent("FuseBoxPuzzleSolved");
         LevelManager.onLevelEvent("PowerOn");
         OpenableDoor.OnDoorUnlockEvent("FuseBoxPuzzleSolved");
+        FindObjectOfType<CameraSwitch>().AbandonDynamicCamera();
+        Destroy(GetComponent<ObjectOfInterest>());
 
         yield return new WaitForSeconds(1);
         Destroy(this);

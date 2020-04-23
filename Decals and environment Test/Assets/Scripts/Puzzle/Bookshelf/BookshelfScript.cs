@@ -18,6 +18,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
     StoolScript stool;
     AudioSource aud;
+    Canvas canvas;
 
     [SerializeField] LayerMask bookshelfLayer;
     [HideInInspector] public GameObject currentlyHeldBook = null; //the fuse the player is currently using
@@ -33,6 +34,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     {
         stool = GetComponentInChildren<StoolScript>();
         aud = GetComponent<AudioSource>();
+        canvas = GetComponentInChildren<Canvas>();
 
         int i = 0;
         var temp = new List<ShelfSlotScript>();
@@ -107,6 +109,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         if (state == PuzzleState.PASSIVE) { return; }
 
         state = PuzzleState.PASSIVE;
+        canvas.enabled = false;
 
         if (currentlyHeldBook != null)
             stool.StoreBook(currentlyHeldBook);
@@ -123,10 +126,13 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.75f);
 
         GameStateManager.SetGameState(GameState.IN_GAME);
-        yield return new WaitForSeconds(1);
+        FindObjectOfType<CameraSwitch>().AbandonDynamicCamera();
         Destroy(GetComponent<ObjectOfInterest>());
-        Destroy(this);
+        canvas.enabled = false;
 
+        yield return new WaitForSeconds(1);
+
+        Destroy(this);
     }
     #endregion
 
@@ -138,6 +144,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         state = PuzzleState.ACTIVE;
 
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the bookshelf in focus
+        canvas.enabled = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
