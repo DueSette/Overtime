@@ -38,7 +38,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     private void Start()
     {
         aud = GetComponent<AudioSource>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         startRot = dial.rotation;
         UpdateTargetSpot();
     }
@@ -172,6 +172,9 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             safeState = SafeState.SOLVED;
             GameStateManager.SetGameState(GameState.IN_GAME);
             LeavePuzzle();
+
+            FindObjectOfType<CameraSwitch>().AbandonDynamicCamera();
+
             anim.SetTrigger("Open");
             aud.PlayOneShot(openingSound);
             this.GetComponent<Collider>().enabled = false;
