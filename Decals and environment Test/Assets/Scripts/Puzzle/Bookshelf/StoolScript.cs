@@ -57,6 +57,7 @@ public class StoolScript : MonoBehaviour
         if (bookNum == -1) { return; } //means there are no books available
 
         bookshelf.currentlyHeldBook = nearest;
+        //nearest.transform.rotation = Quaternion.identity; //will work with right values
         restingBooks[bookNum] = null;
     }
 
@@ -73,18 +74,17 @@ public class StoolScript : MonoBehaviour
             }
     }
 
-    public static IEnumerator PlaceBookOnStool(Transform fuse, Vector3 endPos) //lerps the fuse from cursor to tray slot
+    public static IEnumerator PlaceBookOnStool(Transform book, Vector3 endPos) //lerps the fuse from cursor to tray slot
     {
         float lapsed = 0.0f;
-        Vector3 startPos = fuse.position;
-        Vector3 startRot = fuse.transform.localEulerAngles;
+        Vector3 startPos = book.position;
+        Vector3 startRot = book.transform.localEulerAngles;
 
         while (lapsed <= 1.0f)
         {
             lapsed += Time.deltaTime * 4;
-            fuse.position = Vector3.Lerp(startPos, endPos, lapsed * lapsed);
-            fuse.transform.localEulerAngles = Vector3.Lerp(startRot, new Vector3(startRot.x, startRot.y, -20), lapsed);
-
+            book.position = Vector3.Lerp(startPos, endPos, lapsed * lapsed);
+            book.transform.localEulerAngles = Vector3.Lerp(startRot, new Vector3(18, startRot.y, startRot.z), lapsed);
             yield return null;
         }
     }
