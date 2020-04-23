@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardScript : ObjectOfInterest
+public class BoardScript : ObjectOfInterest, IInteractable
 {
     public float limiter = 10f;
     public float rotspeed = 200;
@@ -30,6 +30,8 @@ public class BoardScript : ObjectOfInterest
     public GameObject localMarble;
 
 
+    enum PuzzleState { ACTIVE = 0, PASSIVE = 2, SOLVED = 4 }
+    PuzzleState state = PuzzleState.PASSIVE;
 
     Quaternion currentRot;
     public Quaternion startRot;
@@ -57,10 +59,7 @@ public class BoardScript : ObjectOfInterest
     {
         marbleActve = MarbleBehaviour.marbleInInventory;
         puzzleComplete = MarbleFinish.puzzleComplete;
-
-
-
-
+        
         //if (camNum == 2 && marbleActve == true && puzzleComplete == false)
         if(interacting)
         {
@@ -79,11 +78,7 @@ public class BoardScript : ObjectOfInterest
                 g.transform.parent = this.transform;
             }
         }
-
-
-
-
-
+        
         currentRot = transform.rotation;
 
         eulerAngX = transform.localEulerAngles.x;
@@ -187,9 +182,7 @@ public class BoardScript : ObjectOfInterest
             interacting = false;
         }
     }
-
-
-
+    
 
     public override void FocusCamera()
     {
@@ -205,5 +198,17 @@ public class BoardScript : ObjectOfInterest
         {
             g.transform.parent = null;
         }
+    }
+
+    void IInteractable.InteractWith()
+    {
+        if (state == (PuzzleState.ACTIVE | PuzzleState.SOLVED)) { return; }
+
+        state = PuzzleState.ACTIVE;
+
+        GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM); //TECHNICALLY this should be the part where the camera puts the bookshelf in focus
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
