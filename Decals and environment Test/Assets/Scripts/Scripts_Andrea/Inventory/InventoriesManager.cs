@@ -275,12 +275,12 @@ public class InventoriesManager : MonoBehaviour
     {
         float l = 0f;
 
+        fadeImage.gameObject.SetActive(true);
         while (l < time)
         {
             l += Time.deltaTime;
             fadeImage.color = Color.Lerp(new Color(0, 0, 0, 0), Color.black, (l / time));
             yield return null;
         }
-        fadeImage.gameObject.SetActive(true);
     }
 }
