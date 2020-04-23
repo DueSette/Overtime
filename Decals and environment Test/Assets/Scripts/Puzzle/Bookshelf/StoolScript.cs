@@ -68,20 +68,22 @@ public class StoolScript : MonoBehaviour
                 restingBooks[i] = fuse;
                 bookshelf.currentlyHeldBook = null;
 
-                StartCoroutine(PlaceBookOnTool(fuse.transform, slots[i].position));
+                StartCoroutine(PlaceBookOnStool(fuse.transform, slots[i].position));
                 return;
             }
     }
 
-    public static IEnumerator PlaceBookOnTool(Transform fuse, Vector3 endPos) //lerps the fuse from cursor to tray slot
+    public static IEnumerator PlaceBookOnStool(Transform fuse, Vector3 endPos) //lerps the fuse from cursor to tray slot
     {
         float lapsed = 0.0f;
         Vector3 startPos = fuse.position;
+        Vector3 startRot = fuse.transform.localEulerAngles;
 
         while (lapsed <= 1.0f)
         {
             lapsed += Time.deltaTime * 4;
             fuse.position = Vector3.Lerp(startPos, endPos, lapsed * lapsed);
+            fuse.transform.localEulerAngles = Vector3.Lerp(startRot, new Vector3(startRot.x, startRot.y, -20), lapsed);
 
             yield return null;
         }

@@ -10,7 +10,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("When the player interacts, the game searches for the fuses in the inventory using the name of the item(s)")]
     string[] nameOfBooksToSearchInInventory;
 
-    [SerializeField, Tooltip("Each book object that STARTS within the box - do not put inventory books here")]
     List<GameObject> bookPrefabs = new List<GameObject>();
 
     [SerializeField] AudioClip pickBook, putBookStool, solvedSound;
@@ -152,7 +151,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
                 g.SetActive(true);
-                g.transform.rotation = Quaternion.Euler(0, -90, 0);
+                g.transform.rotation = Quaternion.Euler(0, -90, 0); //TODO: UPDATE WHEN DORIAN FIXES PREFAB
                 stool.AssignFilledSlot(g);
             }
     }
