@@ -11,7 +11,9 @@ public enum GameState
     PAUSE = 8,
     IN_GAME_LOOK_ONLY = 16, //this one is for specific cases where you can move the camera but can't walk
     INTERACTING_W_ITEM = 32,
-    CAMERA_FOCUS = 64
+    CAMERA_FOCUS = 64,
+    INTERACTING_W_NUMPAD = 128
+
 }
 
 public class GameStateManager : MonoBehaviour
@@ -74,7 +76,10 @@ public class GameStateManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 break;
-
+            case GameState.INTERACTING_W_NUMPAD:
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                break;
             default:
                 break;
         }

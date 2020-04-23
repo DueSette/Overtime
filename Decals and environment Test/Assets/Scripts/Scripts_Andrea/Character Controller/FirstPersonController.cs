@@ -104,6 +104,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
+
             if (GameStateManager.gameState == (GameState.IN_GAME & GameState.IN_GAME_LOOK_ONLY))
             {
                 RotateView();
@@ -115,7 +116,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 if (Input.GetButtonDown("Cancel"))
                 {
                     GameStateManager.SetGameState(GameState.IN_GAME);
-                    ExitInteraction();             
+                    ExitInteraction();
                 }
             }
 

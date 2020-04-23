@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NumpadBehavior : ObjectOfInterest
+public class NumpadBehavior : ObjectOfInterest, IInteractable
 {
 
     /// <summary>
@@ -31,11 +31,13 @@ public class NumpadBehavior : ObjectOfInterest
     public GameObject numpad0;
     public GameObject accessBar;
     public Camera dynamicCamera;
+    public static bool interactWithKeypad;
+    public GameObject theDoor;
+    public OpenableDoor doorScript;
 
     public RaycastHit hit;
     public Ray ray;
     public string state;
-    bool open = false;
 
     [SerializeField] private AudioClip BtnSound;
     [SerializeField] private AudioClip GrantedSound;
@@ -48,8 +50,10 @@ public class NumpadBehavior : ObjectOfInterest
 
     public void Start()
     {
+        interactWithKeypad = false;
         accessCode = Random.Range(1000, 9999);
         Debug.Log("access code is " + accessCode);
+        dynamicCamera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
         accessCodeString = accessCode.ToString();
         Debug.Log("access code(ToString) is " + accessCodeString);
         audioSource = GetComponent<AudioSource>();
@@ -61,6 +65,17 @@ public class NumpadBehavior : ObjectOfInterest
     // Update is called once per frame
     void Update()
     {
+        if(state == "Unanswered")
+        {
+            interactWithKeypad = true;
+        }
+        else
+        {
+            interactWithKeypad = false;
+        }
+
+
+
         if (Input.GetKey(KeyCode.Space))
         {
             state = "NotInteracting";
@@ -75,8 +90,81 @@ public class NumpadBehavior : ObjectOfInterest
                 break;
 
             case "Unanswered":
+
+                interactWithKeypad = true;
+
                 if (currentCode.Length < 4)
                 {
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        Ray ray = dynamicCamera.ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out hit))
+                        {
+                            if (hit.transform.gameObject == numpad1 )
+                            {
+                                numpad1.GetComponent<Animation>().Play("Numpad1Anim");
+                                currentCode = currentCode + "1";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad2)
+                            {
+                                numpad2.GetComponent<Animation>().Play("Numpad2Anim");
+                                currentCode = currentCode + "2";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad3)
+                            {
+                                numpad3.GetComponent<Animation>().Play("Numpad3Anim");
+                                currentCode = currentCode + "3";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad4)
+                            {
+                                numpad4.GetComponent<Animation>().Play("Numpad4Anim");
+                                currentCode = currentCode + "4";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad5)
+                            {
+                                numpad5.GetComponent<Animation>().Play("Numpad5Anim");
+                                currentCode = currentCode + "5";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad6)
+                            {
+                                numpad6.GetComponent<Animation>().Play("Numpad6Anim");
+                                currentCode = currentCode + "6";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad7)
+                            {
+                                numpad7.GetComponent<Animation>().Play("Numpad7Anim");
+                                currentCode = currentCode + "7";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad8)
+                            {
+                                numpad8.GetComponent<Animation>().Play("Numpad8Anim");
+                                currentCode = currentCode + "8";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad9)
+                            {
+                                numpad9.GetComponent<Animation>().Play("Numpad9Anim");
+                                currentCode = currentCode + "9";
+                                ButtonPress();
+                            }
+                            if (hit.transform.gameObject == numpad0)
+                            {
+                                numpad0.GetComponent<Animation>().Play("Numpad0Anim");
+                                currentCode = currentCode + "0";
+                                ButtonPress();
+                            }
+                        }
+                    }
+
+
 
                     if (Input.GetKeyDown("1"))
                     {
@@ -193,6 +281,8 @@ public class NumpadBehavior : ObjectOfInterest
     public override void FocusCamera()
     {
         base.FocusCamera();
+        // GameStateManager.SetGameState(GameState.INTERACTING_W_NUMPAD);
+        GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
         state = "Unanswered";
         Debug.Log("The Changed class was called");
     }
@@ -205,4 +295,26 @@ void generateCode()
         Debug.Log("Password is " + accessCodeString);
         //PasswordEvent(accessCodeString);
     }
+
+    public void InteractWith()
+    {
+        Debug.Log("I AM BEING INTERACTED WITH - The numpad");
+    }
+
+
+    private void OnEnable()
+    {
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += ExitInteraction;
+    }
+    private void OnDisable()
+    {
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= ExitInteraction;
+    }
+
+
+    void ExitInteraction()
+    {
+
+    }
+
 }
