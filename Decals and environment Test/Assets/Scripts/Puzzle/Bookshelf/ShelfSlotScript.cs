@@ -52,7 +52,7 @@ public class ShelfSlotScript : MonoBehaviour
         if (CheckFuse())
             correctBooks++;
 
-        StartCoroutine(StoolScript.PlaceBookOnStool(containedBook.transform, transform.position));
+        StartCoroutine(PlaceBookOnShelfStand(containedBook.transform, transform.position));
         containedBook.GetComponent<Collider>().enabled = false;
 
         bookshelf.currentlyHeldBook = null;
@@ -69,7 +69,7 @@ public class ShelfSlotScript : MonoBehaviour
 
         if (CheckFuse()) { correctBooks--; }
 
-        containedBook.transform.rotation = Quaternion.identity; //todo: will work with correct values
+        containedBook.transform.localRotation = Quaternion.Euler(0, 180, 0);
         containedBook.GetComponent<Collider>().enabled = false;
         bookshelf.currentlyHeldBook = containedBook;
         containedBook = null;
@@ -78,5 +78,20 @@ public class ShelfSlotScript : MonoBehaviour
     bool CheckFuse()
     {
         return containedBook.name.Contains(correctBookTitle);
+    }
+
+    IEnumerator PlaceBookOnShelfStand(Transform book, Vector3 endPos)
+    {
+        float lapsed = 0.0f;
+        Vector3 startPos = book.position;
+        Vector3 startRot = book.transform.localEulerAngles;
+
+        while (lapsed <= 1.0f)
+        {
+            lapsed += Time.deltaTime * 4;
+            book.position = Vector3.Lerp(startPos, endPos, lapsed * lapsed);
+            book.localEulerAngles = Vector3.Lerp(startRot, new Vector3(18, startRot.y, startRot.z), lapsed);
+            yield return null;
+        }
     }
 }
