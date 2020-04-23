@@ -123,6 +123,10 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.75f);
 
         GameStateManager.SetGameState(GameState.IN_GAME);
+        yield return new WaitForSeconds(1);
+        Destroy(GetComponent<ObjectOfInterest>());
+        Destroy(this);
+
     }
     #endregion
 
@@ -151,7 +155,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
                 g.SetActive(true);
-                g.transform.rotation = Quaternion.Euler(0, -90, 0); //TODO: UPDATE WHEN DORIAN FIXES PREFAB
+                g.transform.rotation = Quaternion.Euler(0, 0, 0);
                 stool.AssignFilledSlot(g);
             }
     }

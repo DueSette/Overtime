@@ -69,6 +69,7 @@ public class ShelfSlotScript : MonoBehaviour
 
         if (CheckFuse()) { correctBooks--; }
 
+        containedBook.transform.rotation = Quaternion.identity; //todo: will work with correct values
         containedBook.GetComponent<Collider>().enabled = false;
         bookshelf.currentlyHeldBook = containedBook;
         containedBook = null;

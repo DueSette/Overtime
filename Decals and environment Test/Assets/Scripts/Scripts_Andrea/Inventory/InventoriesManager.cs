@@ -42,7 +42,7 @@ public class InventoriesManager : MonoBehaviour
         ManageTitlesSprites();
         SetMainPanel(false);
 
-        fadeImage.enabled = true;
+        fadeImage.gameObject.SetActive(true);
         StartCoroutine(FadeFromBlack());
     }
 
@@ -268,6 +268,7 @@ public class InventoriesManager : MonoBehaviour
             fadeImage.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), (l/4f) * (l/4f));
             yield return null;
         }
+        fadeImage.gameObject.SetActive(false);
     }
 
     public IEnumerator FadeToBlack(float time)
@@ -280,5 +281,6 @@ public class InventoriesManager : MonoBehaviour
             fadeImage.color = Color.Lerp(new Color(0, 0, 0, 0), Color.black, (l / time));
             yield return null;
         }
+        fadeImage.gameObject.SetActive(true);
     }
 }
