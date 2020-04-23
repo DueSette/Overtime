@@ -64,6 +64,7 @@ public class SoundManager : MonoBehaviour
         sources.Add(gameObject.AddComponent<AudioSource>());
         sources[sources.Count - 1].playOnAwake = false;
         sources[sources.Count - 1].volume = 0.5f;
+        sources[sources.Count - 1].outputAudioMixerGroup = Resources.Load<UnityEngine.Audio.AudioMixerGroup>("GameAudioMixer");
         return sources[sources.Count - 1];
     }
 
