@@ -151,6 +151,8 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
         LevelManager.onLevelEvent("FuseBoxPuzzleSolved");
         LevelManager.onLevelEvent("PowerOn");
         OpenableDoor.OnDoorUnlockEvent("FuseBoxPuzzleSolved");
+        FindObjectOfType<CameraSwitch>().AbandonDynamicCamera();
+        Destroy(GetComponent<ObjectOfInterest>());
 
         yield return new WaitForSeconds(1);
         Destroy(this);
@@ -200,6 +202,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
             {
                 newFuse.transform.localScale /= 5.367f;
                 newFuse.transform.rotation = Quaternion.identity;
+                newFuse.SetActive(true);
                 fusePrefabs.Add(newFuse);
             }
     }
