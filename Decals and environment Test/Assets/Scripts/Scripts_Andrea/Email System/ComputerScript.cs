@@ -15,6 +15,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
 
     [SerializeField] TextMeshProUGUI rightPanelTitle, rightPanelPeople, rightPanelBody;
     [SerializeField] Image rightPanelEmailVeil;
+    [SerializeField] Image spaceTooltip;
     [SerializeField] GameObject standbyScreen;
     [SerializeField] AudioClip clickSound, logon, logoff;
     bool beingInteractedWith = false;
@@ -113,6 +114,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        spaceTooltip.enabled = true;
         SoundManager.instance.PlaySound(logon);
         standbyScreen.SetActive(false);
        // CheckIfPlayerReadEmails();
@@ -126,6 +128,7 @@ public class ComputerScript : MonoBehaviour, IInteractable
         if(!beingInteractedWith) { return; }
         beingInteractedWith = false;
 
+        spaceTooltip.enabled = false;
         SoundManager.instance.PlaySound(logoff);
         standbyScreen.SetActive(true);
     }
