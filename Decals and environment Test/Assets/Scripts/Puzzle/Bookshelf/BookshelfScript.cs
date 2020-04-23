@@ -132,6 +132,16 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(1);
 
+        // Warps The Player To The Memory
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+
+        GameStateManager.GetPlayer().transform.position = GameObject.FindGameObjectWithTag("MemorySpawnPoint").transform.position;
+        GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(GameObject.FindGameObjectWithTag("MemorySpawnPoint").transform.rotation);
+
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+
+        LevelManager.onLevelEvent("MemoryStart");
+
         Destroy(this);
     }
     #endregion

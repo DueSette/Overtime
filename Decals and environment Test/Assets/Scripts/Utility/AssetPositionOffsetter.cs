@@ -13,6 +13,7 @@ public class AssetPositionOffsetter : MonoBehaviour
 
     public void OffsetPositions()
     {
+#if UNITY_EDITOR
         GameObject[] selectedObjects = Selection.gameObjects;
         foreach (GameObject g in selectedObjects)
         {
@@ -38,10 +39,12 @@ public class AssetPositionOffsetter : MonoBehaviour
 
             g.transform.position = startPos;
         }
+#endif
     }
 
     public void OffsetRotations()
     {
+#if UNITY_EDITOR
         GameObject[] selectedObjects = Selection.gameObjects;
         foreach (GameObject g in selectedObjects)
         {
@@ -67,5 +70,6 @@ public class AssetPositionOffsetter : MonoBehaviour
 
             g.transform.eulerAngles = startRot;
         }
+#endif
     }
 }
