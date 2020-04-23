@@ -80,7 +80,7 @@ public class FuseBoxScript : MonoBehaviour, IInteractable, ITextPrompt
     void CheckFuseboxInteraction()
     {
         Ray ray = CameraSwitch.GetCurrentCamera().ScreenPointToRay(Input.mousePosition);
-        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.1f; //updates the distance from the fusebox to the camera
+        cameraDist = Vector3.Distance(transform.position, GameStateManager.GetPlayer().transform.position) / 2.7f; //updates the distance from the fusebox to the camera
 
         if (Physics.Raycast(ray, out RaycastHit hit, 2.5f, fuseBoxLayer))
         {

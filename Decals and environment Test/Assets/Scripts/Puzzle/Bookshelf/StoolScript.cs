@@ -57,19 +57,20 @@ public class StoolScript : MonoBehaviour
         if (bookNum == -1) { return; } //means there are no books available
 
         bookshelf.currentlyHeldBook = nearest;
-        //nearest.transform.rotation = Quaternion.identity; //will work with right values
+        nearest.transform.localRotation = Quaternion.Euler(0, 180, 0); //will work with right values
         restingBooks[bookNum] = null;
     }
 
-    public void StoreBook(GameObject fuse) //accept a fuse from the cursor and stores it
+    public void StoreBook(GameObject book) //accept a fuse from the cursor and stores it
     {
         for (int i = 0; i < restingBooks.Length; i++)
             if (restingBooks[i] == null) //if there is no embedded fuse
             {
-                restingBooks[i] = fuse;
+                restingBooks[i] = book;
                 bookshelf.currentlyHeldBook = null;
+                book.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
-                StartCoroutine(PlaceBookOnStool(fuse.transform, slots[i].position));
+                StartCoroutine(PlaceBookOnStool(book.transform, slots[i].position));
                 return;
             }
     }
@@ -84,7 +85,7 @@ public class StoolScript : MonoBehaviour
         {
             lapsed += Time.deltaTime * 4;
             book.position = Vector3.Lerp(startPos, endPos, lapsed * lapsed);
-            book.transform.localEulerAngles = Vector3.Lerp(startRot, new Vector3(18, startRot.y, startRot.z), lapsed);
+            book.transform.localEulerAngles = Vector3.Lerp(startRot, new Vector3(0, startRot.y, startRot.z), lapsed);
             yield return null;
         }
     }
