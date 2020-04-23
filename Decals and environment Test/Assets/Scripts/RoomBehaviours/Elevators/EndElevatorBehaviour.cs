@@ -45,13 +45,13 @@ public class EndElevatorBehaviour : ElevatorBehaviour
         }
 
         // Getting Players Transform Relative To The End Elevator
-        PlayerPositioning pp = PlayerPositioning.Instance;
+        /*PlayerPositioning pp = PlayerPositioning.Instance;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         player.transform.parent = this.transform;
 
         pp.playerPreviousPos = player.transform.localPosition;
-        pp.playerPreviousRot = player.transform.localEulerAngles;
+        pp.playerPreviousRot = player.transform.localEulerAngles;*/
 
         // Loading Next Level
         GameObject lm = GameObject.FindGameObjectWithTag("GameController");
