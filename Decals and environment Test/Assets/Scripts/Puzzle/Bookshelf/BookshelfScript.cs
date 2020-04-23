@@ -10,7 +10,6 @@ public class BookshelfScript : MonoBehaviour, IInteractable
     [SerializeField, Tooltip("When the player interacts, the game searches for the fuses in the inventory using the name of the item(s)")]
     string[] nameOfBooksToSearchInInventory;
 
-    [SerializeField, Tooltip("Each book object that STARTS within the box - do not put inventory books here")]
     List<GameObject> bookPrefabs = new List<GameObject>();
 
     [SerializeField] AudioClip pickBook, putBookStool, solvedSound;
@@ -124,6 +123,10 @@ public class BookshelfScript : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1.75f);
 
         GameStateManager.SetGameState(GameState.IN_GAME);
+        yield return new WaitForSeconds(1);
+        Destroy(GetComponent<ObjectOfInterest>());
+        Destroy(this);
+
     }
     #endregion
 
@@ -152,7 +155,7 @@ public class BookshelfScript : MonoBehaviour, IInteractable
             {
                 GameObject g = Instantiate(bookPrefabs[slotsFilled], stool.slots[slotsFilled]);
                 g.SetActive(true);
-                g.transform.rotation = Quaternion.Euler(0, -90, 0);
+                g.transform.rotation = Quaternion.Euler(0, 0, 0);
                 stool.AssignFilledSlot(g);
             }
     }

@@ -173,6 +173,7 @@ public class ItemInventory : MonoBehaviour
         itemInView = model;
         model.SetActive(true);
         model.transform.position = inventoryCameraSpot.position;
+        if (model.name.Contains("book")) { model.transform.localPosition += new Vector3(0, -0.32f, 0);}
     }
 
     void RotateItem() //for some reason non-y axes need to rotate this way
