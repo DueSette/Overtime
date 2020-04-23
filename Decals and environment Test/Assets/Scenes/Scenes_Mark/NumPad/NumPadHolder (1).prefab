@@ -103,9 +103,10 @@ Animation:
   m_GameObject: {fileID: 2341943676733098597}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 0c1afcee683944e42beedd0417f7721b, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 0c1afcee683944e42beedd0417f7721b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -213,9 +214,10 @@ Animation:
   m_GameObject: {fileID: 2342160523819746649}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 4f69941e9bc0eab459372a5381bb0232, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 4f69941e9bc0eab459372a5381bb0232, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -325,8 +327,8 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 0}
   m_Animations:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7400000, guid: a55e58d1324f26f4abd2e0461f422eb8, type: 2}
+  - {fileID: 7400000, guid: e74f0631f413bf64d9df4547caa41828, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -434,9 +436,10 @@ Animation:
   m_GameObject: {fileID: 2342367312405108717}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 648a72716a900c742acb3742dd642813, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 648a72716a900c742acb3742dd642813, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -654,9 +657,10 @@ Animation:
   m_GameObject: {fileID: 2342532596519094393}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: bd3a2c74cb8505b4a8375c140ebc3f33, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: bd3a2c74cb8505b4a8375c140ebc3f33, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -764,9 +768,10 @@ Animation:
   m_GameObject: {fileID: 2342649578526938381}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: d572a35821a199c4c9604df9effa3179, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: d572a35821a199c4c9604df9effa3179, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -984,9 +989,10 @@ Animation:
   m_GameObject: {fileID: 2342666629657601521}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: f718cd47f5df6f944bfaa9c2eb0355d6, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: f718cd47f5df6f944bfaa9c2eb0355d6, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1094,9 +1100,10 @@ Animation:
   m_GameObject: {fileID: 2342761780489275473}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 7161ceed17bd99e409a8deba09455bf1, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 7161ceed17bd99e409a8deba09455bf1, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1112,6 +1119,7 @@ GameObject:
   - component: {fileID: 2348506866610343757}
   - component: {fileID: 2333121941731318507}
   - component: {fileID: 5586183753161751626}
+  - component: {fileID: 8299648141482761091}
   m_Layer: 0
   m_Name: NumPadHolder (1)
   m_TagString: Keypad
@@ -1187,12 +1195,110 @@ MonoBehaviour:
   numpad0: {fileID: 2342965868886030303}
   accessBar: {fileID: 2342187064291186669}
   state: 
-  BtnSound: {fileID: 0}
-  GrantedSound: {fileID: 0}
-  DeniedSound: {fileID: 0}
+  BtnSound: {fileID: 8300000, guid: 34f724ffe8219484ca507a6d4d61e6ba, type: 3}
+  GrantedSound: {fileID: 8300000, guid: 60efbd4881ac662488908c6097f73970, type: 3}
+  DeniedSound: {fileID: 8300000, guid: 6df3434c2d187e44b83ff0ee5c47b769, type: 3}
   currentCode: 
   accessCode: 0
   accessCodeString: 
+  codeEmail: {fileID: 0}
+--- !u!82 &8299648141482761091
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2342880097486155651}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -8288163556850598478, guid: 0214601a257af63459d06a3ef41447a9,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2342916922587241137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,9 +1402,10 @@ Animation:
   m_GameObject: {fileID: 2342916922587241137}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 2483437dc009b9748afa12d19606a71b, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 2483437dc009b9748afa12d19606a71b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1406,10 +1513,11 @@ Animation:
   m_GameObject: {fileID: 2342965868886030303}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 7bd897f5b32637e41b29eab6c3f6b767, type: 2}
   m_Animations:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 7400000, guid: 7bd897f5b32637e41b29eab6c3f6b767, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1517,9 +1625,10 @@ Animation:
   m_GameObject: {fileID: 2343257923259657231}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 0fa69908f43a8254eb8dffb294dd6165, type: 2}
   m_Animations:
   - {fileID: 0}
+  - {fileID: 7400000, guid: 0fa69908f43a8254eb8dffb294dd6165, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

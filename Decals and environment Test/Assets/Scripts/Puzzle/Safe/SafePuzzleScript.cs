@@ -174,6 +174,7 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             LeavePuzzle();
             anim.SetTrigger("Open");
             aud.PlayOneShot(openingSound);
+            this.GetComponent<Collider>().enabled = false;
         }
         targetTurningDirection = targetIterator % 2 == 0 ? TurningState.RIGHT : TurningState.LEFT;
     }
