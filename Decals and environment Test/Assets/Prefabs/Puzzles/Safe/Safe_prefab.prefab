@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &137990328940384791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2539865034695733382}
+  m_Layer: 0
+  m_Name: Viewport
+  m_TagString: ViewPort
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2539865034695733382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137990328940384791}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.6053, y: 0.3892, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5173815075531664673}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1044104578233497618
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4908391709230295909}
+  - component: {fileID: 7446900540321940656}
   m_Layer: 0
   m_Name: Safe_door_pivot
   m_TagString: Untagged
@@ -325,14 +356,33 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3563211113063477595}
-  m_LocalRotation: {x: -0, y: 0.9743701, z: -0, w: 0.22495073}
-  m_LocalPosition: {x: -0.2874634, y: 0.28, z: -0.2195629}
+  m_LocalRotation: {x: -0, y: 0.9743701, z: -0, w: 0.22495079}
+  m_LocalPosition: {x: -0.28746325, y: 0.27999997, z: -0.2195625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2598410153482336636}
   m_Father: {fileID: 5173815075531664673}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 154, z: 0}
+--- !u!95 &7446900540321940656
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3563211113063477595}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 76804003ccb5ff44b879ec4fedcc9163, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3624160229343666881
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,14 +753,14 @@ RectTransform:
   m_GameObject: {fileID: 5861262336634097101}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.086}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 4870582056107037527}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19, y: -330}
+  m_AnchoredPosition: {x: 134, y: -22}
   m_SizeDelta: {x: 360, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8613252171808345582
@@ -774,13 +824,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5933423126605826952}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.28, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.27999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1736251985896372794}
   m_Father: {fileID: 5173815075531664673}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5582331550486078617
 MeshFilter:
@@ -908,7 +958,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6706303102276341438}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -1289,7 +1339,7 @@ GameObject:
   - component: {fileID: 8139091672055427173}
   - component: {fileID: 8139091672055427170}
   - component: {fileID: 3526375769446050503}
-  - component: {fileID: 8139091671928456397}
+  - component: {fileID: 3211322152995808084}
   m_Layer: 0
   m_Name: Safe_prefab
   m_TagString: Untagged
@@ -1305,9 +1355,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8184813754961551154}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -21.691, y: 3.672, z: -5.014}
+  m_LocalPosition: {x: -21.691, y: 3.672, z: -5.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 2539865034695733382}
   - {fileID: 4908391709230295909}
   - {fileID: 1686025231072855441}
   - {fileID: 626853777277873820}
@@ -1443,25 +1494,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &8139091671928456397
-Animator:
-  serializedVersion: 3
+--- !u!114 &3211322152995808084
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8184813754961551154}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76804003ccb5ff44b879ec4fedcc9163, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e586935af10db841b36c2fe4cd96b92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theCamera: {fileID: 0}
+  cameraController: {fileID: 0}
+  checker: 1
 --- !u!1 &8407314608051183371
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1638,7 @@ PrefabInstance:
     - target: {fileID: 7612652827020524102, guid: 87badef7df92cf542a88d9fc3ec9a47a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7612652827020524102, guid: 87badef7df92cf542a88d9fc3ec9a47a,
         type: 3}
