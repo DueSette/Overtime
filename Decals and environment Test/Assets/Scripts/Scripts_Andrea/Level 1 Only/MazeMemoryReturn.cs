@@ -6,6 +6,14 @@ public class MazeMemoryReturn : MonoBehaviour, IInteractable
 {
     void IInteractable.InteractWith()
     {
+        StartCoroutine(Return());
+    }
+
+    IEnumerator Return()
+    {
+        PostProcessVolumeSummoner.instance.DarkTransition();
+        yield return new WaitForSeconds(2f);
+
         // Warps The Player Back
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
 
