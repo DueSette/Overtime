@@ -7,7 +7,7 @@ public class ComputerCanvasCameraFinder : MonoBehaviour
     static Camera camera;
     void Start()
     {
-        if(camera == null)
+        if (camera == null)
             camera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
 
         GetComponent<Canvas>().worldCamera = camera;
