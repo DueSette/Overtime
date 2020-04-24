@@ -82,6 +82,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         
         private void Start()
         {
+            Debug.developerConsoleVisible = false;
+
             QualitySettings.vSyncCount = 1;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

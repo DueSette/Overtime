@@ -8,6 +8,7 @@ public class TimelineDirectorScript : MonoBehaviour
     [HideInInspector] public PlayableDirector director;
     public static TimelineDirectorScript instance;
     public PlayableAsset[] sequences;
+    public bool wakeUp = true;
 
     private void Awake()
     {
@@ -30,8 +31,11 @@ public class TimelineDirectorScript : MonoBehaviour
 
     private void Start()
     {
-        director.playableAsset = sequences[0];
-        director.Play();
+        if (wakeUp)
+        {
+            director.playableAsset = sequences[0];
+            director.Play();
+        }
     }
 
     //if the director that fired the event is this director, act upon it

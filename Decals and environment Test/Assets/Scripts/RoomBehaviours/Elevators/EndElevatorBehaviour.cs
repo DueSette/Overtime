@@ -57,7 +57,8 @@ public class EndElevatorBehaviour : ElevatorBehaviour
         GameObject lm = GameObject.FindGameObjectWithTag("GameController");
         if (lm != null)
         {
-            nextLevel = lm.GetComponent<LevelManager>().nextLevel;
+            LevelManager manager = lm.GetComponent<LevelManager>();
+            nextLevel = manager.nextLevel;
         }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);
