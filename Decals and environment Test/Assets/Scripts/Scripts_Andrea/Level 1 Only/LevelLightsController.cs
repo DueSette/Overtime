@@ -14,6 +14,7 @@ public class LevelLightsController : MonoBehaviour
     [SerializeField] private float dimmedLightStrength;
     [SerializeField] private Color dimmedLightColor1;
     [SerializeField] private Color dimmedLightColor2;
+    [SerializeField] private Material dimmedLightMaterial;
 
     private bool lowPower = true;
     [SerializeField] private AnimationCurve blinkCurve;
@@ -35,6 +36,11 @@ public class LevelLightsController : MonoBehaviour
         if (light == null)
         {
             light = this.GetComponent<Light>();
+        }
+
+        if (dimmedLightMaterial != null)
+        {
+            dimmedLightMaterial.SetInt("_UseEmissiveIntensity", 1);
         }
     }
 
@@ -86,5 +92,10 @@ public class LevelLightsController : MonoBehaviour
 
         light.color = defaultLightColor;
         light.intensity = defaultLightStrength;
+
+        if (dimmedLightMaterial != null)
+        {
+            dimmedLightMaterial.SetInt("_UseEmissiveIntensity", 0);
+        }
     }
 }

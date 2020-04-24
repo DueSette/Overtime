@@ -43,7 +43,6 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     [SerializeField] private AudioClip GrantedSound;
     [SerializeField] private AudioClip DeniedSound;
 
-
     public string currentCode;
     public int accessCode;
     public string accessCodeString;
@@ -117,140 +116,69 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
 
                 if (currentCode.Length < 4)
                 {
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        Ray ray = dynamicCamera.ScreenPointToRay(Input.mousePosition);
-                        if (Physics.Raycast(ray, out hit))
-                        {
-                            if (hit.transform.gameObject == numpad1 )
-                            {
-                                numpad1.GetComponent<Animation>().Play("Numpad1Anim");
-                                currentCode = currentCode + "1";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad2)
-                            {
-                                numpad2.GetComponent<Animation>().Play("Numpad2Anim");
-                                currentCode = currentCode + "2";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad3)
-                            {
-                                numpad3.GetComponent<Animation>().Play("Numpad3Anim");
-                                currentCode = currentCode + "3";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad4)
-                            {
-                                numpad4.GetComponent<Animation>().Play("Numpad4Anim");
-                                currentCode = currentCode + "4";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad5)
-                            {
-                                numpad5.GetComponent<Animation>().Play("Numpad5Anim");
-                                currentCode = currentCode + "5";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad6)
-                            {
-                                numpad6.GetComponent<Animation>().Play("Numpad6Anim");
-                                currentCode = currentCode + "6";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad7)
-                            {
-                                numpad7.GetComponent<Animation>().Play("Numpad7Anim");
-                                currentCode = currentCode + "7";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad8)
-                            {
-                                numpad8.GetComponent<Animation>().Play("Numpad8Anim");
-                                currentCode = currentCode + "8";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad9)
-                            {
-                                numpad9.GetComponent<Animation>().Play("Numpad9Anim");
-                                currentCode = currentCode + "9";
-                                ButtonPress();
-                            }
-                            if (hit.transform.gameObject == numpad0)
-                            {
-                                numpad0.GetComponent<Animation>().Play("Numpad0Anim");
-                                currentCode = currentCode + "0";
-                                ButtonPress();
-                            }
-                        }
-                    }
-
-
-
-                    if (Input.GetKeyDown("1"))
+                    if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Alpha1))
                     {
                         numpad1.GetComponent<Animation>().Play("Numpad1Anim");
                         currentCode = currentCode + "1";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("2"))
+                    if (Input.GetKeyDown("2") || Input.GetKeyDown(KeyCode.Alpha2))
                     {
                         numpad2.GetComponent<Animation>().Play("Numpad2Anim");
                         currentCode = currentCode + "2";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("3"))
+                    if (Input.GetKeyDown("3") || Input.GetKeyDown(KeyCode.Alpha3))
                     {
                         numpad3.GetComponent<Animation>().Play("Numpad3Anim");
                         currentCode = currentCode + "3";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("4"))
+                    if (Input.GetKeyDown("4") || Input.GetKeyDown(KeyCode.Alpha4))
                     {
                         numpad4.GetComponent<Animation>().Play("Numpad4Anim");
                         currentCode = currentCode + "4";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("5"))
+                    if (Input.GetKeyDown("5") || Input.GetKeyDown(KeyCode.Alpha5))
                     {
                         numpad5.GetComponent<Animation>().Play("Numpad5Anim");
                         currentCode = currentCode + "5";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("6"))
+                    if (Input.GetKeyDown("6") || Input.GetKeyDown(KeyCode.Alpha6))
                     {
                         numpad6.GetComponent<Animation>().Play("Numpad6Anim");
                         currentCode = currentCode + "6";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("7"))
+                    if (Input.GetKeyDown("7") || Input.GetKeyDown(KeyCode.Alpha7))
                     {
                         numpad7.GetComponent<Animation>().Play("Numpad7Anim");
                         currentCode = currentCode + "7";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("8"))
+                    if (Input.GetKeyDown("8") || Input.GetKeyDown(KeyCode.Alpha8))
                     {
                         numpad8.GetComponent<Animation>().Play("Numpad8Anim");
                         currentCode = currentCode + "8";
                         ButtonPress();
                     }
 
-                    if (Input.GetKeyDown("9"))
+                    if (Input.GetKeyDown("9") || Input.GetKeyDown(KeyCode.Alpha9))
                     {
                         numpad9.GetComponent<Animation>().Play("Numpad9Anim");
                         currentCode = currentCode + "9";
                         ButtonPress();
                     }
-                    if (Input.GetKeyDown("0"))
+                    if (Input.GetKeyDown("0") || Input.GetKeyDown(KeyCode.Alpha0))
                     {
                         numpad0.GetComponent<Animation>().Play("Numpad0Anim");
                         currentCode = currentCode + "0";
@@ -265,6 +193,7 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
                     audioSource.PlayOneShot(GrantedSound);
                     OpenableDoor.OnDoorUnlockEvent("ExecOfficeUnlock");
                     state = "Complete";
+                    GameStateManager.SetGameState(GameState.IN_GAME);
                 }
                 else
                     if (currentCode != accessCodeString)
@@ -276,10 +205,6 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
                 }
                 break;
 
-
-
-
-
             case "Complete":
                 {
                     currentCode = "";
@@ -289,10 +214,7 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
                 {
                 }
                 break;
-
         }
-
-
     }
 
     private void ButtonPress()
@@ -306,12 +228,11 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
         // GameStateManager.SetGameState(GameState.INTERACTING_W_NUMPAD);
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
         state = "Unanswered";
+        GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
         Debug.Log("The Changed class was called");
     }
 
-
-
-void generateCode()
+    void generateCode()
     {
         string password = accessCodeString;
         Debug.Log("Password is " + accessCodeString);

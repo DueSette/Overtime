@@ -7,10 +7,22 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject mainMenu;
+    [SerializeField] Button continueButton;
     [SerializeField] GameObject settingsMenu;
 
     [SerializeField] Image dissolvePanel;
     [SerializeField] AudioSource audio;
+
+    private void Start()
+    {
+        Debug.developerConsoleVisible = false;
+
+        int i = PlayerPrefs.GetInt("CanContinue");
+        if (i == 1)
+        {
+            continueButton.interactable = true;
+        }
+    }
 
     public void LoadWorld(int level)
     {

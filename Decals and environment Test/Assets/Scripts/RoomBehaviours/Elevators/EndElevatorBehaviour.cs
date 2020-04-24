@@ -35,6 +35,8 @@ public class EndElevatorBehaviour : ElevatorBehaviour
     {
         // Closing Elevator Doors
         CloseDoors();
+        
+        StartCoroutine(InventoriesManager.instance.FadeToBlack(5.5f));
         yield return new WaitForSeconds(2.5f);
 
         // Moving Elevator Down
@@ -57,7 +59,8 @@ public class EndElevatorBehaviour : ElevatorBehaviour
         GameObject lm = GameObject.FindGameObjectWithTag("GameController");
         if (lm != null)
         {
-            nextLevel = lm.GetComponent<LevelManager>().nextLevel;
+            LevelManager manager = lm.GetComponent<LevelManager>();
+            nextLevel = manager.nextLevel;
         }
 
         UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);

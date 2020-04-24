@@ -44,35 +44,7 @@ public class MemoryRoomZeroScript : MonoBehaviour
         }
         else
         {
-            SetForDissolutionWithChildren(parent);
-            parent.GetComponent<Collider>().enabled = false;
-
-            // Moving the player back to the office environment
-            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
-            GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
-            GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
-
-            GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
-            LevelManager.onLevelEvent("MemoryReturn");
-            OpenableDoor.OnDoorUnlockEvent("MemoryReturn");
-
-            // Changing the cake room to appear normal
-            foreach (GameObject g in objectsToRemove)
-            {
-                g.SetActive(false);
-            }
-            foreach (GameObject g in objectsToAdd)
-            {
-                g.SetActive(true);
-            }
-            cakeRoomReflectionProbe.RenderProbe();
-
-            // Removing Badooms
-            badoomSpawner.EndBadoomSequence();
-
-
-            // Music
-            SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
+            StartCoroutine(GoBackToOffice());            
         }
     }
 
@@ -108,5 +80,41 @@ public class MemoryRoomZeroScript : MonoBehaviour
             StartCoroutine(LerpDissolve(r.material));
         }
         StartCoroutine(WaitToRemove(obj));
+    }
+
+    IEnumerator GoBackToOffice()
+    {
+        PostProcessVolumeSummoner.instance.DarkTransition();
+        yield return new WaitForSeconds(2f);
+
+        SetForDissolutionWithChildren(parent);
+        parent.GetComponent<Collider>().enabled = false;
+
+        // Moving the player back to the office environment
+
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
+        GameStateManager.GetPlayer().transform.position = hallwaySpot.position;
+        GameStateManager.GetPlayer().GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().SetRotation(hallwaySpot.rotation);
+
+        GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
+        LevelManager.onLevelEvent("MemoryReturn");
+        OpenableDoor.OnDoorUnlockEvent("MemoryReturn");
+
+        // Changing the cake room to appear normal
+        foreach (GameObject g in objectsToRemove)
+        {
+            g.SetActive(false);
+        }
+        foreach (GameObject g in objectsToAdd)
+        {
+            g.SetActive(true);
+        }
+        cakeRoomReflectionProbe.RenderProbe();
+
+        // Removing Badooms
+        badoomSpawner.EndBadoomSequence();
+
+        // Music
+        SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
     }
 }
