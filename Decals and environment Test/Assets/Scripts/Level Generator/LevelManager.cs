@@ -20,6 +20,9 @@ public class LevelManager : MonoBehaviour
         // Chooses which variation of the level to use
         PickLayout();
 
+        // Saving that the player has reached level 1
+        PlayerPrefs.SetInt("CanContinue", 1);
+
         // Setting up start elevator
         Vector3 elevatorStartPos = pickedLayout.GetRooms(RoomTypes.ELEVATOR_START)[0].transform.position;
         elevatorStartPos.y += 3;
