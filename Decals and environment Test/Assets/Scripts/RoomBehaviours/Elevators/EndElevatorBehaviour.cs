@@ -35,6 +35,8 @@ public class EndElevatorBehaviour : ElevatorBehaviour
     {
         // Closing Elevator Doors
         CloseDoors();
+        
+        StartCoroutine(InventoriesManager.instance.FadeToBlack(5.5f));
         yield return new WaitForSeconds(2.5f);
 
         // Moving Elevator Down

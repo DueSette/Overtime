@@ -32,7 +32,10 @@ public class PostProcessVolumeSummoner : MonoBehaviour
         postProcAudio.Play();
 
         double sec = TimelineDirectorScript.instance.director.playableAsset.duration;
-        yield return new WaitForSeconds((float)sec);
+
+        yield return new WaitForSeconds((float)sec - 2.15f);
+        StartCoroutine(InventoriesManager.instance.FadeFromBlackHalf(2.75f));
+        //yield return new WaitForSeconds((float)sec);
 
         postProcAudio.Stop();
         volumeSummoning = null;
@@ -42,6 +45,8 @@ public class PostProcessVolumeSummoner : MonoBehaviour
     bool goUp = true;
     private void Update()
     {
+        /*
+
         if (Input.GetKeyUp(KeyCode.P) && volumeSummoning == null)
         {
             DarkTransition();
@@ -50,6 +55,8 @@ public class PostProcessVolumeSummoner : MonoBehaviour
             GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
             goUp = !goUp;
         }
+
+        */
     }
 
     public void DarkTransition()
