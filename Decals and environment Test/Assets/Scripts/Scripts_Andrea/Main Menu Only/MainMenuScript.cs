@@ -15,6 +15,8 @@ public class MainMenuScript : MonoBehaviour
 
     private void Start()
     {
+        Debug.developerConsoleVisible = false;
+
         int i = PlayerPrefs.GetInt("CanContinue");
         if (i == 1)
         {
