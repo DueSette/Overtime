@@ -23,6 +23,5 @@ public class MazeMemoryReturn : MonoBehaviour, IInteractable
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = true;
 
         LevelManager.onLevelEvent("MemoryReturn");
-        LevelManager.onLevelEvent("LevelSolved");
     }
 }

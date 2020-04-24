@@ -123,69 +123,79 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
                 {
                     if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Alpha1))
                     {
-                        numpad1.GetComponent<Animation>().Play("Numpad1Anim");
+                        StartCoroutine(ButtonPressAnim(numpad1));
+                        //numpad1.GetComponent<Animation>().Play("Numpad1Anim");
                         currentCode = currentCode + "1";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("2") || Input.GetKeyDown(KeyCode.Alpha2))
                     {
-                        numpad2.GetComponent<Animation>().Play("Numpad2Anim");
+                        StartCoroutine(ButtonPressAnim(numpad2));
+                        //numpad2.GetComponent<Animation>().Play("Numpad2Anim");
                         currentCode = currentCode + "2";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("3") || Input.GetKeyDown(KeyCode.Alpha3))
                     {
-                        numpad3.GetComponent<Animation>().Play("Numpad3Anim");
+                        StartCoroutine(ButtonPressAnim(numpad3));
+                        //numpad3.GetComponent<Animation>().Play("Numpad3Anim");
                         currentCode = currentCode + "3";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("4") || Input.GetKeyDown(KeyCode.Alpha4))
                     {
-                        numpad4.GetComponent<Animation>().Play("Numpad4Anim");
+                        StartCoroutine(ButtonPressAnim(numpad4));
+                        //numpad4.GetComponent<Animation>().Play("Numpad4Anim");
                         currentCode = currentCode + "4";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("5") || Input.GetKeyDown(KeyCode.Alpha5))
                     {
-                        numpad5.GetComponent<Animation>().Play("Numpad5Anim");
+                        StartCoroutine(ButtonPressAnim(numpad5));
+                        //numpad5.GetComponent<Animation>().Play("Numpad5Anim");
                         currentCode = currentCode + "5";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("6") || Input.GetKeyDown(KeyCode.Alpha6))
                     {
-                        numpad6.GetComponent<Animation>().Play("Numpad6Anim");
+                        StartCoroutine(ButtonPressAnim(numpad6));
+                        //numpad6.GetComponent<Animation>().Play("Numpad6Anim");
                         currentCode = currentCode + "6";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("7") || Input.GetKeyDown(KeyCode.Alpha7))
                     {
-                        numpad7.GetComponent<Animation>().Play("Numpad7Anim");
+                        StartCoroutine(ButtonPressAnim(numpad7));
+                        //numpad7.GetComponent<Animation>().Play("Numpad7Anim");
                         currentCode = currentCode + "7";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("8") || Input.GetKeyDown(KeyCode.Alpha8))
                     {
-                        numpad8.GetComponent<Animation>().Play("Numpad8Anim");
+                        StartCoroutine(ButtonPressAnim(numpad8));
+                        //numpad8.GetComponent<Animation>().Play("Numpad8Anim");
                         currentCode = currentCode + "8";
                         ButtonPress();
                     }
 
                     if (Input.GetKeyDown("9") || Input.GetKeyDown(KeyCode.Alpha9))
                     {
-                        numpad9.GetComponent<Animation>().Play("Numpad9Anim");
+                        StartCoroutine(ButtonPressAnim(numpad9));
+                        //numpad9.GetComponent<Animation>().Play("Numpad9Anim");
                         currentCode = currentCode + "9";
                         ButtonPress();
                     }
                     if (Input.GetKeyDown("0") || Input.GetKeyDown(KeyCode.Alpha0))
                     {
-                        numpad0.GetComponent<Animation>().Play("Numpad0Anim");
+                        StartCoroutine(ButtonPressAnim(numpad0));
+                        //numpad0.GetComponent<Animation>().Play("Numpad0Anim");
                         currentCode = currentCode + "0";
                         ButtonPress();
                     }
@@ -244,25 +254,24 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
         //PasswordEvent(accessCodeString);
     }
 
-    public void InteractWith()
+    private IEnumerator ButtonPressAnim(GameObject pressedButton)
     {
-        Debug.Log("I AM BEING INTERACTED WITH - The numpad");
+        Vector3 startTransform = pressedButton.transform.localPosition;
+
+        float t = 0;
+        while (t < 1.0f)
+        {
+            t += (Time.deltaTime / 0.4f);
+
+            Vector3 currentTransform = startTransform;
+            currentTransform.x = (Mathf.Sin(t * 3.14f)) * 0.002f;
+
+            pressedButton.transform.localPosition = currentTransform;
+
+            yield return null;
+
+        }
+
+        pressedButton.transform.localPosition = startTransform;
     }
-
-
-    private void OnEnable()
-    {
-        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction += ExitInteraction;
-    }
-    private void OnDisable()
-    {
-        UnityStandardAssets.Characters.FirstPerson.FirstPersonController.ExitInteraction -= ExitInteraction;
-    }
-
-
-    void ExitInteraction()
-    {
-
-    }
-
 }
