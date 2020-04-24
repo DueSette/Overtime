@@ -25,9 +25,6 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
     enum SafeState { PASSIVE = 0, ACTIVE = 2, SOLVED = 4};
     SafeState safeState = SafeState.PASSIVE;
 
-    enum TimerState { SUSPENDED = 0, INCREASING = 2};
-    TimerState tState = TimerState.SUSPENDED;
-
     enum TurningState { LEFT, RIGHT, NONE };
     TurningState currentTurningDirection = TurningState.NONE;
     TurningState targetTurningDirection = TurningState.RIGHT;
@@ -51,14 +48,10 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
         CheckDirection();
 
         CalculateCurrentStep();
-        ManageTimer();
 
-        if (safeDialTimer > checkThreshold)
+        if (Input.GetKeyDown(KeyCode.Return))//safeDialTimer > checkThreshold)
         {
-            tState = TimerState.SUSPENDED;
-
-            targetIterator = CheckIfOnCorrectStep() ? ++targetIterator : 0; //if player left the dial on correct value put next value on, else go back to value one
-            
+            targetIterator = CheckIfOnCorrectStep() ? ++targetIterator : 0; //if player left the dial on correct value put next value on, else go back to value one            
             UpdateTargetSpot();
         }
     }
@@ -91,29 +84,11 @@ public class SafePuzzleScript : MonoBehaviour, IInteractable
             lastCorrectStep = -1;
         }
     }
- 
-    void ManageTimer() //updates timer value in accordance to current state
-    {
-        switch(tState)
-        {
-            case TimerState.INCREASING:
-                safeDialTimer += Time.deltaTime;
-                break;
-            case TimerState.SUSPENDED:
-                safeDialTimer = 0.0f;
-                break;
-        }
-    }
 
     void CheckInput()
     {
-        if (Input.GetMouseButtonDown(0))//Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-            tState = TimerState.SUSPENDED;
-        else if (Input.GetMouseButtonUp(0))//if((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            tState = TimerState.INCREASING;
+        if (Input.GetMouseButtonUp(0))//if((Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             currentTurningDirection = TurningState.NONE;
-        }
 
         if(!Input.GetMouseButton(0)) { return; }
 

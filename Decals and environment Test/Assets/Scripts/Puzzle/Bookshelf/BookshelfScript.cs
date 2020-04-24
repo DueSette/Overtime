@@ -132,6 +132,9 @@ public class BookshelfScript : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(1);
 
+        PostProcessVolumeSummoner.instance.DarkTransition();
+        yield return new WaitForSeconds(2f);
+
         // Warps The Player To The Memory
         GameStateManager.GetPlayer().GetComponent<CharacterController>().enabled = false;
 

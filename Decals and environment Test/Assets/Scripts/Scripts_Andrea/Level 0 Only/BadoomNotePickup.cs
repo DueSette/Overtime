@@ -40,14 +40,13 @@ public class BadoomNotePickup : NoteInGameObjectScript
         //Starts badoom sequence
         ActivateBadooms(true);
 
-        //TurnLightsOff(true); ENABLE IF NEEDED (DESIGN CHOICE)
+        TurnLightsOff(true); //ENABLE IF NEEDED (DESIGN CHOICE)
         EnableDarkPostProcess(true);
 
         wallParticle.Play();
 
         // Badoom Music
         SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
-
     }
 
     private void SetupBackupReferences()
@@ -55,7 +54,7 @@ public class BadoomNotePickup : NoteInGameObjectScript
         if (materialToBeSwappedIn == null)
             return;
 
-        materialToBeSwappedIn = emissiveMaterialsToSwap[0].GetComponent<Renderer>().material; //take a reference to reinstate the previous emissive materials
+        originalEmissiveMaterial = emissiveMaterialsToSwap[0].GetComponent<Renderer>().material; //take a reference to reinstate the previous emissive materials
         originalIntensities = new float[lightSourcesToTurnOff.Length];
 
         for (int i = 0; i < lightSourcesToTurnOff.Length; i++)        
@@ -65,7 +64,7 @@ public class BadoomNotePickup : NoteInGameObjectScript
     public void EndBadoomSequence() //brings everything backtonormal, should happen offscreen
     {
         ActivateBadooms(false);
-        //TurnLightsOff(false);
+        TurnLightsOff(false);
         EnableDarkPostProcess(false);
         wallParticle.Stop();
     }
@@ -81,12 +80,12 @@ public class BadoomNotePickup : NoteInGameObjectScript
     {
         foreach (GameObject emissiveObject in emissiveMaterialsToSwap)
         {
-            emissiveObject.GetComponent<Renderer>().material = start ? materialToBeSwappedIn : originalEmissiveMaterial;
+            emissiveObject.GetComponent<MeshRenderer>().material = start ? materialToBeSwappedIn : originalEmissiveMaterial;
         }
         for (int i = 0; i < lightSourcesToTurnOff.Length; i++)
         {
             Light light = lightSourcesToTurnOff[i];
-            light.intensity = start ? 0 : originalIntensities[i];
+            light.color = start ? Color.black : Color.white;
         }
     }
 

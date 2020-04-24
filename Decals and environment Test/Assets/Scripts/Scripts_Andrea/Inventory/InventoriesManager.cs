@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventoriesManager : MonoBehaviour
 {
@@ -258,8 +259,10 @@ public class InventoriesManager : MonoBehaviour
     }
     #endregion
 
+    #region Canvas management Utilities 
     IEnumerator FadeFromBlack()
     {
+        fadeImage.gameObject.SetActive(true);
         float l = 0f;
 
         while (l < 4)
@@ -283,4 +286,30 @@ public class InventoriesManager : MonoBehaviour
             yield return null;
         }
     }
+
+    public IEnumerator FadeFromBlackHalf(float time)
+    {
+        fadeImage.gameObject.SetActive(true);
+        float l = time/4;
+
+        while (l < time)
+        {
+            l += Time.deltaTime;
+            fadeImage.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), (l / time));
+            yield return null;
+        }
+        fadeImage.gameObject.SetActive(false);
+    }
+
+    public void QuitToMenu()
+    {
+        StartCoroutine(QuitToMenuRoutine());
+    }
+
+    IEnumerator QuitToMenuRoutine()
+    {
+        yield return FadeToBlack(2f);
+        SceneManager.LoadScene(0);
+    }
+    #endregion
 }
