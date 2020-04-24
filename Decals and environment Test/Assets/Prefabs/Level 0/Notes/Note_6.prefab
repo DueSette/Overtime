@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4508694031012197892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633108199791199255}
+  - component: {fileID: 2349544077584493260}
+  - component: {fileID: 407833650}
+  m_Layer: 0
+  m_Name: Note_6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &633108199791199255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508694031012197892}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_Children:
+  - {fileID: 3076126492025556384}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2349544077584493260
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508694031012197892}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 27.973557, y: 0.04, z: 28.386688}
+  m_Center: {x: -0.33140182, y: 0, z: -1.5426636}
+--- !u!114 &407833650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4508694031012197892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7399c40bc15361478d1c2b53ca7b020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  importance: 0
+  pickupSound: {fileID: 8300000, guid: f0fb30e297c770a4d8e3f1450a223b03, type: 3}
+  note:
+    noteID: 6
+    entryName: Conference summary
+    entryDescription: As of Tuesday, week 7 Q3, the team agreed to greenlight the
+      first unofficial recorded implant test.<br>A suitable subject, healthy both
+      in body and mind, has been cleared for eligibility.<br>All members of the board
+      have been required to sign an additional NDA, as well as leaving all their
+      personal devices outside of the building. As the test commences, floor -3 will
+      be the designated gathering spot for all essential staff members on the premises.
+      No one is allowed on any floor above it.<br>The test can only be stopped if
+      absolutely necessary, that includes the subject showing side collateral effects
+      such as a brain haemorrhage or aneurism.<br>The latest simulation produced
+      a 'satisfactory' margin of success, meaning the prospects of additional funds
+      being granted for future iterations are likely to increase.
+    noteModel: {fileID: 9027513553544259539, guid: e816c729503fcde4fadfe5ae1bb3af1a,
+      type: 3}
+  destroyOnPickup: 1
+--- !u!1001 &8334681009722477425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 633108199791199255}
+    m_Modifications:
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8016826662203110594, guid: 103a387a26b991440bd6b05c8b4fb154,
+        type: 3}
+      propertyPath: m_Name
+      value: Note_0_prefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 103a387a26b991440bd6b05c8b4fb154, type: 3}
+--- !u!4 &3076126492025556384 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6420484382047979217, guid: 103a387a26b991440bd6b05c8b4fb154,
+    type: 3}
+  m_PrefabInstance: {fileID: 8334681009722477425}
+  m_PrefabAsset: {fileID: 0}
