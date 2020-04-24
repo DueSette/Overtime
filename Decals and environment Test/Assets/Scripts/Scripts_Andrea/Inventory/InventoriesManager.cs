@@ -308,7 +308,9 @@ public class InventoriesManager : MonoBehaviour
 
     IEnumerator QuitToMenuRoutine()
     {
-        yield return FadeToBlack(2f);
+        fadeImage.transform.parent = null;
+        fadeImage.transform.parent = transform;
+        yield return FadeToBlack(2.5f);
         SceneManager.LoadScene(0);
     }
     #endregion
