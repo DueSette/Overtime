@@ -30,13 +30,6 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     public GameObject numpad9;
     public GameObject numpad0;
     public GameObject accessBar;
-    public Camera dynamicCamera;
-    public static bool interactWithKeypad;
-    public GameObject theDoor;
-    public OpenableDoor doorScript;
-
-    public RaycastHit hit;
-    public Ray ray;
     public string state;
 
     [SerializeField] private AudioClip BtnSound;
