@@ -30,6 +30,7 @@ public class NumpadBehavior : ObjectOfInterest
     public GameObject numpad9;
     public GameObject numpad0;
     public GameObject accessBar;
+
     public string state;
     bool open = false;
 
