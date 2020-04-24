@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SecurityCameraScript : MonoBehaviour
 {
-    public float eulerAngY;
+    private float startAngY;
+    private float time;
 
-    public int camPos;
     public bool camMove;
     public float camSpeed;
 
@@ -16,49 +16,32 @@ public class SecurityCameraScript : MonoBehaviour
 
     private void Start()
     {
-        camPos = 1;
         camMove = true;
-        //camSpeed = 2.5f;
+
+        // Getting the starting position of the camera;
+        startAngY = this.transform.eulerAngles.y;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        eulerAngY = transform.localEulerAngles.y;
-        eulerAngY = Mathf.Round(eulerAngY * 100f) / 100f;
-
-
-        if (eulerAngY > 230 && eulerAngY < 240 && camPos == 2)
+        if (camMove)
         {
-            camPos = 1;
-            StartCoroutine(RotateCamera());
+            time += (Time.deltaTime * camSpeed);
+            if (time > 360)
+            {
+                time -= 360;
+            }
+
+            float newRot = Mathf.Cos(time);
+            newRot *= -1;
+            newRot += 1;
+
+            newRot *= 45;
+            newRot += startAngY;
+
+            this.transform.eulerAngles = new Vector3(0, newRot, 0);
         }
-
-
-        if (eulerAngY > 300 && eulerAngY < 310 && camPos == 1)
-        {
-            camPos = 2;
-            StartCoroutine(RotateCamera());
-        }
-
-        if (camMove == true && camPos == 1)
-        {
-            transform.RotateAround(transform.position, transform.up, Time.deltaTime * camSpeed);
-        }
-
-        if (camMove == true && camPos == 2)
-        {
-            transform.RotateAround(transform.position, transform.up, Time.deltaTime * -camSpeed);
-        }
-    }
-
-
-    IEnumerator RotateCamera()
-    {
-        camMove = false;
-        yield return new WaitForSeconds(2.0f);
-        camMove = true;
     }
 
 

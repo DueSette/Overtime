@@ -5,6 +5,7 @@ using UnityEngine;
 public class ComputerPowerScript : MonoBehaviour
 {
     [SerializeField] private GameObject computerUI;
+    [SerializeField] private GameObject computerLight;
     [SerializeField] private Collider interactionCollider; 
 
     private void OnEnable()
@@ -24,6 +25,7 @@ public class ComputerPowerScript : MonoBehaviour
         if (eventCode == "PowerOn")
         {
             computerUI.SetActive(true);
+            computerLight.SetActive(true);
             interactionCollider.enabled = true;
         }
     }
@@ -33,6 +35,7 @@ public class ComputerPowerScript : MonoBehaviour
         if (eventCode == "PowerOff")
         {
             computerUI.SetActive(false);
+            computerLight.SetActive(false);
             interactionCollider.enabled = false;
         }
     }
