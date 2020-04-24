@@ -66,6 +66,12 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
     private void OnDisable()
     {
         LevelManager.onLevelEvent -= InitNumpadEvent;
+
+        // Reverting Email
+        string s = codeEmail.body;
+        string c = accessCode.ToString();
+        s = s.Replace(c, "XXXX");
+        codeEmail.body = s;
     }
 
     private void InitNumpadEvent(string eventCode)
@@ -74,7 +80,13 @@ public class NumpadBehavior : ObjectOfInterest, IInteractable
         {
             accessCode = Random.Range(1000, 9999);
             Debug.Log("access code is " + accessCode);
-            codeEmail.body = accessCode.ToString();
+
+            // Showing Code In Email
+            string s = codeEmail.body;
+            string c = accessCode.ToString();
+            s = s.Replace("XXXX", c);
+            codeEmail.body = s;
+
             accessCodeString = accessCode.ToString();
             Debug.Log("access code(ToString) is " + accessCodeString);
             audioSource = GetComponent<AudioSource>();
