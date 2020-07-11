@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NumpadBehavior : ObjectOfInterest
+public class NumpadBehavior : ObjectOfInterest, IInteractable
 {
 
     /// <summary>
@@ -30,9 +30,7 @@ public class NumpadBehavior : ObjectOfInterest
     public GameObject numpad9;
     public GameObject numpad0;
     public GameObject accessBar;
-
     public string state;
-    bool open = false;
 
     [SerializeField] private AudioClip BtnSound;
     [SerializeField] private AudioClip GrantedSound;
@@ -46,6 +44,15 @@ public class NumpadBehavior : ObjectOfInterest
 
     private void OnEnable()
     {
+        interactWithKeypad = false;
+        accessCode = Random.Range(1000, 9999);
+        Debug.Log("access code is " + accessCode);
+        dynamicCamera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
+        accessCodeString = accessCode.ToString();
+        Debug.Log("access code(ToString) is " + accessCodeString);
+        audioSource = GetComponent<AudioSource>();
+        generateCode();
+        state = "NotInteracting";
         LevelManager.onLevelEvent += InitNumpadEvent;
     }
 
@@ -84,6 +91,17 @@ public class NumpadBehavior : ObjectOfInterest
     // Update is called once per frame
     void Update()
     {
+        if(state == "Unanswered")
+        {
+            interactWithKeypad = true;
+        }
+        else
+        {
+            interactWithKeypad = false;
+        }
+
+
+
         if (Input.GetKey(KeyCode.Space))
         {
             state = "NotInteracting";
@@ -98,9 +116,11 @@ public class NumpadBehavior : ObjectOfInterest
                 break;
 
             case "Unanswered":
+
+                interactWithKeypad = true;
+
                 if (currentCode.Length < 4)
                 {
-
                     if (Input.GetKeyDown("1") || Input.GetKeyDown(KeyCode.Alpha1))
                     {
                         StartCoroutine(ButtonPressAnim(numpad1));
@@ -220,6 +240,8 @@ public class NumpadBehavior : ObjectOfInterest
     public override void FocusCamera()
     {
         base.FocusCamera();
+        // GameStateManager.SetGameState(GameState.INTERACTING_W_NUMPAD);
+        GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
         state = "Unanswered";
         GameStateManager.SetGameState(GameState.INTERACTING_W_ITEM);
         Debug.Log("The Changed class was called");

@@ -105,7 +105,7 @@ public class CameraSwitch : MonoBehaviour
 
     IEnumerator CameraDelay()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(1f);
         GameStateManager.SetGameState(GameState.IN_GAME);
         cameraNum = 1;
     }

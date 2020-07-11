@@ -25,7 +25,7 @@ public class ObjectOfInterest : MonoBehaviour
     {
         cameraController = GameObject.FindGameObjectWithTag("CameraController").GetComponent<CameraSwitch>();
         cameraController.CameraChange();
-        Invoke("FindCamera", .2f);
+        Invoke("FindCamera", .1f);
     }
 
     void FindCamera()
