@@ -18,6 +18,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private bool m_IsCrouching = false;
         [SerializeField] private float accelerationRate;
+        [SerializeField] private float decelerationRate = 2.5f;
         [SerializeField] private float m_WalkSpeed;
         [SerializeField] private float m_RunSpeed;
         [SerializeField, Range(0.2f, 0.95f)] private float m_CrouchSpeedModifier;
@@ -193,7 +194,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (moving)
                 acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelerationRate, 0.0f, 1.0f);
             else
-                acceleration = 0.0f;       
+                acceleration = Mathf.Clamp(acceleration - Time.deltaTime * decelerationRate, 0.0f, 1.0f);
         }
 
         #region Movement Related Methods
@@ -201,7 +202,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-            float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            float vertical = CrossPlatformInputManager.GetAxis("Vertical"); 
             ManageMovementAcceleration(m_Input.sqrMagnitude != 0);
 
             bool waswalking = m_IsWalking;
