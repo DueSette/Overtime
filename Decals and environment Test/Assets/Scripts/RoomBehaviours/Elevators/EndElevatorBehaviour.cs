@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndElevatorBehaviour : ElevatorBehaviour
 {
-    [SerializeField] string nextLevel;
+    [SerializeField] private List<string> nextLevels;
 
     private void OnEnable()
     {
@@ -46,23 +47,17 @@ public class EndElevatorBehaviour : ElevatorBehaviour
             yield return null;
         }
 
-        // Getting Players Transform Relative To The End Elevator
-        /*PlayerPositioning pp = PlayerPositioning.Instance;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        player.transform.parent = this.transform;
-
-        pp.playerPreviousPos = player.transform.localPosition;
-        pp.playerPreviousRot = player.transform.localEulerAngles;*/
-
         // Loading Next Level
         GameObject lm = GameObject.FindGameObjectWithTag("GameController");
         if (lm != null)
         {
             LevelManager manager = lm.GetComponent<LevelManager>();
-            nextLevel = manager.nextLevel;
+            nextLevels = manager.nextLevels;
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(nextLevel);
+        int i = Random.Range(0, nextLevels.Count);
+        string nextLevel = nextLevels[i];
+
+        SceneManager.LoadScene(nextLevel);
     }
 }

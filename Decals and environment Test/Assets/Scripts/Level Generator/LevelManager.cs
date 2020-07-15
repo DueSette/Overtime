@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     private List<LayoutData> spawnedLayouts;
     private LayoutData pickedLayout;
 
-    public string nextLevel;
+    public List<string> nextLevels;
 
     // Level Events
     public delegate void LevelEvent(string eventCode);
