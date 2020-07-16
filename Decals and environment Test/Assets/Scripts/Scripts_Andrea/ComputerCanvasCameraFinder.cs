@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class ComputerCanvasCameraFinder : MonoBehaviour
 {
-    static Camera camera;
+    private Camera dynamicCamera;
     void Start()
     {
-        if (camera == null)
-            camera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
 
-        GetComponent<Canvas>().worldCamera = camera;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (dynamicCamera == null)
+        {
+            dynamicCamera = GameObject.FindGameObjectWithTag("DynamicCamera").GetComponent<Camera>();
+
+            GetComponent<Canvas>().worldCamera = dynamicCamera;
+        }
     }
 }
