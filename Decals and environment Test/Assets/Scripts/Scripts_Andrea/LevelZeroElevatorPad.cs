@@ -11,7 +11,8 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     [SerializeField] GameObject kid;
 
     [Header("Animations")]
-    [SerializeField] private Material sharedEmissiveMaterial;
+    [SerializeField] private GameObject renderer;
+    private Material emissiveMaterial;
     [SerializeField] private Color defaultColor;
 
     [Header("Fail Animation")]
@@ -34,6 +35,9 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        Material[] rendererMaterials = renderer.GetComponent<MeshRenderer>().materials;
+        emissiveMaterial = rendererMaterials[2];
+
         SetEmissiveMaterialColor(defaultColor);
     }
 
@@ -98,13 +102,13 @@ public class LevelZeroElevatorPad : MonoBehaviour, IInteractable
     */
     public void SetEmissiveMaterialColor(Color newColor)
     {
-        sharedEmissiveMaterial.SetColor("_EmissiveColor", newColor);
-        sharedEmissiveMaterial.SetColor("_EmissiveColorLDR", newColor);
+        emissiveMaterial.SetColor("_EmissiveColor", newColor);
+        emissiveMaterial.SetColor("_EmissiveColorLDR", newColor);
     }
 
     public void SetEmissiveMaterialColor(Color newColor, float timeToChange)
     {
-        StartCoroutine(LerpEmissiveMaterial(sharedEmissiveMaterial.color, newColor, timeToChange));
+        StartCoroutine(LerpEmissiveMaterial(emissiveMaterial.color, newColor, timeToChange));
     }
 
     private IEnumerator LerpEmissiveMaterial(Color startColor, Color endColor, float timeToChange)

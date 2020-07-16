@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ComputerCanvasCameraFinder : MonoBehaviour
 {
-    static Camera dynamicCamera;
+    private Camera dynamicCamera;
     void Start()
     {
 
