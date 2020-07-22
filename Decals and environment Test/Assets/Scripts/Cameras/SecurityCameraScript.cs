@@ -7,6 +7,7 @@ public class SecurityCameraScript : MonoBehaviour
     private float startAngY;
     private float time;
 
+    public GameObject hingeJoint;
     public bool camMove;
     public float camSpeed;
 
@@ -19,7 +20,7 @@ public class SecurityCameraScript : MonoBehaviour
         camMove = true;
 
         // Getting the starting position of the camera;
-        startAngY = this.transform.eulerAngles.y;
+        startAngY = hingeJoint.transform.eulerAngles.y;
     }
 
     // Update is called once per frame
@@ -33,14 +34,17 @@ public class SecurityCameraScript : MonoBehaviour
                 time -= 360;
             }
 
-            float newRot = Mathf.Cos(time);
-            newRot *= -1;
-            newRot += 1;
+            float newY = Mathf.Cos(time);
+            newY *= -1;
+            newY += 1;
 
-            newRot *= 45;
-            newRot += startAngY;
+            newY *= 45;
+            newY += startAngY;
 
-            this.transform.eulerAngles = new Vector3(0, newRot, 0);
+            Vector3 newRot = hingeJoint.transform.eulerAngles;
+            newRot.y = newY;
+
+            hingeJoint.transform.eulerAngles = newRot;
         }
     }
 
