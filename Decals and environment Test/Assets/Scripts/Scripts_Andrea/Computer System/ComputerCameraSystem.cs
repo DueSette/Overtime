@@ -15,6 +15,7 @@ public class ComputerCameraSystem : ComputerSystem
     [SerializeField] GameObject leftSidePanel;
 
     [SerializeField] TextMeshProUGUI rightPanelCameraName;
+    [SerializeField] GameObject rightPanelRecordingIcon;
     [SerializeField] RawImage rightPanelCameraView;
     [SerializeField] Image rightPanelCameraVeil;
 
@@ -97,7 +98,10 @@ public class ComputerCameraSystem : ComputerSystem
     private void DisplayCamera(ViewableCamera camera) //fills the right side display with the content of the selected email scriptable object's data
     {
         rightPanelCameraName.SetText("Cam: " + camera.cameraCode);
+        rightPanelRecordingIcon.SetActive(true);
+
         rightPanelCameraView.texture = camera.cameraView;
+        rightPanelCameraView.color = Color.white;
 
         rightPanelCameraVeil.enabled = true;
 
@@ -106,8 +110,11 @@ public class ComputerCameraSystem : ComputerSystem
 
     public void CleanRightPanel()
     {
-        rightPanelCameraName.SetText("");
+        rightPanelCameraName.SetText("Cam: ----");
+        rightPanelRecordingIcon.SetActive(false);
+
         rightPanelCameraView.texture = null;
+        rightPanelCameraView.color = Color.black;
 
         rightPanelCameraVeil.enabled = false;
     }

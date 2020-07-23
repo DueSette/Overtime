@@ -590,7 +590,7 @@ Transform:
   m_GameObject: {fileID: 4964706322728396295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -22.794167, y: 2.6557312, z: -4.321989}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.009999999, y: 0.01, z: 0.009999999}
   m_Children:
   - {fileID: 8697182785104039948}
   - {fileID: 7028820402931534328}
@@ -718,10 +718,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1813c68493f9c4da4349638ef8cda9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camerasToConnect: []
+  camerasToConnect:
+  - C001
+  - C002
+  - C003
   cameraEntryPrefab: {fileID: 2199292124009200381}
   leftSidePanel: {fileID: 6760021187428550293}
   rightPanelCameraName: {fileID: 4415138244855923488}
+  rightPanelRecordingIcon: {fileID: 2021349856591531509}
   rightPanelCameraView: {fileID: 1200142603528987517}
   rightPanelCameraVeil: {fileID: 965591358815143448}
   clickSound: {fileID: 8300000, guid: 34f724ffe8219484ca507a6d4d61e6ba, type: 3}
@@ -1019,7 +1023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
