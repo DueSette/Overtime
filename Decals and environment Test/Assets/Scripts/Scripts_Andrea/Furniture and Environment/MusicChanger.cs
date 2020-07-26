@@ -13,8 +13,6 @@ public class MusicChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("HELLO WORLD");
-
         SoundManager.instance.FadeBGM(newBackgroundMusic, fadeOutTime, fadeInTime);
     }
 
