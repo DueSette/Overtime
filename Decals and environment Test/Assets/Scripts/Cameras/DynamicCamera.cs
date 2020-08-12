@@ -7,7 +7,7 @@ public class DynamicCamera : MonoBehaviour
 
     public Transform[] views;
     public GameObject fpsController;
-    public List<Transform> viewList; // Make stuff assigned to list tomorrow
+    public List<Transform> viewList;
     public float transitionSpeed;
     Transform currentView;
     public Transform startView;
@@ -86,12 +86,4 @@ public class DynamicCamera : MonoBehaviour
 
         transform.eulerAngles = currentAngle;
     }
-
-    IEnumerator ResetCamera()
-    {
-        yield return new WaitForSeconds(1f);
-    }
 }
-
-
-
