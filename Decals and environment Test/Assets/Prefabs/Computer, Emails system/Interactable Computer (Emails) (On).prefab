@@ -216,18 +216,6 @@ MonoBehaviour:
   m_canvasRenderer: {fileID: 1863861374}
   m_TextComponent: {fileID: 1781666273911778200}
   m_materialReferenceIndex: 1
---- !u!114 &443946691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312087437618522877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10c02cbdc3570504191a949a23cf3bcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &444895430003425713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containedEmails: []
-  emailEntryPrefab: {fileID: 312087437618522877}
+  emailEntryPrefab: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
+    type: 3}
   leftSidePanel: {fileID: 5116614889350616725}
   rightPanelTitle: {fileID: 3943031885205636284}
   rightPanelPeople: {fileID: 1781666273911778200}
@@ -1658,54 +1647,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5180112004185039295}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: DisplayEmailOnClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 5774741722778812987}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: TMPro.TextMeshProUGUI, Unity.TextMeshPro
-      objectReference: {fileID: 0}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 825018482890089182, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 694aa446f9473e14ea4427709d73da44,
-        type: 3}
     - target: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
       propertyPath: m_Name
       value: Email Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4425377759115095916, guid: 26ce5b53136df2047b76110d59575acb,
         type: 3}
@@ -1814,27 +1762,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26ce5b53136df2047b76110d59575acb, type: 3}
---- !u!114 &5774741722778812987 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7573604862143678381, guid: 26ce5b53136df2047b76110d59575acb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4124972348336309654}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &312087437618522874 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4425377759115095916, guid: 26ce5b53136df2047b76110d59575acb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4124972348336309654}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &312087437618522877 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4425377759115095915, guid: 26ce5b53136df2047b76110d59575acb,
     type: 3}
   m_PrefabInstance: {fileID: 4124972348336309654}
   m_PrefabAsset: {fileID: 0}

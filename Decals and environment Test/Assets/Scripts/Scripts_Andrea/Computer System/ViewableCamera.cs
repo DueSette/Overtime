@@ -16,7 +16,9 @@ public class ViewableCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraView = new RenderTexture(viewSize.x, viewSize.y, 0);
+        cameraView = new RenderTexture(viewSize.x, viewSize.y, 24, RenderTextureFormat.RGB111110Float);
+        cameraView.Create();
+
         theCamera.targetTexture = cameraView;
 
         // Disabling the camera until it is needed

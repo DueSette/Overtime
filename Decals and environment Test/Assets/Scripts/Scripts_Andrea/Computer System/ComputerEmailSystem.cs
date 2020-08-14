@@ -86,11 +86,20 @@ public class ComputerEmailSystem : ComputerSystem
         rightPanelEmailVeil.enabled = false;
     }
 
-    public void DisplayEmailOnClick(TextMeshProUGUI title) //called via the button component on the object
+    public void DisplayEmailOnClick(TextMeshProUGUI emailTitle) //called via the button component on the object
     {
+        Debug.Log("Searching for \"" + emailTitle.text.ToString() + "\" email");
+
         foreach (EmailScriptableObject email in containedEmails)
-            if (email.title == title.text)
+        {
+            if (email.title == emailTitle.text)
+            {
                 DisplayEmail(email);
+                break;
+            }
+        }
+
+        Debug.LogError("Error: Email Not Found (" + emailTitle + ")");
     }
 
     private void CheckIfPlayerReadEmails() // [NOT NEEDED FOR NOW] checks if email title was added to a list of emails that were read once already and acts upon it
