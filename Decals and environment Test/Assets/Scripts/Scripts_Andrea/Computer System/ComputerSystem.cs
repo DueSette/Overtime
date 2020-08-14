@@ -30,4 +30,9 @@ public class ComputerSystem : MonoBehaviour
     {
 
     }
+
+    public virtual void DisplayOnClick(string data)
+    {
+
+    }
 }

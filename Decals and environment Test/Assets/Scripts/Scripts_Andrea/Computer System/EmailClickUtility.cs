@@ -7,12 +7,14 @@ public class EmailClickUtility : MonoBehaviour, IDeselectHandler, ISelectHandler
 {
     public delegate void DeselectDelegate();
     public static DeselectDelegate EmailDeselectEvent;
-    static ComputerEmailSystem computer;
+
+    private ComputerSystem computer;
+    public string data;
 
     private void Start()
     {
         if(computer == null)
-            computer = GetComponentInParent<ComputerEmailSystem>();
+            computer = GetComponentInParent<ComputerSystem>();
     }
 
     public void ClearEmailTextStyles()
@@ -28,6 +30,6 @@ public class EmailClickUtility : MonoBehaviour, IDeselectHandler, ISelectHandler
 
     void ISelectHandler.OnSelect(BaseEventData eventData)
     {
-        computer.DisplayEmailOnClick(GetComponentInChildren<TextMeshProUGUI>());
+        computer.DisplayOnClick(data);
     }
 }

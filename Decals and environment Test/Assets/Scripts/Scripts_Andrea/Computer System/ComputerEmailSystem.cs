@@ -64,6 +64,9 @@ public class ComputerEmailSystem : ComputerSystem
             GameObject g = Instantiate(emailEntryPrefab, leftSidePanel.transform);
             g.GetComponentInChildren<TextMeshProUGUI>().SetText(email.title);
             g.SetActive(true);
+
+            g.GetComponent<EmailClickUtility>().data = email.title;
+
             EmailUIGameObjects.Add(g);
         }
     }
@@ -86,20 +89,16 @@ public class ComputerEmailSystem : ComputerSystem
         rightPanelEmailVeil.enabled = false;
     }
 
-    public void DisplayEmailOnClick(TextMeshProUGUI emailTitle) //called via the button component on the object
+    public override void DisplayOnClick(string data) //called via the button component on the object
     {
-        Debug.Log("Searching for \"" + emailTitle.text.ToString() + "\" email");
-
         foreach (EmailScriptableObject email in containedEmails)
         {
-            if (email.title == emailTitle.text)
+            if (email.title == data)
             {
                 DisplayEmail(email);
                 break;
             }
         }
-
-        Debug.LogError("Error: Email Not Found (" + emailTitle + ")");
     }
 
     private void CheckIfPlayerReadEmails() // [NOT NEEDED FOR NOW] checks if email title was added to a list of emails that were read once already and acts upon it

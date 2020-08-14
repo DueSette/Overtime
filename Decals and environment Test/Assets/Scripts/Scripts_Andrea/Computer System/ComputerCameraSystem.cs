@@ -91,6 +91,9 @@ public class ComputerCameraSystem : ComputerSystem
             GameObject g = Instantiate(cameraEntryPrefab, leftSidePanel.transform);
             g.GetComponentInChildren<TextMeshProUGUI>().SetText(newConnection.cameraName);
             g.SetActive(true);
+
+            g.GetComponent<EmailClickUtility>().data = newConnection.cameraName;
+
             CameraUIGameObjects.Add(g);
         }
     }
@@ -119,10 +122,10 @@ public class ComputerCameraSystem : ComputerSystem
         rightPanelCameraVeil.enabled = false;
     }
 
-    public void DisplayEmailOnClick(TextMeshProUGUI title) //called via the button component on the object
+    public override void DisplayOnClick(string data)
     {
         foreach (ViewableCamera camera in connectedCameras)
-            if (camera.cameraName == title.text)
+            if (camera.cameraName == data)
             {
                 camera.SetCameraEnabled(true);
                 DisplayCamera(camera);
@@ -132,26 +135,5 @@ public class ComputerCameraSystem : ComputerSystem
                 camera.SetCameraEnabled(false);
             }
     }
-
-    /*
-    private void CheckIfPlayerReadEmails() // [NOT NEEDED FOR NOW] checks if email title was added to a list of emails that were read once already and acts upon it
-    {
-        foreach (GameObject mail in EmailUIGameObjects)
-        {
-            string mailTitle = mail.GetComponentInChildren<TextMeshProUGUI>().text;
-
-            if (!EmailManager.HasReadEmail(mailTitle)) //if the email in the PC was never read it will have a different font appearance
-            {
-                mail.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-                mail.GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
-            }
-            else
-            {
-                mail.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-                mail.GetComponentInChildren<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
-            }
-        }
-    }
-    */
     #endregion
 }
